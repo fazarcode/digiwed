@@ -1,0 +1,519 @@
+// Prisma schema for Multi-Tenant Digital Wedding Invitation SaaS
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserStatus {
+  ACTIVE
+  SUSPENDED
+  PENDING
+}
+
+enum InvitationStatus {
+  DRAFT
+  PUBLISHED
+}
+
+enum RsvpType {
+  INDIVIDUAL
+  GROUP
+}
+
+enum Attendance {
+  ATTENDING
+  NOT_ATTENDING
+  MAYBE
+}
+
+enum VideoType {
+  YOUTUBE
+  VIMEO
+  MP4
+}
+
+enum GuestType {
+  INDIVIDUAL
+  GROUP
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+}
+
+enum GuestSide {
+  GROOM
+  BRIDE
+  BOTH
+  PARENTS
+}
+
+enum RsvpMode {
+  QR_FIRST     // QR code always visible; RSVP optional
+  RSVP_FIRST   // Guest must submit RSVP before QR is shown
+}
+
+enum GiftType {
+  MONEY
+  GOODS
+}
+
+// Feature C — invitation-owned gift / angpau options (money or goods).
+model Gift {
+  id            String     @id @default(cuid())
+  invitationId  String
+  invitation    Invitation @relation(fields: [invitationId], references: [id], onDelete: Cascade)
+  kind          GiftType   @default(MONEY)
+  // Money
+  provider      String?    // bank / e-wallet name
+  accountName   String?
+  accountNumber String?
+  instructions  String?    @db.Text
+  // Goods
+  itemName      String?
+  description   String?    @db.Text
+  link          String?    @db.Text
+  recipientName String?
+  // Common
+  enabled       Boolean    @default(true)
+  order         Int        @default(0)
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+  @@index([invitationId])
+}
+
+model Role {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  users     User[]
+  createdAt DateTime @default(now())
+}
+
+model User {
+  id             String       @id @default(cuid())
+  email          String       @unique
+  password       String
+  name           String
+  status         UserStatus   @default(ACTIVE)
+  roleId         String
+  role           Role         @relation(fields: [roleId], references: [id])
+  // Feature B — admin-assigned default package for this account (effective = invitation.package ?? user.package)
+  packageId      String?
+  package        Package?     @relation(fields: [packageId], references: [id], onDelete: SetNull)
+  // Req 3 — admin-assigned default template for this account (new invitations inherit it)
+  templateId     String?
+  template       Template?    @relation("UserDefaultTemplate", fields: [templateId], references: [id], onDelete: SetNull)
+  invitations    Invitation[]
+  devices        Device[]
+  whatsappTemplate String?    @db.Text
+  resetToken     String?      @unique
+  resetTokenExp  DateTime?
+  messageTemplates MessageTemplate[]
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  @@index([roleId])
+  @@index([templateId])
+}
+
+model Package {
+  id          String       @id @default(cuid())
+  name        String
+  description String?      @db.Text
+  status      Boolean      @default(true)
+  sortOrder   Int          @default(0)
+  features    Json         // { GUEST: true, RSVP: true, ... }
+  price       String?      // display price string, e.g. "Rp 150.000" (admin-managed)
+  invitations Invitation[]
+  users       User[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model EventMoment {
+  id           String     @id @default(cuid())
+  invitationId String
+  invitation   Invitation @relation(fields: [invitationId], references: [id], onDelete: Cascade)
+  url          String     @db.Text
+  senderName   String?
+  message      String?    @db.Text
+  createdAt    DateTime   @default(now())
+  @@index([invitationId])
+}
+
+model Template {
+  id           String       @id @default(cuid())
+  name         String
+  slug         String       @unique
+  description  String?      @db.Text
+  folderPath   String       // relative folder under /storage/templates/
+  previewImage String?      // relative path to preview.jpg
+  manifest     Json?        // full manifest.json content
+  enabled      Boolean      @default(true)
+  featured     Boolean      @default(false)  // admin can feature templates on the public landing page
+  invitations  Invitation[]
+  defaultForUsers User[]     @relation("UserDefaultTemplate")
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+}
+
+model Invitation {
+  id              String            @id @default(cuid())
+  userId          String
+  user            User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  templateId      String?
+  template        Template?         @relation(fields: [templateId], references: [id])
+  slug            String            @unique
+  status          InvitationStatus  @default(DRAFT)
+
+  // Basic Info
+  brideName       String?
+  groomName       String?
+  brideParents    String?           @db.Text
+  groomParents    String?           @db.Text
+  // Separate father/mother fields (Feature A). Additive; old parents fields kept for back-compat.
+  groomFather     String?
+  groomMother     String?
+  brideFather     String?
+  brideMother     String?
+  quote           String?           @db.Text
+  loveStory       Json?
+  events          Json?
+  coverImage      String?           @db.Text
+  bridePhoto      String?           @db.Text 
+  groomPhoto      String?
+
+  // Req 9A — Photo Moment landing customization
+  momentsTitle    String?
+  momentsMessage  String?           @db.Text
+
+  // Theme
+  primaryColor    String            @default("#8B6F47")
+  secondaryColor  String            @default("#D4A574")
+  backgroundColor String            @default("#FAF7F2")
+  fontFamily      String            @default("Playfair Display")
+  buttonStyle     String            @default("rounded")
+  borderRadius    String            @default("12")
+  animation       String            @default("fade")
+
+  // Event settings
+  rsvpMode              RsvpMode  @default(QR_FIRST)
+  selfieVerification    Boolean   @default(false)
+
+  // Multi-domain routing
+  customDomain          String?   @unique
+  subdomain             String?   @unique
+
+  // Greeting TV settings
+  tvEnabled             Boolean   @default(false)
+  tvBackground          String?   @db.Text
+  tvCouplePhoto         String?   @db.Text
+  tvLogo                String?   @db.Text
+  tvDuration            Int       @default(7)   // seconds per greeting
+  tvSoundEnabled        Boolean   @default(false)
+  tvAnimationEnabled    Boolean   @default(true)
+  tvFontSize            String    @default("large")   // small / medium / large / xlarge
+  tvFullscreen          Boolean   @default(true)
+
+  guests          Guest[]
+  gallery         GalleryImage[]
+  videos          Video[]
+  music           Music[]
+  rsvps           Rsvp[]
+  checkIns        CheckIn[]
+  moments         EventMoment[]
+  gifts           Gift[]
+  giftEntries     GiftEntry[]
+  guestCategories GuestCategory[]
+  guestSides      GuestSideOption[]
+  rsvpFields      RsvpField[]
+  souvenirs             Souvenir[]
+  souvenirDistributions SouvenirDistribution[]
+  physicalGiftItems     PhysicalGiftItem[]
+
+  packageId       String?
+  package         Package?          @relation(fields: [packageId], references: [id], onDelete: SetNull)
+
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  @@index([userId])
+  @@index([templateId])
+  @@index([packageId])
+}
+
+model Guest {
+  id            String       @id @default(cuid())
+  invitationId  String
+  invitation    Invitation   @relation(fields: [invitationId], references: [id], onDelete: Cascade)
+  name          String
+  phone         String?
+  guestType     GuestType    @default(INDIVIDUAL)
+  gender        Gender?
+  guestSide     GuestSide?
+  quota         Int          @default(1)   // Max attendees allowed for this guest (INDIVIDUAL default 1)
+  priorityOverride Int?                    // If set, overrides category priority for Greeting TV
+  categoryId    String?
+  category      GuestCategory? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  categoryText  String?      // legacy free-text; preserved for backward compatibility
+  // Req 5 — DB-driven guest side (independent of category). Legacy guestSide enum kept above.
+  sideId        String?
+  side          GuestSideOption? @relation(fields: [sideId], references: [id], onDelete: SetNull)
+  token         String       @unique  // used in URL, encoded in QR
+  checkedInAt   DateTime?    // used for INDIVIDUAL first check-in timestamp
+  checkedInCount Int         @default(0)  // number of check-ins (GROUP can be >1)
+  rsvps         Rsvp[]
+  checkIns      CheckIn[]
+  giftEntries   GiftEntry[]
+  souvenirDistributions SouvenirDistribution[]
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  @@index([invitationId])
+  @@index([categoryId])
+  @@index([sideId])
+}
+
+model GuestCategory {
+  id           String      @id @default(cuid())
+  // Feature E: null = global/shared (admin-managed); set = invitation-specific (owner-managed).
+  invitationId String?
+  invitation   Invitation? @relation(fields: [invitationId], references: [id], onDelete: Cascade)
+  name         String
+  order        Int         @default(0)
+  enabled      Boolean     @default(true)
+  priority     Int         @default(100)   // Lower = higher greeting priority (VIP=1..General=5..)
+  guests       Guest[]
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  @@unique([invitationId, name])
+  @@index([invitationId])
+}
+
+model Device {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name      String
+  notes     String?  @db.Text
+  active    Boolean  @default(true)
+  checkIns  CheckIn[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@index([userId])
+}
+
+model CheckIn {
+  id           String       @id @default(cuid())
+  invitationId String
+  invitation   Invitation   @relation(fields: [invitationId], references: [id], onDelete: Cascade)
+  guestId      String
+  guest        Guest        @relation(fields: [guestId], references: [id], onDelete: Cascade)
+  deviceId     String?
+  device       Device?      @relation(fields: [deviceId], references: [id], onDelete: SetNull)
+  operatorName String?
+  selfieUrl    String?      @db.Text
+  count        Int          @default(1)  // number of persons checked in during this event
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  @@index([invitationId])
+  @@index([guestId])
+  @@index([deviceId])
+}
+
+model GalleryImage {
+  id            String       @id @default(cuid())
+  invitationId  String
+  invitation    Invitation   @relation(fields: [invitationId], references: [id], onDelete: Cascade)
+  url           String       @db.Text
+  caption       String?
+  order         Int          @default(0)
+  createdAt     DateTime     @default(now())
+  @@index([invitationId])
+}
+
+model Video {
+  id            String       @id @default(cuid())
+  invitationId  String
+  invitation    Invitation   @relation(fields: [invitationId], references: [id], onDelete: Cascade)
+  url           String       @db.Text
+  type          VideoType    @default(MP4)
+  title         String?
+  createdAt     DateTime     @default(now())
+  @@index([invitationId])
+}
+
+model Music {
+  id            String       @id @default(cuid())
+  invitationId  String       @unique
+  invitation    Invitation   @relation(fields: [invitationId], references: [id], onDelete: Cascade)
+  url           String       @db.Text
+  title         String?
+  autoplay      Boolean      @default(true)
+  createdAt     DateTime     @default(now())
+}
+
+model Rsvp {
+  id            String       @id @default(cuid())
+  invitationId  String
+  invitation    Invitation   @relation(fields: [invitationId], references: [id], onDelete: Cascade)
+  guestId       String?
+  guest         Guest?       @relation(fields: [guestId], references: [id], onDelete: SetNull)
+  name          String
+  attendance    Attendance   @default(ATTENDING)
+  rsvpType      RsvpType     @default(INDIVIDUAL)
+  guestCount    Int          @default(1)
+  message       String?      @db.Text
+  customData    Json?
+  createdAt     DateTime     @default(now())
+  @@index([invitationId])
+  @@index([guestId])
+}
+
+model Setting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String   @db.Text
+  updatedAt DateTime @updatedAt
+}
+
+// Feature F — per-user message templates (multiple, private to owner).
+model MessageTemplate {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name      String
+  body      String   @db.Text
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@index([userId])
+}
+
+// Feature H — invitation-level RSVP field definitions (custom form builder).
+model RsvpField {
+  id           String     @id @default(cuid())
+  invitationId String
+  invitation   Invitation @relation(fields: [invitationId], references: [id], onDelete: Cascade)
+  fieldKey     String
+  label        String
+  type         String     @default("text")  // text|textarea|email|phone|number|select|radio|checkbox
+  placeholder  String?
+  required     Boolean    @default(false)
+  enabled      Boolean    @default(true)
+  order        Int        @default(0)
+  options      Json?      // for select/radio/checkbox
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  @@index([invitationId])
+}
+
+// Req 5 — invitation-scoped Guest Side (DB-driven, mirrors GuestCategory). Named
+// GuestSideOption to avoid clash with the legacy GuestSide enum (kept for back-compat).
+model GuestSideOption {
+  id           String     @id @default(cuid())
+  invitationId String
+  invitation   Invitation @relation(fields: [invitationId], references: [id], onDelete: Cascade)
+  name         String
+  order        Int        @default(0)
+  enabled      Boolean    @default(true)
+  guests       Guest[]
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  @@unique([invitationId, name])
+  @@index([invitationId])
+}
+
+// Req 7 — received-gift / angpau LEDGER (distinct from the Gift model which stores
+// angpau account config). Records gifts actually received from guests.
+model GiftEntry {
+  id           String     @id @default(cuid())
+  invitationId String
+  invitation   Invitation @relation(fields: [invitationId], references: [id], onDelete: Cascade)
+  guestId      String?
+  guest        Guest?     @relation(fields: [guestId], references: [id], onDelete: SetNull)
+  kind         GiftType   @default(MONEY)
+  amount       Decimal?   @db.Decimal(14, 2)
+  itemName     String?
+  giverName    String?
+  notes        String?    @db.Text
+  proofUrl       String?           @db.Text   // PRIVATE transfer proof (served via protected route, never /storage-file)
+  physicalItemId String?
+  physicalItem   PhysicalGiftItem? @relation(fields: [physicalItemId], references: [id], onDelete: SetNull)
+  quantity       Int?       // for physical-goods claims
+  checkInId      String?    // optional link to the check-in that recorded this gift
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  @@index([invitationId])
+  @@index([guestId])
+  @@index([physicalItemId])
+}
+
+// Phase 2 — Souvenir (Couple -> Guest). Simple CRUD + quota + distribution history.
+model Souvenir {
+  id            String                 @id @default(cuid())
+  invitationId  String
+  invitation    Invitation             @relation(fields: [invitationId], references: [id], onDelete: Cascade)
+  name          String
+  description   String?                @db.Text
+  image         String?                @db.Text
+  quota         Int                    @default(0)
+  active        Boolean                @default(true)
+  distributions SouvenirDistribution[]
+  createdAt     DateTime               @default(now())
+  updatedAt     DateTime               @updatedAt
+  @@index([invitationId])
+}
+
+// One record per (souvenir, guest); anonymous distributions keep guestId null (repeatable).
+model SouvenirDistribution {
+  id           String     @id @default(cuid())
+  invitationId String
+  invitation   Invitation @relation(fields: [invitationId], references: [id], onDelete: Cascade)
+  souvenirId   String
+  souvenir     Souvenir   @relation(fields: [souvenirId], references: [id], onDelete: Cascade)
+  guestId      String?
+  guest        Guest?     @relation(fields: [guestId], references: [id], onDelete: SetNull)
+  checkInId    String?
+  quantity     Int        @default(1)
+  operatorName String?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  @@unique([souvenirId, guestId])
+  @@index([invitationId])
+  @@index([souvenirId])
+  @@index([guestId])
+}
+
+// Phase 3 — Physical gift catalog items the couple offers (quota-limited). Claims are GiftEntry rows.
+model PhysicalGiftItem {
+  id           String      @id @default(cuid())
+  invitationId String
+  invitation   Invitation  @relation(fields: [invitationId], references: [id], onDelete: Cascade)
+  name         String
+  description  String?     @db.Text
+  image        String?     @db.Text
+  quota        Int         @default(0)
+  active       Boolean     @default(true)
+  giftEntries  GiftEntry[]
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  @@index([invitationId])
+}
+
+// Phase 6 — public landing-page testimonials (admin-managed).
+model Testimonial {
+  id        String   @id @default(cuid())
+  name      String
+  text      String   @db.Text
+  rating    Int      @default(5)
+  avatar    String?  @db.Text
+  active    Boolean  @default(true)
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

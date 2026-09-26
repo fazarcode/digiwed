@@ -1,0 +1,11 @@
+var R=require("../../../../../../chunks/[turbopack]_runtime.js")("server/app/api/invitations/[id]/guests/import-template/route.js")
+R.c("server/chunks/node_modules_next_931dff1e._.js")
+R.c("server/chunks/node_modules_xlsx_xlsx_mjs_539ebb60._.js")
+R.c("server/chunks/97170_@auth_core_46bb605f._.js")
+R.c("server/chunks/97170_jose_dist_node_esm_7c9433d1._.js")
+R.c("server/chunks/node_modules_zod_dist_esm_86ed43c8._.js")
+R.c("server/chunks/node_modules_589a6784._.js")
+R.c("server/chunks/[root-of-the-server]__408fd6cb._.js")
+R.m("[project]/.next-internal/server/app/api/invitations/[id]/guests/import-template/route/actions.js [app-rsc] (server actions loader, ecmascript)")
+R.m("[project]/node_modules/next/dist/esm/build/templates/app-route.js { INNER_APP_ROUTE => \"[project]/app/api/invitations/[id]/guests/import-template/route.js [app-route] (ecmascript)\" } [app-route] (ecmascript)")
+module.exports=R.m("[project]/node_modules/next/dist/esm/build/templates/app-route.js { INNER_APP_ROUTE => \"[project]/app/api/invitations/[id]/guests/import-template/route.js [app-route] (ecmascript)\" } [app-route] (ecmascript)").exports

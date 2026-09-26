@@ -1,0 +1,16 @@
+{
+  "name": "Elegant Brown",
+  "slug": "elegant-brown",
+  "version": "1.0.0",
+  "description": "A luxurious elegant brown & gold wedding invitation template with smooth animations.",
+  "author": "Elegante Platform",
+  "preview": "preview.jpg",
+  "entry": "index.html",
+  "placeholders": [
+    "BRIDE_NAME", "GROOM_NAME", "BRIDE_PARENTS", "GROOM_PARENTS",
+    "WEDDING_DATE", "WEDDING_TIME", "VENUE", "ADDRESS", "MAP", "MAP_URL",
+    "QUOTE", "LOVE_STORY", "COVER_IMAGE",
+    "GALLERY", "VIDEO", "MUSIC", "COUNTDOWN", "RSVP_FORM", "QR_CODE", "GUEST_NAME",
+    "PRIMARY_COLOR", "SECONDARY_COLOR", "BACKGROUND_COLOR", "FONT_FAMILY", "BORDER_RADIUS"
+  ]
+}

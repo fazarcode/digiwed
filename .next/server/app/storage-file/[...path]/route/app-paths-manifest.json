@@ -1,0 +1,3 @@
+{
+  "/storage-file/[...path]/route": "app/storage-file/[...path]/route.js"
+}

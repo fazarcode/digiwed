@@ -1,0 +1,20 @@
+{
+  "node": {
+    "60100ed834aaa3431cb7de8d4bf722f321dae43f6a": {
+      "workers": {
+        "app/register/page": {
+          "moduleId": "[project]/.next-internal/server/app/register/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/auth.js [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "registerUser",
+          "filename": "actions/auth.js"
+        }
+      },
+      "layer": {
+        "app/register/page": "action-browser"
+      },
+      "exportedName": "registerUser",
+      "filename": "actions/auth.js"
+    }
+  },
+  "edge": {}
+}

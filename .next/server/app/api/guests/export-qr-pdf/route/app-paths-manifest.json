@@ -1,0 +1,3 @@
+{
+  "/api/guests/export-qr-pdf/route": "app/api/guests/export-qr-pdf/route.js"
+}
