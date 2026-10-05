@@ -61,7 +61,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$dashboard$2f$n
 ;
 ;
 ;
-const dynamic = 'force-dynamic';
+const dynamic = "force-dynamic";
 async function NewInvitationPage() {
     const [templates, packages] = await Promise.all([
         __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$prisma$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"].template.findMany({
@@ -69,7 +69,7 @@ async function NewInvitationPage() {
                 enabled: true
             },
             orderBy: {
-                createdAt: 'asc'
+                createdAt: "asc"
             }
         }),
         __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$prisma$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"].package.findMany({
@@ -78,10 +78,10 @@ async function NewInvitationPage() {
             },
             orderBy: [
                 {
-                    sortOrder: 'asc'
+                    sortOrder: "asc"
                 },
                 {
-                    name: 'asc'
+                    name: "asc"
                 }
             ]
         })
@@ -106,24 +106,24 @@ async function NewInvitationPage() {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
                         className: "font-serif text-3xl font-bold",
-                        children: "Create New Invitation"
+                        children: "Buat Undangan Baru"
                     }, void 0, false, {
                         fileName: "[project]/app/dashboard/invitations/new/page.js",
-                        lineNumber: 16,
+                        lineNumber: 33,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: "text-muted-foreground mt-1",
-                        children: "Add basic details — your template is assigned by the administrator"
+                        children: "Isi detail dasar — template akan ditentukan oleh administrator"
                     }, void 0, false, {
                         fileName: "[project]/app/dashboard/invitations/new/page.js",
-                        lineNumber: 17,
+                        lineNumber: 34,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/dashboard/invitations/new/page.js",
-                lineNumber: 15,
+                lineNumber: 32,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$dashboard$2f$new$2d$invitation$2d$form$2e$jsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
@@ -131,13 +131,13 @@ async function NewInvitationPage() {
                 packages: pkgs
             }, void 0, false, {
                 fileName: "[project]/app/dashboard/invitations/new/page.js",
-                lineNumber: 19,
+                lineNumber: 38,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/app/dashboard/invitations/new/page.js",
-        lineNumber: 14,
+        lineNumber: 31,
         columnNumber: 5
     }, this);
 }

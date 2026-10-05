@@ -139,7 +139,7 @@ var _s = __turbopack_context__.k.signature();
 ;
 ;
 function TestimonialsManager(param) {
-    let { initial } = param;
+    let { initial, endpoint = '/api/admin/testimonials' } = param;
     _s();
     const [items, setItems] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(initial || []);
     const [form, setForm] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({
@@ -153,7 +153,7 @@ function TestimonialsManager(param) {
         if (!form.name.trim() || !form.text.trim()) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error('Name and text required');
         setBusy(true);
         try {
-            const r = await fetch('/api/admin/testimonials', {
+            const r = await fetch(endpoint, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -180,7 +180,7 @@ function TestimonialsManager(param) {
         }
     };
     const patch = async (id, body)=>{
-        const r = await fetch("/api/admin/testimonials/".concat(id), {
+        const r = await fetch("".concat(endpoint, "/").concat(id), {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
@@ -193,7 +193,7 @@ function TestimonialsManager(param) {
     };
     const del = async (id)=>{
         if (!confirm('Delete testimonial?')) return;
-        await fetch("/api/admin/testimonials/".concat(id), {
+        await fetch("".concat(endpoint, "/").concat(id), {
             method: 'DELETE'
         });
         setItems((l)=>l.filter((x)=>x.id !== id));

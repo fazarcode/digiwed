@@ -24,6 +24,7 @@ export default async function RsvpPage({ searchParams }) {
   // 2. Buat kondisi filter utama (Where Clause)
   const whereClause = {
     invitation: { userId: s.user.id },
+    isMessageOnly: false,
   };
 
   if (attendanceFilter !== "ALL") whereClause.attendance = attendanceFilter;
@@ -54,7 +55,7 @@ export default async function RsvpPage({ searchParams }) {
   const totalPages = Math.ceil(totalRsvpsCount / limit);
 
   // 5. Kalkulasi statistik Dashboard (Abaikan pencarian agar statistik total tetap akurat)
-  const statsWhereClause = { invitation: { userId: s.user.id } };
+  const statsWhereClause = { invitation: { userId: s.user.id }, isMessageOnly: false };
   if (invitationFilter !== "ALL")
     statsWhereClause.invitationId = invitationFilter;
 
@@ -76,10 +77,31 @@ export default async function RsvpPage({ searchParams }) {
       .reduce((sum, r) => sum + r.guestCount, 0),
   };
 
-  // 6. Lempar semua data ke Komponen UI
+  // 6. Phase 2 — load messages/wishes (separate from RSVP layout) for the management area.
+  const messagesWhere = { invitation: { userId: s.user.id }, message: { not: null } };
+  if (invitationFilter !== "ALL") messagesWhere.invitationId = invitationFilter;
+  const messageRows = await prisma.rsvp.findMany({
+    where: messagesWhere,
+    include: { invitation: { select: { brideName: true, groomName: true } } },
+    orderBy: { createdAt: "desc" },
+    take: 100,
+  });
+  const messages = messageRows
+    .filter((m) => String(m.message || "").trim() !== "")
+    .map((m) => ({
+      id: m.id,
+      name: m.name,
+      message: m.message,
+      isMessageOnly: m.isMessageOnly,
+      createdAt: m.createdAt,
+      invitation: m.invitation,
+    }));
+
+  // 7. Lempar semua data ke Komponen UI
   return (
     <RsvpList
       rsvps={rsvps}
+      messages={messages}
       stats={stats}
       userInvitations={userInvitations}
       currentPage={currentPage}

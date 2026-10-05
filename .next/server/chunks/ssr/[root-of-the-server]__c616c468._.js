@@ -471,9 +471,13 @@ function buildData(inv, guest, template, guestHasRsvp) {
     // Determine RSVP mode behaviour:
     // - QR_FIRST (default): show QR immediately for guest links; RSVP is separate.
     // - RSVP_FIRST: hide QR until the guest submits an RSVP; RSVP form reloads to reveal QR.
+    const rsvpEnabled = inv.rsvpEnabled !== false; // Phase 2 — independent toggles
+    const messageEnabled = inv.messageEnabled !== false;
     const rsvpMode = inv.rsvpMode || 'QR_FIRST';
-    const showQR = !!guest && (rsvpMode === 'QR_FIRST' || guestHasRsvp);
-    const showRsvpForm = !guest || guest.guestType === 'GROUP' || !guestHasRsvp; // INDIVIDUAL who already RSVPed hides the form
+    // If RSVP is OFF, QR is not gated behind RSVP submission (treat as QR_FIRST).
+    const effectiveMode = rsvpEnabled ? rsvpMode : 'QR_FIRST';
+    const showQR = !!guest && (effectiveMode === 'QR_FIRST' || guestHasRsvp);
+    const showRsvpForm = rsvpEnabled && (!guest || guest.guestType === 'GROUP' || !guestHasRsvp); // INDIVIDUAL who already RSVPed hides the form
     // Group-guest hint
     const rsvpBadge = guest ? `<div style="display:inline-block;margin-bottom:8px;padding:4px 12px;border-radius:999px;background:rgba(139,111,71,0.12);color:#5a4530;font-size:12px;letter-spacing:1px;text-transform:uppercase">${guest.guestType === 'GROUP' ? 'Group Guest' : 'Individual Guest'}</div>` : '';
     const rsvpAction = `${BASE_URL}/api/rsvp`;
@@ -508,7 +512,6 @@ function buildData(inv, guest, template, guestHasRsvp) {
         <option value="MAYBE">Maybe</option>
       </select>
       ${isIndividualGuest ? guest.quota > 1 ? `<input type="hidden" name="rsvpType" value="INDIVIDUAL" /><label style="font-size:12px;color:#5a4530;letter-spacing:1px;text-transform:uppercase">Number of Attendees (max ${guest.quota})</label><input type="number" name="guestCount" min="1" max="${guest.quota}" value="1" required style="padding:12px 14px;border:1px solid rgba(139,111,71,0.25);border-radius:8px;font-family:inherit;font-size:15px;background:#fff" /><p style="font-size:12px;color:#8b7355;margin:-4px 0 0">Individual RSVP — you can bring up to ${guest.quota} attendees.</p>` : `<input type="hidden" name="rsvpType" value="INDIVIDUAL" /><input type="hidden" name="guestCount" value="1" /><p style="font-size:12px;color:#8b7355;margin:-4px 0 0">Individual RSVP — 1 person</p>` : isGroupGuest ? `<input type="hidden" name="rsvpType" value="GROUP" /><input type="number" name="guestCount" min="1" max="50" value="2" placeholder="Number of guests" required style="padding:12px 14px;border:1px solid rgba(139,111,71,0.25);border-radius:8px;font-family:inherit;font-size:15px;background:#fff" /><p style="font-size:12px;color:#8b7355;margin:-4px 0 0">Group RSVP — you can submit multiple times if plans change.</p>` : `<select name="rsvpType" required onchange="document.getElementById('guestCountWrap').style.display=this.value==='GROUP'?'block':'none'" style="padding:12px 14px;border:1px solid rgba(139,111,71,0.25);border-radius:8px;font-family:inherit;font-size:15px;background:#fff"><option value="INDIVIDUAL">Attending Individually</option><option value="GROUP">Attending as Group (with family/partner)</option></select><div id="guestCountWrap" style="display:none"><input type="number" name="guestCount" min="2" max="20" value="2" placeholder="Number of guests" style="width:100%;padding:12px 14px;border:1px solid rgba(139,111,71,0.25);border-radius:8px;font-family:inherit;font-size:15px;background:#fff" /></div>`}
-      <textarea name="message" rows="3" placeholder="Message for the couple (optional)" style="padding:12px 14px;border:1px solid rgba(139,111,71,0.25);border-radius:8px;font-family:inherit;font-size:15px;background:#fff;resize:vertical"></textarea>
       ${customFieldsHTML}
       <button type="submit" class="btn" style="border:0;cursor:pointer">Send RSVP</button>
       <div id="rsvpMsg" style="font-size:13px;color:#4a3520;margin-top:4px"></div>
@@ -546,6 +549,7 @@ function buildData(inv, guest, template, guestHasRsvp) {
     let qrHTML = '';
     if (guest) {
         if (showQR) {
+            // QR keeps the token so the existing venue check-in scanner (?guest=) is unaffected.
             const url = `${BASE_URL}/invite/${inv.slug}?guest=${guest.token}`;
             const dataUrl = generateQRDataURLSync(url);
             qrHTML = `<h2 class="section-title">Your Guest QR</h2><div class="divider"></div><div class="qr-wrap"><img src="${dataUrl}" alt="Guest QR Code" /><p>Show this QR at the venue for check-in</p><p style="font-family:monospace;letter-spacing:1px;font-size:11px">Token: ${guest.token}</p>${guest.guestType === 'GROUP' ? '<p style="font-size:12px;color:#8b7355;margin-top:6px">Group QR — can be scanned multiple times.</p>' : ''}</div>`;
@@ -553,6 +557,58 @@ function buildData(inv, guest, template, guestHasRsvp) {
             qrHTML = `<div style="padding:20px;border:1px dashed rgba(139,111,71,0.3);border-radius:12px;color:#8b7355;font-size:13px;max-width:340px;margin:0 auto">Your QR code will appear here once you have submitted your RSVP above.</div>`;
         }
     }
+    // Phase 2 — standalone MESSAGE form (independent from RSVP) + public GIFT form.
+    const fieldStyle = 'padding:12px 14px;border:1px solid rgba(139,111,71,0.25);border-radius:8px;font-family:inherit;font-size:15px;background:#fff';
+    const guestHidden = guest ? `<input type="hidden" name="guestId" value="${guest.id}" /><input type="hidden" name="guestToken" value="${guest.token}" />` : '';
+    const messageFormHTML = messageEnabled ? `
+    <form onsubmit="return submitMessage(event, this)" style="display:grid;gap:12px;max-width:400px;margin:0 auto">
+      <input type="hidden" name="invitationId" value="${inv.id}" />
+      ${guestHidden}
+      <input required name="name" placeholder="Your Name" value="${escapeAttr(guest?.name || '')}" style="${fieldStyle}" />
+      <textarea required name="message" rows="3" placeholder="Write your wishes for the couple" style="${fieldStyle};resize:vertical"></textarea>
+      <button type="submit" class="btn" style="border:0;cursor:pointer">Send Message</button>
+      <div id="msgResult" style="font-size:13px;color:#4a3520;margin-top:4px"></div>
+    </form>
+    <script>
+      window.submitMessage = async function(e, form) {
+        e.preventDefault();
+        const payload = Object.fromEntries(new FormData(form));
+        payload.messageOnly = true;
+        try {
+          const res = await fetch('${rsvpAction}', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+          const data = await res.json();
+          const el = document.getElementById('msgResult');
+          if (data.ok) { el.style.color = '#2d6a4f'; el.textContent = 'Thank you for your message!'; form.reset(); }
+          else { el.style.color = '#a83232'; el.textContent = data.error || 'Failed to send.'; }
+        } catch (err) { document.getElementById('msgResult').textContent = 'Network error, please try again.'; }
+        return false;
+      };
+    <\/script>
+  ` : '';
+    const giftAction = `${BASE_URL}/api/public/gift/${inv.slug}`;
+    const giftFormHTML = `
+    <form onsubmit="return submitGift(event, this)" style="display:grid;gap:12px;max-width:400px;margin:0 auto">
+      <input type="hidden" name="action" value="money" />
+      <input name="giverName" placeholder="Your Name" value="${escapeAttr(guest?.name || '')}" style="${fieldStyle}" />
+      <input type="number" name="amount" placeholder="Amount (optional)" style="${fieldStyle}" />
+      <textarea name="note" rows="2" placeholder="Message (optional)" style="${fieldStyle};resize:vertical"></textarea>
+      <button type="submit" class="btn" style="border:0;cursor:pointer">Send Gift</button>
+      <div id="giftResult" style="font-size:13px;color:#4a3520;margin-top:4px"></div>
+    </form>
+    <script>
+      window.submitGift = async function(e, form) {
+        e.preventDefault();
+        try {
+          const res = await fetch('${giftAction}', { method: 'POST', body: new FormData(form) });
+          const data = await res.json();
+          const el = document.getElementById('giftResult');
+          if (data.ok) { el.style.color = '#2d6a4f'; el.textContent = 'Thank you for your gift!'; form.reset(); }
+          else { el.style.color = '#a83232'; el.textContent = data.error || 'Failed to send.'; }
+        } catch (err) { document.getElementById('giftResult').textContent = 'Network error, please try again.'; }
+        return false;
+      };
+    <\/script>
+  `;
     return {
         BRIDE_NAME: inv.brideName || 'Bride',
         GROOM_NAME: inv.groomName || 'Groom',
@@ -583,7 +639,9 @@ function buildData(inv, guest, template, guestHasRsvp) {
         VIDEO: videoHTML || '<p style="color:#8b7355;font-style:italic">Video coming soon.</p>',
         MUSIC: musicHTML,
         COUNTDOWN: countdownHTML,
-        RSVP_FORM: rsvpFormHTML,
+        RSVP_FORM: rsvpEnabled ? `<section class="section bg reveal"><h2 class="section-title">RSVP</h2><p class="subtitle">Kindly confirm your attendance</p><div class="divider"></div>${rsvpFormHTML}</section>` : '',
+        MESSAGE_FORM: messageEnabled ? `<section class="section reveal"><h2 class="section-title">Messages &amp; Wishes</h2><p class="subtitle">Send your best wishes to the couple</p><div class="divider"></div>${messageFormHTML}</section>` : '',
+        GIFT_FORM: `<section class="section bg reveal"><h2 class="section-title">Wedding Gift</h2><p class="subtitle">Your blessing means the world to us</p><div class="divider"></div>${giftFormHTML}</section>`,
         QR_CODE: qrHTML,
         GUEST_NAME: guest?.name || 'Beloved Guest',
         PRIMARY_COLOR: inv.primaryColor || '#8B6F47',
@@ -675,6 +733,7 @@ async function PublicInvitationPage({ params, searchParams }) {
     const sp = await searchParams;
     const slug = p.slug;
     const guestToken = sp?.guest;
+    const guestNameSlug = sp?.to;
     const invitation = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$prisma$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"].invitation.findUnique({
         where: {
             slug
@@ -742,25 +801,25 @@ async function PublicInvitationPage({ params, searchParams }) {
                         children: "Invitation Not Published"
                     }, void 0, false, {
                         fileName: "[project]/app/invite/[slug]/page.js",
-                        lineNumber: 33,
+                        lineNumber: 34,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         children: "This invitation is still being prepared. Please check back later."
                     }, void 0, false, {
                         fileName: "[project]/app/invite/[slug]/page.js",
-                        lineNumber: 34,
+                        lineNumber: 35,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/invite/[slug]/page.js",
-                lineNumber: 32,
+                lineNumber: 33,
                 columnNumber: 9
             }, this)
         }, void 0, false, {
             fileName: "[project]/app/invite/[slug]/page.js",
-            lineNumber: 31,
+            lineNumber: 32,
             columnNumber: 7
         }, this);
     }
@@ -775,8 +834,13 @@ async function PublicInvitationPage({ params, searchParams }) {
     }
     let guest = null;
     let guestHasRsvp = false;
-    if (guestToken) {
-        guest = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$prisma$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"].guest.findFirst({
+    if (guestNameSlug || guestToken) {
+        guest = guestNameSlug ? await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$prisma$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"].guest.findFirst({
+            where: {
+                nameSlug: guestNameSlug,
+                invitationId: invitation.id
+            }
+        }) : await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$prisma$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"].guest.findFirst({
             where: {
                 token: guestToken,
                 invitationId: invitation.id
@@ -786,7 +850,8 @@ async function PublicInvitationPage({ params, searchParams }) {
             const existing = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$prisma$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"].rsvp.findFirst({
                 where: {
                     guestId: guest.id,
-                    invitationId: invitation.id
+                    invitationId: invitation.id,
+                    isMessageOnly: false
                 },
                 select: {
                     id: true
@@ -807,7 +872,7 @@ async function PublicInvitationPage({ params, searchParams }) {
         }
     }, void 0, false, {
         fileName: "[project]/app/invite/[slug]/page.js",
-        lineNumber: 57,
+        lineNumber: 60,
         columnNumber: 10
     }, this);
 }

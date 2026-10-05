@@ -111,7 +111,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$re
 ;
 ;
 ;
-function TestimonialsManager({ initial }) {
+function TestimonialsManager({ initial, endpoint = '/api/admin/testimonials' }) {
     const [items, setItems] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(initial || []);
     const [form, setForm] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])({
         name: '',
@@ -124,7 +124,7 @@ function TestimonialsManager({ initial }) {
         if (!form.name.trim() || !form.text.trim()) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["toast"].error('Name and text required');
         setBusy(true);
         try {
-            const r = await fetch('/api/admin/testimonials', {
+            const r = await fetch(endpoint, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -151,7 +151,7 @@ function TestimonialsManager({ initial }) {
         }
     };
     const patch = async (id, body)=>{
-        const r = await fetch(`/api/admin/testimonials/${id}`, {
+        const r = await fetch(`${endpoint}/${id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
@@ -164,7 +164,7 @@ function TestimonialsManager({ initial }) {
     };
     const del = async (id)=>{
         if (!confirm('Delete testimonial?')) return;
-        await fetch(`/api/admin/testimonials/${id}`, {
+        await fetch(`${endpoint}/${id}`, {
             method: 'DELETE'
         });
         setItems((l)=>l.filter((x)=>x.id !== id));

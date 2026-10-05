@@ -1,0 +1,3 @@
+{
+  "/api/tv/[id]/settings/route": "app/api/tv/[id]/settings/route.js"
+}

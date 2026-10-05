@@ -111,7 +111,12 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2
 ;
 ;
 ;
-const dynamic = 'force-dynamic';
+const dynamic = "force-dynamic";
+const ATTENDANCE_LABEL = {
+    ATTENDING: "Hadir",
+    NOT_ATTENDING: "Tidak Hadir",
+    MAYBE: "Belum Pasti"
+};
 async function UserDashboardPage() {
     const session = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$auth$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["auth"])();
     const userId = session.user.id;
@@ -152,7 +157,7 @@ async function UserDashboardPage() {
                 }
             },
             orderBy: {
-                createdAt: 'desc'
+                createdAt: "desc"
             },
             take: 5,
             include: {
@@ -167,32 +172,32 @@ async function UserDashboardPage() {
     ]);
     const stats = [
         {
-            label: 'Invitations',
+            label: "Undangan",
             value: invitations,
             icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$file$2d$heart$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$export__default__as__FileHeart$3e$__["FileHeart"],
-            color: 'from-rose-500/20 to-rose-500/5',
-            iconColor: 'text-rose-700'
+            color: "from-rose-500/20 to-rose-500/5",
+            iconColor: "text-rose-700"
         },
         {
-            label: 'Guests',
+            label: "Tamu",
             value: guests,
             icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$users$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$export__default__as__Users$3e$__["Users"],
-            color: 'from-amber-500/20 to-amber-500/5',
-            iconColor: 'text-amber-700'
+            color: "from-amber-500/20 to-amber-500/5",
+            iconColor: "text-amber-700"
         },
         {
-            label: 'RSVP Received',
+            label: "RSVP Diterima",
             value: rsvps,
             icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$message$2d$square$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$export__default__as__MessageSquare$3e$__["MessageSquare"],
-            color: 'from-blue-500/20 to-blue-500/5',
-            iconColor: 'text-blue-700'
+            color: "from-blue-500/20 to-blue-500/5",
+            iconColor: "text-blue-700"
         },
         {
-            label: 'Checked In',
+            label: "Sudah Check-in",
             value: checkedIn,
             icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$scan$2d$line$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$export__default__as__ScanLine$3e$__["ScanLine"],
-            color: 'from-emerald-500/20 to-emerald-500/5',
-            iconColor: 'text-emerald-700'
+            color: "from-emerald-500/20 to-emerald-500/5",
+            iconColor: "text-emerald-700"
         }
     ];
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -208,21 +213,21 @@ async function UserDashboardPage() {
                                 children: "Dashboard"
                             }, void 0, false, {
                                 fileName: "[project]/app/dashboard/page.js",
-                                lineNumber: 32,
+                                lineNumber: 79,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                 className: "text-muted-foreground mt-1",
-                                children: "Manage your invitations, guests and RSVPs"
+                                children: "Kelola undangan, tamu, dan RSVP Anda"
                             }, void 0, false, {
                                 fileName: "[project]/app/dashboard/page.js",
-                                lineNumber: 33,
+                                lineNumber: 80,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/dashboard/page.js",
-                        lineNumber: 31,
+                        lineNumber: 78,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
@@ -234,25 +239,25 @@ async function UserDashboardPage() {
                                     className: "h-4 w-4 mr-2"
                                 }, void 0, false, {
                                     fileName: "[project]/app/dashboard/page.js",
-                                    lineNumber: 35,
-                                    columnNumber: 80
+                                    lineNumber: 86,
+                                    columnNumber: 13
                                 }, this),
-                                "New Invitation"
+                                "Undangan Baru"
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/dashboard/page.js",
-                            lineNumber: 35,
-                            columnNumber: 49
+                            lineNumber: 85,
+                            columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/dashboard/page.js",
-                        lineNumber: 35,
+                        lineNumber: 84,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/dashboard/page.js",
-                lineNumber: 30,
+                lineNumber: 77,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -269,7 +274,7 @@ async function UserDashboardPage() {
                                             children: s.label
                                         }, void 0, false, {
                                             fileName: "[project]/app/dashboard/page.js",
-                                            lineNumber: 43,
+                                            lineNumber: 100,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -277,13 +282,13 @@ async function UserDashboardPage() {
                                             children: s.value
                                         }, void 0, false, {
                                             fileName: "[project]/app/dashboard/page.js",
-                                            lineNumber: 44,
+                                            lineNumber: 101,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/dashboard/page.js",
-                                    lineNumber: 42,
+                                    lineNumber: 99,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -292,28 +297,28 @@ async function UserDashboardPage() {
                                         className: "h-6 w-6"
                                     }, void 0, false, {
                                         fileName: "[project]/app/dashboard/page.js",
-                                        lineNumber: 47,
+                                        lineNumber: 106,
                                         columnNumber: 17
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/app/dashboard/page.js",
-                                    lineNumber: 46,
+                                    lineNumber: 103,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/dashboard/page.js",
-                            lineNumber: 41,
+                            lineNumber: 98,
                             columnNumber: 13
                         }, this)
                     }, s.label, false, {
                         fileName: "[project]/app/dashboard/page.js",
-                        lineNumber: 40,
+                        lineNumber: 94,
                         columnNumber: 11
                     }, this))
             }, void 0, false, {
                 fileName: "[project]/app/dashboard/page.js",
-                lineNumber: 38,
+                lineNumber: 92,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -324,10 +329,10 @@ async function UserDashboardPage() {
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                                 className: "font-serif text-xl font-semibold mb-4",
-                                children: "Recent RSVPs"
+                                children: "RSVP Terbaru"
                             }, void 0, false, {
                                 fileName: "[project]/app/dashboard/page.js",
-                                lineNumber: 56,
+                                lineNumber: 115,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -335,11 +340,11 @@ async function UserDashboardPage() {
                                 children: [
                                     latestRsvps.length === 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                         className: "text-sm text-muted-foreground text-center py-6",
-                                        children: "No RSVPs yet"
+                                        children: "Belum ada RSVP"
                                     }, void 0, false, {
                                         fileName: "[project]/app/dashboard/page.js",
-                                        lineNumber: 58,
-                                        columnNumber: 42
+                                        lineNumber: 120,
+                                        columnNumber: 15
                                     }, this),
                                     latestRsvps.map((r)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             className: "flex items-center justify-between py-2 border-b border-primary/5 last:border-0",
@@ -351,54 +356,55 @@ async function UserDashboardPage() {
                                                             children: r.name
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/dashboard/page.js",
-                                                            lineNumber: 62,
+                                                            lineNumber: 130,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                             className: "text-xs text-muted-foreground",
                                                             children: [
-                                                                "for ",
+                                                                "untuk ",
                                                                 r.invitation.brideName,
                                                                 " & ",
                                                                 r.invitation.groomName,
-                                                                " • ",
-                                                                r.rsvpType === 'GROUP' ? `+${r.guestCount - 1}` : 'Individual'
+                                                                " •",
+                                                                " ",
+                                                                r.rsvpType === "GROUP" ? `+${r.guestCount - 1}` : "Individu"
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/app/dashboard/page.js",
-                                                            lineNumber: 63,
+                                                            lineNumber: 131,
                                                             columnNumber: 19
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/app/dashboard/page.js",
-                                                    lineNumber: 61,
+                                                    lineNumber: 129,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                    className: `text-xs px-2 py-1 rounded-full ${r.attendance === 'ATTENDING' ? 'bg-emerald-100 text-emerald-700' : r.attendance === 'NOT_ATTENDING' ? 'bg-red-100 text-red-700' : 'bg-amber-100 text-amber-700'}`,
-                                                    children: r.attendance
+                                                    className: `text-xs px-2 py-1 rounded-full ${r.attendance === "ATTENDING" ? "bg-emerald-100 text-emerald-700" : r.attendance === "NOT_ATTENDING" ? "bg-red-100 text-red-700" : "bg-amber-100 text-amber-700"}`,
+                                                    children: ATTENDANCE_LABEL[r.attendance] || r.attendance
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/dashboard/page.js",
-                                                    lineNumber: 65,
+                                                    lineNumber: 138,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, r.id, true, {
                                             fileName: "[project]/app/dashboard/page.js",
-                                            lineNumber: 60,
+                                            lineNumber: 125,
                                             columnNumber: 15
                                         }, this))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/dashboard/page.js",
-                                lineNumber: 57,
+                                lineNumber: 118,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/dashboard/page.js",
-                        lineNumber: 55,
+                        lineNumber: 114,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -408,56 +414,56 @@ async function UserDashboardPage() {
                                 className: "h-8 w-8 text-primary mb-3"
                             }, void 0, false, {
                                 fileName: "[project]/app/dashboard/page.js",
-                                lineNumber: 72,
+                                lineNumber: 149,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                                 className: "font-serif text-xl font-semibold",
-                                children: "Create Something Beautiful"
+                                children: "Buat Sesuatu yang Indah"
                             }, void 0, false, {
                                 fileName: "[project]/app/dashboard/page.js",
-                                lineNumber: 73,
+                                lineNumber: 150,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                 className: "text-sm text-muted-foreground mt-1 mb-4",
-                                children: "Start with a template and customize every detail"
+                                children: "Mulai dari template dan sesuaikan setiap detailnya"
                             }, void 0, false, {
                                 fileName: "[project]/app/dashboard/page.js",
-                                lineNumber: 74,
+                                lineNumber: 153,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
                                 href: "/dashboard/invitations/new",
                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Button"], {
                                     className: "bg-primary",
-                                    children: "Create Invitation"
+                                    children: "Buat Undangan"
                                 }, void 0, false, {
                                     fileName: "[project]/app/dashboard/page.js",
-                                    lineNumber: 75,
-                                    columnNumber: 51
+                                    lineNumber: 157,
+                                    columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/app/dashboard/page.js",
-                                lineNumber: 75,
+                                lineNumber: 156,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/dashboard/page.js",
-                        lineNumber: 71,
+                        lineNumber: 148,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/dashboard/page.js",
-                lineNumber: 54,
+                lineNumber: 113,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/app/dashboard/page.js",
-        lineNumber: 29,
+        lineNumber: 76,
         columnNumber: 5
     }, this);
 }

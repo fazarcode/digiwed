@@ -128,19 +128,58 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$re
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$trash$2d$2$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Trash2$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/trash-2.js [app-client] (ecmascript) <export default as Trash2>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Link$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/link.js [app-client] (ecmascript) <export default as Link>");
 ;
-var _s = __turbopack_context__.k.signature();
-'use client';
+var _s = __turbopack_context__.k.signature(), _s1 = __turbopack_context__.k.signature();
+"use client";
 ;
 ;
 ;
 ;
 ;
 ;
+// ---------------------------------------------------------------------------
+// Util gambar: perbaikan untuk link Google Drive & placeholder yang gagal load
+// (sama seperti di ImagePicker milik InvitationEditor — disalin di sini karena
+// file ini berdiri sendiri).
+// ---------------------------------------------------------------------------
+const IMG_ERROR_PLACEHOLDER = "data:image/svg+xml;utf8," + encodeURIComponent("<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'>\n      <rect width='100%' height='100%' fill='#f1e5d8'/>\n      <text x='50%' y='50%' font-family='sans-serif' font-size='11' fill='#8b6f47' text-anchor='middle' dominant-baseline='middle'>Gagal memuat</text>\n    </svg>");
+// Ambil file ID dari berbagai format link Google Drive:
+//  - https://drive.google.com/file/d/FILE_ID/view?usp=sharing
+//  - https://drive.google.com/open?id=FILE_ID
+//  - https://drive.google.com/uc?id=FILE_ID&export=view
+//  - https://docs.google.com/uc?id=FILE_ID
+function extractGoogleDriveId(url) {
+    if (!url) return null;
+    const patterns = [
+        /drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/,
+        /drive\.google\.com\/thumbnail\?.*?[?&]id=([a-zA-Z0-9_-]+)/,
+        /(?:drive|docs)\.google\.com\/uc\?.*?[?&]id=([a-zA-Z0-9_-]+)/,
+        /drive\.google\.com\/open\?.*?[?&]id=([a-zA-Z0-9_-]+)/
+    ];
+    for (const re of patterns){
+        const m = url.match(re);
+        if (m && m[1]) return m[1];
+    }
+    const idMatch = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+    return idMatch ? idMatch[1] : null;
+}
+// Link Google Drive biasa (…/view) adalah halaman preview, BUKAN link gambar
+// langsung, sehingga <img src> selalu gagal. Di sini otomatis dikonversi ke
+// endpoint thumbnail Google Drive yang bisa langsung ditampilkan sebagai <img>.
+// Link gambar non-Drive (Cloudinary, S3, dsb.) dikembalikan apa adanya.
+function normalizeImageUrl(url) {
+    const trimmed = (url || "").trim();
+    if (!trimmed) return trimmed;
+    if (trimmed.includes("drive.google.com") || trimmed.includes("docs.google.com")) {
+        const id = extractGoogleDriveId(trimmed);
+        if (id) return "https://drive.google.com/thumbnail?id=".concat(id, "&sz=w1000");
+    }
+    return trimmed;
+}
 function GalleryEditor(param) {
     let { invitationId, initial, onChange } = param;
     _s();
     const [items, setItems] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(initial);
-    const [url, setUrl] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('');
+    const [url, setUrl] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
     const [uploading, setUploading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const refresh = async ()=>{
         const res = await fetch("/api/invitations/".concat(invitationId, "/gallery"));
@@ -150,17 +189,21 @@ function GalleryEditor(param) {
     };
     const addUrl = async ()=>{
         if (!url) return;
+        // Konversi link Google Drive ke link gambar langsung SEBELUM disimpan,
+        // supaya data yang tersimpan di database juga sudah benar (bukan cuma
+        // pratinjaunya di editor ini).
+        const normalized = normalizeImageUrl(url);
         const res = await fetch("/api/invitations/".concat(invitationId, "/gallery"), {
-            method: 'POST',
+            method: "POST",
             headers: {
-                'Content-Type': 'application/json'
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                url
+                url: normalized
             })
         });
-        if (!res.ok) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error('Failed');
-        setUrl('');
+        if (!res.ok) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error("Gagal menambahkan foto");
+        setUrl("");
         refresh();
     };
     const uploadFile = async (e)=>{
@@ -169,30 +212,30 @@ function GalleryEditor(param) {
         if (!f) return;
         setUploading(true);
         const fd = new FormData();
-        fd.append('file', f);
-        fd.append('kind', 'image');
-        const res = await fetch('/api/upload', {
-            method: 'POST',
+        fd.append("file", f);
+        fd.append("kind", "image");
+        const res = await fetch("/api/upload", {
+            method: "POST",
             body: fd
         });
         const data = await res.json();
         setUploading(false);
-        if (!res.ok) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error(data.error || 'Upload failed');
+        if (!res.ok) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error(data.error || "Unggah gagal");
         await fetch("/api/invitations/".concat(invitationId, "/gallery"), {
-            method: 'POST',
+            method: "POST",
             headers: {
-                'Content-Type': 'application/json'
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({
                 url: data.url
             })
         });
         refresh();
-        e.target.value = '';
+        e.target.value = "";
     };
     const removeItem = async (id)=>{
         await fetch("/api/invitations/".concat(invitationId, "/gallery/").concat(id), {
-            method: 'DELETE'
+            method: "DELETE"
         });
         refresh();
     };
@@ -201,10 +244,10 @@ function GalleryEditor(param) {
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                 className: "font-serif text-xl font-semibold",
-                children: "Gallery"
+                children: "Galeri"
             }, void 0, false, {
                 fileName: "[project]/components/editor/gallery-editor.jsx",
-                lineNumber: 45,
+                lineNumber: 117,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -212,10 +255,10 @@ function GalleryEditor(param) {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: "text-xs uppercase tracking-widest text-muted-foreground mb-2",
-                        children: "Method 1 — Upload File"
+                        children: "Cara 1 — Unggah File"
                     }, void 0, false, {
                         fileName: "[project]/components/editor/gallery-editor.jsx",
-                        lineNumber: 47,
+                        lineNumber: 119,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -232,19 +275,19 @@ function GalleryEditor(param) {
                                             className: "h-3.5 w-3.5 mr-1"
                                         }, void 0, false, {
                                             fileName: "[project]/components/editor/gallery-editor.jsx",
-                                            lineNumber: 49,
-                                            columnNumber: 82
+                                            lineNumber: 125,
+                                            columnNumber: 15
                                         }, this),
-                                        uploading ? 'Uploading…' : 'Choose Image'
+                                        uploading ? "Mengunggah…" : "Pilih Gambar"
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/editor/gallery-editor.jsx",
-                                    lineNumber: 49,
-                                    columnNumber: 76
+                                    lineNumber: 124,
+                                    columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/editor/gallery-editor.jsx",
-                                lineNumber: 49,
+                                lineNumber: 123,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -254,19 +297,19 @@ function GalleryEditor(param) {
                                 onChange: uploadFile
                             }, void 0, false, {
                                 fileName: "[project]/components/editor/gallery-editor.jsx",
-                                lineNumber: 50,
+                                lineNumber: 129,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/editor/gallery-editor.jsx",
-                        lineNumber: 48,
+                        lineNumber: 122,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/editor/gallery-editor.jsx",
-                lineNumber: 46,
+                lineNumber: 118,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -274,10 +317,10 @@ function GalleryEditor(param) {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: "text-xs uppercase tracking-widest text-muted-foreground mb-2",
-                        children: "Method 2 — Paste Public URL"
+                        children: "Cara 2 — Tempel URL Publik"
                     }, void 0, false, {
                         fileName: "[project]/components/editor/gallery-editor.jsx",
-                        lineNumber: 54,
+                        lineNumber: 133,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -286,11 +329,11 @@ function GalleryEditor(param) {
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
                                 value: url,
                                 onChange: (e)=>setUrl(e.target.value),
-                                placeholder: "https://... (Cloudinary, Google Drive, S3, etc.)"
+                                placeholder: "https://... (Cloudinary, Google Drive, S3, dll.)"
                             }, void 0, false, {
                                 fileName: "[project]/components/editor/gallery-editor.jsx",
-                                lineNumber: 55,
-                                columnNumber: 37
+                                lineNumber: 137,
+                                columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
                                 size: "sm",
@@ -299,77 +342,116 @@ function GalleryEditor(param) {
                                     className: "h-3.5 w-3.5"
                                 }, void 0, false, {
                                     fileName: "[project]/components/editor/gallery-editor.jsx",
-                                    lineNumber: 55,
-                                    columnNumber: 195
+                                    lineNumber: 143,
+                                    columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/editor/gallery-editor.jsx",
-                                lineNumber: 55,
-                                columnNumber: 160
+                                lineNumber: 142,
+                                columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/editor/gallery-editor.jsx",
-                        lineNumber: 55,
+                        lineNumber: 136,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                        className: "text-[11px] text-muted-foreground mt-1.5",
+                        children: 'Link berbagi Google Drive otomatis dikonversi ke link gambar langsung. Pastikan akses filenya diatur ke "Anyone with the link".'
+                    }, void 0, false, {
+                        fileName: "[project]/components/editor/gallery-editor.jsx",
+                        lineNumber: 146,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/editor/gallery-editor.jsx",
-                lineNumber: 53,
+                lineNumber: 132,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "grid grid-cols-3 gap-2",
-                children: items.map((g)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "relative group aspect-square rounded-lg overflow-hidden border",
-                        children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
-                                src: g.url,
-                                alt: "",
-                                className: "w-full h-full object-cover"
-                            }, void 0, false, {
-                                fileName: "[project]/components/editor/gallery-editor.jsx",
-                                lineNumber: 60,
-                                columnNumber: 13
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                onClick: ()=>removeItem(g.id),
-                                className: "absolute top-1 right-1 h-6 w-6 rounded-full bg-red-500 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition",
-                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$trash$2d$2$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Trash2$3e$__["Trash2"], {
-                                    className: "h-3 w-3"
-                                }, void 0, false, {
-                                    fileName: "[project]/components/editor/gallery-editor.jsx",
-                                    lineNumber: 61,
-                                    columnNumber: 210
-                                }, this)
-                            }, void 0, false, {
-                                fileName: "[project]/components/editor/gallery-editor.jsx",
-                                lineNumber: 61,
-                                columnNumber: 13
-                            }, this)
-                        ]
-                    }, g.id, true, {
+                children: items.map((g)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(GalleryThumb, {
+                        item: g,
+                        onRemove: ()=>removeItem(g.id)
+                    }, g.id, false, {
                         fileName: "[project]/components/editor/gallery-editor.jsx",
-                        lineNumber: 59,
+                        lineNumber: 153,
                         columnNumber: 11
                     }, this))
             }, void 0, false, {
                 fileName: "[project]/components/editor/gallery-editor.jsx",
-                lineNumber: 57,
+                lineNumber: 151,
+                columnNumber: 7
+            }, this),
+            items.length === 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                className: "text-xs text-muted-foreground text-center py-4",
+                children: "Belum ada foto di galeri."
+            }, void 0, false, {
+                fileName: "[project]/components/editor/gallery-editor.jsx",
+                lineNumber: 157,
+                columnNumber: 9
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "[project]/components/editor/gallery-editor.jsx",
+        lineNumber: 116,
+        columnNumber: 5
+    }, this);
+}
+_s(GalleryEditor, "6Rsdxo/x5TvATwJEtgOvlE+nII4=");
+_c = GalleryEditor;
+function GalleryThumb(param) {
+    let { item, onRemove } = param;
+    _s1();
+    const [errored, setErrored] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    // Menormalkan lagi saat render supaya foto lama yang sempat tersimpan
+    // mentah (link Google Drive belum dikonversi) tetap tampil tanpa perlu
+    // dihapus & ditambah ulang.
+    const src = errored ? IMG_ERROR_PLACEHOLDER : normalizeImageUrl(item.url);
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+        className: "relative group aspect-square rounded-lg overflow-hidden border",
+        children: [
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
+                src: src,
+                alt: "",
+                referrerPolicy: "no-referrer",
+                className: "w-full h-full object-cover",
+                onError: ()=>setErrored(true)
+            }, void 0, false, {
+                fileName: "[project]/components/editor/gallery-editor.jsx",
+                lineNumber: 174,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                onClick: onRemove,
+                className: "absolute top-1 right-1 h-6 w-6 rounded-full bg-red-500 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition",
+                "aria-label": "Hapus foto",
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$trash$2d$2$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Trash2$3e$__["Trash2"], {
+                    className: "h-3 w-3"
+                }, void 0, false, {
+                    fileName: "[project]/components/editor/gallery-editor.jsx",
+                    lineNumber: 186,
+                    columnNumber: 9
+                }, this)
+            }, void 0, false, {
+                fileName: "[project]/components/editor/gallery-editor.jsx",
+                lineNumber: 181,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/editor/gallery-editor.jsx",
-        lineNumber: 44,
+        lineNumber: 173,
         columnNumber: 5
     }, this);
 }
-_s(GalleryEditor, "HWO/oGvR590LSyJeY3H90V3pwH8=");
-_c = GalleryEditor;
-var _c;
+_s1(GalleryThumb, "+ZyF5auc5beU+cNGfVLSvkNx2Ro=");
+_c1 = GalleryThumb;
+var _c, _c1;
 __turbopack_context__.k.register(_c, "GalleryEditor");
+__turbopack_context__.k.register(_c1, "GalleryThumb");
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
 }
@@ -393,18 +475,52 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$re
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$youtube$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Youtube$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/youtube.js [app-client] (ecmascript) <export default as Youtube>");
 ;
 var _s = __turbopack_context__.k.signature();
-'use client';
+"use client";
 ;
 ;
 ;
 ;
 ;
 ;
+// ---------------------------------------------------------------------------
+// Util link Google Drive untuk FILE VIDEO (bukan YouTube/Vimeo).
+// Sama seperti audio: link share Drive (…/view) adalah halaman preview,
+// bukan file video langsung, jadi otomatis dikonversi ke endpoint unduh
+// mentah supaya bisa diputar via tag <video>.
+// ---------------------------------------------------------------------------
+function extractGoogleDriveId(url) {
+    if (!url) return null;
+    const patterns = [
+        /drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/,
+        /drive\.google\.com\/uc\?.*?[?&]id=([a-zA-Z0-9_-]+)/,
+        /docs\.google\.com\/uc\?.*?[?&]id=([a-zA-Z0-9_-]+)/,
+        /drive\.google\.com\/open\?.*?[?&]id=([a-zA-Z0-9_-]+)/
+    ];
+    for (const re of patterns){
+        const m = url.match(re);
+        if (m && m[1]) return m[1];
+    }
+    const idMatch = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+    return idMatch ? idMatch[1] : null;
+}
+// PENTING: untuk file Drive di atas ±25MB, Google akan menampilkan halaman
+// konfirmasi "tidak dapat memindai virus" alih-alih file mentahnya, jadi tetap
+// gagal diputar walau linknya sudah benar format — untuk video berukuran
+// besar, sebaiknya unggah langsung lewat Cara 1.
+function normalizeVideoUrl(url) {
+    const trimmed = (url || "").trim();
+    if (!trimmed) return trimmed;
+    if (trimmed.includes("drive.google.com") || trimmed.includes("docs.google.com")) {
+        const id = extractGoogleDriveId(trimmed);
+        if (id) return "https://drive.google.com/uc?export=download&id=".concat(id);
+    }
+    return trimmed;
+}
 function VideoEditor(param) {
     let { invitationId, initial, onChange } = param;
     _s();
     const [items, setItems] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(initial);
-    const [url, setUrl] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('');
+    const [url, setUrl] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
     const refresh = async ()=>{
         const res = await fetch("/api/invitations/".concat(invitationId, "/video"));
         const data = await res.json();
@@ -414,20 +530,24 @@ function VideoEditor(param) {
     const add = async function() {
         let u = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : url;
         if (!u) return;
-        let type = 'MP4';
-        if (u.includes('youtube') || u.includes('youtu.be')) type = 'YOUTUBE';
-        else if (u.includes('vimeo')) type = 'VIMEO';
-        await fetch("/api/invitations/".concat(invitationId, "/video"), {
-            method: 'POST',
+        let type = "MP4";
+        if (u.includes("youtube") || u.includes("youtu.be")) type = "YOUTUBE";
+        else if (u.includes("vimeo")) type = "VIMEO";
+        // Google Drive bukan YouTube/Vimeo, jadi masuk kategori MP4 — link-nya
+        // dikonversi dulu ke file langsung sebelum disimpan.
+        const normalizedUrl = type === "MP4" ? normalizeVideoUrl(u) : u;
+        const res = await fetch("/api/invitations/".concat(invitationId, "/video"), {
+            method: "POST",
             headers: {
-                'Content-Type': 'application/json'
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                url: u,
+                url: normalizedUrl,
                 type
             })
         });
-        setUrl('');
+        if (!res.ok) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error("Gagal menambahkan video");
+        setUrl("");
         refresh();
     };
     const uploadFile = async (e)=>{
@@ -435,20 +555,20 @@ function VideoEditor(param) {
         const f = (_e_target_files = e.target.files) === null || _e_target_files === void 0 ? void 0 : _e_target_files[0];
         if (!f) return;
         const fd = new FormData();
-        fd.append('file', f);
-        fd.append('kind', 'video');
-        const res = await fetch('/api/upload', {
-            method: 'POST',
+        fd.append("file", f);
+        fd.append("kind", "video");
+        const res = await fetch("/api/upload", {
+            method: "POST",
             body: fd
         });
         const data = await res.json();
-        if (!res.ok) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error(data.error || 'Upload failed');
+        if (!res.ok) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error(data.error || "Unggah gagal");
         await add(data.url);
-        e.target.value = '';
+        e.target.value = "";
     };
     const removeItem = async (id)=>{
         await fetch("/api/invitations/".concat(invitationId, "/video/").concat(id), {
-            method: 'DELETE'
+            method: "DELETE"
         });
         refresh();
     };
@@ -460,7 +580,7 @@ function VideoEditor(param) {
                 children: "Video"
             }, void 0, false, {
                 fileName: "[project]/components/editor/video-editor.jsx",
-                lineNumber: 38,
+                lineNumber: 97,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -468,10 +588,10 @@ function VideoEditor(param) {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: "text-xs uppercase tracking-widest text-muted-foreground mb-2",
-                        children: "Method 1 — Upload MP4"
+                        children: "Cara 1 — Unggah MP4"
                     }, void 0, false, {
                         fileName: "[project]/components/editor/video-editor.jsx",
-                        lineNumber: 40,
+                        lineNumber: 99,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -486,20 +606,20 @@ function VideoEditor(param) {
                                             className: "h-3.5 w-3.5 mr-1"
                                         }, void 0, false, {
                                             fileName: "[project]/components/editor/video-editor.jsx",
-                                            lineNumber: 41,
-                                            columnNumber: 66
+                                            lineNumber: 105,
+                                            columnNumber: 15
                                         }, this),
-                                        "Choose Video File"
+                                        "Pilih File Video"
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/editor/video-editor.jsx",
-                                    lineNumber: 41,
-                                    columnNumber: 60
+                                    lineNumber: 104,
+                                    columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/editor/video-editor.jsx",
-                                lineNumber: 41,
-                                columnNumber: 16
+                                lineNumber: 103,
+                                columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                 type: "file",
@@ -508,19 +628,19 @@ function VideoEditor(param) {
                                 onChange: uploadFile
                             }, void 0, false, {
                                 fileName: "[project]/components/editor/video-editor.jsx",
-                                lineNumber: 41,
-                                columnNumber: 137
+                                lineNumber: 109,
+                                columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/editor/video-editor.jsx",
-                        lineNumber: 41,
+                        lineNumber: 102,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/editor/video-editor.jsx",
-                lineNumber: 39,
+                lineNumber: 98,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -528,10 +648,10 @@ function VideoEditor(param) {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: "text-xs uppercase tracking-widest text-muted-foreground mb-2",
-                        children: "Method 2 — YouTube / Vimeo / MP4 URL"
+                        children: "Cara 2 — URL YouTube / Vimeo / MP4"
                     }, void 0, false, {
                         fileName: "[project]/components/editor/video-editor.jsx",
-                        lineNumber: 44,
+                        lineNumber: 118,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -540,11 +660,11 @@ function VideoEditor(param) {
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
                                 value: url,
                                 onChange: (e)=>setUrl(e.target.value),
-                                placeholder: "YouTube / Vimeo / MP4 URL"
+                                placeholder: "URL YouTube / Vimeo / MP4 (atau link Google Drive)"
                             }, void 0, false, {
                                 fileName: "[project]/components/editor/video-editor.jsx",
-                                lineNumber: 45,
-                                columnNumber: 37
+                                lineNumber: 122,
+                                columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
                                 size: "sm",
@@ -553,89 +673,108 @@ function VideoEditor(param) {
                                     className: "h-3.5 w-3.5"
                                 }, void 0, false, {
                                     fileName: "[project]/components/editor/video-editor.jsx",
-                                    lineNumber: 45,
-                                    columnNumber: 177
+                                    lineNumber: 128,
+                                    columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/editor/video-editor.jsx",
-                                lineNumber: 45,
-                                columnNumber: 137
+                                lineNumber: 127,
+                                columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/editor/video-editor.jsx",
-                        lineNumber: 45,
+                        lineNumber: 121,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                        className: "text-[11px] text-muted-foreground mt-1.5",
+                        children: 'Link berbagi Google Drive otomatis dikonversi ke link file langsung. Pastikan akses filenya "Anyone with the link", dan untuk video di atas ±25MB sebaiknya unggah langsung lewat Cara 1.'
+                    }, void 0, false, {
+                        fileName: "[project]/components/editor/video-editor.jsx",
+                        lineNumber: 131,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/editor/video-editor.jsx",
-                lineNumber: 43,
+                lineNumber: 117,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "space-y-2",
-                children: items.map((v)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "flex items-center gap-2 p-2 border rounded-lg",
-                        children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$youtube$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Youtube$3e$__["Youtube"], {
-                                className: "h-4 w-4 text-red-600"
-                            }, void 0, false, {
-                                fileName: "[project]/components/editor/video-editor.jsx",
-                                lineNumber: 50,
-                                columnNumber: 13
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "flex-1 text-xs truncate",
-                                children: v.url
-                            }, void 0, false, {
-                                fileName: "[project]/components/editor/video-editor.jsx",
-                                lineNumber: 51,
-                                columnNumber: 13
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                className: "text-[10px] px-2 py-0.5 bg-muted rounded",
-                                children: v.type
-                            }, void 0, false, {
-                                fileName: "[project]/components/editor/video-editor.jsx",
-                                lineNumber: 52,
-                                columnNumber: 13
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
-                                size: "sm",
-                                variant: "ghost",
-                                onClick: ()=>removeItem(v.id),
-                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$trash$2d$2$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Trash2$3e$__["Trash2"], {
-                                    className: "h-3.5 w-3.5"
+                children: [
+                    items.map((v)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "flex items-center gap-2 p-2 border rounded-lg",
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$youtube$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Youtube$3e$__["Youtube"], {
+                                    className: "h-4 w-4 text-red-600"
                                 }, void 0, false, {
                                     fileName: "[project]/components/editor/video-editor.jsx",
-                                    lineNumber: 53,
-                                    columnNumber: 80
+                                    lineNumber: 143,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "flex-1 text-xs truncate",
+                                    children: v.url
+                                }, void 0, false, {
+                                    fileName: "[project]/components/editor/video-editor.jsx",
+                                    lineNumber: 144,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                    className: "text-[10px] px-2 py-0.5 bg-muted rounded",
+                                    children: v.type
+                                }, void 0, false, {
+                                    fileName: "[project]/components/editor/video-editor.jsx",
+                                    lineNumber: 145,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
+                                    size: "sm",
+                                    variant: "ghost",
+                                    onClick: ()=>removeItem(v.id),
+                                    "aria-label": "Hapus video",
+                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$trash$2d$2$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Trash2$3e$__["Trash2"], {
+                                        className: "h-3.5 w-3.5"
+                                    }, void 0, false, {
+                                        fileName: "[project]/components/editor/video-editor.jsx",
+                                        lineNumber: 154,
+                                        columnNumber: 15
+                                    }, this)
+                                }, void 0, false, {
+                                    fileName: "[project]/components/editor/video-editor.jsx",
+                                    lineNumber: 148,
+                                    columnNumber: 13
                                 }, this)
-                            }, void 0, false, {
-                                fileName: "[project]/components/editor/video-editor.jsx",
-                                lineNumber: 53,
-                                columnNumber: 13
-                            }, this)
-                        ]
-                    }, v.id, true, {
+                            ]
+                        }, v.id, true, {
+                            fileName: "[project]/components/editor/video-editor.jsx",
+                            lineNumber: 139,
+                            columnNumber: 11
+                        }, this)),
+                    items.length === 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                        className: "text-xs text-muted-foreground text-center py-4",
+                        children: "Belum ada video ditambahkan."
+                    }, void 0, false, {
                         fileName: "[project]/components/editor/video-editor.jsx",
-                        lineNumber: 49,
+                        lineNumber: 159,
                         columnNumber: 11
-                    }, this))
-            }, void 0, false, {
+                    }, this)
+                ]
+            }, void 0, true, {
                 fileName: "[project]/components/editor/video-editor.jsx",
-                lineNumber: 47,
+                lineNumber: 137,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/editor/video-editor.jsx",
-        lineNumber: 37,
+        lineNumber: 96,
         columnNumber: 5
     }, this);
 }
-_s(VideoEditor, "Pyx+/e0hvakzh6fF+2jx8U6eRMQ=");
+_s(VideoEditor, "HxvaVfHkavmPlKGeIB701jleank=");
 _c = VideoEditor;
 var _c;
 __turbopack_context__.k.register(_c, "VideoEditor");
@@ -661,7 +800,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$re
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$music$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Music$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/music.js [app-client] (ecmascript) <export default as Music>");
 ;
 var _s = __turbopack_context__.k.signature();
-'use client';
+"use client";
 ;
 ;
 ;
@@ -672,14 +811,14 @@ function MusicEditor(param) {
     let { invitationId, initial, onChange } = param;
     _s();
     const [music, setMusic] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(initial);
-    const [url, setUrl] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])((initial === null || initial === void 0 ? void 0 : initial.url) || '');
-    const [title, setTitle] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])((initial === null || initial === void 0 ? void 0 : initial.title) || '');
+    const [url, setUrl] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])((initial === null || initial === void 0 ? void 0 : initial.url) || "");
+    const [title, setTitle] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])((initial === null || initial === void 0 ? void 0 : initial.title) || "");
     const save = async function() {
         let u = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : url, t = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : title;
         const res = await fetch("/api/invitations/".concat(invitationId, "/music"), {
-            method: 'POST',
+            method: "POST",
             headers: {
-                'Content-Type': 'application/json'
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({
                 url: u,
@@ -687,35 +826,35 @@ function MusicEditor(param) {
             })
         });
         const data = await res.json();
-        if (!res.ok) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error(data.error || 'Failed');
+        if (!res.ok) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error(data.error || "Gagal");
         setMusic(data.music);
         onChange === null || onChange === void 0 ? void 0 : onChange();
-        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].success('Music saved');
+        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].success("Musik berhasil disimpan");
     };
     const uploadFile = async (e)=>{
         var _e_target_files;
         const f = (_e_target_files = e.target.files) === null || _e_target_files === void 0 ? void 0 : _e_target_files[0];
         if (!f) return;
         const fd = new FormData();
-        fd.append('file', f);
-        fd.append('kind', 'audio');
-        const res = await fetch('/api/upload', {
-            method: 'POST',
+        fd.append("file", f);
+        fd.append("kind", "audio");
+        const res = await fetch("/api/upload", {
+            method: "POST",
             body: fd
         });
         const data = await res.json();
-        if (!res.ok) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error(data.error || 'Upload failed');
+        if (!res.ok) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error(data.error || "Unggah gagal");
         setUrl(data.url);
         await save(data.url, title);
-        e.target.value = '';
+        e.target.value = "";
     };
     const remove = async ()=>{
         await fetch("/api/invitations/".concat(invitationId, "/music"), {
-            method: 'DELETE'
+            method: "DELETE"
         });
         setMusic(null);
-        setUrl('');
-        setTitle('');
+        setUrl("");
+        setTitle("");
         onChange === null || onChange === void 0 ? void 0 : onChange();
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -723,10 +862,10 @@ function MusicEditor(param) {
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                 className: "font-serif text-xl font-semibold",
-                children: "Background Music"
+                children: "Musik Latar"
             }, void 0, false, {
                 fileName: "[project]/components/editor/music-editor.jsx",
-                lineNumber: 36,
+                lineNumber: 49,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -734,10 +873,10 @@ function MusicEditor(param) {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: "text-xs uppercase tracking-widest text-muted-foreground mb-2",
-                        children: "Method 1 — Upload MP3"
+                        children: "Cara 1 — Unggah MP3"
                     }, void 0, false, {
                         fileName: "[project]/components/editor/music-editor.jsx",
-                        lineNumber: 38,
+                        lineNumber: 51,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -752,20 +891,20 @@ function MusicEditor(param) {
                                             className: "h-3.5 w-3.5 mr-1"
                                         }, void 0, false, {
                                             fileName: "[project]/components/editor/music-editor.jsx",
-                                            lineNumber: 39,
-                                            columnNumber: 66
+                                            lineNumber: 57,
+                                            columnNumber: 15
                                         }, this),
-                                        "Choose MP3 File"
+                                        "Pilih File MP3"
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/editor/music-editor.jsx",
-                                    lineNumber: 39,
-                                    columnNumber: 60
+                                    lineNumber: 56,
+                                    columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/editor/music-editor.jsx",
-                                lineNumber: 39,
-                                columnNumber: 16
+                                lineNumber: 55,
+                                columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                 type: "file",
@@ -774,19 +913,19 @@ function MusicEditor(param) {
                                 onChange: uploadFile
                             }, void 0, false, {
                                 fileName: "[project]/components/editor/music-editor.jsx",
-                                lineNumber: 39,
-                                columnNumber: 135
+                                lineNumber: 61,
+                                columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/editor/music-editor.jsx",
-                        lineNumber: 39,
+                        lineNumber: 54,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/editor/music-editor.jsx",
-                lineNumber: 37,
+                lineNumber: 50,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -794,43 +933,43 @@ function MusicEditor(param) {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: "text-xs uppercase tracking-widest text-muted-foreground",
-                        children: "Method 2 — MP3 URL"
+                        children: "Cara 2 — URL MP3"
                     }, void 0, false, {
                         fileName: "[project]/components/editor/music-editor.jsx",
-                        lineNumber: 42,
+                        lineNumber: 70,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
                         value: url,
                         onChange: (e)=>setUrl(e.target.value),
-                        placeholder: "https://.../song.mp3"
+                        placeholder: "https://.../lagu.mp3"
                     }, void 0, false, {
                         fileName: "[project]/components/editor/music-editor.jsx",
-                        lineNumber: 43,
+                        lineNumber: 73,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
                         value: title,
                         onChange: (e)=>setTitle(e.target.value),
-                        placeholder: "Song title (optional)"
+                        placeholder: "Judul lagu (opsional)"
                     }, void 0, false, {
                         fileName: "[project]/components/editor/music-editor.jsx",
-                        lineNumber: 44,
+                        lineNumber: 78,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
                         size: "sm",
                         onClick: ()=>save(),
-                        children: "Save"
+                        children: "Simpan"
                     }, void 0, false, {
                         fileName: "[project]/components/editor/music-editor.jsx",
-                        lineNumber: 45,
+                        lineNumber: 83,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/editor/music-editor.jsx",
-                lineNumber: 41,
+                lineNumber: 69,
                 columnNumber: 7
             }, this),
             music && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -840,7 +979,7 @@ function MusicEditor(param) {
                         className: "h-5 w-5 text-primary"
                     }, void 0, false, {
                         fileName: "[project]/components/editor/music-editor.jsx",
-                        lineNumber: 49,
+                        lineNumber: 89,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -848,7 +987,7 @@ function MusicEditor(param) {
                         children: music.title || music.url
                     }, void 0, false, {
                         fileName: "[project]/components/editor/music-editor.jsx",
-                        lineNumber: 50,
+                        lineNumber: 90,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("audio", {
@@ -857,7 +996,7 @@ function MusicEditor(param) {
                         className: "h-8"
                     }, void 0, false, {
                         fileName: "[project]/components/editor/music-editor.jsx",
-                        lineNumber: 51,
+                        lineNumber: 93,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -868,28 +1007,28 @@ function MusicEditor(param) {
                             className: "h-3.5 w-3.5"
                         }, void 0, false, {
                             fileName: "[project]/components/editor/music-editor.jsx",
-                            lineNumber: 52,
-                            columnNumber: 62
+                            lineNumber: 95,
+                            columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/components/editor/music-editor.jsx",
-                        lineNumber: 52,
+                        lineNumber: 94,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/editor/music-editor.jsx",
-                lineNumber: 48,
+                lineNumber: 88,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/editor/music-editor.jsx",
-        lineNumber: 35,
+        lineNumber: 48,
         columnNumber: 5
     }, this);
 }
-_s(MusicEditor, "PoidrivO0hNc3wZvQ7xxQ2wkJIs=");
+_s(MusicEditor, "u4MVYEKNqo6QFzn0IkoxBl2AEII=");
 _c = MusicEditor;
 var _c;
 __turbopack_context__.k.register(_c, "MusicEditor");
@@ -1062,15 +1201,15 @@ function GiftEditor(param) {
                     className: "h-4 w-4 animate-spin"
                 }, void 0, false, {
                     fileName: "[project]/components/editor/gift-editor.jsx",
-                    lineNumber: 94,
-                    columnNumber: 83
+                    lineNumber: 119,
+                    columnNumber: 9
                 }, this),
                 "Loading gifts…"
             ]
         }, void 0, true, {
             fileName: "[project]/components/editor/gift-editor.jsx",
-            lineNumber: 94,
-            columnNumber: 12
+            lineNumber: 118,
+            columnNumber: 7
         }, this);
     }
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1083,7 +1222,7 @@ function GiftEditor(param) {
                         children: "Gift / Angpau"
                     }, void 0, false, {
                         fileName: "[project]/components/editor/gift-editor.jsx",
-                        lineNumber: 100,
+                        lineNumber: 128,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1091,13 +1230,13 @@ function GiftEditor(param) {
                         children: "Add money (bank/e-wallet) or goods (gift registry) options for your guests."
                     }, void 0, false, {
                         fileName: "[project]/components/editor/gift-editor.jsx",
-                        lineNumber: 101,
+                        lineNumber: 129,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/editor/gift-editor.jsx",
-                lineNumber: 99,
+                lineNumber: 127,
                 columnNumber: 7
             }, this),
             gifts.length === 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1105,7 +1244,7 @@ function GiftEditor(param) {
                 children: "No gift options yet. Add one below."
             }, void 0, false, {
                 fileName: "[project]/components/editor/gift-editor.jsx",
-                lineNumber: 107,
+                lineNumber: 136,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1123,14 +1262,14 @@ function GiftEditor(param) {
                                                 className: "h-4 w-4 text-primary"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/editor/gift-editor.jsx",
-                                                lineNumber: 117,
-                                                columnNumber: 39
+                                                lineNumber: 150,
+                                                columnNumber: 19
                                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$gift$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Gift$3e$__["Gift"], {
                                                 className: "h-4 w-4 text-primary"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/editor/gift-editor.jsx",
-                                                lineNumber: 117,
-                                                columnNumber: 85
+                                                lineNumber: 152,
+                                                columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
                                                 value: g.kind,
@@ -1142,7 +1281,7 @@ function GiftEditor(param) {
                                                         children: "Money"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/editor/gift-editor.jsx",
-                                                        lineNumber: 123,
+                                                        lineNumber: 159,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1150,19 +1289,19 @@ function GiftEditor(param) {
                                                         children: "Goods / Item"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/editor/gift-editor.jsx",
-                                                        lineNumber: 124,
+                                                        lineNumber: 160,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/editor/gift-editor.jsx",
-                                                lineNumber: 118,
+                                                lineNumber: 154,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/editor/gift-editor.jsx",
-                                        lineNumber: 116,
+                                        lineNumber: 148,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1177,14 +1316,14 @@ function GiftEditor(param) {
                                                         onChange: (e)=>toggleEnabled(g.id, e.target.checked)
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/editor/gift-editor.jsx",
-                                                        lineNumber: 129,
+                                                        lineNumber: 165,
                                                         columnNumber: 19
                                                     }, this),
                                                     "Enabled"
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/editor/gift-editor.jsx",
-                                                lineNumber: 128,
+                                                lineNumber: 164,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -1198,12 +1337,12 @@ function GiftEditor(param) {
                                                     className: "h-3.5 w-3.5"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/editor/gift-editor.jsx",
-                                                    lineNumber: 132,
-                                                    columnNumber: 144
+                                                    lineNumber: 180,
+                                                    columnNumber: 19
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/components/editor/gift-editor.jsx",
-                                                lineNumber: 132,
+                                                lineNumber: 172,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -1217,12 +1356,12 @@ function GiftEditor(param) {
                                                     className: "h-3.5 w-3.5"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/editor/gift-editor.jsx",
-                                                    lineNumber: 133,
-                                                    columnNumber: 158
+                                                    lineNumber: 190,
+                                                    columnNumber: 19
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/components/editor/gift-editor.jsx",
-                                                lineNumber: 133,
+                                                lineNumber: 182,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -1235,24 +1374,24 @@ function GiftEditor(param) {
                                                     className: "h-3.5 w-3.5"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/editor/gift-editor.jsx",
-                                                    lineNumber: 134,
-                                                    columnNumber: 126
+                                                    lineNumber: 199,
+                                                    columnNumber: 19
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/components/editor/gift-editor.jsx",
-                                                lineNumber: 134,
+                                                lineNumber: 192,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/editor/gift-editor.jsx",
-                                        lineNumber: 127,
+                                        lineNumber: 163,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/editor/gift-editor.jsx",
-                                lineNumber: 115,
+                                lineNumber: 147,
                                 columnNumber: 13
                             }, this),
                             g.kind === "MONEY" ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1268,7 +1407,7 @@ function GiftEditor(param) {
                                                         children: "Provider / Bank"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/editor/gift-editor.jsx",
-                                                        lineNumber: 142,
+                                                        lineNumber: 208,
                                                         columnNumber: 21
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -1278,13 +1417,13 @@ function GiftEditor(param) {
                                                         placeholder: "BCA / OVO / GoPay"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/editor/gift-editor.jsx",
-                                                        lineNumber: 143,
+                                                        lineNumber: 209,
                                                         columnNumber: 21
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/editor/gift-editor.jsx",
-                                                lineNumber: 141,
+                                                lineNumber: 207,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1294,7 +1433,7 @@ function GiftEditor(param) {
                                                         children: "Account Name"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/editor/gift-editor.jsx",
-                                                        lineNumber: 146,
+                                                        lineNumber: 219,
                                                         columnNumber: 21
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -1304,19 +1443,19 @@ function GiftEditor(param) {
                                                         placeholder: "Account holder"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/editor/gift-editor.jsx",
-                                                        lineNumber: 147,
+                                                        lineNumber: 220,
                                                         columnNumber: 21
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/editor/gift-editor.jsx",
-                                                lineNumber: 145,
+                                                lineNumber: 218,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/editor/gift-editor.jsx",
-                                        lineNumber: 140,
+                                        lineNumber: 206,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1326,7 +1465,7 @@ function GiftEditor(param) {
                                                 children: "Account Number"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/editor/gift-editor.jsx",
-                                                lineNumber: 151,
+                                                lineNumber: 231,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -1336,13 +1475,13 @@ function GiftEditor(param) {
                                                 placeholder: "1234567890"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/editor/gift-editor.jsx",
-                                                lineNumber: 152,
+                                                lineNumber: 232,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/editor/gift-editor.jsx",
-                                        lineNumber: 150,
+                                        lineNumber: 230,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1352,7 +1491,7 @@ function GiftEditor(param) {
                                                 children: "Instructions (optional)"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/editor/gift-editor.jsx",
-                                                lineNumber: 155,
+                                                lineNumber: 242,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$textarea$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Textarea"], {
@@ -1363,19 +1502,19 @@ function GiftEditor(param) {
                                                 placeholder: "Any note for guests"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/editor/gift-editor.jsx",
-                                                lineNumber: 156,
+                                                lineNumber: 243,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/editor/gift-editor.jsx",
-                                        lineNumber: 154,
+                                        lineNumber: 241,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/editor/gift-editor.jsx",
-                                lineNumber: 139,
+                                lineNumber: 205,
                                 columnNumber: 15
                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "space-y-2",
@@ -1387,7 +1526,7 @@ function GiftEditor(param) {
                                                 children: "Item Name"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/editor/gift-editor.jsx",
-                                                lineNumber: 162,
+                                                lineNumber: 257,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -1397,13 +1536,13 @@ function GiftEditor(param) {
                                                 placeholder: "e.g. Kitchen set"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/editor/gift-editor.jsx",
-                                                lineNumber: 163,
+                                                lineNumber: 258,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/editor/gift-editor.jsx",
-                                        lineNumber: 161,
+                                        lineNumber: 256,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1413,7 +1552,7 @@ function GiftEditor(param) {
                                                 children: "Description"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/editor/gift-editor.jsx",
-                                                lineNumber: 166,
+                                                lineNumber: 268,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$textarea$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Textarea"], {
@@ -1424,13 +1563,13 @@ function GiftEditor(param) {
                                                 placeholder: "Details about the item"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/editor/gift-editor.jsx",
-                                                lineNumber: 167,
+                                                lineNumber: 269,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/editor/gift-editor.jsx",
-                                        lineNumber: 165,
+                                        lineNumber: 267,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1443,7 +1582,7 @@ function GiftEditor(param) {
                                                         children: "Link (optional)"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/editor/gift-editor.jsx",
-                                                        lineNumber: 171,
+                                                        lineNumber: 281,
                                                         columnNumber: 21
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -1453,13 +1592,13 @@ function GiftEditor(param) {
                                                         placeholder: "https://registry..."
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/editor/gift-editor.jsx",
-                                                        lineNumber: 172,
+                                                        lineNumber: 282,
                                                         columnNumber: 21
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/editor/gift-editor.jsx",
-                                                lineNumber: 170,
+                                                lineNumber: 280,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1469,7 +1608,7 @@ function GiftEditor(param) {
                                                         children: "Recipient (optional)"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/editor/gift-editor.jsx",
-                                                        lineNumber: 175,
+                                                        lineNumber: 292,
                                                         columnNumber: 21
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -1479,36 +1618,36 @@ function GiftEditor(param) {
                                                         placeholder: "Send to..."
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/editor/gift-editor.jsx",
-                                                        lineNumber: 176,
+                                                        lineNumber: 293,
                                                         columnNumber: 21
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/editor/gift-editor.jsx",
-                                                lineNumber: 174,
+                                                lineNumber: 291,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/editor/gift-editor.jsx",
-                                        lineNumber: 169,
+                                        lineNumber: 279,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/editor/gift-editor.jsx",
-                                lineNumber: 160,
+                                lineNumber: 255,
                                 columnNumber: 15
                             }, this)
                         ]
                     }, g.id, true, {
                         fileName: "[project]/components/editor/gift-editor.jsx",
-                        lineNumber: 114,
+                        lineNumber: 143,
                         columnNumber: 11
                     }, this))
             }, void 0, false, {
                 fileName: "[project]/components/editor/gift-editor.jsx",
-                lineNumber: 112,
+                lineNumber: 141,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1525,14 +1664,14 @@ function GiftEditor(param) {
                                 className: "h-4 w-4 mr-1"
                             }, void 0, false, {
                                 fileName: "[project]/components/editor/gift-editor.jsx",
-                                lineNumber: 187,
+                                lineNumber: 317,
                                 columnNumber: 11
                             }, this),
                             "Add Money"
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/editor/gift-editor.jsx",
-                        lineNumber: 186,
+                        lineNumber: 310,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -1546,26 +1685,26 @@ function GiftEditor(param) {
                                 className: "h-4 w-4 mr-1"
                             }, void 0, false, {
                                 fileName: "[project]/components/editor/gift-editor.jsx",
-                                lineNumber: 190,
+                                lineNumber: 327,
                                 columnNumber: 11
                             }, this),
                             "Add Goods"
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/editor/gift-editor.jsx",
-                        lineNumber: 189,
+                        lineNumber: 320,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/editor/gift-editor.jsx",
-                lineNumber: 185,
+                lineNumber: 309,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/editor/gift-editor.jsx",
-        lineNumber: 98,
+        lineNumber: 126,
         columnNumber: 5
     }, this);
 }
@@ -2200,7 +2339,7 @@ function CategoriesEditor(param) {
             const d = await r.json();
             if (r.ok) setItems(d.items || []);
         } catch (e) {
-            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error("Failed to load");
+            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error("Gagal memuat data");
         } finally{
             setLoading(false);
         }
@@ -2222,7 +2361,7 @@ function CategoriesEditor(param) {
             })
         });
         const d = await r.json();
-        if (!r.ok) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error(d.error || "Failed");
+        if (!r.ok) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error(d.error || "Gagal menambahkan");
         setName("");
         load();
     };
@@ -2238,7 +2377,7 @@ function CategoriesEditor(param) {
         });
         if (!r.ok) {
             const d = await r.json();
-            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error(d.error || "Failed");
+            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error(d.error || "Gagal mengubah nama");
             load();
         }
     };
@@ -2247,7 +2386,7 @@ function CategoriesEditor(param) {
         if (c.guestCount > 0) {
             var _others_;
             const others = items.filter((x)=>x.id !== c.id);
-            const target = prompt('"'.concat(c.name, '" is used by ').concat(c.guestCount, " guest(s). Enter a category name to reassign them to, or leave blank to unassign:"), ((_others_ = others[0]) === null || _others_ === void 0 ? void 0 : _others_.name) || "");
+            const target = prompt('"'.concat(c.name, '" digunakan oleh ').concat(c.guestCount, " tamu. Masukkan nama kategori tujuan untuk memindahkan mereka, atau kosongkan untuk melepas kategori:"), ((_others_ = others[0]) === null || _others_ === void 0 ? void 0 : _others_.name) || "");
             if (target === null) return;
             const match = others.find((x)=>x.name.toLowerCase() === target.trim().toLowerCase());
             url += "?reassignTo=".concat(target.trim() ? match ? match.id : "null" : "null");
@@ -2257,9 +2396,9 @@ function CategoriesEditor(param) {
         });
         if (!r.ok) {
             const d = await r.json();
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error(d.error || "Delete failed");
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error(d.error || "Gagal menghapus");
         }
-        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].success("Deleted");
+        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].success("Berhasil dihapus");
         load();
     };
     if (loading) return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2269,15 +2408,15 @@ function CategoriesEditor(param) {
                 className: "h-4 w-4 animate-spin"
             }, void 0, false, {
                 fileName: "[project]/components/editor/categories-editor.jsx",
-                lineNumber: 44,
-                columnNumber: 94
+                lineNumber: 79,
+                columnNumber: 9
             }, this),
-            "Loading…"
+            "Memuat…"
         ]
     }, void 0, true, {
         fileName: "[project]/components/editor/categories-editor.jsx",
-        lineNumber: 44,
-        columnNumber: 23
+        lineNumber: 78,
+        columnNumber: 7
     }, this);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "space-y-4",
@@ -2286,24 +2425,24 @@ function CategoriesEditor(param) {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                         className: "font-serif text-xl font-semibold",
-                        children: "Guest Sides / Categories"
+                        children: "Kategori Tamu"
                     }, void 0, false, {
                         fileName: "[project]/components/editor/categories-editor.jsx",
-                        lineNumber: 47,
-                        columnNumber: 12
+                        lineNumber: 86,
+                        columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: "text-xs text-muted-foreground mt-0.5",
-                        children: "Global (shared) categories are admin-managed. Add your own invitation-specific ones below."
+                        children: "Kategori global (bersama) dikelola oleh admin. Tambahkan kategori khusus undangan Anda di bawah."
                     }, void 0, false, {
                         fileName: "[project]/components/editor/categories-editor.jsx",
-                        lineNumber: 47,
-                        columnNumber: 90
+                        lineNumber: 87,
+                        columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/editor/categories-editor.jsx",
-                lineNumber: 47,
+                lineNumber: 85,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2317,7 +2456,7 @@ function CategoriesEditor(param) {
                                     children: c.name
                                 }, void 0, false, {
                                     fileName: "[project]/components/editor/categories-editor.jsx",
-                                    lineNumber: 52,
+                                    lineNumber: 100,
                                     columnNumber: 17
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2325,8 +2464,8 @@ function CategoriesEditor(param) {
                                     children: "Global"
                                 }, void 0, false, {
                                     fileName: "[project]/components/editor/categories-editor.jsx",
-                                    lineNumber: 52,
-                                    columnNumber: 70
+                                    lineNumber: 101,
+                                    columnNumber: 17
                                 }, this)
                             ]
                         }, void 0, true) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
@@ -2337,18 +2476,18 @@ function CategoriesEditor(param) {
                                     onBlur: (e)=>e.target.value !== c.name && rename(c, e.target.value)
                                 }, void 0, false, {
                                     fileName: "[project]/components/editor/categories-editor.jsx",
-                                    lineNumber: 55,
+                                    lineNumber: 107,
                                     columnNumber: 17
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                     className: "text-xs text-muted-foreground",
                                     children: [
                                         c.guestCount,
-                                        " guest(s)"
+                                        " tamu"
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/editor/categories-editor.jsx",
-                                    lineNumber: 56,
+                                    lineNumber: 114,
                                     columnNumber: 17
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -2361,24 +2500,24 @@ function CategoriesEditor(param) {
                                         className: "h-3.5 w-3.5"
                                     }, void 0, false, {
                                         fileName: "[project]/components/editor/categories-editor.jsx",
-                                        lineNumber: 57,
-                                        columnNumber: 116
+                                        lineNumber: 124,
+                                        columnNumber: 19
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/components/editor/categories-editor.jsx",
-                                    lineNumber: 57,
+                                    lineNumber: 117,
                                     columnNumber: 17
                                 }, this)
                             ]
                         }, void 0, true)
                     }, c.id, false, {
                         fileName: "[project]/components/editor/categories-editor.jsx",
-                        lineNumber: 50,
+                        lineNumber: 94,
                         columnNumber: 11
                     }, this))
             }, void 0, false, {
                 fileName: "[project]/components/editor/categories-editor.jsx",
-                lineNumber: 48,
+                lineNumber: 92,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2387,11 +2526,11 @@ function CategoriesEditor(param) {
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
                         value: name,
                         onChange: (e)=>setName(e.target.value),
-                        placeholder: "New side/category name",
+                        placeholder: "Nama sisi/kategori baru",
                         onKeyDown: (e)=>e.key === "Enter" && add()
                     }, void 0, false, {
                         fileName: "[project]/components/editor/categories-editor.jsx",
-                        lineNumber: 64,
+                        lineNumber: 132,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -2403,26 +2542,26 @@ function CategoriesEditor(param) {
                                 className: "h-4 w-4 mr-1"
                             }, void 0, false, {
                                 fileName: "[project]/components/editor/categories-editor.jsx",
-                                lineNumber: 65,
-                                columnNumber: 68
+                                lineNumber: 139,
+                                columnNumber: 11
                             }, this),
-                            "Add"
+                            "Tambah"
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/editor/categories-editor.jsx",
-                        lineNumber: 65,
+                        lineNumber: 138,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/editor/categories-editor.jsx",
-                lineNumber: 63,
+                lineNumber: 131,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/editor/categories-editor.jsx",
-        lineNumber: 46,
+        lineNumber: 84,
         columnNumber: 5
     }, this);
 }
@@ -2470,7 +2609,7 @@ function SidesEditor(param) {
             const d = await r.json();
             if (r.ok) setItems(d.items || []);
         } catch (e) {
-            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error("Failed to load");
+            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error("Gagal memuat data");
         } finally{
             setLoading(false);
         }
@@ -2492,7 +2631,7 @@ function SidesEditor(param) {
             })
         });
         const d = await r.json();
-        if (!r.ok) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error(d.error || "Failed");
+        if (!r.ok) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error(d.error || "Gagal menambahkan");
         setName("");
         load();
     };
@@ -2509,7 +2648,7 @@ function SidesEditor(param) {
         });
         if (!r.ok) {
             const d = await r.json();
-            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error(d.error || "Failed");
+            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error(d.error || "Gagal mengubah nama");
         }
         load();
     };
@@ -2518,7 +2657,7 @@ function SidesEditor(param) {
         if (c.guestCount > 0) {
             var _others_;
             const others = items.filter((x)=>x.id !== c.id);
-            const target = prompt('"'.concat(c.name, '" is used by ').concat(c.guestCount, " guest(s). Enter a side name to reassign them to, or leave blank to unassign:"), ((_others_ = others[0]) === null || _others_ === void 0 ? void 0 : _others_.name) || "");
+            const target = prompt('"'.concat(c.name, '" digunakan oleh ').concat(c.guestCount, " tamu. Masukkan nama Pihak Tamu tujuan untuk memindahkan mereka, atau kosongkan untuk melepas Pihak Tamu:"), ((_others_ = others[0]) === null || _others_ === void 0 ? void 0 : _others_.name) || "");
             if (target === null) return;
             const match = others.find((x)=>x.name.toLowerCase() === target.trim().toLowerCase());
             url += "?reassignTo=".concat(target.trim() ? match ? match.id : "null" : "null");
@@ -2528,9 +2667,9 @@ function SidesEditor(param) {
         });
         if (!r.ok) {
             const d = await r.json();
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error(d.error || "Delete failed");
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error(d.error || "Gagal menghapus");
         }
-        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].success("Deleted");
+        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].success("Berhasil dihapus");
         load();
     };
     if (loading) return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2540,15 +2679,15 @@ function SidesEditor(param) {
                 className: "h-4 w-4 animate-spin"
             }, void 0, false, {
                 fileName: "[project]/components/editor/sides-editor.jsx",
-                lineNumber: 52,
-                columnNumber: 94
+                lineNumber: 81,
+                columnNumber: 9
             }, this),
-            "Loading…"
+            "Memuat…"
         ]
     }, void 0, true, {
         fileName: "[project]/components/editor/sides-editor.jsx",
-        lineNumber: 52,
-        columnNumber: 23
+        lineNumber: 80,
+        columnNumber: 7
     }, this);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "space-y-4",
@@ -2558,24 +2697,24 @@ function SidesEditor(param) {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                         className: "font-serif text-xl font-semibold",
-                        children: "Guest Sides"
+                        children: "Pihak Tamu Tamu"
                     }, void 0, false, {
                         fileName: "[project]/components/editor/sides-editor.jsx",
-                        lineNumber: 56,
+                        lineNumber: 88,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: "text-xs text-muted-foreground mt-0.5",
-                        children: "Bride side, Groom side, etc. Independent from Categories. Deleting a side keeps its guests (they become unassigned)."
+                        children: "Pihak Tamu mempelai wanita, Pihak Tamu mempelai pria, dan sebagainya. Terpisah dari Kategori. Menghapus Pihak Tamu tidak menghapus tamunya (tamu menjadi tanpa Pihak Tamu)."
                     }, void 0, false, {
                         fileName: "[project]/components/editor/sides-editor.jsx",
-                        lineNumber: 57,
+                        lineNumber: 89,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/editor/sides-editor.jsx",
-                lineNumber: 55,
+                lineNumber: 87,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2583,11 +2722,11 @@ function SidesEditor(param) {
                 children: [
                     items.length === 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: "text-sm text-muted-foreground border border-dashed rounded-xl p-6 text-center",
-                        children: "No sides yet. Add one below."
+                        children: "Belum ada Pihak Tamu. Tambahkan di bawah."
                     }, void 0, false, {
                         fileName: "[project]/components/editor/sides-editor.jsx",
-                        lineNumber: 60,
-                        columnNumber: 32
+                        lineNumber: 97,
+                        columnNumber: 11
                     }, this),
                     items.map((c)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "flex items-center gap-2 p-2 border rounded-lg bg-gray-50/50",
@@ -2599,18 +2738,18 @@ function SidesEditor(param) {
                                     onBlur: (e)=>rename(c, e.target.value)
                                 }, void 0, false, {
                                     fileName: "[project]/components/editor/sides-editor.jsx",
-                                    lineNumber: 63,
+                                    lineNumber: 106,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                     className: "text-xs text-muted-foreground",
                                     children: [
                                         c.guestCount,
-                                        " guest(s)"
+                                        " tamu"
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/editor/sides-editor.jsx",
-                                    lineNumber: 64,
+                                    lineNumber: 112,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -2624,24 +2763,24 @@ function SidesEditor(param) {
                                         className: "h-3.5 w-3.5"
                                     }, void 0, false, {
                                         fileName: "[project]/components/editor/sides-editor.jsx",
-                                        lineNumber: 65,
-                                        columnNumber: 148
+                                        lineNumber: 123,
+                                        columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/components/editor/sides-editor.jsx",
-                                    lineNumber: 65,
+                                    lineNumber: 115,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, c.id, true, {
                             fileName: "[project]/components/editor/sides-editor.jsx",
-                            lineNumber: 62,
+                            lineNumber: 102,
                             columnNumber: 11
                         }, this))
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/editor/sides-editor.jsx",
-                lineNumber: 59,
+                lineNumber: 95,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2650,12 +2789,12 @@ function SidesEditor(param) {
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
                         value: name,
                         onChange: (e)=>setName(e.target.value),
-                        placeholder: "New side name (e.g. Bride Side)",
+                        placeholder: "Nama Pihak Tamu baru (mis. Pihak Tamu Mempelai Wanita)",
                         "data-testid": "side-new-input",
                         onKeyDown: (e)=>e.key === "Enter" && add()
                     }, void 0, false, {
                         fileName: "[project]/components/editor/sides-editor.jsx",
-                        lineNumber: 70,
+                        lineNumber: 129,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -2668,26 +2807,26 @@ function SidesEditor(param) {
                                 className: "h-4 w-4 mr-1"
                             }, void 0, false, {
                                 fileName: "[project]/components/editor/sides-editor.jsx",
-                                lineNumber: 71,
-                                columnNumber: 95
+                                lineNumber: 142,
+                                columnNumber: 11
                             }, this),
-                            "Add"
+                            "Tambah"
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/editor/sides-editor.jsx",
-                        lineNumber: 71,
+                        lineNumber: 136,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/editor/sides-editor.jsx",
-                lineNumber: 69,
+                lineNumber: 128,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/editor/sides-editor.jsx",
-        lineNumber: 54,
+        lineNumber: 86,
         columnNumber: 5
     }, this);
 }
@@ -3079,7 +3218,7 @@ function RsvpFieldsEditor(param) {
                         const d = await r.json();
                         if (r.ok) setItems(d.items || []);
                     } catch (e) {
-                        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error("Failed to load RSVP fields");
+                        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error("Gagal memuat kolom RSVP");
                     } finally{
                         setLoading(false);
                     }
@@ -3094,12 +3233,12 @@ function RsvpFieldsEditor(param) {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                label: "New Field",
+                label: "Kolom Baru",
                 type: "text"
             })
         });
         const d = await r.json();
-        if (!r.ok) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error(d.error || "Failed");
+        if (!r.ok) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error(d.error || "Gagal menambahkan");
         setItems((x)=>[
                 ...x,
                 d.item
@@ -3117,7 +3256,7 @@ function RsvpFieldsEditor(param) {
             });
             if (!r.ok) {
                 const d = await r.json();
-                __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error(d.error || "Save failed");
+                __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error(d.error || "Gagal menyimpan");
             }
         }, 500);
     };
@@ -3141,11 +3280,11 @@ function RsvpFieldsEditor(param) {
         });
     };
     const del = async (id)=>{
-        if (!confirm("Delete this field?")) return;
+        if (!confirm("Hapus kolom ini?")) return;
         const r = await fetch("".concat(base, "/").concat(id), {
             method: "DELETE"
         });
-        if (!r.ok) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error("Delete failed");
+        if (!r.ok) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error("Gagal menghapus");
         setItems((x)=>x.filter((f)=>f.id !== id));
     };
     const move = (i, dir)=>{
@@ -3174,15 +3313,15 @@ function RsvpFieldsEditor(param) {
                 className: "h-4 w-4 animate-spin"
             }, void 0, false, {
                 fileName: "[project]/components/editor/rsvp-fields-editor.jsx",
-                lineNumber: 41,
-                columnNumber: 94
+                lineNumber: 98,
+                columnNumber: 9
             }, this),
-            "Loading…"
+            "Memuat…"
         ]
     }, void 0, true, {
         fileName: "[project]/components/editor/rsvp-fields-editor.jsx",
-        lineNumber: 41,
-        columnNumber: 23
+        lineNumber: 97,
+        columnNumber: 7
     }, this);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "space-y-4",
@@ -3191,33 +3330,33 @@ function RsvpFieldsEditor(param) {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                         className: "font-serif text-xl font-semibold",
-                        children: "RSVP Form Fields"
+                        children: "Kolom Formulir RSVP"
                     }, void 0, false, {
                         fileName: "[project]/components/editor/rsvp-fields-editor.jsx",
-                        lineNumber: 44,
-                        columnNumber: 12
+                        lineNumber: 105,
+                        columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: "text-xs text-muted-foreground mt-0.5",
-                        children: "Custom fields shown in addition to the standard name/attendance/message."
+                        children: "Kolom tambahan yang ditampilkan selain nama/kehadiran/pesan standar."
                     }, void 0, false, {
                         fileName: "[project]/components/editor/rsvp-fields-editor.jsx",
-                        lineNumber: 44,
-                        columnNumber: 82
+                        lineNumber: 108,
+                        columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/editor/rsvp-fields-editor.jsx",
-                lineNumber: 44,
+                lineNumber: 104,
                 columnNumber: 7
             }, this),
             items.length === 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "text-sm text-muted-foreground border border-dashed rounded-xl p-6 text-center",
-                children: "No custom fields yet."
+                children: "Belum ada kolom tambahan."
             }, void 0, false, {
                 fileName: "[project]/components/editor/rsvp-fields-editor.jsx",
-                lineNumber: 45,
-                columnNumber: 30
+                lineNumber: 113,
+                columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "space-y-4",
@@ -3231,10 +3370,10 @@ function RsvpFieldsEditor(param) {
                                         className: "h-8 text-sm font-medium",
                                         value: f.label || "",
                                         onChange: (e)=>upd(f.id, "label", e.target.value),
-                                        placeholder: "Field label"
+                                        placeholder: "Label kolom"
                                     }, void 0, false, {
                                         fileName: "[project]/components/editor/rsvp-fields-editor.jsx",
-                                        lineNumber: 50,
+                                        lineNumber: 124,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3251,12 +3390,12 @@ function RsvpFieldsEditor(param) {
                                                     className: "h-3.5 w-3.5"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/editor/rsvp-fields-editor.jsx",
-                                                    lineNumber: 52,
-                                                    columnNumber: 136
+                                                    lineNumber: 139,
+                                                    columnNumber: 19
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/components/editor/rsvp-fields-editor.jsx",
-                                                lineNumber: 52,
+                                                lineNumber: 131,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -3270,12 +3409,12 @@ function RsvpFieldsEditor(param) {
                                                     className: "h-3.5 w-3.5"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/editor/rsvp-fields-editor.jsx",
-                                                    lineNumber: 53,
-                                                    columnNumber: 150
+                                                    lineNumber: 149,
+                                                    columnNumber: 19
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/components/editor/rsvp-fields-editor.jsx",
-                                                lineNumber: 53,
+                                                lineNumber: 141,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -3288,24 +3427,24 @@ function RsvpFieldsEditor(param) {
                                                     className: "h-3.5 w-3.5"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/editor/rsvp-fields-editor.jsx",
-                                                    lineNumber: 54,
-                                                    columnNumber: 119
+                                                    lineNumber: 158,
+                                                    columnNumber: 19
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/components/editor/rsvp-fields-editor.jsx",
-                                                lineNumber: 54,
+                                                lineNumber: 151,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/editor/rsvp-fields-editor.jsx",
-                                        lineNumber: 51,
+                                        lineNumber: 130,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/editor/rsvp-fields-editor.jsx",
-                                lineNumber: 49,
+                                lineNumber: 123,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3315,11 +3454,11 @@ function RsvpFieldsEditor(param) {
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
                                                 className: "text-xs",
-                                                children: "Type"
+                                                children: "Tipe"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/editor/rsvp-fields-editor.jsx",
-                                                lineNumber: 58,
-                                                columnNumber: 20
+                                                lineNumber: 164,
+                                                columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
                                                 className: "w-full h-8 text-sm rounded-md border px-2",
@@ -3330,18 +3469,18 @@ function RsvpFieldsEditor(param) {
                                                         children: t
                                                     }, t, false, {
                                                         fileName: "[project]/components/editor/rsvp-fields-editor.jsx",
-                                                        lineNumber: 60,
-                                                        columnNumber: 37
+                                                        lineNumber: 171,
+                                                        columnNumber: 21
                                                     }, this))
                                             }, void 0, false, {
                                                 fileName: "[project]/components/editor/rsvp-fields-editor.jsx",
-                                                lineNumber: 59,
+                                                lineNumber: 165,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/editor/rsvp-fields-editor.jsx",
-                                        lineNumber: 58,
+                                        lineNumber: 163,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3351,8 +3490,8 @@ function RsvpFieldsEditor(param) {
                                                 children: "Placeholder"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/editor/rsvp-fields-editor.jsx",
-                                                lineNumber: 63,
-                                                columnNumber: 20
+                                                lineNumber: 178,
+                                                columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
                                                 className: "h-8 text-sm",
@@ -3360,46 +3499,46 @@ function RsvpFieldsEditor(param) {
                                                 onChange: (e)=>upd(f.id, "placeholder", e.target.value)
                                             }, void 0, false, {
                                                 fileName: "[project]/components/editor/rsvp-fields-editor.jsx",
-                                                lineNumber: 63,
-                                                columnNumber: 66
+                                                lineNumber: 179,
+                                                columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/editor/rsvp-fields-editor.jsx",
-                                        lineNumber: 63,
+                                        lineNumber: 177,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/editor/rsvp-fields-editor.jsx",
-                                lineNumber: 57,
+                                lineNumber: 162,
                                 columnNumber: 13
                             }, this),
                             HAS_OPTS.includes(f.type) && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
                                         className: "text-xs",
-                                        children: "Options (one per line)"
+                                        children: "Opsi (satu per baris)"
                                     }, void 0, false, {
                                         fileName: "[project]/components/editor/rsvp-fields-editor.jsx",
-                                        lineNumber: 66,
-                                        columnNumber: 20
+                                        lineNumber: 188,
+                                        columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$textarea$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Textarea"], {
                                         rows: 3,
                                         className: "text-sm",
                                         value: (f.options || []).join("\n"),
                                         onChange: (e)=>updOptions(f.id, e.target.value),
-                                        placeholder: "Attending\nNot Attending"
+                                        placeholder: "Hadir\nTidak Hadir"
                                     }, void 0, false, {
                                         fileName: "[project]/components/editor/rsvp-fields-editor.jsx",
-                                        lineNumber: 67,
+                                        lineNumber: 189,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/editor/rsvp-fields-editor.jsx",
-                                lineNumber: 66,
+                                lineNumber: 187,
                                 columnNumber: 15
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -3411,14 +3550,14 @@ function RsvpFieldsEditor(param) {
                                         onChange: (e)=>upd(f.id, "required", e.target.checked)
                                     }, void 0, false, {
                                         fileName: "[project]/components/editor/rsvp-fields-editor.jsx",
-                                        lineNumber: 70,
-                                        columnNumber: 79
+                                        lineNumber: 199,
+                                        columnNumber: 15
                                     }, this),
-                                    "Required"
+                                    "Wajib diisi"
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/editor/rsvp-fields-editor.jsx",
-                                lineNumber: 70,
+                                lineNumber: 198,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -3430,25 +3569,25 @@ function RsvpFieldsEditor(param) {
                                         onChange: (e)=>upd(f.id, "enabled", e.target.checked)
                                     }, void 0, false, {
                                         fileName: "[project]/components/editor/rsvp-fields-editor.jsx",
-                                        lineNumber: 71,
-                                        columnNumber: 79
+                                        lineNumber: 207,
+                                        columnNumber: 15
                                     }, this),
-                                    "Enabled"
+                                    "Aktif"
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/editor/rsvp-fields-editor.jsx",
-                                lineNumber: 71,
+                                lineNumber: 206,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, f.id, true, {
                         fileName: "[project]/components/editor/rsvp-fields-editor.jsx",
-                        lineNumber: 48,
+                        lineNumber: 119,
                         columnNumber: 11
                     }, this))
             }, void 0, false, {
                 fileName: "[project]/components/editor/rsvp-fields-editor.jsx",
-                lineNumber: 46,
+                lineNumber: 117,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -3461,20 +3600,20 @@ function RsvpFieldsEditor(param) {
                         className: "h-4 w-4 mr-1"
                     }, void 0, false, {
                         fileName: "[project]/components/editor/rsvp-fields-editor.jsx",
-                        lineNumber: 75,
-                        columnNumber: 94
+                        lineNumber: 223,
+                        columnNumber: 9
                     }, this),
-                    "Add Field"
+                    "Tambah Kolom"
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/editor/rsvp-fields-editor.jsx",
-                lineNumber: 75,
+                lineNumber: 217,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/editor/rsvp-fields-editor.jsx",
-        lineNumber: 43,
+        lineNumber: 103,
         columnNumber: 5
     }, this);
 }
@@ -3554,18 +3693,18 @@ var _s = __turbopack_context__.k.signature(), _s1 = __turbopack_context__.k.sign
 const TABS = [
     {
         id: "basic",
-        label: "Basic Info",
+        label: "Info Dasar",
         icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$info$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Info$3e$__["Info"]
     },
     {
         id: "event",
-        label: "Event",
+        label: "Acara",
         icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$calendar$2d$days$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__CalendarDays$3e$__["CalendarDays"]
     },
-    // { id: "theme", label: "Theme", icon: Palette },
+    // { id: "theme", label: "Tema", icon: Palette },
     {
         id: "gallery",
-        label: "Gallery",
+        label: "Galeri",
         icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$images$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Images$3e$__["Images"]
     },
     {
@@ -3575,35 +3714,74 @@ const TABS = [
     },
     {
         id: "music",
-        label: "Music",
+        label: "Musik",
         icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$music$2d$2$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Music2$3e$__["Music2"]
     },
     {
         id: "gift",
-        label: "Gift / Angpau",
+        label: "Hadiah / Angpau",
         icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$gift$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Gift$3e$__["Gift"]
     },
     {
         id: "categories",
-        label: "Categories",
+        label: "Kategori",
         icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$users$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Users$3e$__["Users"]
     },
     {
         id: "guestsides",
-        label: "Guest Sides",
+        label: "Pihak Tamu",
         icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$users$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Users$3e$__["Users"]
     },
     {
         id: "rsvp",
-        label: "RSVP Fields",
+        label: "Kolom RSVP",
         icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$message$2d$square$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__MessageSquare$3e$__["MessageSquare"]
     },
     {
         id: "publish",
-        label: "Publish",
+        label: "Terbitkan",
         icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$send$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Send$3e$__["Send"]
     }
 ];
+// ---------------------------------------------------------------------------
+// Util gambar: perbaikan untuk link Google Drive & placeholder yang gagal load
+// ---------------------------------------------------------------------------
+// Placeholder inline (SVG data URI) — tidak bergantung ke domain luar,
+// beda dengan via.placeholder.com yang sudah tidak aktif sejak 2023.
+const IMG_ERROR_PLACEHOLDER = "data:image/svg+xml;utf8," + encodeURIComponent("<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'>\n      <rect width='100%' height='100%' fill='#f1e5d8'/>\n      <text x='50%' y='50%' font-family='sans-serif' font-size='12' fill='#8b6f47' text-anchor='middle' dominant-baseline='middle'>Gagal memuat gambar</text>\n    </svg>");
+// Ambil file ID dari berbagai format link Google Drive:
+//  - https://drive.google.com/file/d/FILE_ID/view?usp=sharing
+//  - https://drive.google.com/open?id=FILE_ID
+//  - https://drive.google.com/uc?id=FILE_ID&export=view
+//  - https://docs.google.com/uc?id=FILE_ID
+function extractGoogleDriveId(url) {
+    if (!url) return null;
+    const patterns = [
+        /drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/,
+        /drive\.google\.com\/thumbnail\?.*?[?&]id=([a-zA-Z0-9_-]+)/,
+        /(?:drive|docs)\.google\.com\/uc\?.*?[?&]id=([a-zA-Z0-9_-]+)/,
+        /drive\.google\.com\/open\?.*?[?&]id=([a-zA-Z0-9_-]+)/
+    ];
+    for (const re of patterns){
+        const m = url.match(re);
+        if (m && m[1]) return m[1];
+    }
+    const idMatch = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+    return idMatch ? idMatch[1] : null;
+}
+// Link Google Drive biasa (…/view) adalah halaman preview, BUKAN link gambar
+// langsung, sehingga <img src> selalu gagal. Di sini otomatis dikonversi ke
+// endpoint thumbnail Google Drive yang bisa langsung ditampilkan sebagai <img>.
+// Link gambar non-Drive (Unsplash, S3, dsb.) dikembalikan apa adanya.
+function normalizeImageUrl(url) {
+    const trimmed = (url || "").trim();
+    if (!trimmed) return trimmed;
+    if (trimmed.includes("drive.google.com") || trimmed.includes("docs.google.com")) {
+        const id = extractGoogleDriveId(trimmed);
+        if (id) return "https://drive.google.com/thumbnail?id=".concat(id, "&sz=w1000");
+    }
+    return trimmed;
+}
 function InvitationEditor(param) {
     let { invitation: initial, templates } = param;
     _s();
@@ -3614,7 +3792,7 @@ function InvitationEditor(param) {
     const [iframeKey, setIframeKey] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(0);
     const debounceRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
     const previewUrl = "/invite/".concat(inv.slug, "?preview=1&t=").concat(iframeKey);
-    const publicUrl = "".concat(("TURBOPACK compile-time truthy", 1) ? window.location.origin : "TURBOPACK unreachable", "/invite/").concat(inv.slug);
+    const publicUrl = inv.customDomain ? "https://".concat(inv.customDomain) : "".concat(("TURBOPACK compile-time truthy", 1) ? window.location.origin : "TURBOPACK unreachable", "/invite/").concat(inv.slug);
     const update = (patch)=>{
         setInv((prev)=>({
                 ...prev,
@@ -3632,7 +3810,7 @@ function InvitationEditor(param) {
                     },
                     body: JSON.stringify(patch)
                 });
-                if (!res.ok) throw new Error("Save failed");
+                if (!res.ok) throw new Error("Gagal menyimpan");
                 setIframeKey({
                     "InvitationEditor.useCallback[persist]": (k)=>k + 1
                 }["InvitationEditor.useCallback[persist]"]); // refresh preview
@@ -3670,14 +3848,14 @@ function InvitationEditor(param) {
         });
         const data = await res.json();
         if (!res.ok) {
-            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error(data.error || "Failed to update slug");
+            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error(data.error || "Gagal memperbarui slug");
             return false;
         }
         update({
             slug: data.invitation.slug
         });
         setIframeKey((k)=>k + 1);
-        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].success("Slug updated");
+        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].success("Slug berhasil diperbarui");
         return data.invitation.slug;
     };
     const publishToggle = async ()=>{
@@ -3691,12 +3869,12 @@ function InvitationEditor(param) {
                 status: target
             })
         });
-        if (!res.ok) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error("Failed");
+        if (!res.ok) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error("Gagal memperbarui status");
         update({
             status: target
         });
         setIframeKey((k)=>k + 1);
-        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].success(target === "PUBLISHED" ? "Published! Invitation is now live." : "Unpublished");
+        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].success(target === "PUBLISHED" ? "Diterbitkan! Undangan sekarang sudah aktif." : "Publikasi dibatalkan");
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "-m-6 md:-m-8 h-[calc(100vh-4rem)] flex",
@@ -3715,40 +3893,41 @@ function InvitationEditor(param) {
                                         className: "h-3.5 w-3.5"
                                     }, void 0, false, {
                                         fileName: "[project]/components/editor/invitation-editor.jsx",
-                                        lineNumber: 144,
+                                        lineNumber: 199,
                                         columnNumber: 13
                                     }, this),
-                                    "Back"
+                                    "Kembali"
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                                lineNumber: 140,
+                                lineNumber: 195,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                 className: "font-serif text-lg font-semibold",
                                 children: [
-                                    inv.brideName || "Bride",
-                                    " & ",
-                                    inv.groomName || "Groom"
+                                    inv.brideName || "Mempelai Wanita",
+                                    " &",
+                                    " ",
+                                    inv.groomName || "Mempelai Pria"
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                                lineNumber: 147,
+                                lineNumber: 202,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                 className: "inline-block text-[10px] uppercase tracking-widest px-2 py-0.5 rounded-full mt-1 ".concat(inv.status === "PUBLISHED" ? "bg-emerald-100 text-emerald-700" : "bg-amber-100 text-amber-700"),
-                                children: inv.status
+                                children: inv.status === "PUBLISHED" ? "TERBIT" : "DRAFT"
                             }, void 0, false, {
                                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                                lineNumber: 150,
+                                lineNumber: 206,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/editor/invitation-editor.jsx",
-                        lineNumber: 139,
+                        lineNumber: 194,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("nav", {
@@ -3761,19 +3940,19 @@ function InvitationEditor(param) {
                                         className: "h-4 w-4"
                                     }, void 0, false, {
                                         fileName: "[project]/components/editor/invitation-editor.jsx",
-                                        lineNumber: 168,
+                                        lineNumber: 224,
                                         columnNumber: 15
                                     }, this),
                                     t.label
                                 ]
                             }, t.id, true, {
                                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                                lineNumber: 158,
+                                lineNumber: 214,
                                 columnNumber: 13
                             }, this))
                     }, void 0, false, {
                         fileName: "[project]/components/editor/invitation-editor.jsx",
-                        lineNumber: 156,
+                        lineNumber: 212,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3784,23 +3963,23 @@ function InvitationEditor(param) {
                                     className: "h-3 w-3 animate-spin"
                                 }, void 0, false, {
                                     fileName: "[project]/components/editor/invitation-editor.jsx",
-                                    lineNumber: 176,
+                                    lineNumber: 232,
                                     columnNumber: 15
                                 }, this),
-                                "Saving…"
+                                "Menyimpan…"
                             ]
                         }, void 0, true) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
-                            children: "All changes saved"
+                            children: "Semua perubahan tersimpan"
                         }, void 0, false)
                     }, void 0, false, {
                         fileName: "[project]/components/editor/invitation-editor.jsx",
-                        lineNumber: 173,
+                        lineNumber: 229,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                lineNumber: 138,
+                lineNumber: 193,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3813,7 +3992,7 @@ function InvitationEditor(param) {
                             onChange: scheduleSave
                         }, void 0, false, {
                             fileName: "[project]/components/editor/invitation-editor.jsx",
-                            lineNumber: 188,
+                            lineNumber: 244,
                             columnNumber: 31
                         }, this),
                         tab === "event" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(EventForm, {
@@ -3821,7 +4000,7 @@ function InvitationEditor(param) {
                             onChange: scheduleSave
                         }, void 0, false, {
                             fileName: "[project]/components/editor/invitation-editor.jsx",
-                            lineNumber: 189,
+                            lineNumber: 245,
                             columnNumber: 31
                         }, this),
                         tab === "gallery" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$editor$2f$gallery$2d$editor$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -3830,7 +4009,7 @@ function InvitationEditor(param) {
                             onChange: ()=>setIframeKey((k)=>k + 1)
                         }, void 0, false, {
                             fileName: "[project]/components/editor/invitation-editor.jsx",
-                            lineNumber: 191,
+                            lineNumber: 247,
                             columnNumber: 13
                         }, this),
                         tab === "video" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$editor$2f$video$2d$editor$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -3839,7 +4018,7 @@ function InvitationEditor(param) {
                             onChange: ()=>setIframeKey((k)=>k + 1)
                         }, void 0, false, {
                             fileName: "[project]/components/editor/invitation-editor.jsx",
-                            lineNumber: 198,
+                            lineNumber: 254,
                             columnNumber: 13
                         }, this),
                         tab === "music" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$editor$2f$music$2d$editor$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -3848,7 +4027,7 @@ function InvitationEditor(param) {
                             onChange: ()=>setIframeKey((k)=>k + 1)
                         }, void 0, false, {
                             fileName: "[project]/components/editor/invitation-editor.jsx",
-                            lineNumber: 205,
+                            lineNumber: 261,
                             columnNumber: 13
                         }, this),
                         tab === "gift" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$editor$2f$gift$2d$editor$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -3856,7 +4035,7 @@ function InvitationEditor(param) {
                             onChange: ()=>setIframeKey((k)=>k + 1)
                         }, void 0, false, {
                             fileName: "[project]/components/editor/invitation-editor.jsx",
-                            lineNumber: 212,
+                            lineNumber: 268,
                             columnNumber: 13
                         }, this),
                         tab === "giftlog" && null,
@@ -3864,14 +4043,14 @@ function InvitationEditor(param) {
                             invitationId: inv.id
                         }, void 0, false, {
                             fileName: "[project]/components/editor/invitation-editor.jsx",
-                            lineNumber: 218,
+                            lineNumber: 274,
                             columnNumber: 36
                         }, this),
                         tab === "guestsides" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$editor$2f$sides$2d$editor$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                             invitationId: inv.id
                         }, void 0, false, {
                             fileName: "[project]/components/editor/invitation-editor.jsx",
-                            lineNumber: 219,
+                            lineNumber: 275,
                             columnNumber: 36
                         }, this),
                         tab === "moments" && null,
@@ -3879,7 +4058,7 @@ function InvitationEditor(param) {
                             invitationId: inv.id
                         }, void 0, false, {
                             fileName: "[project]/components/editor/invitation-editor.jsx",
-                            lineNumber: 221,
+                            lineNumber: 277,
                             columnNumber: 30
                         }, this),
                         tab === "publish" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(PublishTab, {
@@ -3889,18 +4068,18 @@ function InvitationEditor(param) {
                             onSaveSlug: saveSlug
                         }, void 0, false, {
                             fileName: "[project]/components/editor/invitation-editor.jsx",
-                            lineNumber: 223,
+                            lineNumber: 279,
                             columnNumber: 13
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/editor/invitation-editor.jsx",
-                    lineNumber: 187,
+                    lineNumber: 243,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                lineNumber: 186,
+                lineNumber: 242,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3911,10 +4090,10 @@ function InvitationEditor(param) {
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                 className: "text-xs uppercase tracking-widest text-muted-foreground",
-                                children: "Live Preview"
+                                children: "Pratinjau Langsung"
                             }, void 0, false, {
                                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                                lineNumber: 236,
+                                lineNumber: 292,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3929,25 +4108,25 @@ function InvitationEditor(param) {
                                             className: "h-3 w-3"
                                         }, void 0, false, {
                                             fileName: "[project]/components/editor/invitation-editor.jsx",
-                                            lineNumber: 246,
+                                            lineNumber: 302,
                                             columnNumber: 15
                                         }, this),
-                                        "Open in new tab"
+                                        "Buka di tab baru"
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/editor/invitation-editor.jsx",
-                                    lineNumber: 240,
+                                    lineNumber: 296,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                                lineNumber: 239,
+                                lineNumber: 295,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/editor/invitation-editor.jsx",
-                        lineNumber: 235,
+                        lineNumber: 291,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3957,32 +4136,32 @@ function InvitationEditor(param) {
                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("iframe", {
                                 src: previewUrl,
                                 className: "w-full h-full",
-                                title: "Preview"
+                                title: "Pratinjau"
                             }, iframeKey, false, {
                                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                                lineNumber: 253,
+                                lineNumber: 309,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/components/editor/invitation-editor.jsx",
-                            lineNumber: 252,
+                            lineNumber: 308,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/components/editor/invitation-editor.jsx",
-                        lineNumber: 251,
+                        lineNumber: 307,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                lineNumber: 234,
+                lineNumber: 290,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/editor/invitation-editor.jsx",
-        lineNumber: 136,
+        lineNumber: 191,
         columnNumber: 5
     }, this);
 }
@@ -3999,10 +4178,10 @@ function BasicForm(param) {
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                 className: "font-serif text-xl font-semibold",
-                children: "Basic Information"
+                children: "Informasi Dasar"
             }, void 0, false, {
                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                lineNumber: 269,
+                lineNumber: 325,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4011,10 +4190,10 @@ function BasicForm(param) {
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
-                                children: "Bride Name"
+                                children: "Nama Mempelai Wanita"
                             }, void 0, false, {
                                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                                lineNumber: 273,
+                                lineNumber: 329,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -4024,22 +4203,22 @@ function BasicForm(param) {
                                     })
                             }, void 0, false, {
                                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                                lineNumber: 274,
+                                lineNumber: 330,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/editor/invitation-editor.jsx",
-                        lineNumber: 272,
+                        lineNumber: 328,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
-                                children: "Groom Name"
+                                children: "Nama Mempelai Pria"
                             }, void 0, false, {
                                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                                lineNumber: 280,
+                                lineNumber: 336,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -4049,26 +4228,26 @@ function BasicForm(param) {
                                     })
                             }, void 0, false, {
                                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                                lineNumber: 281,
+                                lineNumber: 337,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/editor/invitation-editor.jsx",
-                        lineNumber: 279,
+                        lineNumber: 335,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                lineNumber: 271,
+                lineNumber: 327,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "grid grid-cols-2 gap-3 pb-4 border-b border-primary/10",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(ImagePicker, {
-                        label: "Bride Photo",
+                        label: "Foto Mempelai Wanita",
                         value: inv.bridePhoto,
                         onChange: (url)=>onChange({
                                 bridePhoto: url
@@ -4076,11 +4255,11 @@ function BasicForm(param) {
                         shape: "circle"
                     }, void 0, false, {
                         fileName: "[project]/components/editor/invitation-editor.jsx",
-                        lineNumber: 289,
+                        lineNumber: 345,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(ImagePicker, {
-                        label: "Groom Photo",
+                        label: "Foto Mempelai Pria",
                         value: inv.groomPhoto,
                         onChange: (url)=>onChange({
                                 groomPhoto: url
@@ -4088,27 +4267,27 @@ function BasicForm(param) {
                         shape: "circle"
                     }, void 0, false, {
                         fileName: "[project]/components/editor/invitation-editor.jsx",
-                        lineNumber: 295,
+                        lineNumber: 351,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                lineNumber: 288,
+                lineNumber: 344,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
                     className: "text-xs text-muted-foreground",
-                    children: "Parents (shown on the invitation, built from father & mother below)"
+                    children: "Orang Tua (ditampilkan di undangan, otomatis digabung dari data ayah & ibu di bawah)"
                 }, void 0, false, {
                     fileName: "[project]/components/editor/invitation-editor.jsx",
-                    lineNumber: 304,
+                    lineNumber: 360,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                lineNumber: 303,
+                lineNumber: 359,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4117,10 +4296,10 @@ function BasicForm(param) {
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
-                                children: "Groom's Father"
+                                children: "Ayah Mempelai Pria"
                             }, void 0, false, {
                                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                                lineNumber: 309,
+                                lineNumber: 368,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -4128,25 +4307,25 @@ function BasicForm(param) {
                                 onChange: (e)=>onChange({
                                         groomFather: e.target.value
                                     }),
-                                placeholder: "Father's name"
+                                placeholder: "Nama ayah"
                             }, void 0, false, {
                                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                                lineNumber: 310,
+                                lineNumber: 369,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/editor/invitation-editor.jsx",
-                        lineNumber: 308,
+                        lineNumber: 367,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
-                                children: "Groom's Mother"
+                                children: "Ibu Mempelai Pria"
                             }, void 0, false, {
                                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                                lineNumber: 317,
+                                lineNumber: 376,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -4154,25 +4333,25 @@ function BasicForm(param) {
                                 onChange: (e)=>onChange({
                                         groomMother: e.target.value
                                     }),
-                                placeholder: "Mother's name"
+                                placeholder: "Nama ibu"
                             }, void 0, false, {
                                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                                lineNumber: 318,
+                                lineNumber: 377,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/editor/invitation-editor.jsx",
-                        lineNumber: 316,
+                        lineNumber: 375,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
-                                children: "Bride's Father"
+                                children: "Ayah Mempelai Wanita"
                             }, void 0, false, {
                                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                                lineNumber: 325,
+                                lineNumber: 384,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -4180,25 +4359,25 @@ function BasicForm(param) {
                                 onChange: (e)=>onChange({
                                         brideFather: e.target.value
                                     }),
-                                placeholder: "Father's name"
+                                placeholder: "Nama ayah"
                             }, void 0, false, {
                                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                                lineNumber: 326,
+                                lineNumber: 385,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/editor/invitation-editor.jsx",
-                        lineNumber: 324,
+                        lineNumber: 383,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
-                                children: "Bride's Mother"
+                                children: "Ibu Mempelai Wanita"
                             }, void 0, false, {
                                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                                lineNumber: 333,
+                                lineNumber: 392,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -4206,31 +4385,31 @@ function BasicForm(param) {
                                 onChange: (e)=>onChange({
                                         brideMother: e.target.value
                                     }),
-                                placeholder: "Mother's name"
+                                placeholder: "Nama ibu"
                             }, void 0, false, {
                                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                                lineNumber: 334,
+                                lineNumber: 393,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/editor/invitation-editor.jsx",
-                        lineNumber: 332,
+                        lineNumber: 391,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                lineNumber: 307,
+                lineNumber: 366,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
-                        children: "Quote"
+                        children: "Kutipan"
                     }, void 0, false, {
                         fileName: "[project]/components/editor/invitation-editor.jsx",
-                        lineNumber: 342,
+                        lineNumber: 401,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$textarea$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Textarea"], {
@@ -4239,16 +4418,16 @@ function BasicForm(param) {
                         onChange: (e)=>onChange({
                                 quote: e.target.value
                             }),
-                        placeholder: "A meaningful quote or verse"
+                        placeholder: "Kutipan atau ayat yang bermakna"
                     }, void 0, false, {
                         fileName: "[project]/components/editor/invitation-editor.jsx",
-                        lineNumber: 343,
+                        lineNumber: 402,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                lineNumber: 341,
+                lineNumber: 400,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4258,10 +4437,10 @@ function BasicForm(param) {
                         className: "mb-2",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
-                                children: "Love Story Timeline"
+                                children: "Linimasa Kisah Cinta"
                             }, void 0, false, {
                                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                                lineNumber: 353,
+                                lineNumber: 412,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -4269,13 +4448,13 @@ function BasicForm(param) {
                                 children: "Bagikan cerita cinta Anda berdasarkan urutan waktu."
                             }, void 0, false, {
                                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                                lineNumber: 354,
+                                lineNumber: 413,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/editor/invitation-editor.jsx",
-                        lineNumber: 352,
+                        lineNumber: 411,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(LoveStoryEditor, {
@@ -4285,17 +4464,17 @@ function BasicForm(param) {
                             })
                     }, void 0, false, {
                         fileName: "[project]/components/editor/invitation-editor.jsx",
-                        lineNumber: 358,
+                        lineNumber: 417,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                lineNumber: 351,
+                lineNumber: 410,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(ImagePicker, {
-                label: "Cover Image",
+                label: "Foto Sampul",
                 value: inv.coverImage,
                 onChange: (url)=>onChange({
                         coverImage: url
@@ -4303,13 +4482,13 @@ function BasicForm(param) {
                 shape: "rectangle"
             }, void 0, false, {
                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                lineNumber: 364,
+                lineNumber: 423,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/editor/invitation-editor.jsx",
-        lineNumber: 268,
+        lineNumber: 324,
         columnNumber: 5
     }, this);
 }
@@ -4357,10 +4536,10 @@ function EventForm(param) {
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                 className: "font-serif text-xl font-semibold",
-                children: "Wedding Events"
+                children: "Acara Pernikahan"
             }, void 0, false, {
                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                lineNumber: 403,
+                lineNumber: 462,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4381,43 +4560,43 @@ function EventForm(param) {
                                             className: "h-3.5 w-3.5"
                                         }, void 0, false, {
                                             fileName: "[project]/components/editor/invitation-editor.jsx",
-                                            lineNumber: 419,
+                                            lineNumber: 478,
                                             columnNumber: 17
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/components/editor/invitation-editor.jsx",
-                                        lineNumber: 412,
+                                        lineNumber: 471,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/components/editor/invitation-editor.jsx",
-                                    lineNumber: 411,
+                                    lineNumber: 470,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
                                             className: "text-xs",
-                                            children: "Event Title"
+                                            children: "Judul Acara"
                                         }, void 0, false, {
                                             fileName: "[project]/components/editor/invitation-editor.jsx",
-                                            lineNumber: 424,
+                                            lineNumber: 483,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
                                             value: ev.title || "",
                                             onChange: (e)=>updateItem(index, "title", e.target.value),
-                                            placeholder: "e.g. Akad Nikah / Reception",
+                                            placeholder: "misal: Akad Nikah / Resepsi",
                                             className: "h-8 text-sm font-medium"
                                         }, void 0, false, {
                                             fileName: "[project]/components/editor/invitation-editor.jsx",
-                                            lineNumber: 425,
+                                            lineNumber: 484,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/editor/invitation-editor.jsx",
-                                    lineNumber: 423,
+                                    lineNumber: 482,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4427,10 +4606,10 @@ function EventForm(param) {
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
                                                     className: "text-xs",
-                                                    children: "Date"
+                                                    children: "Tanggal"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/editor/invitation-editor.jsx",
-                                                    lineNumber: 435,
+                                                    lineNumber: 494,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -4440,108 +4619,108 @@ function EventForm(param) {
                                                     className: "h-8 text-sm"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/editor/invitation-editor.jsx",
-                                                    lineNumber: 436,
+                                                    lineNumber: 495,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/editor/invitation-editor.jsx",
-                                            lineNumber: 434,
+                                            lineNumber: 493,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
                                                     className: "text-xs",
-                                                    children: "Time"
+                                                    children: "Waktu"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/editor/invitation-editor.jsx",
-                                                    lineNumber: 444,
+                                                    lineNumber: 503,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
                                                     value: ev.time || "",
                                                     onChange: (e)=>updateItem(index, "time", e.target.value),
-                                                    placeholder: "08:00 AM - Finish",
+                                                    placeholder: "08:00 - Selesai",
                                                     className: "h-8 text-sm"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/editor/invitation-editor.jsx",
-                                                    lineNumber: 445,
+                                                    lineNumber: 504,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/editor/invitation-editor.jsx",
-                                            lineNumber: 443,
+                                            lineNumber: 502,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/editor/invitation-editor.jsx",
-                                    lineNumber: 433,
+                                    lineNumber: 492,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
                                             className: "text-xs",
-                                            children: "Venue Name"
+                                            children: "Nama Tempat"
                                         }, void 0, false, {
                                             fileName: "[project]/components/editor/invitation-editor.jsx",
-                                            lineNumber: 455,
+                                            lineNumber: 514,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
                                             value: ev.venue || "",
                                             onChange: (e)=>updateItem(index, "venue", e.target.value),
-                                            placeholder: "The Grand Ballroom",
+                                            placeholder: "Contoh: Gedung Serbaguna",
                                             className: "h-8 text-sm"
                                         }, void 0, false, {
                                             fileName: "[project]/components/editor/invitation-editor.jsx",
-                                            lineNumber: 456,
+                                            lineNumber: 515,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/editor/invitation-editor.jsx",
-                                    lineNumber: 454,
+                                    lineNumber: 513,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
                                             className: "text-xs",
-                                            children: "Full Address"
+                                            children: "Alamat Lengkap"
                                         }, void 0, false, {
                                             fileName: "[project]/components/editor/invitation-editor.jsx",
-                                            lineNumber: 465,
+                                            lineNumber: 524,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$textarea$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Textarea"], {
                                             rows: 2,
                                             value: ev.address || "",
                                             onChange: (e)=>updateItem(index, "address", e.target.value),
-                                            placeholder: "Full address of the venue",
+                                            placeholder: "Alamat lengkap lokasi acara",
                                             className: "text-sm"
                                         }, void 0, false, {
                                             fileName: "[project]/components/editor/invitation-editor.jsx",
-                                            lineNumber: 466,
+                                            lineNumber: 525,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/editor/invitation-editor.jsx",
-                                    lineNumber: 464,
+                                    lineNumber: 523,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
                                             className: "text-xs",
-                                            children: "Google Maps URL"
+                                            children: "URL Google Maps"
                                         }, void 0, false, {
                                             fileName: "[project]/components/editor/invitation-editor.jsx",
-                                            lineNumber: 476,
+                                            lineNumber: 535,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -4551,19 +4730,19 @@ function EventForm(param) {
                                             className: "h-8 text-sm"
                                         }, void 0, false, {
                                             fileName: "[project]/components/editor/invitation-editor.jsx",
-                                            lineNumber: 477,
+                                            lineNumber: 536,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/editor/invitation-editor.jsx",
-                                    lineNumber: 475,
+                                    lineNumber: 534,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, ev.id || index, true, {
                             fileName: "[project]/components/editor/invitation-editor.jsx",
-                            lineNumber: 407,
+                            lineNumber: 466,
                             columnNumber: 11
                         }, this)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -4576,20 +4755,20 @@ function EventForm(param) {
                                 className: "h-4 w-4 mr-2"
                             }, void 0, false, {
                                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                                lineNumber: 493,
+                                lineNumber: 552,
                                 columnNumber: 11
                             }, this),
-                            "Add Event (Akad / Resepsi)"
+                            "Tambah Acara (Akad / Resepsi)"
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/editor/invitation-editor.jsx",
-                        lineNumber: 487,
+                        lineNumber: 546,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                lineNumber: 405,
+                lineNumber: 464,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4597,19 +4776,19 @@ function EventForm(param) {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
                         className: "font-serif text-sm font-semibold uppercase tracking-widest text-muted-foreground",
-                        children: "Check-in & RSVP Settings"
+                        children: "Pengaturan Check-in & RSVP"
                     }, void 0, false, {
                         fileName: "[project]/components/editor/invitation-editor.jsx",
-                        lineNumber: 499,
+                        lineNumber: 558,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
-                                children: "RSVP Mode"
+                                children: "Mode RSVP"
                             }, void 0, false, {
                                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                                lineNumber: 503,
+                                lineNumber: 562,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -4621,38 +4800,38 @@ function EventForm(param) {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                         value: "QR_FIRST",
-                                        children: "QR First — Show QR code immediately, RSVP is optional"
+                                        children: "QR Dulu — Tampilkan kode QR langsung, RSVP bersifat opsional"
                                     }, void 0, false, {
                                         fileName: "[project]/components/editor/invitation-editor.jsx",
-                                        lineNumber: 509,
+                                        lineNumber: 568,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                         value: "RSVP_FIRST",
-                                        children: "RSVP First — Guest must submit RSVP before QR is shown"
+                                        children: "RSVP Dulu — Tamu harus mengisi RSVP sebelum QR ditampilkan"
                                     }, void 0, false, {
                                         fileName: "[project]/components/editor/invitation-editor.jsx",
-                                        lineNumber: 512,
+                                        lineNumber: 571,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                                lineNumber: 504,
+                                lineNumber: 563,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                 className: "text-xs text-muted-foreground mt-1",
-                                children: "Applies when guests open their personalized invitation link."
+                                children: "Berlaku saat tamu membuka link undangan personal mereka."
                             }, void 0, false, {
                                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                                lineNumber: 516,
+                                lineNumber: 575,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/editor/invitation-editor.jsx",
-                        lineNumber: 502,
+                        lineNumber: 561,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4668,7 +4847,7 @@ function EventForm(param) {
                                 id: "selfie-check"
                             }, void 0, false, {
                                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                                lineNumber: 521,
+                                lineNumber: 580,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -4677,42 +4856,140 @@ function EventForm(param) {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                         className: "font-medium",
-                                        children: "Enable Selfie Verification at Check-in"
+                                        children: "Aktifkan Verifikasi Selfie saat Check-in"
                                     }, void 0, false, {
                                         fileName: "[project]/components/editor/invitation-editor.jsx",
-                                        lineNumber: 532,
+                                        lineNumber: 591,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                         className: "text-xs text-muted-foreground mt-0.5",
-                                        children: "Operator must capture a live selfie of the guest before completing check-in. Recommended for VIP events."
+                                        children: "Operator harus mengambil foto selfie langsung dari tamu sebelum menyelesaikan proses check-in. Disarankan untuk acara VIP."
                                     }, void 0, false, {
                                         fileName: "[project]/components/editor/invitation-editor.jsx",
-                                        lineNumber: 535,
+                                        lineNumber: 594,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                                lineNumber: 528,
+                                lineNumber: 587,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/editor/invitation-editor.jsx",
-                        lineNumber: 520,
+                        lineNumber: 579,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "flex items-start gap-3 rounded-lg border p-3",
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                type: "checkbox",
+                                checked: inv.rsvpEnabled !== false,
+                                onChange: (e)=>onChange({
+                                        rsvpEnabled: e.target.checked
+                                    }),
+                                className: "mt-1 h-4 w-4",
+                                id: "rsvp-enabled-check",
+                                "data-testid": "toggle-rsvp-enabled"
+                            }, void 0, false, {
+                                fileName: "[project]/components/editor/invitation-editor.jsx",
+                                lineNumber: 601,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                htmlFor: "rsvp-enabled-check",
+                                className: "text-sm flex-1 cursor-pointer",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        className: "font-medium",
+                                        children: "Aktifkan Form RSVP"
+                                    }, void 0, false, {
+                                        fileName: "[project]/components/editor/invitation-editor.jsx",
+                                        lineNumber: 613,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                        className: "text-xs text-muted-foreground mt-0.5",
+                                        children: "Tampilkan form RSVP di undangan publik. Terpisah dari form Ucapan."
+                                    }, void 0, false, {
+                                        fileName: "[project]/components/editor/invitation-editor.jsx",
+                                        lineNumber: 614,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/components/editor/invitation-editor.jsx",
+                                lineNumber: 609,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/components/editor/invitation-editor.jsx",
+                        lineNumber: 600,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "flex items-start gap-3 rounded-lg border p-3",
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                type: "checkbox",
+                                checked: inv.messageEnabled !== false,
+                                onChange: (e)=>onChange({
+                                        messageEnabled: e.target.checked
+                                    }),
+                                className: "mt-1 h-4 w-4",
+                                id: "message-enabled-check",
+                                "data-testid": "toggle-message-enabled"
+                            }, void 0, false, {
+                                fileName: "[project]/components/editor/invitation-editor.jsx",
+                                lineNumber: 620,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                htmlFor: "message-enabled-check",
+                                className: "text-sm flex-1 cursor-pointer",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        className: "font-medium",
+                                        children: "Aktifkan Form Ucapan / Doa"
+                                    }, void 0, false, {
+                                        fileName: "[project]/components/editor/invitation-editor.jsx",
+                                        lineNumber: 632,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                        className: "text-xs text-muted-foreground mt-0.5",
+                                        children: "Izinkan tamu mengirim ucapan meskipun RSVP dimatikan. Terpisah dari RSVP."
+                                    }, void 0, false, {
+                                        fileName: "[project]/components/editor/invitation-editor.jsx",
+                                        lineNumber: 633,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/components/editor/invitation-editor.jsx",
+                                lineNumber: 628,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/components/editor/invitation-editor.jsx",
+                        lineNumber: 619,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                lineNumber: 498,
+                lineNumber: 557,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/editor/invitation-editor.jsx",
-        lineNumber: 402,
+        lineNumber: 461,
         columnNumber: 5
     }, this);
 }
@@ -4722,7 +4999,7 @@ function PublishTab(param) {
     _s1();
     const copy = ()=>{
         navigator.clipboard.writeText(publicUrl);
-        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].success("Link copied");
+        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].success("Link disalin");
     };
     const [slug, setSlug] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(inv.slug);
     const [savingSlug, setSavingSlug] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
@@ -4744,10 +5021,10 @@ function PublishTab(param) {
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                 className: "font-serif text-xl font-semibold",
-                children: "Publish"
+                children: "Terbitkan"
             }, void 0, false, {
                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                lineNumber: 562,
+                lineNumber: 662,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4755,33 +5032,33 @@ function PublishTab(param) {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: "font-medium",
-                        children: inv.status === "PUBLISHED" ? "✨ Your invitation is live!" : "Invitation not published"
+                        children: inv.status === "PUBLISHED" ? "✨ Undangan Anda sudah aktif!" : "Undangan belum diterbitkan"
                     }, void 0, false, {
                         fileName: "[project]/components/editor/invitation-editor.jsx",
-                        lineNumber: 566,
+                        lineNumber: 666,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: "text-sm text-muted-foreground mt-1",
-                        children: inv.status === "PUBLISHED" ? "Anyone with the link can view it." : "Publish to allow guests to view and RSVP."
+                        children: inv.status === "PUBLISHED" ? "Siapa pun dengan link ini bisa melihatnya." : "Terbitkan agar tamu bisa melihat undangan dan mengisi RSVP."
                     }, void 0, false, {
                         fileName: "[project]/components/editor/invitation-editor.jsx",
-                        lineNumber: 571,
+                        lineNumber: 671,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                lineNumber: 563,
+                lineNumber: 663,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
-                        children: "Custom URL Slug"
+                        children: "Slug URL Kustom"
                     }, void 0, false, {
                         fileName: "[project]/components/editor/invitation-editor.jsx",
-                        lineNumber: 579,
+                        lineNumber: 679,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4790,11 +5067,11 @@ function PublishTab(param) {
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
                                 value: slug,
                                 onChange: (e)=>setSlug(e.target.value),
-                                placeholder: "my-wedding-2026",
+                                placeholder: "pernikahan-saya-2026",
                                 className: "font-mono text-xs"
                             }, void 0, false, {
                                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                                lineNumber: 581,
+                                lineNumber: 681,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -4805,47 +5082,47 @@ function PublishTab(param) {
                                     className: "h-4 w-4 animate-spin"
                                 }, void 0, false, {
                                     fileName: "[project]/components/editor/invitation-editor.jsx",
-                                    lineNumber: 588,
-                                    columnNumber: 27
+                                    lineNumber: 693,
+                                    columnNumber: 15
                                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$save$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Save$3e$__["Save"], {
                                     className: "h-4 w-4"
                                 }, void 0, false, {
                                     fileName: "[project]/components/editor/invitation-editor.jsx",
-                                    lineNumber: 588,
-                                    columnNumber: 74
+                                    lineNumber: 695,
+                                    columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                                lineNumber: 587,
+                                lineNumber: 687,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/editor/invitation-editor.jsx",
-                        lineNumber: 580,
+                        lineNumber: 680,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: "text-xs text-muted-foreground mt-1",
-                        children: "Lowercase, hyphenated, and unique. Changing this changes your public link."
+                        children: "Huruf kecil, pakai tanda hubung, dan unik. Mengubah ini akan mengubah link publik Anda."
                     }, void 0, false, {
                         fileName: "[project]/components/editor/invitation-editor.jsx",
-                        lineNumber: 591,
+                        lineNumber: 699,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                lineNumber: 578,
+                lineNumber: 678,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
-                        children: "Public URL"
+                        children: "URL Publik"
                     }, void 0, false, {
                         fileName: "[project]/components/editor/invitation-editor.jsx",
-                        lineNumber: 597,
+                        lineNumber: 706,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4857,7 +5134,7 @@ function PublishTab(param) {
                                 className: "font-mono text-xs"
                             }, void 0, false, {
                                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                                lineNumber: 599,
+                                lineNumber: 708,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -4867,24 +5144,24 @@ function PublishTab(param) {
                                     className: "h-4 w-4"
                                 }, void 0, false, {
                                     fileName: "[project]/components/editor/invitation-editor.jsx",
-                                    lineNumber: 601,
+                                    lineNumber: 710,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                                lineNumber: 600,
+                                lineNumber: 709,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/editor/invitation-editor.jsx",
-                        lineNumber: 598,
+                        lineNumber: 707,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                lineNumber: 596,
+                lineNumber: 705,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -4895,14 +5172,14 @@ function PublishTab(param) {
                         className: "h-4 w-4 mr-2"
                     }, void 0, false, {
                         fileName: "[project]/components/editor/invitation-editor.jsx",
-                        lineNumber: 611,
+                        lineNumber: 720,
                         columnNumber: 9
                     }, this),
-                    inv.status === "PUBLISHED" ? "Unpublish" : "Publish Now"
+                    inv.status === "PUBLISHED" ? "Batalkan Publikasi" : "Terbitkan Sekarang"
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                lineNumber: 605,
+                lineNumber: 714,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4917,25 +5194,25 @@ function PublishTab(param) {
                             className: "h-4 w-4"
                         }, void 0, false, {
                             fileName: "[project]/components/editor/invitation-editor.jsx",
-                            lineNumber: 621,
+                            lineNumber: 732,
                             columnNumber: 11
                         }, this),
-                        "Open public invitation"
+                        "Buka undangan publik"
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/editor/invitation-editor.jsx",
-                    lineNumber: 615,
+                    lineNumber: 726,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                lineNumber: 614,
+                lineNumber: 725,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/editor/invitation-editor.jsx",
-        lineNumber: 561,
+        lineNumber: 661,
         columnNumber: 5
     }, this);
 }
@@ -4968,7 +5245,7 @@ function ImagePicker(param) {
                 body: fd
             });
             const data = await res.json();
-            if (!res.ok) throw new Error(data.error || "Upload failed");
+            if (!res.ok) throw new Error(data.error || "Unggah gagal");
             onChange(data.url);
             __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].success("Foto berhasil diunggah");
         } catch (err) {
@@ -4978,6 +5255,10 @@ function ImagePicker(param) {
             e.target.value = "";
         }
     };
+    // Tampilkan versi yang sudah dinormalisasi (link Google Drive otomatis
+    // dikonversi ke format thumbnail) supaya link lama yang sudah tersimpan
+    // pun tetap tampil tanpa perlu diedit ulang.
+    const displaySrc = imgError ? IMG_ERROR_PLACEHOLDER : normalizeImageUrl(value);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "space-y-2",
         children: [
@@ -4985,24 +5266,25 @@ function ImagePicker(param) {
                 children: label
             }, void 0, false, {
                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                lineNumber: 672,
+                lineNumber: 790,
                 columnNumber: 7
             }, this),
             value && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "relative inline-block",
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
-                    src: imgError ? "https://via.placeholder.com/150?text=Error" : value,
-                    alt: "Preview",
+                    src: displaySrc,
+                    alt: "Pratinjau",
+                    referrerPolicy: "no-referrer",
                     className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$utils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["cn"])("object-cover border border-primary/20 shadow-sm", shape === "circle" ? "w-16 h-16 rounded-full" : "w-full h-32 rounded-lg"),
                     onError: ()=>setImgError(true)
                 }, void 0, false, {
                     fileName: "[project]/components/editor/invitation-editor.jsx",
-                    lineNumber: 675,
+                    lineNumber: 793,
                     columnNumber: 11
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                lineNumber: 674,
+                lineNumber: 792,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5011,11 +5293,18 @@ function ImagePicker(param) {
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
                         value: value || "",
                         onChange: (e)=>onChange(e.target.value),
+                        onBlur: (e)=>{
+                            // Konversi link Google Drive (…/view, ?id=, dsb.) ke link gambar
+                            // langsung begitu user selesai mengetik/menempel link, supaya
+                            // nilai yang tersimpan juga sudah benar (bukan cuma pratinjaunya).
+                            const normalized = normalizeImageUrl(e.target.value);
+                            if (normalized && normalized !== e.target.value) onChange(normalized);
+                        },
                         placeholder: placeholder,
                         className: "text-xs flex-1"
                     }, void 0, false, {
                         fileName: "[project]/components/editor/invitation-editor.jsx",
-                        lineNumber: 691,
+                        lineNumber: 808,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -5031,23 +5320,23 @@ function ImagePicker(param) {
                                         className: "h-3.5 w-3.5 animate-spin"
                                     }, void 0, false, {
                                         fileName: "[project]/components/editor/invitation-editor.jsx",
-                                        lineNumber: 701,
+                                        lineNumber: 826,
                                         columnNumber: 17
                                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$upload$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Upload$3e$__["Upload"], {
                                         className: "h-3.5 w-3.5"
                                     }, void 0, false, {
                                         fileName: "[project]/components/editor/invitation-editor.jsx",
-                                        lineNumber: 703,
+                                        lineNumber: 828,
                                         columnNumber: 17
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/components/editor/invitation-editor.jsx",
-                                    lineNumber: 699,
+                                    lineNumber: 824,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                                lineNumber: 698,
+                                lineNumber: 823,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -5057,25 +5346,33 @@ function ImagePicker(param) {
                                 onChange: uploadFile
                             }, void 0, false, {
                                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                                lineNumber: 707,
+                                lineNumber: 832,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/editor/invitation-editor.jsx",
-                        lineNumber: 697,
+                        lineNumber: 822,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                lineNumber: 690,
+                lineNumber: 807,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                className: "text-[11px] text-muted-foreground",
+                children: "Tempel link gambar langsung, atau link berbagi Google Drive (otomatis dikonversi), atau unggah file."
+            }, void 0, false, {
+                fileName: "[project]/components/editor/invitation-editor.jsx",
+                lineNumber: 835,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/editor/invitation-editor.jsx",
-        lineNumber: 671,
+        lineNumber: 789,
         columnNumber: 5
     }, this);
 }
@@ -5127,17 +5424,17 @@ function LoveStoryEditor(param) {
                                     className: "h-3.5 w-3.5"
                                 }, void 0, false, {
                                     fileName: "[project]/components/editor/invitation-editor.jsx",
-                                    lineNumber: 751,
+                                    lineNumber: 880,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                                lineNumber: 744,
+                                lineNumber: 873,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/components/editor/invitation-editor.jsx",
-                            lineNumber: 743,
+                            lineNumber: 872,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5147,91 +5444,91 @@ function LoveStoryEditor(param) {
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
                                             className: "text-xs",
-                                            children: "Date / Year"
+                                            children: "Tanggal / Tahun"
                                         }, void 0, false, {
                                             fileName: "[project]/components/editor/invitation-editor.jsx",
-                                            lineNumber: 757,
+                                            lineNumber: 886,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
                                             value: item.date || "",
                                             onChange: (e)=>updateItem(index, "date", e.target.value),
-                                            placeholder: "e.g. Dec 2020",
+                                            placeholder: "misal: Des 2020",
                                             className: "h-8 text-sm"
                                         }, void 0, false, {
                                             fileName: "[project]/components/editor/invitation-editor.jsx",
-                                            lineNumber: 758,
+                                            lineNumber: 887,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/editor/invitation-editor.jsx",
-                                    lineNumber: 756,
+                                    lineNumber: 885,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
                                             className: "text-xs",
-                                            children: "Title"
+                                            children: "Judul"
                                         }, void 0, false, {
                                             fileName: "[project]/components/editor/invitation-editor.jsx",
-                                            lineNumber: 766,
+                                            lineNumber: 895,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
                                             value: item.title || "",
                                             onChange: (e)=>updateItem(index, "title", e.target.value),
-                                            placeholder: "e.g. First Met",
+                                            placeholder: "misal: Pertama Bertemu",
                                             className: "h-8 text-sm"
                                         }, void 0, false, {
                                             fileName: "[project]/components/editor/invitation-editor.jsx",
-                                            lineNumber: 767,
+                                            lineNumber: 896,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/editor/invitation-editor.jsx",
-                                    lineNumber: 765,
+                                    lineNumber: 894,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/editor/invitation-editor.jsx",
-                            lineNumber: 755,
+                            lineNumber: 884,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
                                     className: "text-xs",
-                                    children: "Story"
+                                    children: "Cerita"
                                 }, void 0, false, {
                                     fileName: "[project]/components/editor/invitation-editor.jsx",
-                                    lineNumber: 777,
+                                    lineNumber: 906,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$textarea$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Textarea"], {
                                     rows: 3,
                                     value: item.story || "",
                                     onChange: (e)=>updateItem(index, "story", e.target.value),
-                                    placeholder: "Tell this part of the story...",
+                                    placeholder: "Ceritakan bagian ini...",
                                     className: "text-sm"
                                 }, void 0, false, {
                                     fileName: "[project]/components/editor/invitation-editor.jsx",
-                                    lineNumber: 778,
+                                    lineNumber: 907,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/editor/invitation-editor.jsx",
-                            lineNumber: 776,
+                            lineNumber: 905,
                             columnNumber: 11
                         }, this)
                     ]
                 }, item.id || index, true, {
                     fileName: "[project]/components/editor/invitation-editor.jsx",
-                    lineNumber: 739,
+                    lineNumber: 868,
                     columnNumber: 9
                 }, this)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -5244,20 +5541,20 @@ function LoveStoryEditor(param) {
                         className: "h-4 w-4 mr-2"
                     }, void 0, false, {
                         fileName: "[project]/components/editor/invitation-editor.jsx",
-                        lineNumber: 795,
+                        lineNumber: 924,
                         columnNumber: 9
                     }, this),
-                    "Add Story Part"
+                    "Tambah Bagian Cerita"
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/editor/invitation-editor.jsx",
-                lineNumber: 789,
+                lineNumber: 918,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/editor/invitation-editor.jsx",
-        lineNumber: 737,
+        lineNumber: 866,
         columnNumber: 5
     }, this);
 }

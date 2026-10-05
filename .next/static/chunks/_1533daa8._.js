@@ -93,7 +93,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$re
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/sonner/dist/index.mjs [app-client] (ecmascript)");
 ;
 var _s = __turbopack_context__.k.signature();
-'use client';
+"use client";
 ;
 ;
 ;
@@ -104,16 +104,16 @@ var _s = __turbopack_context__.k.signature();
 function NewInvitationForm() {
     _s();
     const router = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRouter"])();
-    const [brideName, setBrideName] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('');
-    const [groomName, setGroomName] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('');
+    const [brideName, setBrideName] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
+    const [groomName, setGroomName] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
     const [saving, setSaving] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const submit = async (e)=>{
         e.preventDefault();
         setSaving(true);
-        const res = await fetch('/api/invitations', {
-            method: 'POST',
+        const res = await fetch("/api/invitations", {
+            method: "POST",
             headers: {
-                'Content-Type': 'application/json'
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({
                 brideName,
@@ -122,8 +122,8 @@ function NewInvitationForm() {
         });
         const data = await res.json();
         setSaving(false);
-        if (!res.ok) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error(data.error || 'Failed');
-        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].success('Invitation created');
+        if (!res.ok) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error(data.error || "Gagal membuat undangan");
+        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].success("Undangan berhasil dibuat");
         router.push("/dashboard/invitations/".concat(data.invitation.id, "/edit"));
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -135,10 +135,10 @@ function NewInvitationForm() {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                         className: "font-serif text-lg font-semibold mb-4",
-                        children: "Basic Info"
+                        children: "Info Dasar"
                     }, void 0, false, {
                         fileName: "[project]/components/dashboard/new-invitation-form.jsx",
-                        lineNumber: 31,
+                        lineNumber: 35,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -147,73 +147,73 @@ function NewInvitationForm() {
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
-                                        children: "Bride Name"
+                                        children: "Nama Mempelai Wanita"
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/new-invitation-form.jsx",
-                                        lineNumber: 33,
-                                        columnNumber: 16
+                                        lineNumber: 38,
+                                        columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
                                         value: brideName,
                                         onChange: (e)=>setBrideName(e.target.value),
-                                        placeholder: "e.g. Amelia",
+                                        placeholder: "mis. Amelia",
                                         required: true,
                                         "data-testid": "new-bride-name"
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/new-invitation-form.jsx",
-                                        lineNumber: 33,
-                                        columnNumber: 41
+                                        lineNumber: 39,
+                                        columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/dashboard/new-invitation-form.jsx",
-                                lineNumber: 33,
+                                lineNumber: 37,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
-                                        children: "Groom Name"
+                                        children: "Nama Mempelai Pria"
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/new-invitation-form.jsx",
-                                        lineNumber: 34,
-                                        columnNumber: 16
+                                        lineNumber: 48,
+                                        columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
                                         value: groomName,
                                         onChange: (e)=>setGroomName(e.target.value),
-                                        placeholder: "e.g. Fazar",
+                                        placeholder: "mis. Fazar",
                                         required: true,
                                         "data-testid": "new-groom-name"
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/new-invitation-form.jsx",
-                                        lineNumber: 34,
-                                        columnNumber: 41
+                                        lineNumber: 49,
+                                        columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/dashboard/new-invitation-form.jsx",
-                                lineNumber: 34,
+                                lineNumber: 47,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/dashboard/new-invitation-form.jsx",
-                        lineNumber: 32,
+                        lineNumber: 36,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: "text-xs text-muted-foreground mt-4",
-                        children: "Your invitation design template is assigned by the administrator. You can customize all content in the editor."
+                        children: "Template desain undangan Anda ditentukan oleh administrator. Anda dapat menyesuaikan seluruh isi undangan di editor."
                     }, void 0, false, {
                         fileName: "[project]/components/dashboard/new-invitation-form.jsx",
-                        lineNumber: 36,
+                        lineNumber: 58,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/dashboard/new-invitation-form.jsx",
-                lineNumber: 30,
+                lineNumber: 34,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -229,30 +229,30 @@ function NewInvitationForm() {
                                 className: "h-4 w-4 animate-spin mr-2"
                             }, void 0, false, {
                                 fileName: "[project]/components/dashboard/new-invitation-form.jsx",
-                                lineNumber: 40,
-                                columnNumber: 120
+                                lineNumber: 73,
+                                columnNumber: 15
                             }, this),
-                            "Creating…"
+                            "Membuat…"
                         ]
-                    }, void 0, true) : 'Continue to Editor →'
+                    }, void 0, true) : "Lanjut ke Editor →"
                 }, void 0, false, {
                     fileName: "[project]/components/dashboard/new-invitation-form.jsx",
-                    lineNumber: 40,
+                    lineNumber: 65,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/dashboard/new-invitation-form.jsx",
-                lineNumber: 39,
+                lineNumber: 64,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/dashboard/new-invitation-form.jsx",
-        lineNumber: 29,
+        lineNumber: 33,
         columnNumber: 5
     }, this);
 }
-_s(NewInvitationForm, "zKdEEu+xvtAUJfzpALd22JZQsqM=", false, function() {
+_s(NewInvitationForm, "6cgZWf1cvl9aJw53XiXnTAb/4Q4=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRouter"]
     ];

@@ -43,9 +43,12 @@ export async function PATCH(request, { params }) {
     "templateId",
     "rsvpMode",
     "selfieVerification",
+    "rsvpEnabled",
+    "messageEnabled",
     "customDomain",
     "subdomain",
     "packageId",
+    "quotaMode",
   ];
   const data = {};
   for (const k of allowed) if (body[k] !== undefined) data[k] = body[k];
@@ -54,6 +57,9 @@ export async function PATCH(request, { params }) {
     delete data.rsvpMode;
   if (data.selfieVerification !== undefined)
     data.selfieVerification = !!data.selfieVerification;
+  if (data.rsvpEnabled !== undefined) data.rsvpEnabled = !!data.rsvpEnabled;
+  if (data.messageEnabled !== undefined)
+    data.messageEnabled = !!data.messageEnabled;
 
   // Normalize domain fields
   if ("customDomain" in data) {
@@ -116,7 +122,10 @@ export async function PATCH(request, { params }) {
   if (body.slug !== undefined) {
     const norm = slugify(body.slug || "");
     if (!norm)
-      return NextResponse.json({ error: "Slug cannot be empty." }, { status: 400 });
+      return NextResponse.json(
+        { error: "Slug cannot be empty." },
+        { status: 400 },
+      );
     if (norm !== inv.slug) {
       const dup = await prisma.invitation.findFirst({
         where: { slug: norm, NOT: { id: p.id } },
@@ -144,6 +153,7 @@ export async function PATCH(request, { params }) {
         customDomain: updated.customDomain,
         subdomain: updated.subdomain,
         packageId: updated.packageId,
+        quotaMode: updated.quotaMode,
       },
     });
   } catch (e) {

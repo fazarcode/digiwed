@@ -79,21 +79,24 @@ Please view your personalized invitation here:
 {invitation_url}
 
 We look forward to celebrating with you!`;
-function buildInvitationUrl(baseOrigin, invitation, guestToken) {
-    const suffix = guestToken ? `?guest=${guestToken}` : "";
+function buildInvitationUrl(baseOrigin, invitation, guest) {
+    // Accept either a guest object (preferred) or a raw token string (legacy callers).
+    const nameSlug = guest && typeof guest === "object" ? guest.nameSlug : null;
+    const token = guest && typeof guest === "object" ? guest.token : guest;
+    const query = nameSlug ? `?to=${encodeURIComponent(nameSlug)}` : token ? `?guest=${token}` : "";
     if (invitation?.customDomain) {
-        return `https://${invitation.customDomain}/${suffix}`;
+        return `https://${invitation.customDomain}/${query}`;
     }
     if (invitation?.subdomain && baseOrigin) {
         try {
             const u = new URL(baseOrigin);
             const rootHost = u.hostname.split(".").slice(-2).join(".");
             // Best-effort subdomain URL; falls back gracefully if hostname isn't a real domain.
-            return `${u.protocol}//${invitation.subdomain}.${rootHost}/${suffix}`;
+            return `${u.protocol}//${invitation.subdomain}.${rootHost}/${query}`;
         } catch  {}
     }
     const base = (baseOrigin || "").replace(/\/$/, "");
-    return `${base}/invite/${invitation.slug}${suffix}`;
+    return `${base}/invite/${invitation.slug}${query}`;
 }
 function fmtDate(d) {
     if (!d) return "";
@@ -139,7 +142,7 @@ function buildContext({ invitation, guest, origin }) {
         event_date: ev.date ? fmtDate(ev.date) : "",
         event_time: ev.time || "",
         event_location: ev.venue || ev.address || "",
-        invitation_url: buildInvitationUrl(origin, invitation, guest?.token),
+        invitation_url: buildInvitationUrl(origin, invitation, guest),
         guest_category: guest?.category || guest?.categoryText || "",
         guest_quota: guest?.quota ?? 1
     };
@@ -174,7 +177,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$whatsapp$2e$js__$5b$a
 ;
 ;
 ;
-const dynamic = 'force-dynamic';
+const dynamic = "force-dynamic";
 async function GuestsPage() {
     const s = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$auth$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["auth"])();
     const [invitations, categories, user] = await Promise.all([
@@ -185,10 +188,15 @@ async function GuestsPage() {
             include: {
                 guests: {
                     orderBy: {
-                        createdAt: 'desc'
+                        createdAt: "desc"
                     },
                     include: {
                         category: {
+                            select: {
+                                name: true
+                            }
+                        },
+                        side: {
                             select: {
                                 name: true
                             }
@@ -197,7 +205,7 @@ async function GuestsPage() {
                 }
             },
             orderBy: {
-                updatedAt: 'desc'
+                updatedAt: "desc"
             }
         }),
         __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$prisma$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"].guestCategory.findMany({
@@ -206,10 +214,10 @@ async function GuestsPage() {
             },
             orderBy: [
                 {
-                    order: 'asc'
+                    order: "asc"
                 },
                 {
-                    name: 'asc'
+                    name: "asc"
                 }
             ]
         }),
@@ -239,10 +247,13 @@ async function GuestsPage() {
                     name: g.name,
                     phone: g.phone,
                     token: g.token,
+                    trackingCode: g.trackingCode,
+                    nameSlug: g.nameSlug,
                     guestType: g.guestType,
                     gender: g.gender,
-                    guestSide: g.guestSide,
                     quota: g.quota,
+                    sideId: g.sideId,
+                    sideName: g.side?.name || null,
                     categoryId: g.categoryId,
                     category: g.category?.name || g.categoryText || null,
                     checkedInAt: g.checkedInAt?.toISOString() || null,
@@ -261,24 +272,24 @@ async function GuestsPage() {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
                         className: "font-serif text-3xl font-bold",
-                        children: "Guests"
+                        children: "Tamu"
                     }, void 0, false, {
                         fileName: "[project]/app/dashboard/guests/page.js",
-                        lineNumber: 36,
+                        lineNumber: 68,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: "text-muted-foreground mt-1",
-                        children: "Manage guests across all your invitations"
+                        children: "Kelola tamu di semua undangan Anda"
                     }, void 0, false, {
                         fileName: "[project]/app/dashboard/guests/page.js",
-                        lineNumber: 37,
+                        lineNumber: 69,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/dashboard/guests/page.js",
-                lineNumber: 35,
+                lineNumber: 67,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$dashboard$2f$guests$2d$page$2e$jsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
@@ -287,13 +298,13 @@ async function GuestsPage() {
                 messageTemplate: messageTemplate
             }, void 0, false, {
                 fileName: "[project]/app/dashboard/guests/page.js",
-                lineNumber: 39,
+                lineNumber: 73,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/app/dashboard/guests/page.js",
-        lineNumber: 34,
+        lineNumber: 66,
         columnNumber: 5
     }, this);
 }

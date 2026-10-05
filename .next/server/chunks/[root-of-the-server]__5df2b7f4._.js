@@ -219,7 +219,10 @@ const { handlers, auth, signIn, signOut } = (0, __TURBOPACK__imported__module__$
 "use strict";
 
 // Simple in-memory pub/sub for Server-Sent Events (SSE)
-// One channel per invitation.id. Not clustered — fine for MVP single-instance deployment.
+// One channel per invitation.id. Not clustered — fine for single-instance deployment.
+//
+// Disimpan di globalThis supaya semua route (stream & check-in) memakai
+// Map yang sama, walaupun modul ini dimuat ulang / terduplikasi oleh Next.js.
 __turbopack_context__.s([
     "channelSize",
     ()=>channelSize,
@@ -228,7 +231,8 @@ __turbopack_context__.s([
     "subscribe",
     ()=>subscribe
 ]);
-const channels = new Map(); // invitationId -> Set of writer functions
+const g = globalThis;
+const channels = g.__tvChannels || (g.__tvChannels = new Map()); // invitationId -> Set of writer functions
 function subscribe(invitationId, write) {
     let set = channels.get(invitationId);
     if (!set) {
@@ -290,17 +294,39 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$nanoid$2f$in
 ;
 ;
 ;
-const STORAGE_ROOT = process.env.STORAGE_ROOT || '/app/digital-invitation-platform/storage';
+const STORAGE_ROOT = process.env.STORAGE_ROOT || "/app/digital-invitation-platform/storage";
+// Helper untuk validasi kuota ketat (STRICT)
+async function checkQuota(prisma, { guest, invitation, newCount, excludeCheckInId }) {
+    if (invitation.quotaMode !== "STRICT") return null;
+    const agg = await prisma.checkIn.aggregate({
+        _sum: {
+            count: true
+        },
+        where: {
+            guestId: guest.id,
+            ...excludeCheckInId ? {
+                id: {
+                    not: excludeCheckInId
+                }
+            } : {}
+        }
+    });
+    const used = agg._sum.count || 0;
+    const remaining = guest.quota - used;
+    if (remaining <= 0) return `Kuota ${guest.name} sudah penuh (${used}/${guest.quota})`;
+    if (newCount > remaining) return `Melebihi kuota. Sisa kuota: ${remaining}`;
+    return null;
+}
 async function GET(request) {
     const s = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$auth$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["auth"])();
     if (!s) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-        error: 'Unauthorized'
+        error: "Unauthorized"
     }, {
         status: 401
     });
-    let token = new URL(request.url).searchParams.get('token');
+    let token = new URL(request.url).searchParams.get("token");
     if (!token) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-        error: 'Token required'
+        error: "Token wajib diisi"
     }, {
         status: 400
     });
@@ -323,7 +349,8 @@ async function GET(request) {
                     groomName: true,
                     slug: true,
                     selfieVerification: true,
-                    tvEnabled: true
+                    tvEnabled: true,
+                    quotaMode: true
                 }
             },
             category: {
@@ -340,7 +367,7 @@ async function GET(request) {
         }
     });
     if (!guest) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-        error: 'Guest not found',
+        error: "Tamu tidak ditemukan",
         tokenTried: token
     }, {
         status: 404
@@ -366,14 +393,14 @@ async function GET(request) {
 async function POST(request) {
     const s = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$auth$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["auth"])();
     if (!s) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-        error: 'Unauthorized'
+        error: "Unauthorized"
     }, {
         status: 401
     });
     const body = await request.json().catch(()=>({}));
-    let { token, deviceId, operatorName, count = 1, selfieDataUrl } = body;
+    let { token, deviceId, operatorName, tableName, count = 1, selfieDataUrl } = body;
     if (!token) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-        error: 'Token required'
+        error: "Token wajib diisi"
     }, {
         status: 400
     });
@@ -381,6 +408,8 @@ async function POST(request) {
     token = String(token).trim();
     const m = token.match(/[?&]guest=([\w-]+)/);
     if (m) token = m[1];
+    // Rapikan nama meja
+    const cleanTable = tableName ? String(tableName).trim().slice(0, 120) || null : null;
     const guest = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$prisma$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].guest.findFirst({
         where: {
             token,
@@ -395,7 +424,8 @@ async function POST(request) {
                     selfieVerification: true,
                     tvEnabled: true,
                     brideName: true,
-                    groomName: true
+                    groomName: true,
+                    quotaMode: true
                 }
             },
             category: {
@@ -408,33 +438,48 @@ async function POST(request) {
         }
     });
     if (!guest) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-        error: 'Guest not found'
+        error: "Tamu tidak ditemukan"
     }, {
         status: 404
     });
-    if (guest.guestType === 'INDIVIDUAL' && guest.checkedInAt) {
+    if (guest.guestType === "INDIVIDUAL" && guest.checkedInAt) {
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            error: 'This guest has already been checked in.',
+            error: "Tamu ini sudah check-in.",
             guest,
             alreadyCheckedIn: true
         }, {
             status: 400
         });
     }
-    // Attendee count validation: bounded by quota
     const requested = Math.max(1, parseInt(count, 10) || 1);
-    const incCount = Math.min(requested, guest.quota || 1, 50);
+    const strict = guest.invitation.quotaMode === "STRICT";
+    // Validasi Kuota jika Mode STRICT aktif
+    const quotaErr = await checkQuota(__TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$prisma$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"], {
+        guest,
+        invitation: guest.invitation,
+        newCount: requested
+    });
+    if (quotaErr) {
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+            error: quotaErr,
+            guest
+        }, {
+            status: 409
+        });
+    }
+    // Attendee count validation: bounded by quota if strict, or max 50 if flexible
+    const incCount = Math.min(requested, strict ? guest.quota - (guest.checkedInCount || 0) : 50);
     let savedSelfieUrl = null;
     if (guest.invitation.selfieVerification) {
         if (!selfieDataUrl) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            error: 'Selfie is required for check-in'
+            error: "Selfie wajib untuk check-in"
         }, {
             status: 400
         });
-        const m = String(selfieDataUrl).match(/^data:(image\/(png|jpeg|jpg|webp));base64,(.+)$/);
-        if (m) {
-            const ext = m[2] === 'jpg' ? 'jpg' : m[2];
-            const buf = Buffer.from(m[3], 'base64');
+        const matchSelfie = String(selfieDataUrl).match(/^data:(image\/(png|jpeg|jpg|webp));base64,(.+)$/);
+        if (matchSelfie) {
+            const ext = matchSelfie[2] === "jpg" ? "jpg" : matchSelfie[2];
+            const buf = Buffer.from(matchSelfie[3], "base64");
             const relDir = `uploads/${s.user.id}/selfies`;
             const absDir = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(STORAGE_ROOT, relDir);
             __TURBOPACK__imported__module__$5b$externals$5d2f$fs__$5b$external$5d$__$28$fs$2c$__cjs$29$__["default"].mkdirSync(absDir, {
@@ -467,6 +512,7 @@ async function POST(request) {
                 guestId: guest.id,
                 deviceId: validDeviceId,
                 operatorName: operatorName || null,
+                tableName: cleanTable,
                 selfieUrl: savedSelfieUrl,
                 count: incCount
             }
@@ -490,7 +536,7 @@ async function POST(request) {
     // Broadcast to TV screens — include priority for queue ordering
     const priority = guest.priorityOverride ?? guest.category?.priority ?? 100;
     if (guest.invitation.tvEnabled) {
-        (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$broadcast$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["publish"])(guest.invitation.id, 'checkin', {
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$broadcast$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["publish"])(guest.invitation.id, "checkin", {
             checkInId,
             guestId: guest.id,
             guestName: guest.name,
@@ -502,6 +548,7 @@ async function POST(request) {
             groomName: guest.invitation.groomName,
             deviceName,
             operatorName: operatorName || null,
+            tableName: cleanTable,
             selfieUrl: savedSelfieUrl || null,
             at: new Date().toISOString()
         });
@@ -514,7 +561,8 @@ async function POST(request) {
             checkedInAt: updatedGuest.checkedInAt,
             checkedInCount: updatedGuest.checkedInCount
         },
-        count: incCount
+        count: incCount,
+        tableName: cleanTable
     });
 }
 }),

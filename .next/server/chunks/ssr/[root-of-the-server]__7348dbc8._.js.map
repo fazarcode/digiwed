@@ -2,5 +2,5 @@
   "version": 3,
   "sources": [],
   "sections": [
-    {"offset": {"line": 10, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/fazar/Documents/d-inv4/app/providers.js"],"sourcesContent":["'use client';\nimport { SessionProvider } from 'next-auth/react';\n\nexport function Providers({ children }) {\n  return <SessionProvider>{children}</SessionProvider>;\n}\n"],"names":[],"mappings":";;;;;AACA;AADA;;;AAGO,SAAS,UAAU,EAAE,QAAQ,EAAE;IACpC,qBAAO,8OAAC,wJAAe;kBAAE;;;;;;AAC3B","debugId":null}}]
+    {"offset": {"line": 10, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/fazar/Documents/d-inv6/app/providers.js"],"sourcesContent":["'use client';\nimport { SessionProvider } from 'next-auth/react';\n\nexport function Providers({ children }) {\n  return <SessionProvider>{children}</SessionProvider>;\n}\n"],"names":[],"mappings":";;;;;AACA;AADA;;;AAGO,SAAS,UAAU,EAAE,QAAQ,EAAE;IACpC,qBAAO,8OAAC,wJAAe;kBAAE;;;;;;AAC3B","debugId":null}}]
 }

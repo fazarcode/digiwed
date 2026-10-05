@@ -231,16 +231,20 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$prisma$2e$js__$5b$app
 async function GET(request) {
     const s = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$auth$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["auth"])();
     if (!s) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-        error: 'Unauthorized'
+        error: "Unauthorized"
     }, {
         status: 401
     });
     const url = new URL(request.url);
-    const invitationId = url.searchParams.get('invitationId');
-    const status = url.searchParams.get('status') || 'all';
-    const q = (url.searchParams.get('q') || '').trim();
-    const deviceId = url.searchParams.get('deviceId');
-    const categoryId = url.searchParams.get('categoryId');
+    const invitationId = url.searchParams.get("invitationId");
+    const status = url.searchParams.get("status") || "all";
+    const q = (url.searchParams.get("q") || "").trim();
+    const deviceId = url.searchParams.get("deviceId");
+    const categoryId = url.searchParams.get("categoryId");
+    // Pagination
+    const paginate = url.searchParams.has("limit");
+    const page = Math.max(1, parseInt(url.searchParams.get("page"), 10) || 1);
+    const limit = Math.min(Math.max(parseInt(url.searchParams.get("limit"), 10) || 10, 1), 10000);
     // Query all guests owned by this user (with optional filters), including their check-ins
     const guestWhere = {
         invitation: {
@@ -262,6 +266,7 @@ async function GET(request) {
             },
             invitation: {
                 select: {
+                    id: true,
                     brideName: true,
                     groomName: true
                 }
@@ -278,12 +283,12 @@ async function GET(request) {
                     }
                 },
                 orderBy: {
-                    createdAt: 'desc'
+                    createdAt: "desc"
                 }
             }
         },
         orderBy: {
-            createdAt: 'desc'
+            createdAt: "desc"
         }
     });
     const items = [];
@@ -294,15 +299,17 @@ async function GET(request) {
                 items.push({
                     id: `ci-${ci.id}`,
                     guestId: g.id,
+                    invitationId: g.invitationId,
                     guestToken: g.token,
                     guestName: g.name,
                     guestType: g.guestType,
                     category: g.category?.name || g.categoryText || null,
                     categoryId: g.categoryId,
                     attendees: ci.count || 1,
-                    status: 'CHECKED_IN',
+                    status: "CHECKED_IN",
                     checkedInAt: ci.createdAt.toISOString(),
                     operatorName: ci.operatorName || null,
+                    tableName: ci.tableName || null,
                     deviceName: ci.device?.name || null,
                     selfieUrl: ci.selfieUrl || null,
                     invitation: g.invitation
@@ -313,15 +320,17 @@ async function GET(request) {
             items.push({
                 id: `g-${g.id}`,
                 guestId: g.id,
+                invitationId: g.invitationId,
                 guestToken: g.token,
                 guestName: g.name,
                 guestType: g.guestType,
                 category: g.category?.name || g.categoryText || null,
                 categoryId: g.categoryId,
                 attendees: 0,
-                status: 'NOT_CHECKED_IN',
+                status: "NOT_CHECKED_IN",
                 checkedInAt: null,
                 operatorName: null,
+                tableName: null,
                 deviceName: null,
                 selfieUrl: null,
                 invitation: g.invitation
@@ -329,22 +338,30 @@ async function GET(request) {
         }
     }
     // Status filter
-    const filtered = items.filter((x)=>status === 'all' || x.status === status);
+    const filtered = items.filter((x)=>status === "all" || x.status === status);
     // Sort by latest check-in (CHECKED_IN first sorted by time desc, then NOT_CHECKED_IN)
     filtered.sort((a, b)=>{
-        if (a.status !== b.status) return a.status === 'CHECKED_IN' ? -1 : 1;
-        if (a.status === 'CHECKED_IN') return new Date(b.checkedInAt) - new Date(a.checkedInAt);
+        if (a.status !== b.status) return a.status === "CHECKED_IN" ? -1 : 1;
+        if (a.status === "CHECKED_IN") return new Date(b.checkedInAt) - new Date(a.checkedInAt);
         return 0;
     });
-    const totalAttendees = filtered.filter((x)=>x.status === 'CHECKED_IN').reduce((s, x)=>s + (x.attendees || 1), 0);
-    const totalCheckedIn = filtered.filter((x)=>x.status === 'CHECKED_IN').length;
-    const totalNotCheckedIn = filtered.filter((x)=>x.status === 'NOT_CHECKED_IN').length;
+    // Statistik dihitung dari SEMUA data terfilter (bukan hanya halaman aktif)
+    const totalAttendees = filtered.filter((x)=>x.status === "CHECKED_IN").reduce((s, x)=>s + (x.attendees || 1), 0);
+    const totalCheckedIn = filtered.filter((x)=>x.status === "CHECKED_IN").length;
+    const totalNotCheckedIn = filtered.filter((x)=>x.status === "NOT_CHECKED_IN").length;
+    const total = filtered.length;
+    const totalPages = paginate ? Math.max(1, Math.ceil(total / limit)) : 1;
+    const pageItems = paginate ? filtered.slice((page - 1) * limit, page * limit) : filtered;
     return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-        items: filtered,
+        items: pageItems,
+        total,
+        totalPages,
+        page: paginate ? page : 1,
+        limit: paginate ? limit : total,
         totalAttendees,
         totalCheckedIn,
         totalNotCheckedIn,
-        count: filtered.length
+        count: total
     });
 }
 }),

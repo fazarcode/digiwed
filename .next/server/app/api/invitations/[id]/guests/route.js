@@ -4,7 +4,7 @@ R.c("server/chunks/97170_@auth_core_46bb605f._.js")
 R.c("server/chunks/97170_jose_dist_node_esm_7c9433d1._.js")
 R.c("server/chunks/node_modules_zod_dist_esm_86ed43c8._.js")
 R.c("server/chunks/node_modules_1c3cb5f6._.js")
-R.c("server/chunks/[root-of-the-server]__e4f36735._.js")
+R.c("server/chunks/[root-of-the-server]__a591d937._.js")
 R.m("[project]/.next-internal/server/app/api/invitations/[id]/guests/route/actions.js [app-rsc] (server actions loader, ecmascript)")
 R.m("[project]/node_modules/next/dist/esm/build/templates/app-route.js { INNER_APP_ROUTE => \"[project]/app/api/invitations/[id]/guests/route.js [app-route] (ecmascript)\" } [app-route] (ecmascript)")
 module.exports=R.m("[project]/node_modules/next/dist/esm/build/templates/app-route.js { INNER_APP_ROUTE => \"[project]/app/api/invitations/[id]/guests/route.js [app-route] (ecmascript)\" } [app-route] (ecmascript)").exports

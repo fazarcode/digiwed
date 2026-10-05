@@ -19,7 +19,7 @@ var _s = __turbopack_context__.k.signature();
 ;
 ;
 function RsvpList(param) {
-    let { rsvps, stats, userInvitations, currentPage, totalPages, totalRsvpsCount, attendanceFilter, invitationFilter, searchQuery, skip, limit = 10 } = param;
+    let { rsvps, messages = [], stats, userInvitations, currentPage, totalPages, totalRsvpsCount, attendanceFilter, invitationFilter, searchQuery, skip, limit = 10 } = param;
     _s();
     const router = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRouter"])();
     const pathname = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["usePathname"])();
@@ -35,6 +35,28 @@ function RsvpList(param) {
     }["RsvpList.useEffect"], []);
     // State lokal khusus untuk input teks search
     const [searchTerm, setSearchTerm] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(searchQuery || "");
+    // Phase 2 — messages/wishes (independent from RSVP). Delete via /api/messages/[id].
+    const [msgs, setMsgs] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(messages || []);
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "RsvpList.useEffect": ()=>{
+            setMsgs(messages || []);
+        }
+    }["RsvpList.useEffect"], [
+        messages
+    ]);
+    // Total pesan yang masuk (ikut berkurang saat ada pesan dihapus)
+    const totalMessages = msgs.length;
+    const messageOnlyCount = msgs.filter((m)=>m.isMessageOnly).length;
+    const withRsvpCount = totalMessages - messageOnlyCount;
+    const deleteMessage = async (id)=>{
+        if (!confirm("Hapus pesan ini? Tamu dan RSVP-nya TIDAK akan ikut terhapus.")) return;
+        const res = await fetch("/api/messages/".concat(id), {
+            method: "DELETE"
+        });
+        if (!res.ok) return;
+        setMsgs((l)=>l.filter((m)=>m.id !== id));
+        router.refresh();
+    };
     // ==========================================
     // FUNGSI EXPORT EXCEL
     // ==========================================
@@ -67,85 +89,28 @@ function RsvpList(param) {
         const totalGuestsInSheet = rsvps.reduce((acc, r)=>{
             return acc + (r.rsvpType === "GROUP" ? Number(r.guestCount || 1) : 1);
         }, 0);
+        // Baris ringkasan: label di kolom "Nama Tamu", nilai di "Undangan (Mempelai)", satuan di "Status Kehadiran".
+        const summaryRow = (label, value, unit)=>({
+                "No.": "",
+                "Nama Tamu": label,
+                "Undangan (Mempelai)": value,
+                "Status Kehadiran": unit,
+                "Tipe RSVP": "",
+                "Jumlah Tamu (Orang)": "",
+                "Pesan / Ucapan": "",
+                "Tanggal RSVP": "",
+                "Waktu RSVP": ""
+            });
         excelData.push({});
         excelData.push({});
-        excelData.push({
-            "No.": "",
-            "Nama Tamu": "RINGKASAN STATISTIK",
-            "Undangan (Mempelai)": "",
-            "Status Kehadiran": "",
-            "Tipe RSVP": "",
-            "Jumlah Tamu (Orang)": "",
-            "Pesan / Ucapan": "",
-            "Tanggal RSVP": "",
-            "Waktu RSVP": ""
-        });
-        excelData.push({
-            "No.": "",
-            "Nama Tamu": "- Total Tamu (Tabel Ini)",
-            "Undangan (Mempelai)": totalGuestsInSheet,
-            "Status Kehadiran": "Orang",
-            "Tipe RSVP": "",
-            "Jumlah Tamu (Orang)": "",
-            "Pesan / Ucapan": "",
-            "Tanggal RSVP": "",
-            "Waktu RSVP": ""
-        });
-        excelData.push({
-            "No.": "",
-            "Nama Tamu": "- Total Perkiraan Tamu (Keseluruhan)",
-            "Undangan (Mempelai)": stats.totalGuests,
-            "Status Kehadiran": "Orang",
-            "Tipe RSVP": "",
-            "Jumlah Tamu (Orang)": "",
-            "Pesan / Ucapan": "",
-            "Tanggal RSVP": "",
-            "Waktu RSVP": ""
-        });
-        excelData.push({
-            "No.": "",
-            "Nama Tamu": "- Total Seluruh RSVP Masuk",
-            "Undangan (Mempelai)": stats.total,
-            "Status Kehadiran": "Respon",
-            "Tipe RSVP": "",
-            "Jumlah Tamu (Orang)": "",
-            "Pesan / Ucapan": "",
-            "Tanggal RSVP": "",
-            "Waktu RSVP": ""
-        });
-        excelData.push({
-            "No.": "",
-            "Nama Tamu": "- Hadir (Attending)",
-            "Undangan (Mempelai)": stats.attending,
-            "Status Kehadiran": "Respon",
-            "Tipe RSVP": "",
-            "Jumlah Tamu (Orang)": "",
-            "Pesan / Ucapan": "",
-            "Tanggal RSVP": "",
-            "Waktu RSVP": ""
-        });
-        excelData.push({
-            "No.": "",
-            "Nama Tamu": "- Tidak Hadir (Not Attending)",
-            "Undangan (Mempelai)": stats.notAttending,
-            "Status Kehadiran": "Respon",
-            "Tipe RSVP": "",
-            "Jumlah Tamu (Orang)": "",
-            "Pesan / Ucapan": "",
-            "Tanggal RSVP": "",
-            "Waktu RSVP": ""
-        });
-        excelData.push({
-            "No.": "",
-            "Nama Tamu": "- Ragu-ragu (Maybe)",
-            "Undangan (Mempelai)": stats.maybe,
-            "Status Kehadiran": "Respon",
-            "Tipe RSVP": "",
-            "Jumlah Tamu (Orang)": "",
-            "Pesan / Ucapan": "",
-            "Tanggal RSVP": "",
-            "Waktu RSVP": ""
-        });
+        excelData.push(summaryRow("RINGKASAN STATISTIK", "", ""));
+        excelData.push(summaryRow("- Total Tamu (Tabel Ini)", totalGuestsInSheet, "Orang"));
+        excelData.push(summaryRow("- Total Perkiraan Tamu (Keseluruhan)", stats.totalGuests, "Orang"));
+        excelData.push(summaryRow("- Total Seluruh RSVP Masuk", stats.total, "Respon"));
+        excelData.push(summaryRow("- Hadir (Attending)", stats.attending, "Respon"));
+        excelData.push(summaryRow("- Tidak Hadir (Not Attending)", stats.notAttending, "Respon"));
+        excelData.push(summaryRow("- Ragu-ragu (Maybe)", stats.maybe, "Respon"));
+        excelData.push(summaryRow("- Total Pesan & Ucapan Masuk", totalMessages, "Pesan"));
         const worksheet = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$xlsx$2f$xlsx$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["utils"].json_to_sheet(excelData);
         worksheet["!cols"] = [
             {
@@ -264,21 +229,21 @@ function RsvpList(param) {
                                 children: "RSVP"
                             }, void 0, false, {
                                 fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                lineNumber: 259,
+                                lineNumber: 235,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                 className: "text-muted-foreground text-sm mt-1",
-                                children: "All RSVPs across your invitations"
+                                children: "Semua RSVP dari seluruh undangan Anda"
                             }, void 0, false, {
                                 fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                lineNumber: 262,
+                                lineNumber: 238,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                        lineNumber: 258,
+                        lineNumber: 234,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -299,27 +264,27 @@ function RsvpList(param) {
                                     d: "M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
                                 }, void 0, false, {
                                     fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                    lineNumber: 279,
+                                    lineNumber: 255,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                lineNumber: 272,
+                                lineNumber: 248,
                                 columnNumber: 11
                             }, this),
-                            "Export to Excel (",
+                            "Ekspor ke Excel (",
                             (rsvps === null || rsvps === void 0 ? void 0 : rsvps.length) || 0,
                             ")"
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                        lineNumber: 267,
+                        lineNumber: 243,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                lineNumber: 257,
+                lineNumber: 233,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -331,26 +296,28 @@ function RsvpList(param) {
                         color: "from-primary/10 border-primary/20"
                     },
                     {
-                        label: "Attending",
+                        label: "Hadir",
                         value: stats.attending,
                         color: "from-emerald-500/10 border-emerald-500/20"
                     },
                     {
-                        label: "Not Attending",
+                        label: "Tidak Hadir",
                         value: stats.notAttending,
                         color: "from-rose-500/10 border-rose-500/20"
                     },
                     {
-                        label: "Maybe",
+                        label: "Ragu-ragu",
                         value: stats.maybe,
                         color: "from-amber-500/10 border-amber-500/20"
                     },
                     {
-                        label: "Total Guests",
-                        value: stats.totalGuests,
-                        color: "from-sky-500/10 border-sky-500/20"
+                        label: "Total Pesan",
+                        value: totalMessages,
+                        color: "from-violet-500/10 border-violet-500/20",
+                        testId: "stat-total-messages"
                     }
                 ].map((s)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        "data-testid": s.testId,
                         className: "rounded-2xl bg-gradient-to-br ".concat(s.color, " to-background border p-5 shadow-sm"),
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -358,7 +325,7 @@ function RsvpList(param) {
                                 children: s.label
                             }, void 0, false, {
                                 fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                lineNumber: 323,
+                                lineNumber: 301,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -366,18 +333,18 @@ function RsvpList(param) {
                                 children: s.value
                             }, void 0, false, {
                                 fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                lineNumber: 326,
+                                lineNumber: 304,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, s.label, true, {
                         fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                        lineNumber: 319,
+                        lineNumber: 296,
                         columnNumber: 11
                     }, this))
             }, void 0, false, {
                 fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                lineNumber: 291,
+                lineNumber: 267,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -389,10 +356,10 @@ function RsvpList(param) {
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                 htmlFor: "search",
                                 className: "text-xs font-medium text-muted-foreground",
-                                children: "Search Guest Name"
+                                children: "Cari Nama Tamu"
                             }, void 0, false, {
                                 fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                lineNumber: 337,
+                                lineNumber: 315,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -410,36 +377,36 @@ function RsvpList(param) {
                                             d: "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                                         }, void 0, false, {
                                             fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                            lineNumber: 350,
+                                            lineNumber: 328,
                                             columnNumber: 15
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                        lineNumber: 344,
+                                        lineNumber: 322,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                         type: "text",
                                         id: "search",
-                                        placeholder: "Type a name...",
+                                        placeholder: "Ketik nama...",
                                         value: searchTerm,
                                         onChange: (e)=>setSearchTerm(e.target.value),
                                         className: "h-10 pl-9 pr-3 w-full rounded-xl border border-input text-sm bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                        lineNumber: 357,
+                                        lineNumber: 335,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                lineNumber: 343,
+                                lineNumber: 321,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                        lineNumber: 336,
+                        lineNumber: 314,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -448,10 +415,10 @@ function RsvpList(param) {
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                 htmlFor: "invitationId",
                                 className: "text-xs font-medium text-muted-foreground",
-                                children: "Filter by Invitation"
+                                children: "Filter Undangan"
                             }, void 0, false, {
                                 fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                lineNumber: 370,
+                                lineNumber: 348,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -462,10 +429,10 @@ function RsvpList(param) {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                         value: "ALL",
-                                        children: "All Invitations"
+                                        children: "Semua Undangan"
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                        lineNumber: 382,
+                                        lineNumber: 360,
                                         columnNumber: 13
                                     }, this),
                                     userInvitations.map((inv)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -477,19 +444,19 @@ function RsvpList(param) {
                                             ]
                                         }, inv.id, true, {
                                             fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                            lineNumber: 384,
+                                            lineNumber: 362,
                                             columnNumber: 15
                                         }, this))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                lineNumber: 376,
+                                lineNumber: 354,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                        lineNumber: 369,
+                        lineNumber: 347,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -498,10 +465,10 @@ function RsvpList(param) {
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                 htmlFor: "attendance",
                                 className: "text-xs font-medium text-muted-foreground",
-                                children: "Filter by Attendance"
+                                children: "Filter Kehadiran"
                             }, void 0, false, {
                                 fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                lineNumber: 393,
+                                lineNumber: 371,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -512,52 +479,52 @@ function RsvpList(param) {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                         value: "ALL",
-                                        children: "All Status"
+                                        children: "Semua Status"
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                        lineNumber: 405,
+                                        lineNumber: 383,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                         value: "ATTENDING",
-                                        children: "Attending"
+                                        children: "Hadir"
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                        lineNumber: 406,
+                                        lineNumber: 384,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                         value: "MAYBE",
-                                        children: "Maybe"
+                                        children: "Ragu-ragu"
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                        lineNumber: 407,
+                                        lineNumber: 385,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                         value: "NOT_ATTENDING",
-                                        children: "Not Attending"
+                                        children: "Tidak Hadir"
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                        lineNumber: 408,
+                                        lineNumber: 386,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                lineNumber: 399,
+                                lineNumber: 377,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                        lineNumber: 392,
+                        lineNumber: 370,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                lineNumber: 334,
+                lineNumber: 312,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -574,61 +541,61 @@ function RsvpList(param) {
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                                 className: "px-5 py-3.5 font-semibold",
-                                                children: "Guest"
+                                                children: "Tamu"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                                lineNumber: 419,
+                                                lineNumber: 397,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                                 className: "px-5 py-3.5 font-semibold",
-                                                children: "Invitation"
+                                                children: "Undangan"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                                lineNumber: 420,
+                                                lineNumber: 398,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                                 className: "px-5 py-3.5 font-semibold",
-                                                children: "Attendance"
+                                                children: "Kehadiran"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                                lineNumber: 421,
+                                                lineNumber: 399,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                                 className: "px-5 py-3.5 font-semibold",
-                                                children: "Type"
+                                                children: "Tipe"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                                lineNumber: 422,
+                                                lineNumber: 400,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                                 className: "px-5 py-3.5 font-semibold",
-                                                children: "Message"
+                                                children: "Pesan"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                                lineNumber: 423,
+                                                lineNumber: 401,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                                 className: "px-5 py-3.5 font-semibold",
-                                                children: "Date"
+                                                children: "Tanggal"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                                lineNumber: 424,
+                                                lineNumber: 402,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                        lineNumber: 418,
+                                        lineNumber: 396,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                    lineNumber: 417,
+                                    lineNumber: 395,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
@@ -642,7 +609,7 @@ function RsvpList(param) {
                                                         children: r.name
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                                        lineNumber: 430,
+                                                        lineNumber: 408,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -654,7 +621,7 @@ function RsvpList(param) {
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                                        lineNumber: 433,
+                                                        lineNumber: 411,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -666,27 +633,27 @@ function RsvpList(param) {
                                                                     className: "w-1.5 h-1.5 rounded-full ".concat(r.attendance === "ATTENDING" ? "bg-emerald-500" : r.attendance === "NOT_ATTENDING" ? "bg-rose-500" : "bg-amber-500")
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                                                    lineNumber: 446,
+                                                                    lineNumber: 424,
                                                                     columnNumber: 23
                                                                 }, this),
-                                                                r.attendance === "ATTENDING" ? "Attending" : r.attendance === "NOT_ATTENDING" ? "Not Attending" : "Maybe"
+                                                                r.attendance === "ATTENDING" ? "Hadir" : r.attendance === "NOT_ATTENDING" ? "Tidak Hadir" : "Ragu-ragu"
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                                            lineNumber: 437,
+                                                            lineNumber: 415,
                                                             columnNumber: 21
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                                        lineNumber: 436,
+                                                        lineNumber: 414,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
                                                         className: "px-5 py-4 text-xs",
-                                                        children: r.rsvpType === "GROUP" ? "Group (".concat(r.guestCount, " guests)") : "Individual"
+                                                        children: r.rsvpType === "GROUP" ? "Grup (".concat(r.guestCount, " tamu)") : "Individu"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                                        lineNumber: 462,
+                                                        lineNumber: 440,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -694,21 +661,21 @@ function RsvpList(param) {
                                                         children: r.message || "—"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                                        lineNumber: 467,
+                                                        lineNumber: 445,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
                                                         className: "px-5 py-4 text-xs text-muted-foreground",
-                                                        children: isMounted ? new Date(r.createdAt).toLocaleString() : new Date(r.createdAt).toISOString()
+                                                        children: isMounted ? new Date(r.createdAt).toLocaleString("id-ID") : new Date(r.createdAt).toISOString()
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                                        lineNumber: 470,
+                                                        lineNumber: 448,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, r.id, true, {
                                                 fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                                lineNumber: 429,
+                                                lineNumber: 407,
                                                 columnNumber: 17
                                             }, this)),
                                         rsvps.length === 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
@@ -730,53 +697,53 @@ function RsvpList(param) {
                                                                 d: "M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                                                lineNumber: 490,
+                                                                lineNumber: 468,
                                                                 columnNumber: 25
                                                             }, this)
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                                            lineNumber: 484,
+                                                            lineNumber: 462,
                                                             columnNumber: 23
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                             className: "text-sm",
-                                                            children: searchQuery ? 'No RSVPs found matching "'.concat(searchQuery, '"') : "No RSVPs match your filters."
+                                                            children: searchQuery ? 'Tidak ada RSVP yang cocok dengan "'.concat(searchQuery, '"') : "Tidak ada RSVP yang sesuai dengan filter Anda."
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                                            lineNumber: 497,
+                                                            lineNumber: 475,
                                                             columnNumber: 23
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                                    lineNumber: 483,
+                                                    lineNumber: 461,
                                                     columnNumber: 21
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                                lineNumber: 479,
+                                                lineNumber: 457,
                                                 columnNumber: 19
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                            lineNumber: 478,
+                                            lineNumber: 456,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                    lineNumber: 427,
+                                    lineNumber: 405,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                            lineNumber: 416,
+                            lineNumber: 394,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                        lineNumber: 415,
+                        lineNumber: 393,
                         columnNumber: 9
                     }, this),
                     totalRsvpsCount > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -790,11 +757,11 @@ function RsvpList(param) {
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                                 htmlFor: "limit",
-                                                className: "font-medium    text-foreground",
-                                                children: "Rows per page:"
+                                                className: "font-medium text-foreground",
+                                                children: "Baris per halaman:"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                                lineNumber: 518,
+                                                lineNumber: 494,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -808,7 +775,7 @@ function RsvpList(param) {
                                                         children: "10"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                                        lineNumber: 530,
+                                                        lineNumber: 503,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -816,7 +783,7 @@ function RsvpList(param) {
                                                         children: "25"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                                        lineNumber: 531,
+                                                        lineNumber: 504,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -824,7 +791,7 @@ function RsvpList(param) {
                                                         children: "50"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                                        lineNumber: 532,
+                                                        lineNumber: 505,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -832,74 +799,74 @@ function RsvpList(param) {
                                                         children: "100"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                                        lineNumber: 533,
+                                                        lineNumber: 506,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                                lineNumber: 524,
+                                                lineNumber: 497,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                        lineNumber: 517,
+                                        lineNumber: 493,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                         className: "hidden sm:inline-block w-px h-4 bg-border"
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                        lineNumber: 537,
+                                        lineNumber: 510,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                         children: [
-                                            "Showing",
+                                            "Menampilkan",
                                             " ",
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 className: "font-semibold text-foreground",
                                                 children: skip + 1
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                                lineNumber: 541,
+                                                lineNumber: 514,
                                                 columnNumber: 17
                                             }, this),
                                             " ",
-                                            "to",
+                                            "sampai",
                                             " ",
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 className: "font-semibold text-foreground",
                                                 children: Math.min(skip + Number(currentLimit), totalRsvpsCount)
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                                lineNumber: 545,
+                                                lineNumber: 518,
                                                 columnNumber: 17
                                             }, this),
                                             " ",
-                                            "of",
+                                            "dari",
                                             " ",
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 className: "font-semibold text-foreground",
                                                 children: totalRsvpsCount
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                                lineNumber: 549,
+                                                lineNumber: 522,
                                                 columnNumber: 17
                                             }, this),
                                             " ",
-                                            "entries"
+                                            "data"
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                        lineNumber: 539,
+                                        lineNumber: 512,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                lineNumber: 516,
+                                lineNumber: 492,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -916,14 +883,14 @@ function RsvpList(param) {
                                                 viewBox: "0 0 24 24"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                                lineNumber: 564,
+                                                lineNumber: 537,
                                                 columnNumber: 19
                                             }, this),
-                                            "Previous"
+                                            "Sebelumnya"
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                        lineNumber: 560,
+                                        lineNumber: 533,
                                         columnNumber: 17
                                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                         className: "inline-flex items-center justify-center h-8 px-3 text-xs font-medium border rounded-lg opacity-40 cursor-not-allowed bg-muted/40",
@@ -935,14 +902,14 @@ function RsvpList(param) {
                                                 viewBox: "0 0 24 24"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                                lineNumber: 574,
+                                                lineNumber: 547,
                                                 columnNumber: 19
                                             }, this),
-                                            "Previous"
+                                            "Sebelumnya"
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                        lineNumber: 573,
+                                        lineNumber: 546,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -955,20 +922,20 @@ function RsvpList(param) {
                                                 children: page
                                             }, page, false, {
                                                 fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                                lineNumber: 589,
+                                                lineNumber: 562,
                                                 columnNumber: 21
                                             }, this);
                                         })
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                        lineNumber: 585,
+                                        lineNumber: 558,
                                         columnNumber: 15
                                     }, this),
                                     currentPage < totalPages ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                                         href: getPaginationUrl(currentPage + 1),
                                         className: "inline-flex items-center justify-center h-8 px-3 text-xs font-medium border rounded-lg bg-background hover:bg-muted transition-colors",
                                         children: [
-                                            "Next",
+                                            "Berikutnya",
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
                                                 className: "w-4 h-4 ml-1",
                                                 fill: "none",
@@ -976,18 +943,18 @@ function RsvpList(param) {
                                                 viewBox: "0 0 24 24"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                                lineNumber: 611,
+                                                lineNumber: 584,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                        lineNumber: 606,
+                                        lineNumber: 579,
                                         columnNumber: 17
                                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                         className: "inline-flex items-center justify-center h-8 px-3 text-xs font-medium border rounded-lg opacity-40 cursor-not-allowed bg-muted/40",
                                         children: [
-                                            "Next",
+                                            "Berikutnya",
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
                                                 className: "w-4 h-4 ml-1",
                                                 fill: "none",
@@ -995,41 +962,230 @@ function RsvpList(param) {
                                                 viewBox: "0 0 24 24"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                                lineNumber: 621,
+                                                lineNumber: 594,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                        lineNumber: 619,
+                                        lineNumber: 592,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                                lineNumber: 557,
+                                lineNumber: 530,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                        lineNumber: 514,
+                        lineNumber: 490,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/dashboard/rsvp-list.jsx",
-                lineNumber: 414,
+                lineNumber: 392,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "rounded-2xl bg-card border shadow-sm overflow-hidden",
+                "data-testid": "messages-section",
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "px-5 py-4 border-b bg-muted/20 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2",
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                                        className: "font-serif text-xl font-bold text-foreground",
+                                        children: "Pesan & Ucapan"
+                                    }, void 0, false, {
+                                        fileName: "[project]/components/dashboard/rsvp-list.jsx",
+                                        lineNumber: 614,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                        className: "text-xs text-muted-foreground mt-0.5",
+                                        children: "Pesan dari tamu (dengan atau tanpa RSVP). Menghapus pesan tidak akan menghapus tamu maupun RSVP-nya."
+                                    }, void 0, false, {
+                                        fileName: "[project]/components/dashboard/rsvp-list.jsx",
+                                        lineNumber: 617,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/components/dashboard/rsvp-list.jsx",
+                                lineNumber: 613,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "text-xs text-muted-foreground sm:text-right",
+                                "data-testid": "messages-total",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                        children: [
+                                            "Total:",
+                                            " ",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "font-semibold text-foreground",
+                                                children: totalMessages
+                                            }, void 0, false, {
+                                                fileName: "[project]/components/dashboard/rsvp-list.jsx",
+                                                lineNumber: 628,
+                                                columnNumber: 15
+                                            }, this),
+                                            " ",
+                                            "pesan"
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/components/dashboard/rsvp-list.jsx",
+                                        lineNumber: 626,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                        children: [
+                                            withRsvpCount,
+                                            " dengan RSVP · ",
+                                            messageOnlyCount,
+                                            " hanya pesan"
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/components/dashboard/rsvp-list.jsx",
+                                        lineNumber: 633,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/components/dashboard/rsvp-list.jsx",
+                                lineNumber: 622,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/components/dashboard/rsvp-list.jsx",
+                        lineNumber: 612,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "divide-y divide-border/60",
+                        children: msgs.length === 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                            className: "px-5 py-10 text-center text-sm text-muted-foreground",
+                            children: "Belum ada pesan."
+                        }, void 0, false, {
+                            fileName: "[project]/components/dashboard/rsvp-list.jsx",
+                            lineNumber: 640,
+                            columnNumber: 13
+                        }, this) : msgs.map((m)=>{
+                            var _m_invitation, _m_invitation1;
+                            return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "flex items-start justify-between gap-4 px-5 py-4",
+                                "data-testid": "message-row-".concat(m.id),
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        className: "min-w-0",
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                className: "flex flex-wrap items-center gap-2",
+                                                children: [
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                        className: "font-medium text-foreground",
+                                                        children: m.name
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/components/dashboard/rsvp-list.jsx",
+                                                        lineNumber: 652,
+                                                        columnNumber: 21
+                                                    }, this),
+                                                    m.isMessageOnly ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                        className: "text-[10px] uppercase tracking-wide px-2 py-0.5 rounded-full bg-sky-50 text-sky-700 border border-sky-200/50",
+                                                        children: "Hanya pesan"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/components/dashboard/rsvp-list.jsx",
+                                                        lineNumber: 656,
+                                                        columnNumber: 23
+                                                    }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                        className: "text-[10px] uppercase tracking-wide px-2 py-0.5 rounded-full bg-muted text-muted-foreground",
+                                                        children: "Dengan RSVP"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/components/dashboard/rsvp-list.jsx",
+                                                        lineNumber: 660,
+                                                        columnNumber: 23
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                        className: "text-xs text-muted-foreground",
+                                                        children: [
+                                                            "· ",
+                                                            (_m_invitation = m.invitation) === null || _m_invitation === void 0 ? void 0 : _m_invitation.brideName,
+                                                            " &",
+                                                            " ",
+                                                            (_m_invitation1 = m.invitation) === null || _m_invitation1 === void 0 ? void 0 : _m_invitation1.groomName
+                                                        ]
+                                                    }, void 0, true, {
+                                                        fileName: "[project]/components/dashboard/rsvp-list.jsx",
+                                                        lineNumber: 664,
+                                                        columnNumber: 21
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "[project]/components/dashboard/rsvp-list.jsx",
+                                                lineNumber: 651,
+                                                columnNumber: 19
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                className: "text-sm italic text-muted-foreground mt-1 break-words",
+                                                children: [
+                                                    "“",
+                                                    m.message,
+                                                    "”"
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "[project]/components/dashboard/rsvp-list.jsx",
+                                                lineNumber: 669,
+                                                columnNumber: 19
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/components/dashboard/rsvp-list.jsx",
+                                        lineNumber: 650,
+                                        columnNumber: 17
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                        onClick: ()=>deleteMessage(m.id),
+                                        className: "shrink-0 text-xs font-medium px-3 py-1.5 rounded-lg border text-rose-600 border-rose-200 hover:bg-rose-50 transition-colors",
+                                        "data-testid": "message-delete-".concat(m.id),
+                                        children: "Hapus"
+                                    }, void 0, false, {
+                                        fileName: "[project]/components/dashboard/rsvp-list.jsx",
+                                        lineNumber: 673,
+                                        columnNumber: 17
+                                    }, this)
+                                ]
+                            }, m.id, true, {
+                                fileName: "[project]/components/dashboard/rsvp-list.jsx",
+                                lineNumber: 645,
+                                columnNumber: 15
+                            }, this);
+                        })
+                    }, void 0, false, {
+                        fileName: "[project]/components/dashboard/rsvp-list.jsx",
+                        lineNumber: 638,
+                        columnNumber: 9
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "[project]/components/dashboard/rsvp-list.jsx",
+                lineNumber: 608,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/dashboard/rsvp-list.jsx",
-        lineNumber: 255,
+        lineNumber: 231,
         columnNumber: 5
     }, this);
 }
-_s(RsvpList, "9wXFgkRyEXnelZtu50Uyhngj+yg=", false, function() {
+_s(RsvpList, "sOBnz3jDUYfYGZ0iRcI9qFDS3p0=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRouter"],
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["usePathname"],

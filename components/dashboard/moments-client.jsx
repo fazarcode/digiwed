@@ -1,4 +1,5 @@
 "use client";
+
 import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -20,46 +21,83 @@ import {
   Camera,
 } from "lucide-react";
 
+// Format tanggal tetap (zona waktu tetap) agar tidak terjadi hydration mismatch
+const dateFormatter = new Intl.DateTimeFormat("id-ID", {
+  dateStyle: "medium",
+  timeStyle: "short",
+  timeZone: "Asia/Jakarta",
+});
+
+const formatDate = (value) => {
+  const d = new Date(value);
+  return Number.isNaN(d.getTime()) ? "-" : dateFormatter.format(d);
+};
+
 export default function MomentsClient({ invitations }) {
   const router = useRouter();
+
   const [selectedId, setSelectedId] = useState(invitations[0]?.id || "");
+
+  // Fallback ke undangan pertama jika undangan terpilih sudah tidak ada
   const selected = useMemo(
-    () => invitations.find((i) => i.id === selectedId),
+    () =>
+      invitations.find((i) => i.id === selectedId) || invitations[0] || null,
     [invitations, selectedId],
   );
+
   const [showQr, setShowQr] = useState(false);
   const [zoom, setZoom] = useState(null);
-  const origin = typeof window !== "undefined" ? window.location.origin : "";
-  const publicUrl = selected ? `${origin}/moments/${selected.slug}` : "";
+
+  // FIX HYDRATION:
+  // Jangan menggunakan window.location.origin saat render.
+  // URL relatif akan sama antara server dan client.
+  const publicUrl = selected ? `/moments/${selected.slug}` : "";
 
   const del = async (mid) => {
-    if (!confirm("Delete this photo? This cannot be undone.")) return;
-    const res = await fetch(`/api/invitations/${selected.id}/moments/${mid}`, {
-      method: "DELETE",
-    });
-    if (!res.ok) return toast.error("Failed to delete");
-    toast.success("Photo removed");
-    router.refresh();
+    if (!selected) return;
+
+    if (!confirm("Hapus foto ini? Tindakan ini tidak dapat dibatalkan."))
+      return;
+
+    try {
+      const res = await fetch(
+        `/api/invitations/${selected.id}/moments/${mid}`,
+        { method: "DELETE" },
+      );
+
+      if (!res.ok) throw new Error();
+
+      toast.success("Foto berhasil dihapus");
+      router.refresh();
+    } catch {
+      toast.error("Gagal menghapus foto");
+    }
   };
 
   const downloadAll = () => {
     if (!selected) return;
+
     window.open(
       `/api/invitations/${selected.id}/moments/download-all`,
       "_blank",
     );
   };
 
-  const copyLink = () => {
-    navigator.clipboard.writeText(publicUrl);
-    toast.success("Upload link copied");
+  const copyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(publicUrl);
+      toast.success("Tautan unggah berhasil disalin");
+    } catch {
+      toast.error("Gagal menyalin tautan. Salin secara manual.");
+    }
   };
 
   if (invitations.length === 0) {
     return (
       <div className="rounded-2xl bg-white border p-12 text-center">
         <p className="text-muted-foreground">
-          Create an invitation first, then guests can upload moments.
+          Buat undangan terlebih dahulu, setelah itu tamu dapat mengunggah
+          momen.
         </p>
       </div>
     );
@@ -67,36 +105,54 @@ export default function MomentsClient({ invitations }) {
 
   return (
     <div className="grid gap-6 lg:grid-cols-4">
+      {/* LIST UNDANGAN */}
       <div className="lg:col-span-1 rounded-2xl bg-white border p-4 space-y-1 h-fit">
         <p className="text-xs uppercase tracking-widest text-muted-foreground px-2 pb-2">
-          Your Invitations
+          Undangan Anda
         </p>
+
         {invitations.map((i) => (
           <button
             key={i.id}
+            type="button"
             data-testid={`moments-inv-${i.id}`}
             onClick={() => setSelectedId(i.id)}
-            className={`w-full text-left px-3 py-2 rounded-md text-sm transition ${selectedId === i.id ? "bg-primary text-primary-foreground" : "hover:bg-muted"}`}
+            className={`w-full text-left px-3 py-2 rounded-md text-sm transition ${
+              selected?.id === i.id
+                ? "bg-primary text-primary-foreground"
+                : "hover:bg-muted"
+            }`}
           >
             <p className="font-medium">
-              {i.brideName} & {i.groomName}
+              {[i.brideName, i.groomName].filter(Boolean).join(" & ") ||
+                "Tanpa nama"}
             </p>
-            <p className="text-xs opacity-70">{i.moments.length} photos</p>
+
+            <p className="text-xs opacity-70">{i.moments?.length || 0} foto</p>
           </button>
         ))}
       </div>
 
+      {/* CONTENT */}
       <div className="lg:col-span-3 space-y-4">
+        {/* CUSTOMIZER */}
         {selected && (
-          <div className="rounded-2xl bg-white border p-5" data-testid="moments-customize-card">
-            <MomentsCustomizer inv={selected} />
+          <div
+            className="rounded-2xl bg-white border p-5"
+            data-testid="moments-customize-card"
+          >
+            {/* key agar state form ter-reset saat berganti undangan */}
+            <MomentsCustomizer key={selected.id} inv={selected} />
           </div>
         )}
+
+        {/* PUBLIC URL */}
         <div className="rounded-2xl bg-white border p-5 flex flex-wrap items-center justify-between gap-3">
-          <div>
+          <div className="min-w-0">
             <p className="text-xs uppercase tracking-widest text-muted-foreground">
-              Public Upload URL
+              URL Unggah Publik
             </p>
+
             <p
               className="font-mono text-sm truncate max-w-[420px]"
               data-testid="moments-public-url"
@@ -104,6 +160,7 @@ export default function MomentsClient({ invitations }) {
               {publicUrl}
             </p>
           </div>
+
           <div className="flex gap-2 flex-wrap">
             <Button
               variant="outline"
@@ -111,22 +168,25 @@ export default function MomentsClient({ invitations }) {
               data-testid="copy-moments-link"
             >
               <Copy className="h-4 w-4 mr-1.5" />
-              Copy Link
+              Salin Tautan
             </Button>
-            <a href={publicUrl} target="_blank">
-              <Button variant="outline">
+
+            <Button variant="outline" asChild>
+              <a href={publicUrl} target="_blank" rel="noopener noreferrer">
                 <ExternalLink className="h-4 w-4 mr-1.5" />
-                Preview
-              </Button>
-            </a>
+                Pratinjau
+              </a>
+            </Button>
+
             <Button
               variant="outline"
               onClick={() => setShowQr(true)}
               data-testid="show-moments-qr"
             >
               <QrIcon className="h-4 w-4 mr-1.5" />
-              Show QR
+              Tampilkan QR
             </Button>
+
             <Button
               className="bg-primary"
               onClick={downloadAll}
@@ -134,15 +194,17 @@ export default function MomentsClient({ invitations }) {
               data-testid="download-all-moments"
             >
               <Download className="h-4 w-4 mr-1.5" />
-              Download All
+              Unduh Semua
             </Button>
           </div>
         </div>
 
+        {/* GALLERY */}
         <div className="rounded-2xl bg-white border p-5">
           <p className="text-xs uppercase tracking-widest text-muted-foreground mb-3">
-            {selected?.moments?.length || 0} photos
+            {selected?.moments?.length || 0} foto
           </p>
+
           {selected?.moments?.length ? (
             <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
               {selected.moments.map((m) => (
@@ -152,35 +214,50 @@ export default function MomentsClient({ invitations }) {
                   data-testid={`moment-${m.id}`}
                 >
                   <button
+                    type="button"
                     onClick={() => setZoom(m)}
                     className="block w-full aspect-square bg-black/5"
                   >
                     <img
                       src={m.url}
-                      alt={m.senderName || "Guest photo"}
+                      alt={m.senderName || "Foto tamu"}
                       className="w-full h-full object-cover"
+                      loading="lazy"
                     />
                   </button>
+
                   <div className="p-2 text-xs">
                     <p className="font-medium truncate">
-                      {m.senderName || "Anonymous"}
+                      {m.senderName || "Anonim"}
                     </p>
+
                     <p className="text-muted-foreground">
-                      {new Date(m.createdAt).toLocaleString()}
+                      {formatDate(m.createdAt)}
                     </p>
+
                     {m.message && (
-                      <p className="italic mt-1 line-clamp-2">"{m.message}"</p>
+                      <p className="italic mt-1 line-clamp-2">
+                        &ldquo;{m.message}&rdquo;
+                      </p>
                     )}
+
                     <div className="flex justify-between pt-2">
-                      <a href={m.url} download>
-                        <Button size="sm" variant="ghost">
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        asChild
+                        aria-label="Unduh foto"
+                      >
+                        <a href={m.url} download>
                           <Download className="h-3.5 w-3.5" />
-                        </Button>
-                      </a>
+                        </a>
+                      </Button>
+
                       <Button
                         size="sm"
                         variant="ghost"
                         onClick={() => del(m.id)}
+                        aria-label="Hapus foto"
                         data-testid={`delete-moment-${m.id}`}
                       >
                         <Trash2 className="h-3.5 w-3.5 text-red-600" />
@@ -193,59 +270,71 @@ export default function MomentsClient({ invitations }) {
           ) : (
             <div className="text-center py-16 text-muted-foreground">
               <Camera className="h-12 w-12 mx-auto mb-3 opacity-30" />
+
               <p>
-                No moments yet — share the QR code with your guests at the
-                venue.
+                Belum ada momen. Bagikan kode QR kepada tamu di lokasi acara.
               </p>
             </div>
           )}
         </div>
       </div>
 
-      {/* QR dialog */}
+      {/* DIALOG QR */}
       <Dialog open={showQr} onOpenChange={setShowQr}>
         <DialogContent className="max-w-sm">
           <DialogHeader>
-            <DialogTitle>Event Moments QR</DialogTitle>
+            <DialogTitle>QR Momen Acara</DialogTitle>
+
             <DialogDescription>
-              Guests can scan this to upload photos — no login required.
+              Tamu dapat memindai kode ini untuk mengunggah foto, tanpa perlu
+              login.
             </DialogDescription>
           </DialogHeader>
+
           {selected && (
             <div className="space-y-3">
               <img
                 src={`/api/invitations/${selected.id}/moments-qr`}
-                alt="Moments QR"
+                alt="QR Momen"
                 className="w-full rounded-lg border"
               />
+
               <p className="text-xs text-muted-foreground text-center break-all">
                 {publicUrl}
               </p>
-              <a href={`/api/invitations/${selected.id}/moments-qr`} download>
-                <Button className="w-full bg-primary">
+
+              <Button className="w-full bg-primary" asChild>
+                <a href={`/api/invitations/${selected.id}/moments-qr`} download>
                   <Download className="h-4 w-4 mr-1.5" />
-                  Download QR
-                </Button>
-              </a>
+                  Unduh QR
+                </a>
+              </Button>
             </div>
           )}
         </DialogContent>
       </Dialog>
 
-      {/* Photo zoom dialog */}
+      {/* DIALOG ZOOM FOTO */}
       <Dialog open={!!zoom} onOpenChange={(o) => !o && setZoom(null)}>
         <DialogContent className="max-w-3xl">
           {zoom && (
             <>
               <DialogHeader>
-                <DialogTitle>{zoom.senderName || "Anonymous"}</DialogTitle>
+                <DialogTitle>{zoom.senderName || "Anonim"}</DialogTitle>
+
                 <DialogDescription>
-                  {new Date(zoom.createdAt).toLocaleString()}
+                  {formatDate(zoom.createdAt)}
                 </DialogDescription>
               </DialogHeader>
-              <img src={zoom.url} alt="Moment" className="w-full rounded-lg" />
+
+              <img
+                src={zoom.url}
+                alt={zoom.senderName || "Foto tamu"}
+                className="w-full rounded-lg"
+              />
+
               {zoom.message && (
-                <p className="italic text-sm">"{zoom.message}"</p>
+                <p className="italic text-sm">&ldquo;{zoom.message}&rdquo;</p>
               )}
             </>
           )}

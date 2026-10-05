@@ -83,6 +83,7 @@ __turbopack_context__.s([
     "default",
     ()=>DomainSettingsClient
 ]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = /*#__PURE__*/ __turbopack_context__.i("[project]/node_modules/next/dist/build/polyfills/process.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/ui/input.jsx [app-client] (ecmascript)");
@@ -98,7 +99,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$re
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Link$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/link.js [app-client] (ecmascript) <export default as Link>");
 ;
 var _s = __turbopack_context__.k.signature();
-'use client';
+"use client";
 ;
 ;
 ;
@@ -107,29 +108,29 @@ var _s = __turbopack_context__.k.signature();
 ;
 const MODES = [
     {
-        id: 'SLUG',
-        label: 'Slug (default)',
+        id: "SLUG",
+        label: "Slug (bawaan)",
         icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Link$3e$__["Link"],
-        hint: 'Use the default platform URL — no setup required.'
+        hint: "Pakai URL bawaan platform — tanpa pengaturan tambahan."
     },
     {
-        id: 'SUBDOMAIN',
-        label: 'Subdomain',
+        id: "SUBDOMAIN",
+        label: "Subdomain",
         icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$globe$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Globe$3e$__["Globe"],
-        hint: 'Serve on a branded subdomain like wedding.yoursite.com.'
+        hint: "Tayang di subdomain sendiri, misalnya pernikahan.situsanda.com."
     },
     {
-        id: 'CUSTOM',
-        label: 'Custom Domain',
+        id: "CUSTOM",
+        label: "Domain Kustom",
         icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$globe$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Globe$3e$__["Globe"],
-        hint: 'Point your own domain via CNAME. Fallback to slug URL until active.'
+        hint: "Arahkan domain Anda sendiri lewat CNAME. Memakai URL slug sampai domain aktif."
     }
 ];
 function DomainSettingsClient(param) {
     let { invitations } = param;
     var _invitations_;
     _s();
-    const [selectedId, setSelectedId] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(((_invitations_ = invitations[0]) === null || _invitations_ === void 0 ? void 0 : _invitations_.id) || '');
+    const [selectedId, setSelectedId] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(((_invitations_ = invitations[0]) === null || _invitations_ === void 0 ? void 0 : _invitations_.id) || "");
     const inv = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
         "DomainSettingsClient.useMemo[inv]": ()=>invitations.find({
                 "DomainSettingsClient.useMemo[inv]": (i)=>i.id === selectedId
@@ -138,18 +139,18 @@ function DomainSettingsClient(param) {
         invitations,
         selectedId
     ]);
-    const initialMode = (inv === null || inv === void 0 ? void 0 : inv.customDomain) ? 'CUSTOM' : (inv === null || inv === void 0 ? void 0 : inv.subdomain) ? 'SUBDOMAIN' : 'SLUG';
+    const initialMode = (inv === null || inv === void 0 ? void 0 : inv.customDomain) ? "CUSTOM" : (inv === null || inv === void 0 ? void 0 : inv.subdomain) ? "SUBDOMAIN" : "SLUG";
     const [mode, setMode] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(initialMode);
-    const [customDomain, setCustomDomain] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])((inv === null || inv === void 0 ? void 0 : inv.customDomain) || '');
-    const [subdomain, setSubdomain] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])((inv === null || inv === void 0 ? void 0 : inv.subdomain) || '');
+    const [customDomain, setCustomDomain] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])((inv === null || inv === void 0 ? void 0 : inv.customDomain) || "");
+    const [subdomain, setSubdomain] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])((inv === null || inv === void 0 ? void 0 : inv.subdomain) || "");
     const [checking, setChecking] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const [reachable, setReachable] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null); // null | true | false
     const [saving, setSaving] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "DomainSettingsClient.useEffect": ()=>{
-            setMode((inv === null || inv === void 0 ? void 0 : inv.customDomain) ? 'CUSTOM' : (inv === null || inv === void 0 ? void 0 : inv.subdomain) ? 'SUBDOMAIN' : 'SLUG');
-            setCustomDomain((inv === null || inv === void 0 ? void 0 : inv.customDomain) || '');
-            setSubdomain((inv === null || inv === void 0 ? void 0 : inv.subdomain) || '');
+            setMode((inv === null || inv === void 0 ? void 0 : inv.customDomain) ? "CUSTOM" : (inv === null || inv === void 0 ? void 0 : inv.subdomain) ? "SUBDOMAIN" : "SLUG");
+            setCustomDomain((inv === null || inv === void 0 ? void 0 : inv.customDomain) || "");
+            setSubdomain((inv === null || inv === void 0 ? void 0 : inv.subdomain) || "");
             setReachable(null);
         }
     }["DomainSettingsClient.useEffect"], [
@@ -161,29 +162,29 @@ function DomainSettingsClient(param) {
             try {
                 return new URL(origin).hostname;
             } catch (e) {
-                return 'invitation.example.com';
+                return "invitation.example.com";
             }
         }
     }["DomainSettingsClient.useMemo[platformHost]"], [
         origin
     ]);
+    // Disarankan set NEXT_PUBLIC_ROOT_DOMAIN (mis. domainanda.co.id) agar benar untuk domain .co.id / .web.id
     const rootDomain = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
-        "DomainSettingsClient.useMemo[rootDomain]": ()=>platformHost.split('.').slice(-2).join('.') || 'example.com'
+        "DomainSettingsClient.useMemo[rootDomain]": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].env.NEXT_PUBLIC_ROOT_DOMAIN || platformHost.split(".").slice(-2).join(".") || "example.com"
     }["DomainSettingsClient.useMemo[rootDomain]"], [
         platformHost
     ]);
-    const slugUrl = inv ? "".concat(origin, "/invite/").concat(inv.slug) : '';
-    const subUrl = subdomain ? "https://".concat(subdomain, ".").concat(rootDomain) : '';
-    const cdUrl = customDomain ? "https://".concat(customDomain) : '';
+    const slugUrl = inv ? "".concat(origin, "/invite/").concat(inv.slug) : "";
+    const subUrl = subdomain ? "https://".concat(subdomain, ".").concat(rootDomain) : "";
     const save = async ()=>{
         if (!inv) return;
         setSaving(true);
         try {
             const payload = {};
-            if (mode === 'CUSTOM') {
+            if (mode === "CUSTOM") {
                 payload.customDomain = customDomain.trim() || null;
                 payload.subdomain = null;
-            } else if (mode === 'SUBDOMAIN') {
+            } else if (mode === "SUBDOMAIN") {
                 payload.subdomain = subdomain.trim() || null;
                 payload.customDomain = null;
             } else {
@@ -191,16 +192,16 @@ function DomainSettingsClient(param) {
                 payload.subdomain = null;
             }
             const res = await fetch("/api/invitations/".concat(inv.id), {
-                method: 'PATCH',
+                method: "PATCH",
                 headers: {
-                    'Content-Type': 'application/json'
+                    "Content-Type": "application/json"
                 },
                 body: JSON.stringify(payload)
             });
             const data = await res.json();
-            if (!res.ok) throw new Error(data.error || 'Save failed');
-            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].success('Domain settings saved');
-            // Refresh local snapshot
+            if (!res.ok) throw new Error(data.error || "Gagal menyimpan");
+            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].success("Pengaturan domain tersimpan");
+            // Perbarui data lokal
             inv.customDomain = data.invitation.customDomain;
             inv.subdomain = data.invitation.subdomain;
         } catch (e) {
@@ -214,11 +215,11 @@ function DomainSettingsClient(param) {
         setChecking(true);
         setReachable(null);
         try {
-            const res = await fetch("https://".concat(customDomain), {
-                method: 'HEAD',
-                mode: 'no-cors'
+            await fetch("https://".concat(customDomain), {
+                method: "HEAD",
+                mode: "no-cors"
             });
-            // no-cors → response is opaque; we can only detect network failure vs success by exception
+            // no-cors → respons opaque; hanya bisa mendeteksi gagal jaringan vs berhasil lewat exception
             setReachable(true);
         } catch (e) {
             setReachable(false);
@@ -228,23 +229,23 @@ function DomainSettingsClient(param) {
     };
     const copy = (text)=>{
         navigator.clipboard.writeText(text);
-        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].success('Copied');
+        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].success("Tersalin");
     };
     if (invitations.length === 0) {
         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "rounded-2xl bg-white border p-12 text-center",
             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                 className: "text-muted-foreground",
-                children: "Create an invitation first to configure its domain."
+                children: "Buat undangan terlebih dahulu untuk mengatur domainnya."
             }, void 0, false, {
                 fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                lineNumber: 79,
-                columnNumber: 74
+                lineNumber: 145,
+                columnNumber: 9
             }, this)
         }, void 0, false, {
             fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-            lineNumber: 79,
-            columnNumber: 12
+            lineNumber: 144,
+            columnNumber: 7
         }, this);
     }
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -255,16 +256,16 @@ function DomainSettingsClient(param) {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: "text-xs uppercase tracking-widest text-muted-foreground px-2 pb-2",
-                        children: "Your Invitations"
+                        children: "Undangan Anda"
                     }, void 0, false, {
                         fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                        lineNumber: 86,
+                        lineNumber: 156,
                         columnNumber: 9
                     }, this),
                     invitations.map((i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                             "data-testid": "domain-inv-".concat(i.id),
                             onClick: ()=>setSelectedId(i.id),
-                            className: "w-full text-left px-3 py-2 rounded-md text-sm transition ".concat(selectedId === i.id ? 'bg-primary text-primary-foreground' : 'hover:bg-muted'),
+                            className: "w-full text-left px-3 py-2 rounded-md text-sm transition ".concat(selectedId === i.id ? "bg-primary text-primary-foreground" : "hover:bg-muted"),
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                     className: "font-medium",
@@ -275,27 +276,27 @@ function DomainSettingsClient(param) {
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                    lineNumber: 89,
+                                    lineNumber: 166,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                     className: "text-xs opacity-70",
-                                    children: i.customDomain ? "custom: ".concat(i.customDomain) : i.subdomain ? "sub: ".concat(i.subdomain) : "slug: ".concat(i.slug)
+                                    children: i.customDomain ? "kustom: ".concat(i.customDomain) : i.subdomain ? "sub: ".concat(i.subdomain) : "slug: ".concat(i.slug)
                                 }, void 0, false, {
                                     fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                    lineNumber: 90,
+                                    lineNumber: 169,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, i.id, true, {
                             fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                            lineNumber: 88,
+                            lineNumber: 160,
                             columnNumber: 11
                         }, this))
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                lineNumber: 85,
+                lineNumber: 155,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -306,10 +307,10 @@ function DomainSettingsClient(param) {
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                 className: "text-xs uppercase tracking-widest text-muted-foreground",
-                                children: "URL Mode"
+                                children: "Mode URL"
                             }, void 0, false, {
                                 fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                lineNumber: 98,
+                                lineNumber: 183,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -319,7 +320,7 @@ function DomainSettingsClient(param) {
                                     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                         "data-testid": "mode-".concat(m.id.toLowerCase()),
                                         onClick: ()=>setMode(m.id),
-                                        className: "text-left p-3 rounded-xl border transition ".concat(active ? 'border-primary bg-primary/5 shadow-sm' : 'border-primary/10 hover:border-primary/30'),
+                                        className: "text-left p-3 rounded-xl border transition ".concat(active ? "border-primary bg-primary/5 shadow-sm" : "border-primary/10 hover:border-primary/30"),
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                 className: "flex items-center gap-2 text-sm font-semibold",
@@ -328,14 +329,14 @@ function DomainSettingsClient(param) {
                                                         className: "h-4 w-4"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                                        lineNumber: 109,
-                                                        columnNumber: 82
+                                                        lineNumber: 197,
+                                                        columnNumber: 21
                                                     }, this),
                                                     m.label
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                                lineNumber: 109,
+                                                lineNumber: 196,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -343,35 +344,35 @@ function DomainSettingsClient(param) {
                                                 children: m.hint
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                                lineNumber: 110,
+                                                lineNumber: 200,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, m.id, true, {
                                         fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                        lineNumber: 103,
+                                        lineNumber: 190,
                                         columnNumber: 17
                                     }, this);
                                 })
                             }, void 0, false, {
                                 fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                lineNumber: 99,
+                                lineNumber: 186,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                        lineNumber: 97,
+                        lineNumber: 182,
                         columnNumber: 9
                     }, this),
-                    mode === 'SLUG' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    mode === "SLUG" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "rounded-2xl bg-white border p-5 space-y-3",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
-                                children: "Slug URL"
+                                children: "URL Slug"
                             }, void 0, false, {
                                 fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                lineNumber: 120,
+                                lineNumber: 209,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -383,7 +384,7 @@ function DomainSettingsClient(param) {
                                         className: "font-mono text-xs"
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                        lineNumber: 122,
+                                        lineNumber: 211,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -394,12 +395,12 @@ function DomainSettingsClient(param) {
                                             className: "h-4 w-4"
                                         }, void 0, false, {
                                             fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                            lineNumber: 123,
-                                            columnNumber: 99
+                                            lineNumber: 217,
+                                            columnNumber: 17
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                        lineNumber: 123,
+                                        lineNumber: 212,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -411,47 +412,47 @@ function DomainSettingsClient(param) {
                                                 className: "h-4 w-4"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                                lineNumber: 124,
-                                                columnNumber: 75
+                                                lineNumber: 221,
+                                                columnNumber: 19
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                            lineNumber: 124,
-                                            columnNumber: 49
+                                            lineNumber: 220,
+                                            columnNumber: 17
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                        lineNumber: 124,
+                                        lineNumber: 219,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                lineNumber: 121,
+                                lineNumber: 210,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                 className: "text-xs text-muted-foreground",
-                                children: "This URL always works — even if your subdomain or custom domain isn't yet active."
+                                children: "URL ini selalu berfungsi — bahkan jika subdomain atau domain kustom Anda belum aktif."
                             }, void 0, false, {
                                 fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                lineNumber: 126,
+                                lineNumber: 225,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                        lineNumber: 119,
+                        lineNumber: 208,
                         columnNumber: 11
                     }, this),
-                    mode === 'SUBDOMAIN' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    mode === "SUBDOMAIN" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "rounded-2xl bg-white border p-5 space-y-3",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
                                 children: "Subdomain"
                             }, void 0, false, {
                                 fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                lineNumber: 132,
+                                lineNumber: 234,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -460,12 +461,12 @@ function DomainSettingsClient(param) {
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
                                         "data-testid": "subdomain-input",
                                         value: subdomain,
-                                        onChange: (e)=>setSubdomain(e.target.value.replace(/[^a-z0-9-]/gi, '').toLowerCase()),
-                                        placeholder: "e.g. john-jane",
+                                        onChange: (e)=>setSubdomain(e.target.value.replace(/[^a-z0-9-]/gi, "").toLowerCase()),
+                                        placeholder: "misal: budi-siti",
                                         className: "max-w-xs"
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                        lineNumber: 134,
+                                        lineNumber: 236,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -476,31 +477,32 @@ function DomainSettingsClient(param) {
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                        lineNumber: 135,
+                                        lineNumber: 247,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                lineNumber: 133,
+                                lineNumber: 235,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                 className: "text-xs text-muted-foreground",
                                 children: [
-                                    "Only lowercase letters, numbers and hyphens. Fallback URL: ",
+                                    "Hanya huruf kecil, angka, dan tanda hubung. URL cadangan:",
+                                    " ",
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                         className: "font-mono",
                                         children: slugUrl
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                        lineNumber: 137,
-                                        columnNumber: 117
+                                        lineNumber: 253,
+                                        columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                lineNumber: 137,
+                                lineNumber: 251,
                                 columnNumber: 13
                             }, this),
                             subUrl && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -512,7 +514,7 @@ function DomainSettingsClient(param) {
                                         className: "font-mono text-xs"
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                        lineNumber: 140,
+                                        lineNumber: 257,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -522,37 +524,37 @@ function DomainSettingsClient(param) {
                                             className: "h-4 w-4"
                                         }, void 0, false, {
                                             fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                            lineNumber: 141,
-                                            columnNumber: 72
+                                            lineNumber: 259,
+                                            columnNumber: 19
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                        lineNumber: 141,
+                                        lineNumber: 258,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                lineNumber: 139,
+                                lineNumber: 256,
                                 columnNumber: 15
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                        lineNumber: 131,
+                        lineNumber: 233,
                         columnNumber: 11
                     }, this),
-                    mode === 'CUSTOM' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    mode === "CUSTOM" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "space-y-4",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "rounded-2xl bg-white border p-5 space-y-3",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
-                                        children: "Your Domain"
+                                        children: "Domain Anda"
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                        lineNumber: 150,
+                                        lineNumber: 269,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -561,11 +563,11 @@ function DomainSettingsClient(param) {
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
                                                 "data-testid": "custom-domain-input",
                                                 value: customDomain,
-                                                onChange: (e)=>setCustomDomain(e.target.value.replace(/^https?:\/\//, '').replace(/\/$/, '').toLowerCase()),
-                                                placeholder: "e.g. domain-event.com"
+                                                onChange: (e)=>setCustomDomain(e.target.value.replace(/^https?:\/\//, "").replace(/\/$/, "").toLowerCase()),
+                                                placeholder: "misal: acara-kami.com"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                                lineNumber: 152,
+                                                lineNumber: 271,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -573,16 +575,16 @@ function DomainSettingsClient(param) {
                                                 onClick: checkDomain,
                                                 disabled: !customDomain || checking,
                                                 "data-testid": "check-domain-btn",
-                                                children: checking ? 'Checking…' : 'Check'
+                                                children: checking ? "Memeriksa…" : "Periksa"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                                lineNumber: 153,
+                                                lineNumber: 284,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                        lineNumber: 151,
+                                        lineNumber: 270,
                                         columnNumber: 15
                                     }, this),
                                     reachable === true && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -592,15 +594,15 @@ function DomainSettingsClient(param) {
                                                 className: "h-4 w-4"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                                lineNumber: 157,
-                                                columnNumber: 104
+                                                lineNumber: 295,
+                                                columnNumber: 19
                                             }, this),
-                                            " Domain is reachable"
+                                            " Domain dapat dijangkau"
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                        lineNumber: 157,
-                                        columnNumber: 38
+                                        lineNumber: 294,
+                                        columnNumber: 17
                                     }, this),
                                     reachable === false && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         className: "flex items-center gap-2 text-xs text-amber-700",
@@ -609,38 +611,39 @@ function DomainSettingsClient(param) {
                                                 className: "h-4 w-4"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                                lineNumber: 158,
-                                                columnNumber: 103
+                                                lineNumber: 300,
+                                                columnNumber: 19
                                             }, this),
-                                            " Domain not reachable yet — using slug fallback"
+                                            " Domain belum dapat dijangkau — memakai URL slug sebagai cadangan"
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                        lineNumber: 158,
-                                        columnNumber: 39
+                                        lineNumber: 299,
+                                        columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                         className: "text-xs text-muted-foreground",
                                         children: [
-                                            "Fallback URL until active: ",
+                                            "URL cadangan sampai domain aktif:",
+                                            " ",
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 className: "font-mono",
                                                 children: slugUrl
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                                lineNumber: 159,
-                                                columnNumber: 87
+                                                lineNumber: 306,
+                                                columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                        lineNumber: 159,
+                                        lineNumber: 304,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                lineNumber: 149,
+                                lineNumber: 268,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -653,22 +656,22 @@ function DomainSettingsClient(param) {
                                                 className: "h-4 w-4 text-primary"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                                lineNumber: 163,
-                                                columnNumber: 76
+                                                lineNumber: 312,
+                                                columnNumber: 17
                                             }, this),
-                                            "DNS Configuration"
+                                            "Konfigurasi DNS"
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                        lineNumber: 163,
+                                        lineNumber: 311,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                         className: "text-xs text-muted-foreground",
-                                        children: "Add the following record at your DNS provider. It may take a few minutes to propagate."
+                                        children: "Tambahkan record berikut di penyedia DNS Anda. Propagasi bisa memakan waktu beberapa menit."
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                        lineNumber: 164,
+                                        lineNumber: 315,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -682,10 +685,10 @@ function DomainSettingsClient(param) {
                                                         children: [
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                                                 className: "py-2 pr-4",
-                                                                children: "Type"
+                                                                children: "Tipe"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                                                lineNumber: 169,
+                                                                lineNumber: 323,
                                                                 columnNumber: 23
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -693,15 +696,15 @@ function DomainSettingsClient(param) {
                                                                 children: "Host"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                                                lineNumber: 170,
+                                                                lineNumber: 324,
                                                                 columnNumber: 23
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                                                 className: "py-2 pr-4",
-                                                                children: "Value"
+                                                                children: "Nilai"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                                                lineNumber: 171,
+                                                                lineNumber: 325,
                                                                 columnNumber: 23
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -709,18 +712,18 @@ function DomainSettingsClient(param) {
                                                                 children: "TTL"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                                                lineNumber: 172,
+                                                                lineNumber: 326,
                                                                 columnNumber: 23
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                                        lineNumber: 168,
+                                                        lineNumber: 322,
                                                         columnNumber: 21
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                                    lineNumber: 167,
+                                                    lineNumber: 321,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
@@ -734,20 +737,20 @@ function DomainSettingsClient(param) {
                                                                     children: "CNAME"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                                                    lineNumber: 177,
-                                                                    columnNumber: 49
+                                                                    lineNumber: 332,
+                                                                    columnNumber: 25
                                                                 }, this)
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                                                lineNumber: 177,
+                                                                lineNumber: 331,
                                                                 columnNumber: 23
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
                                                                 className: "py-3 pr-4",
-                                                                children: customDomain ? customDomain.startsWith('www.') ? 'www' : '@' : 'www'
+                                                                children: customDomain ? customDomain.startsWith("www.") ? "www" : "@" : "www"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                                                lineNumber: 178,
+                                                                lineNumber: 336,
                                                                 columnNumber: 23
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -755,7 +758,7 @@ function DomainSettingsClient(param) {
                                                                 children: platformHost
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                                                lineNumber: 179,
+                                                                lineNumber: 343,
                                                                 columnNumber: 23
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -763,86 +766,89 @@ function DomainSettingsClient(param) {
                                                                 children: "3600"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                                                lineNumber: 180,
+                                                                lineNumber: 344,
                                                                 columnNumber: 23
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                                        lineNumber: 176,
+                                                        lineNumber: 330,
                                                         columnNumber: 21
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                                    lineNumber: 175,
+                                                    lineNumber: 329,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                            lineNumber: 166,
+                                            lineNumber: 320,
                                             columnNumber: 17
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                        lineNumber: 165,
+                                        lineNumber: 319,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                         className: "text-xs text-muted-foreground",
                                         children: [
-                                            "Example: ",
+                                            "Contoh: ",
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 className: "font-mono",
                                                 children: "CNAME"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                                lineNumber: 186,
-                                                columnNumber: 26
+                                                lineNumber: 350,
+                                                columnNumber: 25
                                             }, this),
-                                            " | ",
+                                            " |",
+                                            " ",
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 className: "font-mono",
                                                 children: "www"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                                lineNumber: 186,
-                                                columnNumber: 69
+                                                lineNumber: 351,
+                                                columnNumber: 17
                                             }, this),
-                                            " | ",
+                                            " |",
+                                            " ",
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 className: "font-mono",
-                                                children: "domain-event.com"
+                                                children: "acara-kami.com"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                                lineNumber: 186,
-                                                columnNumber: 110
+                                                lineNumber: 352,
+                                                columnNumber: 17
                                             }, this),
-                                            " → ",
+                                            " →",
+                                            " ",
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 className: "font-mono",
                                                 children: platformHost
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                                lineNumber: 186,
-                                                columnNumber: 164
+                                                lineNumber: 353,
+                                                columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                        lineNumber: 185,
+                                        lineNumber: 349,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                lineNumber: 162,
+                                lineNumber: 310,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                        lineNumber: 148,
+                        lineNumber: 267,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -857,36 +863,36 @@ function DomainSettingsClient(param) {
                                     className: "h-4 w-4 mr-1.5"
                                 }, void 0, false, {
                                     fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                                    lineNumber: 194,
+                                    lineNumber: 366,
                                     columnNumber: 13
                                 }, this),
                                 " ",
-                                saving ? 'Saving…' : 'Save Domain Settings'
+                                saving ? "Menyimpan…" : "Simpan Pengaturan Domain"
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                            lineNumber: 193,
+                            lineNumber: 360,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                        lineNumber: 192,
+                        lineNumber: 359,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-                lineNumber: 95,
+                lineNumber: 180,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/dashboard/domain-settings-client.jsx",
-        lineNumber: 83,
+        lineNumber: 153,
         columnNumber: 5
     }, this);
 }
-_s(DomainSettingsClient, "PJc/IME7RZNs9pzyNM+dDwp2OiA=");
+_s(DomainSettingsClient, "KpRpDIIDyoKpsKBVs6Au0Prv5vk=");
 _c = DomainSettingsClient;
 var _c;
 __turbopack_context__.k.register(_c, "DomainSettingsClient");

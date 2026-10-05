@@ -63,17 +63,17 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$dashboard$2f$c
 ;
 ;
 ;
-const dynamic = 'force-dynamic';
+const dynamic = "force-dynamic";
 async function AttendancePage({ searchParams }) {
     const sp = await searchParams;
     const initialMode = [
-        'camera',
-        'device',
-        'manual'
-    ].includes(sp?.mode) ? sp.mode : 'camera';
+        "camera",
+        "device",
+        "manual"
+    ].includes(sp?.mode) ? sp.mode : "camera";
     const s = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$auth$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["auth"])();
     const userId = s.user.id;
-    const [attInvitations, devices, categories, checkinRaw] = await Promise.all([
+    const [attInvitations, devices, categories, guestSides, checkinRaw] = await Promise.all([
         __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$prisma$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"].invitation.findMany({
             where: {
                 userId
@@ -89,7 +89,7 @@ async function AttendancePage({ searchParams }) {
                 userId
             },
             orderBy: {
-                name: 'asc'
+                name: "asc"
             },
             select: {
                 id: true,
@@ -98,18 +98,49 @@ async function AttendancePage({ searchParams }) {
                 active: true
             }
         }),
+        // Kategori global (invitationId null) + kategori milik undangan user ini saja
         __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$prisma$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"].guestCategory.findMany({
             where: {
-                enabled: true
+                enabled: true,
+                OR: [
+                    {
+                        invitationId: null
+                    },
+                    {
+                        invitation: {
+                            userId
+                        }
+                    }
+                ]
             },
             orderBy: [
                 {
-                    order: 'asc'
+                    order: "asc"
                 }
             ],
             select: {
                 id: true,
-                name: true
+                name: true,
+                invitationId: true
+            }
+        }),
+        // Sisi tamu milik undangan user ini
+        __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$prisma$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"].guestSideOption.findMany({
+            where: {
+                enabled: true,
+                invitation: {
+                    userId
+                }
+            },
+            orderBy: [
+                {
+                    order: "asc"
+                }
+            ],
+            select: {
+                id: true,
+                name: true,
+                invitationId: true
             }
         }),
         __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$prisma$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"].invitation.findMany({
@@ -134,7 +165,6 @@ async function AttendancePage({ searchParams }) {
             }
         })
     ]);
-    // Camera/Device modes reuse the existing check-in-client shape.
     const checkinInvitations = checkinRaw.map((i)=>({
             id: i.id,
             brideName: i.brideName,
@@ -160,24 +190,24 @@ async function AttendancePage({ searchParams }) {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
                         className: "font-serif text-3xl font-bold",
-                        children: "Check-in & Attendance"
+                        children: "Check-in & Kehadiran"
                     }, void 0, false, {
                         fileName: "[project]/app/dashboard/attendance/page.js",
-                        lineNumber: 44,
+                        lineNumber: 78,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: "text-muted-foreground mt-1",
-                        children: "Scan guest QR via camera or device, or manage attendance manually — all in one place."
+                        children: "Scan QR tamu lewat kamera atau device, atau kelola kehadiran secara manual — semuanya di satu tempat."
                     }, void 0, false, {
                         fileName: "[project]/app/dashboard/attendance/page.js",
-                        lineNumber: 45,
+                        lineNumber: 81,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/dashboard/attendance/page.js",
-                lineNumber: 43,
+                lineNumber: 77,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$dashboard$2f$checkin$2d$attendance$2d$client$2e$jsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
@@ -186,16 +216,17 @@ async function AttendancePage({ searchParams }) {
                 checkinDevices: checkinDevices,
                 attendanceInvitations: attInvitations,
                 attendanceDevices: attendanceDevices,
-                categories: categories
+                categories: categories,
+                guestSides: guestSides
             }, void 0, false, {
                 fileName: "[project]/app/dashboard/attendance/page.js",
-                lineNumber: 47,
+                lineNumber: 86,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/app/dashboard/attendance/page.js",
-        lineNumber: 42,
+        lineNumber: 76,
         columnNumber: 5
     }, this);
 }

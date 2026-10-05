@@ -88,7 +88,8 @@ async function RsvpPage({ searchParams }) {
     const whereClause = {
         invitation: {
             userId: s.user.id
-        }
+        },
+        isMessageOnly: false
     };
     if (attendanceFilter !== "ALL") whereClause.attendance = attendanceFilter;
     if (invitationFilter !== "ALL") whereClause.invitationId = invitationFilter;
@@ -125,7 +126,8 @@ async function RsvpPage({ searchParams }) {
     const statsWhereClause = {
         invitation: {
             userId: s.user.id
-        }
+        },
+        isMessageOnly: false
     };
     if (invitationFilter !== "ALL") statsWhereClause.invitationId = invitationFilter;
     const allRsvpsForStats = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$prisma$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"].rsvp.findMany({
@@ -142,9 +144,43 @@ async function RsvpPage({ searchParams }) {
         maybe: allRsvpsForStats.filter((r)=>r.attendance === "MAYBE").length,
         totalGuests: allRsvpsForStats.filter((r)=>r.attendance === "ATTENDING").reduce((sum, r)=>sum + r.guestCount, 0)
     };
-    // 6. Lempar semua data ke Komponen UI
+    // 6. Phase 2 — load messages/wishes (separate from RSVP layout) for the management area.
+    const messagesWhere = {
+        invitation: {
+            userId: s.user.id
+        },
+        message: {
+            not: null
+        }
+    };
+    if (invitationFilter !== "ALL") messagesWhere.invitationId = invitationFilter;
+    const messageRows = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$prisma$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"].rsvp.findMany({
+        where: messagesWhere,
+        include: {
+            invitation: {
+                select: {
+                    brideName: true,
+                    groomName: true
+                }
+            }
+        },
+        orderBy: {
+            createdAt: "desc"
+        },
+        take: 100
+    });
+    const messages = messageRows.filter((m)=>String(m.message || "").trim() !== "").map((m)=>({
+            id: m.id,
+            name: m.name,
+            message: m.message,
+            isMessageOnly: m.isMessageOnly,
+            createdAt: m.createdAt,
+            invitation: m.invitation
+        }));
+    // 7. Lempar semua data ke Komponen UI
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$dashboard$2f$rsvp$2d$list$2e$jsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
         rsvps: rsvps,
+        messages: messages,
         stats: stats,
         userInvitations: userInvitations,
         currentPage: currentPage,
@@ -157,7 +193,7 @@ async function RsvpPage({ searchParams }) {
         limit: limit
     }, void 0, false, {
         fileName: "[project]/app/dashboard/rsvp/page.js",
-        lineNumber: 81,
+        lineNumber: 102,
         columnNumber: 5
     }, this);
 }

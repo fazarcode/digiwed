@@ -1,0 +1,6 @@
+[
+  {
+    "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?(?:\\/((?!api\\/auth|api\\/host-resolve|_next\\/static|_next\\/image|favicon.ico|storage-file|.*\\.(?:png|jpg|jpeg|gif|svg|ico|css|js|woff|woff2|mp3|mp4|webp)$).*))(\\.json|\\.rsc|\\.segments\\/.+\\.segment\\.rsc)?[\\/#\\?]?$",
+    "originalSource": "/((?!api/auth|api/host-resolve|_next/static|_next/image|favicon.ico|storage-file|.*\\.(?:png|jpg|jpeg|gif|svg|ico|css|js|woff|woff2|mp3|mp4|webp)$).*)"
+  }
+]

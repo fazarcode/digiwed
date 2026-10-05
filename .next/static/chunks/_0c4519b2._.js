@@ -53,21 +53,24 @@ __turbopack_context__.s([
     ()=>renderTemplate
 ]);
 const DEFAULT_WHATSAPP_TEMPLATE = "Dear {guest_name},\n\nWith joy, we invite you to celebrate the wedding of {event_name}.\n\nEvent Date: {event_date}\nTime: {event_time}\nLocation: {event_location}\n\nCategory: {guest_category}\nGuest Quota: {guest_quota}\n\nPlease view your personalized invitation here:\n{invitation_url}\n\nWe look forward to celebrating with you!";
-function buildInvitationUrl(baseOrigin, invitation, guestToken) {
-    const suffix = guestToken ? "?guest=".concat(guestToken) : "";
+function buildInvitationUrl(baseOrigin, invitation, guest) {
+    // Accept either a guest object (preferred) or a raw token string (legacy callers).
+    const nameSlug = guest && typeof guest === "object" ? guest.nameSlug : null;
+    const token = guest && typeof guest === "object" ? guest.token : guest;
+    const query = nameSlug ? "?to=".concat(encodeURIComponent(nameSlug)) : token ? "?guest=".concat(token) : "";
     if (invitation === null || invitation === void 0 ? void 0 : invitation.customDomain) {
-        return "https://".concat(invitation.customDomain, "/").concat(suffix);
+        return "https://".concat(invitation.customDomain, "/").concat(query);
     }
     if ((invitation === null || invitation === void 0 ? void 0 : invitation.subdomain) && baseOrigin) {
         try {
             const u = new URL(baseOrigin);
             const rootHost = u.hostname.split(".").slice(-2).join(".");
             // Best-effort subdomain URL; falls back gracefully if hostname isn't a real domain.
-            return "".concat(u.protocol, "//").concat(invitation.subdomain, ".").concat(rootHost, "/").concat(suffix);
+            return "".concat(u.protocol, "//").concat(invitation.subdomain, ".").concat(rootHost, "/").concat(query);
         } catch (e) {}
     }
     const base = (baseOrigin || "").replace(/\/$/, "");
-    return "".concat(base, "/invite/").concat(invitation.slug).concat(suffix);
+    return "".concat(base, "/invite/").concat(invitation.slug).concat(query);
 }
 function fmtDate(d) {
     if (!d) return "";
@@ -116,7 +119,7 @@ function buildContext(param) {
         event_date: ev.date ? fmtDate(ev.date) : "",
         event_time: ev.time || "",
         event_location: ev.venue || ev.address || "",
-        invitation_url: buildInvitationUrl(origin, invitation, guest === null || guest === void 0 ? void 0 : guest.token),
+        invitation_url: buildInvitationUrl(origin, invitation, guest),
         guest_category: (guest === null || guest === void 0 ? void 0 : guest.category) || (guest === null || guest === void 0 ? void 0 : guest.categoryText) || "",
         guest_quota: (_guest_quota = guest === null || guest === void 0 ? void 0 : guest.quota) !== null && _guest_quota !== void 0 ? _guest_quota : 1
     };

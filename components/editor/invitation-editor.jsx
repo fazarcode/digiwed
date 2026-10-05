@@ -37,20 +37,74 @@ import CategoriesEditor from "./categories-editor";
 import SidesEditor from "./sides-editor";
 import MomentsCustomizer from "./moments-customizer";
 import RsvpFieldsEditor from "./rsvp-fields-editor";
+import QuotaModeSetting from "@/components/dashboard/quota-mode-setting";
 
 const TABS = [
-  { id: "basic", label: "Basic Info", icon: Info },
-  { id: "event", label: "Event", icon: CalendarDays },
-  // { id: "theme", label: "Theme", icon: Palette },
-  { id: "gallery", label: "Gallery", icon: Images },
+  { id: "basic", label: "Info Dasar", icon: Info },
+  { id: "event", label: "Acara", icon: CalendarDays },
+  // { id: "theme", label: "Tema", icon: Palette },
+  { id: "gallery", label: "Galeri", icon: Images },
   { id: "video", label: "Video", icon: Video },
-  { id: "music", label: "Music", icon: Music2 },
-  { id: "gift", label: "Gift / Angpau", icon: Gift },
-  { id: "categories", label: "Categories", icon: Users },
-  { id: "guestsides", label: "Guest Sides", icon: Users },
-  { id: "rsvp", label: "RSVP Fields", icon: MessageSquare },
-  { id: "publish", label: "Publish", icon: Send },
+  { id: "music", label: "Musik", icon: Music2 },
+  { id: "gift", label: "Hadiah / Angpau", icon: Gift },
+  { id: "categories", label: "Kategori", icon: Users },
+  { id: "guestsides", label: "Pihak Tamu", icon: Users },
+  { id: "rsvp", label: "Kolom RSVP", icon: MessageSquare },
+  { id: "publish", label: "Terbitkan", icon: Send },
 ];
+
+// ---------------------------------------------------------------------------
+// Util gambar: perbaikan untuk link Google Drive & placeholder yang gagal load
+// ---------------------------------------------------------------------------
+
+// Placeholder inline (SVG data URI) — tidak bergantung ke domain luar,
+// beda dengan via.placeholder.com yang sudah tidak aktif sejak 2023.
+const IMG_ERROR_PLACEHOLDER =
+  "data:image/svg+xml;utf8," +
+  encodeURIComponent(
+    `<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'>
+      <rect width='100%' height='100%' fill='#f1e5d8'/>
+      <text x='50%' y='50%' font-family='sans-serif' font-size='12' fill='#8b6f47' text-anchor='middle' dominant-baseline='middle'>Gagal memuat gambar</text>
+    </svg>`,
+  );
+
+// Ambil file ID dari berbagai format link Google Drive:
+//  - https://drive.google.com/file/d/FILE_ID/view?usp=sharing
+//  - https://drive.google.com/open?id=FILE_ID
+//  - https://drive.google.com/uc?id=FILE_ID&export=view
+//  - https://docs.google.com/uc?id=FILE_ID
+function extractGoogleDriveId(url) {
+  if (!url) return null;
+  const patterns = [
+    /drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/,
+    /drive\.google\.com\/thumbnail\?.*?[?&]id=([a-zA-Z0-9_-]+)/,
+    /(?:drive|docs)\.google\.com\/uc\?.*?[?&]id=([a-zA-Z0-9_-]+)/,
+    /drive\.google\.com\/open\?.*?[?&]id=([a-zA-Z0-9_-]+)/,
+  ];
+  for (const re of patterns) {
+    const m = url.match(re);
+    if (m && m[1]) return m[1];
+  }
+  const idMatch = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+  return idMatch ? idMatch[1] : null;
+}
+
+// Link Google Drive biasa (…/view) adalah halaman preview, BUKAN link gambar
+// langsung, sehingga <img src> selalu gagal. Di sini otomatis dikonversi ke
+// endpoint thumbnail Google Drive yang bisa langsung ditampilkan sebagai <img>.
+// Link gambar non-Drive (Unsplash, S3, dsb.) dikembalikan apa adanya.
+function normalizeImageUrl(url) {
+  const trimmed = (url || "").trim();
+  if (!trimmed) return trimmed;
+  if (
+    trimmed.includes("drive.google.com") ||
+    trimmed.includes("docs.google.com")
+  ) {
+    const id = extractGoogleDriveId(trimmed);
+    if (id) return `https://drive.google.com/thumbnail?id=${id}&sz=w1000`;
+  }
+  return trimmed;
+}
 
 export default function InvitationEditor({ invitation: initial, templates }) {
   const router = useRouter();
@@ -61,7 +115,9 @@ export default function InvitationEditor({ invitation: initial, templates }) {
   const debounceRef = useRef(null);
 
   const previewUrl = `/invite/${inv.slug}?preview=1&t=${iframeKey}`;
-  const publicUrl = `${typeof window !== "undefined" ? window.location.origin : ""}/invite/${inv.slug}`;
+  const publicUrl = inv.customDomain
+    ? `https://${inv.customDomain}`
+    : `${typeof window !== "undefined" ? window.location.origin : ""}/invite/${inv.slug}`;
 
   const update = (patch) => {
     setInv((prev) => ({ ...prev, ...patch }));
@@ -76,7 +132,7 @@ export default function InvitationEditor({ invitation: initial, templates }) {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(patch),
         });
-        if (!res.ok) throw new Error("Save failed");
+        if (!res.ok) throw new Error("Gagal menyimpan");
         setIframeKey((k) => k + 1); // refresh preview
       } catch (e) {
         toast.error(e.message);
@@ -106,12 +162,12 @@ export default function InvitationEditor({ invitation: initial, templates }) {
     });
     const data = await res.json();
     if (!res.ok) {
-      toast.error(data.error || "Failed to update slug");
+      toast.error(data.error || "Gagal memperbarui slug");
       return false;
     }
     update({ slug: data.invitation.slug });
     setIframeKey((k) => k + 1);
-    toast.success("Slug updated");
+    toast.success("Slug berhasil diperbarui");
     return data.invitation.slug;
   };
 
@@ -122,13 +178,13 @@ export default function InvitationEditor({ invitation: initial, templates }) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status: target }),
     });
-    if (!res.ok) return toast.error("Failed");
+    if (!res.ok) return toast.error("Gagal memperbarui status");
     update({ status: target });
     setIframeKey((k) => k + 1);
     toast.success(
       target === "PUBLISHED"
-        ? "Published! Invitation is now live."
-        : "Unpublished",
+        ? "Diterbitkan! Undangan sekarang sudah aktif."
+        : "Publikasi dibatalkan",
     );
   };
 
@@ -142,15 +198,16 @@ export default function InvitationEditor({ invitation: initial, templates }) {
             className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-primary mb-2"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
-            Back
+            Kembali
           </Link>
           <p className="font-serif text-lg font-semibold">
-            {inv.brideName || "Bride"} &amp; {inv.groomName || "Groom"}
+            {inv.brideName || "Mempelai Wanita"} &amp;{" "}
+            {inv.groomName || "Mempelai Pria"}
           </p>
           <span
             className={`inline-block text-[10px] uppercase tracking-widest px-2 py-0.5 rounded-full mt-1 ${inv.status === "PUBLISHED" ? "bg-emerald-100 text-emerald-700" : "bg-amber-100 text-amber-700"}`}
           >
-            {inv.status}
+            {inv.status === "PUBLISHED" ? "TERBIT" : "DRAFT"}
           </span>
         </div>
         <nav className="flex-1 overflow-y-auto p-2 space-y-0.5 scrollbar-thin">
@@ -174,10 +231,10 @@ export default function InvitationEditor({ invitation: initial, templates }) {
           {saving ? (
             <>
               <Loader2 className="h-3 w-3 animate-spin" />
-              Saving…
+              Menyimpan…
             </>
           ) : (
-            <>All changes saved</>
+            <>Semua perubahan tersimpan</>
           )}
         </div>
       </div>
@@ -234,7 +291,7 @@ export default function InvitationEditor({ invitation: initial, templates }) {
       <div className="flex-1 bg-[#F8F5F0] flex flex-col">
         <div className="h-12 flex items-center justify-between px-4 bg-white border-b border-primary/10">
           <span className="text-xs uppercase tracking-widest text-muted-foreground">
-            Live Preview
+            Pratinjau Langsung
           </span>
           <div className="flex items-center gap-2">
             <a
@@ -244,7 +301,7 @@ export default function InvitationEditor({ invitation: initial, templates }) {
               className="text-xs text-primary flex items-center gap-1"
             >
               <ExternalLink className="h-3 w-3" />
-              Open in new tab
+              Buka di tab baru
             </a>
           </div>
         </div>
@@ -254,7 +311,7 @@ export default function InvitationEditor({ invitation: initial, templates }) {
               key={iframeKey}
               src={previewUrl}
               className="w-full h-full"
-              title="Preview"
+              title="Pratinjau"
             />
           </div>
         </div>
@@ -266,18 +323,18 @@ export default function InvitationEditor({ invitation: initial, templates }) {
 function BasicForm({ inv, onChange }) {
   return (
     <div className="space-y-4">
-      <h2 className="font-serif text-xl font-semibold">Basic Information</h2>
+      <h2 className="font-serif text-xl font-semibold">Informasi Dasar</h2>
 
       <div className="grid grid-cols-2 gap-3">
         <div>
-          <Label>Bride Name</Label>
+          <Label>Nama Mempelai Wanita</Label>
           <Input
             value={inv.brideName || ""}
             onChange={(e) => onChange({ brideName: e.target.value })}
           />
         </div>
         <div>
-          <Label>Groom Name</Label>
+          <Label>Nama Mempelai Pria</Label>
           <Input
             value={inv.groomName || ""}
             onChange={(e) => onChange({ groomName: e.target.value })}
@@ -287,13 +344,13 @@ function BasicForm({ inv, onChange }) {
 
       <div className="grid grid-cols-2 gap-3 pb-4 border-b border-primary/10">
         <ImagePicker
-          label="Bride Photo"
+          label="Foto Mempelai Wanita"
           value={inv.bridePhoto}
           onChange={(url) => onChange({ bridePhoto: url })}
           shape="circle"
         />
         <ImagePicker
-          label="Groom Photo"
+          label="Foto Mempelai Pria"
           value={inv.groomPhoto}
           onChange={(url) => onChange({ groomPhoto: url })}
           shape="circle"
@@ -301,56 +358,59 @@ function BasicForm({ inv, onChange }) {
       </div>
 
       <div>
-        <Label className="text-xs text-muted-foreground">Parents (shown on the invitation, built from father &amp; mother below)</Label>
+        <Label className="text-xs text-muted-foreground">
+          Orang Tua (ditampilkan di undangan, otomatis digabung dari data ayah
+          &amp; ibu di bawah)
+        </Label>
       </div>
 
       <div className="grid grid-cols-2 gap-3 pt-1">
         <div>
-          <Label>Groom's Father</Label>
+          <Label>Ayah Mempelai Pria</Label>
           <Input
             value={inv.groomFather || ""}
             onChange={(e) => onChange({ groomFather: e.target.value })}
-            placeholder="Father's name"
+            placeholder="Nama ayah"
           />
         </div>
         <div>
-          <Label>Groom's Mother</Label>
+          <Label>Ibu Mempelai Pria</Label>
           <Input
             value={inv.groomMother || ""}
             onChange={(e) => onChange({ groomMother: e.target.value })}
-            placeholder="Mother's name"
+            placeholder="Nama ibu"
           />
         </div>
         <div>
-          <Label>Bride's Father</Label>
+          <Label>Ayah Mempelai Wanita</Label>
           <Input
             value={inv.brideFather || ""}
             onChange={(e) => onChange({ brideFather: e.target.value })}
-            placeholder="Father's name"
+            placeholder="Nama ayah"
           />
         </div>
         <div>
-          <Label>Bride's Mother</Label>
+          <Label>Ibu Mempelai Wanita</Label>
           <Input
             value={inv.brideMother || ""}
             onChange={(e) => onChange({ brideMother: e.target.value })}
-            placeholder="Mother's name"
+            placeholder="Nama ibu"
           />
         </div>
       </div>
       <div>
-        <Label>Quote</Label>
+        <Label>Kutipan</Label>
         <Textarea
           rows={3}
           value={inv.quote || ""}
           onChange={(e) => onChange({ quote: e.target.value })}
-          placeholder="A meaningful quote or verse"
+          placeholder="Kutipan atau ayat yang bermakna"
         />
       </div>
 
       <div className="pt-2">
         <div className="mb-2">
-          <Label>Love Story Timeline</Label>
+          <Label>Linimasa Kisah Cinta</Label>
           <p className="text-xs text-muted-foreground mt-0.5">
             Bagikan cerita cinta Anda berdasarkan urutan waktu.
           </p>
@@ -362,7 +422,7 @@ function BasicForm({ inv, onChange }) {
       </div>
 
       <ImagePicker
-        label="Cover Image"
+        label="Foto Sampul"
         value={inv.coverImage}
         onChange={(url) => onChange({ coverImage: url })}
         shape="rectangle"
@@ -400,7 +460,7 @@ function EventForm({ inv, onChange }) {
 
   return (
     <div className="space-y-4">
-      <h2 className="font-serif text-xl font-semibold">Wedding Events</h2>
+      <h2 className="font-serif text-xl font-semibold">Acara Pernikahan</h2>
 
       <div className="space-y-4">
         {currentEvents.map((ev, index) => (
@@ -421,18 +481,18 @@ function EventForm({ inv, onChange }) {
             </div>
 
             <div>
-              <Label className="text-xs">Event Title</Label>
+              <Label className="text-xs">Judul Acara</Label>
               <Input
                 value={ev.title || ""}
                 onChange={(e) => updateItem(index, "title", e.target.value)}
-                placeholder="e.g. Akad Nikah / Reception"
+                placeholder="misal: Akad Nikah / Resepsi"
                 className="h-8 text-sm font-medium"
               />
             </div>
 
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <Label className="text-xs">Date</Label>
+                <Label className="text-xs">Tanggal</Label>
                 <Input
                   type="date"
                   value={ev.date || ""}
@@ -441,39 +501,39 @@ function EventForm({ inv, onChange }) {
                 />
               </div>
               <div>
-                <Label className="text-xs">Time</Label>
+                <Label className="text-xs">Waktu</Label>
                 <Input
                   value={ev.time || ""}
                   onChange={(e) => updateItem(index, "time", e.target.value)}
-                  placeholder="08:00 AM - Finish"
+                  placeholder="08:00 - Selesai"
                   className="h-8 text-sm"
                 />
               </div>
             </div>
 
             <div>
-              <Label className="text-xs">Venue Name</Label>
+              <Label className="text-xs">Nama Tempat</Label>
               <Input
                 value={ev.venue || ""}
                 onChange={(e) => updateItem(index, "venue", e.target.value)}
-                placeholder="The Grand Ballroom"
+                placeholder="Contoh: Gedung Serbaguna"
                 className="h-8 text-sm"
               />
             </div>
 
             <div>
-              <Label className="text-xs">Full Address</Label>
+              <Label className="text-xs">Alamat Lengkap</Label>
               <Textarea
                 rows={2}
                 value={ev.address || ""}
                 onChange={(e) => updateItem(index, "address", e.target.value)}
-                placeholder="Full address of the venue"
+                placeholder="Alamat lengkap lokasi acara"
                 className="text-sm"
               />
             </div>
 
             <div>
-              <Label className="text-xs">Google Maps URL</Label>
+              <Label className="text-xs">URL Google Maps</Label>
               <Input
                 value={ev.mapUrl || ""}
                 onChange={(e) => updateItem(index, "mapUrl", e.target.value)}
@@ -491,30 +551,45 @@ function EventForm({ inv, onChange }) {
           onClick={addItem}
         >
           <Plus className="h-4 w-4 mr-2" />
-          Add Event (Akad / Resepsi)
+          Tambah Acara (Akad / Resepsi)
         </Button>
       </div>
 
       <div className="pt-4 border-t space-y-3">
         <h3 className="font-serif text-sm font-semibold uppercase tracking-widest text-muted-foreground">
-          Check-in & RSVP Settings
+          Pengaturan Check-in &amp; RSVP
         </h3>
+
+        {/* 1. Pengaturan Mode Kuota Check-in (Baru Ditambahkan) */}
+        <div className="rounded-lg border p-3 space-y-2">
+          <Label className="font-medium">Mode Kuota Check-in</Label>
+          <QuotaModeSetting
+            value={inv.quotaMode || "FLEXIBLE"}
+            onChange={(mode) => onChange({ quotaMode: mode })}
+          />
+          <p className="text-xs text-muted-foreground">
+            {inv.quotaMode === "STRICT"
+              ? "Ketat: Tamu tidak bisa check-in melebihi kuota (pax) yang ditentukan."
+              : "Fleksibel: Operator tetap bisa menambah jumlah hadir melebihi kuota tamu."}
+          </p>
+        </div>
+
         <div>
-          <Label>RSVP Mode</Label>
+          <Label>Mode RSVP</Label>
           <select
             value={inv.rsvpMode || "QR_FIRST"}
             onChange={(e) => onChange({ rsvpMode: e.target.value })}
             className="w-full h-10 px-3 rounded-md border text-sm"
           >
             <option value="QR_FIRST">
-              QR First — Show QR code immediately, RSVP is optional
+              QR Dulu — Tampilkan kode QR langsung, RSVP bersifat opsional
             </option>
             <option value="RSVP_FIRST">
-              RSVP First — Guest must submit RSVP before QR is shown
+              RSVP Dulu — Tamu harus mengisi RSVP sebelum QR ditampilkan
             </option>
           </select>
           <p className="text-xs text-muted-foreground mt-1">
-            Applies when guests open their personalized invitation link.
+            Berlaku saat tamu membuka link undangan personal mereka.
           </p>
         </div>
         <div className="flex items-start gap-3 rounded-lg border p-3">
@@ -530,11 +605,50 @@ function EventForm({ inv, onChange }) {
             className="text-sm flex-1 cursor-pointer"
           >
             <span className="font-medium">
-              Enable Selfie Verification at Check-in
+              Aktifkan Verifikasi Selfie saat Check-in
             </span>
             <p className="text-xs text-muted-foreground mt-0.5">
-              Operator must capture a live selfie of the guest before completing
-              check-in. Recommended for VIP events.
+              Operator harus mengambil foto selfie langsung dari tamu sebelum
+              menyelesaikan proses check-in. Disarankan untuk acara VIP.
+            </p>
+          </label>
+        </div>
+        <div className="flex items-start gap-3 rounded-lg border p-3">
+          <input
+            type="checkbox"
+            checked={inv.rsvpEnabled !== false}
+            onChange={(e) => onChange({ rsvpEnabled: e.target.checked })}
+            className="mt-1 h-4 w-4"
+            id="rsvp-enabled-check"
+            data-testid="toggle-rsvp-enabled"
+          />
+          <label
+            htmlFor="rsvp-enabled-check"
+            className="text-sm flex-1 cursor-pointer"
+          >
+            <span className="font-medium">Aktifkan Form RSVP</span>
+            <p className="text-xs text-muted-foreground mt-0.5">
+              Tampilkan form RSVP di undangan publik. Terpisah dari form Ucapan.
+            </p>
+          </label>
+        </div>
+        <div className="flex items-start gap-3 rounded-lg border p-3">
+          <input
+            type="checkbox"
+            checked={inv.messageEnabled !== false}
+            onChange={(e) => onChange({ messageEnabled: e.target.checked })}
+            className="mt-1 h-4 w-4"
+            id="message-enabled-check"
+            data-testid="toggle-message-enabled"
+          />
+          <label
+            htmlFor="message-enabled-check"
+            className="text-sm flex-1 cursor-pointer"
+          >
+            <span className="font-medium">Aktifkan Form Ucapan / Doa</span>
+            <p className="text-xs text-muted-foreground mt-0.5">
+              Izinkan tamu mengirim ucapan meskipun RSVP dimatikan. Terpisah
+              dari RSVP.
             </p>
           </label>
         </div>
@@ -546,11 +660,13 @@ function EventForm({ inv, onChange }) {
 function PublishTab({ inv, publicUrl, onToggle, onSaveSlug }) {
   const copy = () => {
     navigator.clipboard.writeText(publicUrl);
-    toast.success("Link copied");
+    toast.success("Link disalin");
   };
   const [slug, setSlug] = useState(inv.slug);
   const [savingSlug, setSavingSlug] = useState(false);
-  useEffect(() => { setSlug(inv.slug); }, [inv.slug]);
+  useEffect(() => {
+    setSlug(inv.slug);
+  }, [inv.slug]);
   const doSaveSlug = async () => {
     setSavingSlug(true);
     const result = await onSaveSlug(slug);
@@ -559,42 +675,51 @@ function PublishTab({ inv, publicUrl, onToggle, onSaveSlug }) {
   };
   return (
     <div className="space-y-5">
-      <h2 className="font-serif text-xl font-semibold">Publish</h2>
+      <h2 className="font-serif text-xl font-semibold">Terbitkan</h2>
       <div
         className={`rounded-xl p-5 border ${inv.status === "PUBLISHED" ? "bg-emerald-50 border-emerald-200" : "bg-amber-50 border-amber-200"}`}
       >
         <p className="font-medium">
           {inv.status === "PUBLISHED"
-            ? "✨ Your invitation is live!"
-            : "Invitation not published"}
+            ? "✨ Undangan Anda sudah aktif!"
+            : "Undangan belum diterbitkan"}
         </p>
         <p className="text-sm text-muted-foreground mt-1">
           {inv.status === "PUBLISHED"
-            ? "Anyone with the link can view it."
-            : "Publish to allow guests to view and RSVP."}
+            ? "Siapa pun dengan link ini bisa melihatnya."
+            : "Terbitkan agar tamu bisa melihat undangan dan mengisi RSVP."}
         </p>
       </div>
 
       <div>
-        <Label>Custom URL Slug</Label>
+        <Label>Slug URL Kustom</Label>
         <div className="flex gap-2 mt-1">
           <Input
             value={slug}
             onChange={(e) => setSlug(e.target.value)}
-            placeholder="my-wedding-2026"
+            placeholder="pernikahan-saya-2026"
             className="font-mono text-xs"
           />
-          <Button variant="outline" onClick={doSaveSlug} disabled={savingSlug || !slug || slug === inv.slug}>
-            {savingSlug ? <Loader2 className="h-4 w-4 animate-spin" /> : <Save className="h-4 w-4" />}
+          <Button
+            variant="outline"
+            onClick={doSaveSlug}
+            disabled={savingSlug || !slug || slug === inv.slug}
+          >
+            {savingSlug ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : (
+              <Save className="h-4 w-4" />
+            )}
           </Button>
         </div>
         <p className="text-xs text-muted-foreground mt-1">
-          Lowercase, hyphenated, and unique. Changing this changes your public link.
+          Huruf kecil, pakai tanda hubung, dan unik. Mengubah ini akan mengubah
+          link publik Anda.
         </p>
       </div>
 
       <div>
-        <Label>Public URL</Label>
+        <Label>URL Publik</Label>
         <div className="flex gap-2 mt-1">
           <Input value={publicUrl} readOnly className="font-mono text-xs" />
           <Button variant="outline" onClick={copy}>
@@ -609,7 +734,9 @@ function PublishTab({ inv, publicUrl, onToggle, onSaveSlug }) {
         }
       >
         <Send className="h-4 w-4 mr-2" />
-        {inv.status === "PUBLISHED" ? "Unpublish" : "Publish Now"}
+        {inv.status === "PUBLISHED"
+          ? "Batalkan Publikasi"
+          : "Terbitkan Sekarang"}
       </Button>
       <div className="pt-4 border-t">
         <a
@@ -619,7 +746,7 @@ function PublishTab({ inv, publicUrl, onToggle, onSaveSlug }) {
           className="text-sm text-primary flex items-center gap-1"
         >
           <ExternalLink className="h-4 w-4" />
-          Open public invitation
+          Buka undangan publik
         </a>
       </div>
     </div>
@@ -655,7 +782,7 @@ function ImagePicker({
       const res = await fetch("/api/upload", { method: "POST", body: fd });
       const data = await res.json();
 
-      if (!res.ok) throw new Error(data.error || "Upload failed");
+      if (!res.ok) throw new Error(data.error || "Unggah gagal");
 
       onChange(data.url);
       toast.success("Foto berhasil diunggah");
@@ -667,16 +794,22 @@ function ImagePicker({
     }
   };
 
+  // Tampilkan versi yang sudah dinormalisasi (link Google Drive otomatis
+  // dikonversi ke format thumbnail) supaya link lama yang sudah tersimpan
+  // pun tetap tampil tanpa perlu diedit ulang.
+  const displaySrc = imgError
+    ? IMG_ERROR_PLACEHOLDER
+    : normalizeImageUrl(value);
+
   return (
     <div className="space-y-2">
       <Label>{label}</Label>
       {value && (
         <div className="relative inline-block">
           <img
-            src={
-              imgError ? "https://via.placeholder.com/150?text=Error" : value
-            }
-            alt="Preview"
+            src={displaySrc}
+            alt="Pratinjau"
+            referrerPolicy="no-referrer"
             className={cn(
               "object-cover border border-primary/20 shadow-sm",
               shape === "circle"
@@ -691,6 +824,14 @@ function ImagePicker({
         <Input
           value={value || ""}
           onChange={(e) => onChange(e.target.value)}
+          onBlur={(e) => {
+            // Konversi link Google Drive (…/view, ?id=, dsb.) ke link gambar
+            // langsung begitu user selesai mengetik/menempel link, supaya
+            // nilai yang tersimpan juga sudah benar (bukan cuma pratinjaunya).
+            const normalized = normalizeImageUrl(e.target.value);
+            if (normalized && normalized !== e.target.value)
+              onChange(normalized);
+          }}
           placeholder={placeholder}
           className="text-xs flex-1"
         />
@@ -707,6 +848,10 @@ function ImagePicker({
           <input type="file" accept="image/*" hidden onChange={uploadFile} />
         </label>
       </div>
+      <p className="text-[11px] text-muted-foreground">
+        Tempel link gambar langsung, atau link berbagi Google Drive (otomatis
+        dikonversi), atau unggah file.
+      </p>
     </div>
   );
 }
@@ -754,32 +899,32 @@ function LoveStoryEditor({ items, onChange }) {
 
           <div className="grid grid-cols-2 gap-3 pr-8">
             <div>
-              <Label className="text-xs">Date / Year</Label>
+              <Label className="text-xs">Tanggal / Tahun</Label>
               <Input
                 value={item.date || ""}
                 onChange={(e) => updateItem(index, "date", e.target.value)}
-                placeholder="e.g. Dec 2020"
+                placeholder="misal: Des 2020"
                 className="h-8 text-sm"
               />
             </div>
             <div>
-              <Label className="text-xs">Title</Label>
+              <Label className="text-xs">Judul</Label>
               <Input
                 value={item.title || ""}
                 onChange={(e) => updateItem(index, "title", e.target.value)}
-                placeholder="e.g. First Met"
+                placeholder="misal: Pertama Bertemu"
                 className="h-8 text-sm"
               />
             </div>
           </div>
 
           <div>
-            <Label className="text-xs">Story</Label>
+            <Label className="text-xs">Cerita</Label>
             <Textarea
               rows={3}
               value={item.story || ""}
               onChange={(e) => updateItem(index, "story", e.target.value)}
-              placeholder="Tell this part of the story..."
+              placeholder="Ceritakan bagian ini..."
               className="text-sm"
             />
           </div>
@@ -793,7 +938,7 @@ function LoveStoryEditor({ items, onChange }) {
         onClick={addItem}
       >
         <Plus className="h-4 w-4 mr-2" />
-        Add Story Part
+        Tambah Bagian Cerita
       </Button>
     </div>
   );

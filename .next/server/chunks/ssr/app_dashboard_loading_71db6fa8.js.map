@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/fazar/Documents/d-inv6/app/dashboard/loading.js"],"sourcesContent":["export default function DashboardLoading() {\r\n  return (\r\n    <div\r\n      className=\"space-y-6 animate-pulse\"\r\n      aria-busy=\"true\"\r\n      aria-label=\"Memuat halaman\"\r\n    >\r\n      <div className=\"space-y-2\">\r\n        <div className=\"h-8 w-56 rounded-md bg-primary/10\" />\r\n        <div className=\"h-4 w-80 max-w-full rounded-md bg-primary/5\" />\r\n      </div>\r\n      <div className=\"grid gap-4 sm:grid-cols-2 lg:grid-cols-4\">\r\n        {[0, 1, 2, 3].map((i) => (\r\n          <div\r\n            key={i}\r\n            className=\"h-28 rounded-2xl bg-white border border-primary/10\"\r\n          />\r\n        ))}\r\n      </div>\r\n      <div className=\"h-64 rounded-2xl bg-white border border-primary/10\" />\r\n    </div>\r\n  );\r\n}\r\n"],"names":[],"mappings":";;;;;;AAAe,SAAS;IACtB,qBACE,8OAAC;QACC,WAAU;QACV,aAAU;QACV,cAAW;;0BAEX,8OAAC;gBAAI,WAAU;;kCACb,8OAAC;wBAAI,WAAU;;;;;;kCACf,8OAAC;wBAAI,WAAU;;;;;;;;;;;;0BAEjB,8OAAC;gBAAI,WAAU;0BACZ;oBAAC;oBAAG;oBAAG;oBAAG;iBAAE,CAAC,GAAG,CAAC,CAAC,kBACjB,8OAAC;wBAEC,WAAU;uBADL;;;;;;;;;;0BAKX,8OAAC;gBAAI,WAAU;;;;;;;;;;;;AAGrB","debugId":null}}]
+}

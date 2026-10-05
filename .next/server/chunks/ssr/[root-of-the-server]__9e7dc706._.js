@@ -115,21 +115,24 @@ Please view your personalized invitation here:
 {invitation_url}
 
 We look forward to celebrating with you!`;
-function buildInvitationUrl(baseOrigin, invitation, guestToken) {
-    const suffix = guestToken ? `?guest=${guestToken}` : "";
+function buildInvitationUrl(baseOrigin, invitation, guest) {
+    // Accept either a guest object (preferred) or a raw token string (legacy callers).
+    const nameSlug = guest && typeof guest === "object" ? guest.nameSlug : null;
+    const token = guest && typeof guest === "object" ? guest.token : guest;
+    const query = nameSlug ? `?to=${encodeURIComponent(nameSlug)}` : token ? `?guest=${token}` : "";
     if (invitation?.customDomain) {
-        return `https://${invitation.customDomain}/${suffix}`;
+        return `https://${invitation.customDomain}/${query}`;
     }
     if (invitation?.subdomain && baseOrigin) {
         try {
             const u = new URL(baseOrigin);
             const rootHost = u.hostname.split(".").slice(-2).join(".");
             // Best-effort subdomain URL; falls back gracefully if hostname isn't a real domain.
-            return `${u.protocol}//${invitation.subdomain}.${rootHost}/${suffix}`;
+            return `${u.protocol}//${invitation.subdomain}.${rootHost}/${query}`;
         } catch  {}
     }
     const base = (baseOrigin || "").replace(/\/$/, "");
-    return `${base}/invite/${invitation.slug}${suffix}`;
+    return `${base}/invite/${invitation.slug}${query}`;
 }
 function fmtDate(d) {
     if (!d) return "";
@@ -175,7 +178,7 @@ function buildContext({ invitation, guest, origin }) {
         event_date: ev.date ? fmtDate(ev.date) : "",
         event_time: ev.time || "",
         event_location: ev.venue || ev.address || "",
-        invitation_url: buildInvitationUrl(origin, invitation, guest?.token),
+        invitation_url: buildInvitationUrl(origin, invitation, guest),
         guest_category: guest?.category || guest?.categoryText || "",
         guest_quota: guest?.quota ?? 1
     };

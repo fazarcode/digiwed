@@ -7,7 +7,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { toast } from 'sonner';
 import { Plus, Trash2, Star } from 'lucide-react';
 
-export default function TestimonialsManager({ initial }) {
+export default function TestimonialsManager({ initial, endpoint = '/api/admin/testimonials' }) {
   const [items, setItems] = useState(initial || []);
   const [form, setForm] = useState({ name: '', text: '', rating: 5, order: 0 });
   const [busy, setBusy] = useState(false);
@@ -16,7 +16,7 @@ export default function TestimonialsManager({ initial }) {
     if (!form.name.trim() || !form.text.trim()) return toast.error('Name and text required');
     setBusy(true);
     try {
-      const r = await fetch('/api/admin/testimonials', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(form) });
+      const r = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(form) });
       const d = await r.json();
       if (!r.ok) throw new Error(d.error || 'Failed');
       setItems((l) => [...l, d.item]);
@@ -25,12 +25,12 @@ export default function TestimonialsManager({ initial }) {
     } catch (e) { toast.error(e.message); } finally { setBusy(false); }
   };
   const patch = async (id, body) => {
-    const r = await fetch(`/api/admin/testimonials/${id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+    const r = await fetch(`${endpoint}/${id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
     const d = await r.json();
     if (!r.ok) return toast.error(d.error || 'Failed');
     setItems((l) => l.map((x) => (x.id === id ? d.item : x)));
   };
-  const del = async (id) => { if (!confirm('Delete testimonial?')) return; await fetch(`/api/admin/testimonials/${id}`, { method: 'DELETE' }); setItems((l) => l.filter((x) => x.id !== id)); };
+  const del = async (id) => { if (!confirm('Delete testimonial?')) return; await fetch(`${endpoint}/${id}`, { method: 'DELETE' }); setItems((l) => l.filter((x) => x.id !== id)); };
 
   return (
     <div className="space-y-6">

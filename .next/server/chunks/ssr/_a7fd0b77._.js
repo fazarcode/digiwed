@@ -20,7 +20,13 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$re
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$lock$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Lock$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/lock.js [app-ssr] (ecmascript) <export default as Lock>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$book$2d$open$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__BookOpen$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/book-open.js [app-ssr] (ecmascript) <export default as BookOpen>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$utils$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/lib/utils.js [app-ssr] (ecmascript)");
+(()=>{
+    const e = new Error("Cannot find module './TemplateDocsPanel'");
+    e.code = 'MODULE_NOT_FOUND';
+    throw e;
+})();
 'use client';
+;
 ;
 ;
 ;
@@ -196,19 +202,19 @@ function TemplateCodeEditor({ template }) {
                                     className: "h-4 w-4 mr-1"
                                 }, void 0, false, {
                                     fileName: "[project]/components/admin/template-code-editor.jsx",
-                                    lineNumber: 122,
+                                    lineNumber: 123,
                                     columnNumber: 47
                                 }, this),
                                 "Back"
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/admin/template-code-editor.jsx",
-                            lineNumber: 122,
+                            lineNumber: 123,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/components/admin/template-code-editor.jsx",
-                        lineNumber: 121,
+                        lineNumber: 122,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -222,7 +228,7 @@ function TemplateCodeEditor({ template }) {
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/admin/template-code-editor.jsx",
-                                lineNumber: 125,
+                                lineNumber: 126,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -234,13 +240,13 @@ function TemplateCodeEditor({ template }) {
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/admin/template-code-editor.jsx",
-                                lineNumber: 126,
+                                lineNumber: 127,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/admin/template-code-editor.jsx",
-                        lineNumber: 124,
+                        lineNumber: 125,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
@@ -253,14 +259,14 @@ function TemplateCodeEditor({ template }) {
                                 className: "h-4 w-4 mr-1"
                             }, void 0, false, {
                                 fileName: "[project]/components/admin/template-code-editor.jsx",
-                                lineNumber: 129,
+                                lineNumber: 130,
                                 columnNumber: 11
                             }, this),
                             "Payload & Variables"
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/admin/template-code-editor.jsx",
-                        lineNumber: 128,
+                        lineNumber: 129,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
@@ -273,20 +279,20 @@ function TemplateCodeEditor({ template }) {
                                 className: "h-4 w-4 mr-1 animate-spin"
                             }, void 0, false, {
                                 fileName: "[project]/components/admin/template-code-editor.jsx",
-                                lineNumber: 132,
+                                lineNumber: 133,
                                 columnNumber: 25
                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$refresh$2d$cw$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__RefreshCw$3e$__["RefreshCw"], {
                                 className: "h-4 w-4 mr-1"
                             }, void 0, false, {
                                 fileName: "[project]/components/admin/template-code-editor.jsx",
-                                lineNumber: 132,
+                                lineNumber: 133,
                                 columnNumber: 77
                             }, this),
                             "Refresh Preview"
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/admin/template-code-editor.jsx",
-                        lineNumber: 131,
+                        lineNumber: 132,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
@@ -299,156 +305,32 @@ function TemplateCodeEditor({ template }) {
                                 className: "h-4 w-4 mr-1 animate-spin"
                             }, void 0, false, {
                                 fileName: "[project]/components/admin/template-code-editor.jsx",
-                                lineNumber: 135,
+                                lineNumber: 136,
                                 columnNumber: 21
                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$save$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Save$3e$__["Save"], {
                                 className: "h-4 w-4 mr-1"
                             }, void 0, false, {
                                 fileName: "[project]/components/admin/template-code-editor.jsx",
-                                lineNumber: 135,
+                                lineNumber: 136,
                                 columnNumber: 73
                             }, this),
                             "Save"
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/admin/template-code-editor.jsx",
-                        lineNumber: 134,
+                        lineNumber: 135,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/admin/template-code-editor.jsx",
-                lineNumber: 120,
+                lineNumber: 121,
                 columnNumber: 7
             }, this),
-            showDocs && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "rounded-lg border border-primary/20 bg-muted/30 p-4 text-sm space-y-3",
-                "data-testid": "template-docs-panel",
-                children: [
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "font-semibold text-foreground",
-                                children: "RSVP POST"
-                            }, void 0, false, {
-                                fileName: "[project]/components/admin/template-code-editor.jsx",
-                                lineNumber: 142,
-                                columnNumber: 13
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "text-muted-foreground",
-                                children: "Public form submits to the existing endpoint:"
-                            }, void 0, false, {
-                                fileName: "[project]/components/admin/template-code-editor.jsx",
-                                lineNumber: 143,
-                                columnNumber: 13
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("pre", {
-                                className: "mt-1 rounded bg-[#1e1e1e] text-emerald-300 p-2 overflow-auto text-xs",
-                                children: [
-                                    "POST /api/rsvp Content-Type: application/json",
-                                    "{",
-                                    '"invitationId": "',
-                                    '{',
-                                    "inv.id",
-                                    '}',
-                                    '",   // hidden field "guestId": "<optional>", "guestToken": "<optional>", "name": "Guest Name", "attendance": "ATTENDING | NOT_ATTENDING | MAYBE", "rsvpType": "INDIVIDUAL | GROUP", "guestCount": 1, "message": "optional", "cf_<fieldKey>": "value"   // one per custom RSVP field',
-                                    "}"
-                                ]
-                            }, void 0, true, {
-                                fileName: "[project]/components/admin/template-code-editor.jsx",
-                                lineNumber: 144,
-                                columnNumber: 13
-                            }, this)
-                        ]
-                    }, void 0, true, {
-                        fileName: "[project]/components/admin/template-code-editor.jsx",
-                        lineNumber: 141,
-                        columnNumber: 11
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "font-semibold text-foreground",
-                                children: "RSVP Variables (supported by the template engine)"
-                            }, void 0, false, {
-                                fileName: "[project]/components/admin/template-code-editor.jsx",
-                                lineNumber: 159,
-                                columnNumber: 13
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "text-muted-foreground",
-                                children: "Per-RSVP (1-based index) and the full list:"
-                            }, void 0, false, {
-                                fileName: "[project]/components/admin/template-code-editor.jsx",
-                                lineNumber: 160,
-                                columnNumber: 13
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("pre", {
-                                className: "mt-1 rounded bg-[#1e1e1e] text-sky-300 p-2 overflow-auto text-xs",
-                                children: [
-                                    '{rsvp1.name}',
-                                    '{rsvp1.attendance}',
-                                    "     // ATTENDING / NOT_ATTENDING / MAYBE",
-                                    '{rsvp1.type}',
-                                    "           // alias of rsvpType",
-                                    '{rsvp1.rsvpType}',
-                                    '{rsvp1.guestCount}',
-                                    '{rsvp1.message}',
-                                    '{allRsvp}',
-                                    "              // JSON array of all RSVPs"
-                                ]
-                            }, void 0, true, {
-                                fileName: "[project]/components/admin/template-code-editor.jsx",
-                                lineNumber: 161,
-                                columnNumber: 13
-                            }, this)
-                        ]
-                    }, void 0, true, {
-                        fileName: "[project]/components/admin/template-code-editor.jsx",
-                        lineNumber: 158,
-                        columnNumber: 11
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "font-semibold text-foreground",
-                                children: "Custom RSVP Fields (dynamic)"
-                            }, void 0, false, {
-                                fileName: "[project]/components/admin/template-code-editor.jsx",
-                                lineNumber: 170,
-                                columnNumber: 13
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "text-muted-foreground",
-                                children: "A custom field is available automatically — no engine changes needed."
-                            }, void 0, false, {
-                                fileName: "[project]/components/admin/template-code-editor.jsx",
-                                lineNumber: 171,
-                                columnNumber: 13
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("pre", {
-                                className: "mt-1 rounded bg-[#1e1e1e] text-amber-300 p-2 overflow-auto text-xs",
-                                children: [
-                                    "Field label:  Meal Preference Field key:    mealPreference Variable:     ",
-                                    '{rsvp1.mealPreference}'
-                                ]
-                            }, void 0, true, {
-                                fileName: "[project]/components/admin/template-code-editor.jsx",
-                                lineNumber: 172,
-                                columnNumber: 13
-                            }, this)
-                        ]
-                    }, void 0, true, {
-                        fileName: "[project]/components/admin/template-code-editor.jsx",
-                        lineNumber: 169,
-                        columnNumber: 11
-                    }, this)
-                ]
-            }, void 0, true, {
+            showDocs && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(TemplateDocsPanel, {}, void 0, false, {
                 fileName: "[project]/components/admin/template-code-editor.jsx",
                 lineNumber: 140,
-                columnNumber: 9
+                columnNumber: 20
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "grid grid-cols-12 gap-3 h-[74vh]",
@@ -461,7 +343,7 @@ function TemplateCodeEditor({ template }) {
                                 children: "Files"
                             }, void 0, false, {
                                 fileName: "[project]/components/admin/template-code-editor.jsx",
-                                lineNumber: 181,
+                                lineNumber: 144,
                                 columnNumber: 11
                             }, this),
                             loadingTree ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -471,14 +353,14 @@ function TemplateCodeEditor({ template }) {
                                         className: "h-4 w-4 animate-spin"
                                     }, void 0, false, {
                                         fileName: "[project]/components/admin/template-code-editor.jsx",
-                                        lineNumber: 183,
+                                        lineNumber: 146,
                                         columnNumber: 88
                                     }, this),
                                     "Loading…"
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/admin/template-code-editor.jsx",
-                                lineNumber: 183,
+                                lineNumber: 146,
                                 columnNumber: 13
                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
                                 className: "py-1",
@@ -495,13 +377,13 @@ function TemplateCodeEditor({ template }) {
                                                         className: "h-3.5 w-3.5 shrink-0"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/admin/template-code-editor.jsx",
-                                                        lineNumber: 199,
+                                                        lineNumber: 162,
                                                         columnNumber: 35
                                                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$lock$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Lock$3e$__["Lock"], {
                                                         className: "h-3.5 w-3.5 shrink-0"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/admin/template-code-editor.jsx",
-                                                        lineNumber: 199,
+                                                        lineNumber: 162,
                                                         columnNumber: 83
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -509,7 +391,7 @@ function TemplateCodeEditor({ template }) {
                                                         children: f.path
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/admin/template-code-editor.jsx",
-                                                        lineNumber: 200,
+                                                        lineNumber: 163,
                                                         columnNumber: 21
                                                     }, this),
                                                     dirty[f.path] ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -517,18 +399,18 @@ function TemplateCodeEditor({ template }) {
                                                         children: "•"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/admin/template-code-editor.jsx",
-                                                        lineNumber: 201,
+                                                        lineNumber: 164,
                                                         columnNumber: 38
                                                     }, this) : null
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/admin/template-code-editor.jsx",
-                                                lineNumber: 188,
+                                                lineNumber: 151,
                                                 columnNumber: 19
                                             }, this)
                                         }, f.path, false, {
                                             fileName: "[project]/components/admin/template-code-editor.jsx",
-                                            lineNumber: 187,
+                                            lineNumber: 150,
                                             columnNumber: 17
                                         }, this)),
                                     files.length === 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
@@ -536,19 +418,19 @@ function TemplateCodeEditor({ template }) {
                                         children: "No files"
                                     }, void 0, false, {
                                         fileName: "[project]/components/admin/template-code-editor.jsx",
-                                        lineNumber: 205,
+                                        lineNumber: 168,
                                         columnNumber: 38
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/admin/template-code-editor.jsx",
-                                lineNumber: 185,
+                                lineNumber: 148,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/admin/template-code-editor.jsx",
-                        lineNumber: 180,
+                        lineNumber: 143,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -558,7 +440,7 @@ function TemplateCodeEditor({ template }) {
                             children: "Select a file to edit"
                         }, void 0, false, {
                             fileName: "[project]/components/admin/template-code-editor.jsx",
-                            lineNumber: 213,
+                            lineNumber: 176,
                             columnNumber: 13
                         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$monaco$2d$editor$2f$react$2f$dist$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__["default"], {
                             height: "100%",
@@ -582,17 +464,17 @@ function TemplateCodeEditor({ template }) {
                                 children: "Loading editor…"
                             }, void 0, false, {
                                 fileName: "[project]/components/admin/template-code-editor.jsx",
-                                lineNumber: 223,
+                                lineNumber: 186,
                                 columnNumber: 24
                             }, void 0)
                         }, void 0, false, {
                             fileName: "[project]/components/admin/template-code-editor.jsx",
-                            lineNumber: 215,
+                            lineNumber: 178,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/components/admin/template-code-editor.jsx",
-                        lineNumber: 211,
+                        lineNumber: 174,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -605,20 +487,20 @@ function TemplateCodeEditor({ template }) {
                                         children: "Live Preview"
                                     }, void 0, false, {
                                         fileName: "[project]/components/admin/template-code-editor.jsx",
-                                        lineNumber: 231,
+                                        lineNumber: 194,
                                         columnNumber: 13
                                     }, this),
                                     previewing ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$loader$2d$circle$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Loader2$3e$__["Loader2"], {
                                         className: "h-3.5 w-3.5 animate-spin"
                                     }, void 0, false, {
                                         fileName: "[project]/components/admin/template-code-editor.jsx",
-                                        lineNumber: 232,
+                                        lineNumber: 195,
                                         columnNumber: 27
                                     }, this) : null
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/admin/template-code-editor.jsx",
-                                lineNumber: 230,
+                                lineNumber: 193,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("iframe", {
@@ -628,25 +510,25 @@ function TemplateCodeEditor({ template }) {
                                 className: "w-full flex-1 border-0 bg-white"
                             }, void 0, false, {
                                 fileName: "[project]/components/admin/template-code-editor.jsx",
-                                lineNumber: 234,
+                                lineNumber: 197,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/admin/template-code-editor.jsx",
-                        lineNumber: 229,
+                        lineNumber: 192,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/admin/template-code-editor.jsx",
-                lineNumber: 179,
+                lineNumber: 142,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/admin/template-code-editor.jsx",
-        lineNumber: 119,
+        lineNumber: 120,
         columnNumber: 5
     }, this);
 }

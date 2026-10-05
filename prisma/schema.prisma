@@ -60,6 +60,12 @@ enum RsvpMode {
   RSVP_FIRST   // Guest must submit RSVP before QR is shown
 }
 
+// Aturan kuota kehadiran per undangan
+enum QuotaMode {
+  STRICT     // check-in tidak boleh melebihi kuota (grup yang sudah penuh ditolak)
+  FLEXIBLE   // jumlah hadir boleh melebihi kuota
+}
+
 enum GiftType {
   MONEY
   GOODS
@@ -116,6 +122,7 @@ model User {
   resetToken     String?      @unique
   resetTokenExp  DateTime?
   messageTemplates MessageTemplate[]
+  testimonials     Testimonial[]     @relation("UserTestimonials")
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
   @@index([roleId])
@@ -204,7 +211,12 @@ model Invitation {
 
   // Event settings
   rsvpMode              RsvpMode  @default(QR_FIRST)
+  // Aturan kuota kehadiran: STRICT = tidak boleh melebihi kuota, FLEXIBLE = boleh lebih
+  quotaMode             QuotaMode @default(FLEXIBLE)
   selfieVerification    Boolean   @default(false)
+  // Phase 2 — RSVP and Message forms are independently toggleable on the public invitation.
+  rsvpEnabled           Boolean   @default(true)
+  messageEnabled        Boolean   @default(true)
 
   // Multi-domain routing
   customDomain          String?   @unique
@@ -220,6 +232,7 @@ model Invitation {
   tvAnimationEnabled    Boolean   @default(true)
   tvFontSize            String    @default("large")   // small / medium / large / xlarge
   tvFullscreen          Boolean   @default(true)
+  tvCategoryColors      Json?
 
   guests          Guest[]
   gallery         GalleryImage[]
@@ -265,6 +278,10 @@ model Guest {
   sideId        String?
   side          GuestSideOption? @relation(fields: [sideId], references: [id], onDelete: SetNull)
   token         String       @unique  // used in URL, encoded in QR
+  // Phase 2 — separate, human-readable tracking code (GST-XX-0001). NOT a replacement for id/token.
+  trackingCode  String?      // unique within invitation
+  // Phase 2 — URL-safe guest-name slug for public links (?to=<nameSlug>). Separate from id/token/trackingCode.
+  nameSlug      String?      // unique within invitation
   checkedInAt   DateTime?    // used for INDIVIDUAL first check-in timestamp
   checkedInCount Int         @default(0)  // number of check-ins (GROUP can be >1)
   rsvps         Rsvp[]
@@ -273,6 +290,8 @@ model Guest {
   souvenirDistributions SouvenirDistribution[]
   createdAt     DateTime     @default(now())
   updatedAt     DateTime     @updatedAt
+  @@unique([invitationId, trackingCode])
+  @@unique([invitationId, nameSlug])
   @@index([invitationId])
   @@index([categoryId])
   @@index([sideId])
@@ -316,6 +335,7 @@ model CheckIn {
   deviceId     String?
   device       Device?      @relation(fields: [deviceId], references: [id], onDelete: SetNull)
   operatorName String?
+  tableName    String? 
   selfieUrl    String?      @db.Text
   count        Int          @default(1)  // number of persons checked in during this event
   createdAt    DateTime     @default(now())
@@ -362,13 +382,16 @@ model Rsvp {
   invitationId  String
   invitation    Invitation   @relation(fields: [invitationId], references: [id], onDelete: Cascade)
   guestId       String?
-  guest         Guest?       @relation(fields: [guestId], references: [id], onDelete: SetNull)
+  // Hapus tamu → RSVP ikut terhapus
+  guest         Guest?       @relation(fields: [guestId], references: [id], onDelete: Cascade)
   name          String
   attendance    Attendance   @default(ATTENDING)
   rsvpType      RsvpType     @default(INDIVIDUAL)
   guestCount    Int          @default(1)
   message       String?      @db.Text
   customData    Json?
+  // Phase 2 — message-only submission (guest sent a wish without an RSVP). Excluded from RSVP stats.
+  isMessageOnly Boolean      @default(false)
   createdAt     DateTime     @default(now())
   @@index([invitationId])
   @@index([guestId])
@@ -435,7 +458,8 @@ model GiftEntry {
   invitationId String
   invitation   Invitation @relation(fields: [invitationId], references: [id], onDelete: Cascade)
   guestId      String?
-  guest        Guest?     @relation(fields: [guestId], references: [id], onDelete: SetNull)
+  // Hapus tamu → catatan hadiah ikut terhapus
+  guest        Guest?     @relation(fields: [guestId], references: [id], onDelete: Cascade)
   kind         GiftType   @default(MONEY)
   amount       Decimal?   @db.Decimal(14, 2)
   itemName     String?
@@ -477,7 +501,8 @@ model SouvenirDistribution {
   souvenirId   String
   souvenir     Souvenir   @relation(fields: [souvenirId], references: [id], onDelete: Cascade)
   guestId      String?
-  guest        Guest?     @relation(fields: [guestId], references: [id], onDelete: SetNull)
+  // Hapus tamu → distribusi suvenir ikut terhapus (sisa suvenir otomatis kembali)
+  guest        Guest?     @relation(fields: [guestId], references: [id], onDelete: Cascade)
   checkInId    String?
   quantity     Int        @default(1)
   operatorName String?
@@ -514,6 +539,10 @@ model Testimonial {
   avatar    String?  @db.Text
   active    Boolean  @default(true)
   order     Int      @default(0)
+  // Phase 2 — owner-scoped ratings. null = admin/global testimonial (existing behavior preserved).
+  userId    String?
+  user      User?    @relation("UserTestimonials", fields: [userId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  @@index([userId])
 }

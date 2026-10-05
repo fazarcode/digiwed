@@ -218,6 +218,7 @@ const { handlers, auth, signIn, signOut } = (0, __TURBOPACK__imported__module__$
 "[project]/app/api/invitations/[id]/guests/import-template/route.js [app-route] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
 
+// app/api/invitations/[id]/guests/import-template/route.js
 __turbopack_context__.s([
     "GET",
     ()=>GET
@@ -225,61 +226,124 @@ __turbopack_context__.s([
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/server.js [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$xlsx$2f$xlsx$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/xlsx/xlsx.mjs [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$auth$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/auth.js [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$prisma$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/lib/prisma.js [app-route] (ecmascript)");
 ;
 ;
 ;
-async function GET() {
+;
+async function GET(request, { params }) {
     const s = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$auth$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["auth"])();
     if (!s) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-        error: 'Unauthorized'
+        error: "Unauthorized"
     }, {
         status: 401
     });
+    const p = await params;
+    // Pastikan undangan milik user, lalu ambil Guest Side & kategori miliknya untuk contoh/petunjuk.
+    const inv = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$prisma$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].invitation.findFirst({
+        where: {
+            id: p.id,
+            userId: s.user.id
+        },
+        select: {
+            id: true
+        }
+    });
+    if (!inv) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+        error: "Not found"
+    }, {
+        status: 404
+    });
+    const [sides, cats] = await Promise.all([
+        __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$prisma$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].guestSideOption.findMany({
+            where: {
+                invitationId: p.id,
+                enabled: true
+            },
+            orderBy: [
+                {
+                    order: "asc"
+                },
+                {
+                    name: "asc"
+                }
+            ]
+        }),
+        __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$prisma$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].guestCategory.findMany({
+            where: {
+                enabled: true,
+                OR: [
+                    {
+                        invitationId: null
+                    },
+                    {
+                        invitationId: p.id
+                    }
+                ]
+            },
+            orderBy: [
+                {
+                    order: "asc"
+                },
+                {
+                    name: "asc"
+                }
+            ]
+        })
+    ]);
+    const sideNames = sides.map((x)=>x.name);
+    const catNames = cats.map((x)=>x.name);
+    // Contoh memakai nama sisi/kategori yang benar-benar ada; jika belum ada, pakai nama umum.
+    const sideA = sideNames[0] || "Groom Side";
+    const sideB = sideNames[1] || sideNames[0] || "Bride Side";
+    const catA = catNames[0] || "Family";
+    const catB = catNames[1] || catNames[0] || "Friend";
+    // Header kolom sengaja tetap dalam bahasa Inggris agar terbaca oleh pemetaan otomatis di dialog impor.
     const headers = [
-        'Name',
-        'Phone',
-        'GuestType',
-        'GuestCount',
-        'Gender',
-        'GuestSide',
-        'Category'
+        "Name",
+        "Phone",
+        "GuestType",
+        "GuestCount",
+        "Gender",
+        "GuestSide",
+        "Category"
     ];
     const example = [
         [
-            'John Doe',
-            '+62 812-3456-7890',
-            'INDIVIDUAL',
+            "John Doe",
+            "+62 812-3456-7890",
+            "INDIVIDUAL",
             1,
-            'MALE',
-            'GROOM',
-            'Family'
+            "MALE",
+            sideA,
+            catA
         ],
         [
-            'Jane Smith',
-            '+62 812-1111-2222',
-            'INDIVIDUAL',
+            "Jane Smith",
+            "+62 812-1111-2222",
+            "INDIVIDUAL",
             1,
-            'FEMALE',
-            'BRIDE',
-            'Friend'
+            "FEMALE",
+            sideB,
+            catB
         ],
         [
-            'Smith Family',
-            '+62 812-3333-4444',
-            'GROUP',
+            "Smith Family",
+            "+62 812-3333-4444",
+            "GROUP",
             4,
-            'OTHER',
-            'BOTH',
-            'VIP'
+            "OTHER",
+            sideA,
+            catA
         ],
         [
-            'Parents of Bride',
-            '+62 812-5555-6666',
-            'GROUP',
+            "Parents of Bride",
+            "+62 812-5555-6666",
+            "GROUP",
             6,
-            'OTHER',
-            'PARENTS',
-            'Family'
+            "OTHER",
+            sideB,
+            catA
         ]
     ];
     const wb = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$xlsx$2f$xlsx$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__["utils"].book_new();
@@ -287,7 +351,7 @@ async function GET() {
         headers,
         ...example
     ]);
-    ws['!cols'] = [
+    ws["!cols"] = [
         {
             wch: 20
         },
@@ -304,59 +368,68 @@ async function GET() {
             wch: 8
         },
         {
-            wch: 12
+            wch: 18
         },
         {
             wch: 14
         }
     ];
-    __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$xlsx$2f$xlsx$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__["utils"].book_append_sheet(wb, ws, 'Guests');
-    // Notes sheet with valid values
+    __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$xlsx$2f$xlsx$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__["utils"].book_append_sheet(wb, ws, "Guests");
+    // Sheet petunjuk dengan nilai yang diperbolehkan
     const notes = [
         [
-            'Field',
-            'Allowed Values'
+            "Kolom",
+            "Nilai yang Diperbolehkan"
         ],
         [
-            'GuestType',
-            'INDIVIDUAL, GROUP'
+            "GuestType",
+            "INDIVIDUAL (perorangan), GROUP (kelompok/keluarga)"
         ],
         [
-            'Gender',
-            'MALE, FEMALE, OTHER'
+            "Gender",
+            "MALE (laki-laki), FEMALE (perempuan), OTHER (lainnya)"
         ],
         [
-            'GuestSide',
-            'GROOM, BRIDE, BOTH, PARENTS'
+            "GuestSide",
+            "Teks bebas: nama Pihak Tamu (tidak peka huruf besar/kecil). Pihak yang sudah ada akan dicocokkan, sedangkan nama baru dibuat otomatis untuk undangan ini."
         ],
         [
-            'Category',
-            'Any existing category name (case-insensitive). Unknown names are stored as free text.'
+            "Category",
+            "Nama kategori yang sudah ada (tidak peka huruf besar/kecil). Nama yang tidak dikenal disimpan sebagai teks bebas."
         ],
         [
-            'GuestCount',
-            'Positive integer. For INDIVIDUAL, forced to 1 at check-in. For GROUP, this is the expected size.'
+            "GuestCount",
+            "Bilangan bulat positif. Untuk INDIVIDUAL, otomatis menjadi 1 saat check-in. Untuk GROUP, ini adalah jumlah orang yang diharapkan."
+        ],
+        [],
+        [
+            "Pihak Tamu yang Ada",
+            sideNames.length ? sideNames.join(", ") : "(belum ada - akan dibuat otomatis dari isi file)"
+        ],
+        [
+            "Kategori yang Ada",
+            catNames.length ? catNames.join(", ") : "(belum ada)"
         ]
     ];
     const nws = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$xlsx$2f$xlsx$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__["utils"].aoa_to_sheet(notes);
-    nws['!cols'] = [
+    nws["!cols"] = [
         {
-            wch: 14
+            wch: 22
         },
         {
             wch: 80
         }
     ];
-    __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$xlsx$2f$xlsx$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__["utils"].book_append_sheet(wb, nws, 'Instructions');
+    __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$xlsx$2f$xlsx$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__["utils"].book_append_sheet(wb, nws, "Petunjuk");
     const buf = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$xlsx$2f$xlsx$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__["write"](wb, {
-        type: 'buffer',
-        bookType: 'xlsx'
+        type: "buffer",
+        bookType: "xlsx"
     });
     return new __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"](buf, {
         status: 200,
         headers: {
-            'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-            'Content-Disposition': 'attachment; filename="guest-import-template.xlsx"'
+            "Content-Type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            "Content-Disposition": 'attachment; filename="guest-import-template.xlsx"'
         }
     });
 }

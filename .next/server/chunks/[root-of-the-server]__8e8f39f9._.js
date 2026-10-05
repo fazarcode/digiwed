@@ -309,9 +309,12 @@ async function PATCH(request, { params }) {
         "templateId",
         "rsvpMode",
         "selfieVerification",
+        "rsvpEnabled",
+        "messageEnabled",
         "customDomain",
         "subdomain",
-        "packageId"
+        "packageId",
+        "quotaMode"
     ];
     const data = {};
     for (const k of allowed)if (body[k] !== undefined) data[k] = body[k];
@@ -321,6 +324,8 @@ async function PATCH(request, { params }) {
         "RSVP_FIRST"
     ].includes(data.rsvpMode)) delete data.rsvpMode;
     if (data.selfieVerification !== undefined) data.selfieVerification = !!data.selfieVerification;
+    if (data.rsvpEnabled !== undefined) data.rsvpEnabled = !!data.rsvpEnabled;
+    if (data.messageEnabled !== undefined) data.messageEnabled = !!data.messageEnabled;
     // Normalize domain fields
     if ("customDomain" in data) {
         const v = String(data.customDomain || "").trim().toLowerCase();
@@ -429,7 +434,8 @@ async function PATCH(request, { params }) {
                 slug: updated.slug,
                 customDomain: updated.customDomain,
                 subdomain: updated.subdomain,
-                packageId: updated.packageId
+                packageId: updated.packageId,
+                quotaMode: updated.quotaMode
             }
         });
     } catch (e) {

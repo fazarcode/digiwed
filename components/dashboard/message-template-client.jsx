@@ -1,5 +1,5 @@
 "use client";
-import { useMemo, useState, useEffect } from "react"; // Tambahkan useEffect
+import { useMemo, useState, useEffect } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Copy, Save, RotateCcw, Send } from "lucide-react";
@@ -16,8 +16,6 @@ export default function MessageTemplateClient({
   const [saving, setSaving] = useState(false);
   const [selectedId, setSelectedId] = useState(invitations[0]?.id || "");
   const selectedInv = invitations.find((i) => i.id === selectedId);
-
-  // Ganti baris origin lama dengan state & useEffect ini:
   const [origin, setOrigin] = useState("");
 
   useEffect(() => {
@@ -27,7 +25,7 @@ export default function MessageTemplateClient({
   const previewCtx = useMemo(() => {
     if (!selectedInv) return null;
     const guest = selectedInv.sampleGuest || {
-      name: "Alex Doe",
+      name: "Budi Santoso",
       token: "sample-token",
       quota: 2,
       category: "VIP",
@@ -36,10 +34,7 @@ export default function MessageTemplateClient({
   }, [selectedInv, origin]);
 
   const preview = useMemo(
-    () =>
-      previewCtx
-        ? renderTemplate(template, previewCtx)
-        : renderTemplate(template, {}),
+    () => renderTemplate(template, previewCtx || {}),
     [template, previewCtx],
   );
 
@@ -58,8 +53,8 @@ export default function MessageTemplateClient({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ template }),
       });
-      if (!res.ok) throw new Error("Save failed");
-      toast.success("Message template saved");
+      if (!res.ok) throw new Error("Gagal menyimpan");
+      toast.success("Template pesan berhasil disimpan");
     } catch (e) {
       toast.error(e.message);
     } finally {
@@ -68,30 +63,34 @@ export default function MessageTemplateClient({
   };
 
   const reset = async () => {
-    if (
-      !confirm(
-        "Reset to the default template? Your customization will be replaced.",
-      )
-    )
+    if (!confirm("Kembalikan ke template bawaan? Perubahan Anda akan diganti."))
       return;
-    const res = await fetch("/api/message-template", { method: "DELETE" });
-    const data = await res.json();
-    setTemplate(data.template || defaultTemplate);
-    toast.success("Reverted to default template");
+    try {
+      const res = await fetch("/api/message-template", { method: "DELETE" });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error();
+      setTemplate(data.template || defaultTemplate);
+      toast.success("Template dikembalikan ke bawaan");
+    } catch {
+      toast.error("Gagal mengembalikan template");
+    }
   };
 
   const copyPreview = async () => {
     try {
       await navigator.clipboard.writeText(preview);
-      toast.success("Message copied to clipboard");
+      toast.success("Pesan berhasil disalin");
     } catch {
-      toast.error("Failed to copy");
+      toast.error("Gagal menyalin pesan");
     }
   };
 
   const openWhatsApp = () => {
-    const msg = encodeURIComponent(preview);
-    window.open(`https://wa.me/?text=${msg}`, "_blank");
+    window.open(
+      `https://wa.me/?text=${encodeURIComponent(preview)}`,
+      "_blank",
+      "noopener,noreferrer",
+    );
   };
 
   return (
@@ -100,11 +99,11 @@ export default function MessageTemplateClient({
       <div className="space-y-4 rounded-2xl bg-white border border-primary/10 p-5">
         <div className="flex items-center justify-between">
           <p className="text-xs uppercase tracking-widest text-muted-foreground">
-            Your Template
+            Template Anda
           </p>
           {isCustom && (
             <span className="text-[10px] uppercase tracking-widest px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700">
-              Custom
+              Kustom
             </span>
           )}
         </div>
@@ -117,7 +116,7 @@ export default function MessageTemplateClient({
         />
         <div>
           <p className="text-xs uppercase tracking-widest text-muted-foreground mb-2">
-            Placeholders — click to insert
+            Placeholder — klik untuk menyisipkan
           </p>
           <div className="flex flex-wrap gap-1.5">
             {PLACEHOLDER_LIST.map((p) => (
@@ -140,24 +139,24 @@ export default function MessageTemplateClient({
             disabled={saving}
             className="bg-primary"
           >
-            <Save className="h-4 w-4 mr-1.5" />{" "}
-            {saving ? "Saving…" : "Save Template"}
+            <Save className="h-4 w-4 mr-1.5" />
+            {saving ? "Menyimpan…" : "Simpan Template"}
           </Button>
           <Button
             data-testid="reset-template-btn"
             onClick={reset}
             variant="outline"
           >
-            <RotateCcw className="h-4 w-4 mr-1.5" /> Reset Default
+            <RotateCcw className="h-4 w-4 mr-1.5" /> Kembalikan ke Bawaan
           </Button>
         </div>
       </div>
 
-      {/* Preview */}
+      {/* Pratinjau */}
       <div className="space-y-3 rounded-2xl bg-white border border-primary/10 p-5">
         <div className="flex items-center justify-between">
           <p className="text-xs uppercase tracking-widest text-muted-foreground">
-            Live Preview
+            Pratinjau Langsung
           </p>
           <div className="flex gap-1">
             <Button
@@ -166,7 +165,7 @@ export default function MessageTemplateClient({
               variant="ghost"
               onClick={copyPreview}
             >
-              <Copy className="h-3.5 w-3.5 mr-1" /> Copy
+              <Copy className="h-3.5 w-3.5 mr-1" /> Salin
             </Button>
             <Button
               data-testid="open-whatsapp-btn"
@@ -174,7 +173,7 @@ export default function MessageTemplateClient({
               variant="ghost"
               onClick={openWhatsApp}
             >
-              <Send className="h-3.5 w-3.5 mr-1 text-emerald-600" /> Open
+              <Send className="h-3.5 w-3.5 mr-1 text-emerald-600" /> Buka
               WhatsApp
             </Button>
           </div>
@@ -183,7 +182,7 @@ export default function MessageTemplateClient({
         {invitations.length > 1 && (
           <div>
             <label className="text-xs text-muted-foreground">
-              Preview for invitation:
+              Pratinjau untuk undangan:
             </label>
             <select
               value={selectedId}
@@ -193,7 +192,8 @@ export default function MessageTemplateClient({
             >
               {invitations.map((i) => (
                 <option key={i.id} value={i.id}>
-                  {i.brideName} & {i.groomName}
+                  {[i.brideName, i.groomName].filter(Boolean).join(" & ") ||
+                    "Tanpa nama"}
                 </option>
               ))}
             </select>
@@ -202,8 +202,8 @@ export default function MessageTemplateClient({
 
         {invitations.length === 0 && (
           <div className="rounded-md border bg-muted/30 p-3 text-xs text-muted-foreground">
-            Create an invitation first to see a real preview. Placeholders will
-            remain unfilled.
+            Buat undangan terlebih dahulu untuk melihat pratinjau sebenarnya.
+            Placeholder akan tetap kosong.
           </div>
         )}
 
@@ -216,7 +216,7 @@ export default function MessageTemplateClient({
 
         {selectedInv?.sampleGuest && (
           <p className="text-xs text-muted-foreground">
-            Sample guest:{" "}
+            Tamu contoh:{" "}
             <span className="font-medium">{selectedInv.sampleGuest.name}</span>
           </p>
         )}

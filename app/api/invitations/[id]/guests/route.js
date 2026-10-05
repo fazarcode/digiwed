@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { auth } from '@/auth';
 import prisma from '@/lib/prisma';
 import { makeGuestToken } from '@/lib/slug';
+import { assignGuestCodes } from '@/lib/guest-codes';
 
 async function guard(id, userId) { return prisma.invitation.findFirst({ where: { id, userId }, select: { id: true } }); }
 
@@ -16,6 +17,7 @@ export async function GET(request, { params }) {
   });
   const mapped = items.map(g => ({
     id: g.id, name: g.name, phone: g.phone, token: g.token,
+    trackingCode: g.trackingCode, nameSlug: g.nameSlug,
     guestType: g.guestType, gender: g.gender, guestSide: g.guestSide,
     categoryId: g.categoryId, category: g.category?.name || g.categoryText || null,
     sideId: g.sideId, sideName: g.side?.name || null,
@@ -61,16 +63,29 @@ export async function POST(request, { params }) {
     if (side) resolvedSideId = side.id;
   }
 
-  const guest = await prisma.guest.create({
-    data: {
-      invitationId: p.id,
-      name, phone: phone || null,
-      guestType, gender: gender || null, guestSide: guestSide || null,
-      sideId: resolvedSideId,
-      quota: finalQuota, priorityOverride: finalPriority,
-      categoryId: resolvedCategoryId, categoryText: legacyText,
-      token: makeGuestToken(),
-    },
-  });
+  const invMeta = await prisma.invitation.findUnique({ where: { id: p.id }, select: { brideName: true, groomName: true } });
+
+  let guest = null;
+  for (let attempt = 0; attempt < 6; attempt++) {
+    const { trackingCode, nameSlug } = await assignGuestCodes(prisma, p.id, name, invMeta?.brideName, invMeta?.groomName, attempt);
+    try {
+      guest = await prisma.guest.create({
+        data: {
+          invitationId: p.id,
+          name, phone: phone || null,
+          guestType, gender: gender || null, guestSide: guestSide || null,
+          sideId: resolvedSideId,
+          quota: finalQuota, priorityOverride: finalPriority,
+          categoryId: resolvedCategoryId, categoryText: legacyText,
+          token: makeGuestToken(),
+          trackingCode, nameSlug,
+        },
+      });
+      break;
+    } catch (e) {
+      if (e.code === 'P2002' && attempt < 5) continue; // unique race on trackingCode/nameSlug -> retry
+      throw e;
+    }
+  }
   return NextResponse.json({ item: guest });
 }

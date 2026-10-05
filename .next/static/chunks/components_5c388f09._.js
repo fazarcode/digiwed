@@ -266,118 +266,123 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/ui/label.jsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/ui/button.jsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/sonner/dist/index.mjs [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$qr$2d$code$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__QrCode$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/qr-code.js [app-client] (ecmascript) <export default as QrCode>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$camera$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Camera$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/camera.js [app-client] (ecmascript) <export default as Camera>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$circle$2d$check$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__CheckCircle2$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/circle-check.js [app-client] (ecmascript) <export default as CheckCircle2>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$circle$2d$alert$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__AlertCircle$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/circle-alert.js [app-client] (ecmascript) <export default as AlertCircle>");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$scan$2d$line$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__ScanLine$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/scan-line.js [app-client] (ecmascript) <export default as ScanLine>");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$plus$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Plus$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/plus.js [app-client] (ecmascript) <export default as Plus>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$users$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Users$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/users.js [app-client] (ecmascript) <export default as Users>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$user$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__User$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/user.js [app-client] (ecmascript) <export default as User>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$refresh$2d$cw$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__RefreshCw$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/refresh-cw.js [app-client] (ecmascript) <export default as RefreshCw>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$circle$2d$stop$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__StopCircle$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/circle-stop.js [app-client] (ecmascript) <export default as StopCircle>");
 ;
 var _s = __turbopack_context__.k.signature();
-'use client';
+"use client";
 ;
 ;
 ;
 ;
 ;
 ;
+const extractToken = (text)=>{
+    let tok = String(text || "").trim();
+    const m = tok.match(/[?&]guest=([\w-]+)/);
+    if (m) return m[1];
+    try {
+        const t = new URL(tok).searchParams.get("guest");
+        if (t) return t;
+    } catch (e) {}
+    return tok;
+};
 function CheckInClient(param) {
-    let { invitations, devices: initialDevices, operator, deviceId, hideSetup = false, onCheckedIn } = param;
-    var _initialDevices_, _pending_invitation;
+    let { invitations = [], operator = "", deviceId = "", tableName = "", onCheckedIn } = param;
     _s();
-    const [devices, setDevices] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(initialDevices);
-    const [selectedDevice, setSelectedDevice] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(((_initialDevices_ = initialDevices[0]) === null || _initialDevices_ === void 0 ? void 0 : _initialDevices_.id) || '');
-    const [operatorName, setOperatorName] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('');
-    // Feature G2: when the unified page provides operator/device, use them (shared across tabs).
-    const effOperator = operator !== undefined ? operator || '' : operatorName;
-    const effDevice = deviceId !== undefined ? deviceId || '' : selectedDevice;
-    const [mode, setMode] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('manual');
-    const [token, setToken] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('');
-    const [pending, setPending] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
+    const [pending, setPending] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null); // hanya dipakai bila undangan wajib selfie
     const [result, setResult] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     const [scanning, setScanning] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
-    const [groupCount, setGroupCount] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(1);
-    const [individualCount, setIndividualCount] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(1);
+    const [count, setCount] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(1);
     const [selfieDataUrl, setSelfieDataUrl] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
-    const [showAddDevice, setShowAddDevice] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
-    const [newDeviceName, setNewDeviceName] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('');
+    const [selfieCamOn, setSelfieCamOn] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const html5QrRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
-    const scanLockRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(false); // Prevents duplicate scans while showing result
+    const scanLockRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(false);
+    const pendingRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
     const videoRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
     const streamRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
+    // simpan nilai terbaru agar callback scanner tidak memakai state lama
+    const ctx = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])({});
+    ctx.current = {
+        operator,
+        deviceId,
+        tableName,
+        onCheckedIn
+    };
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "CheckInClient.useEffect": ()=>{
+            pendingRef.current = pending;
+        }
+    }["CheckInClient.useEffect"], [
+        pending
+    ]);
     const totalChecked = invitations.reduce((s, i)=>s + i.checkedIn, 0);
     const totalGuests = invitations.reduce((s, i)=>s + i.totalGuests, 0);
     const totalCheckIns = invitations.reduce((s, i)=>s + i.totalCheckIns, 0);
-    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "CheckInClient.useEffect": ()=>{
-            try {
-                setOperatorName(localStorage.getItem('checkin.operator') || '');
-                const d = localStorage.getItem('checkin.device');
-                if (d && initialDevices.find({
-                    "CheckInClient.useEffect": (x)=>x.id === d
-                }["CheckInClient.useEffect"])) setSelectedDevice(d);
-            } catch (e) {}
-        }
-    }["CheckInClient.useEffect"], []);
-    const persistHint = ()=>{
-        try {
-            localStorage.setItem('checkin.operator', effOperator);
-            localStorage.setItem('checkin.device', effDevice);
-        } catch (e) {}
+    const postCheckin = async (body)=>{
+        const { operator, deviceId, tableName } = ctx.current;
+        const res = await fetch("/api/guests/lookup/checkin", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                ...body,
+                deviceId: deviceId || null,
+                operatorName: operator.trim(),
+                tableName: tableName || null
+            })
+        });
+        const data = await res.json().catch(()=>({}));
+        return {
+            res,
+            data
+        };
     };
-    // ---- Auto check-in flow (used by continuous scanner) ----
+    // ---- Check-in otomatis (dipanggil scanner kamera) ----
     const autoCheckin = async (token)=>{
-        if (!effOperator.trim()) {
-            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error('Enter operator name first');
+        var _g_invitation, _ctx_current_onCheckedIn, _ctx_current;
+        if (!ctx.current.operator.trim()) {
+            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error("Isi operator dulu");
             return;
         }
         const info = await fetch("/api/guests/lookup/checkin?token=".concat(encodeURIComponent(token))).then((r)=>r.json()).catch(()=>null);
         if (!(info === null || info === void 0 ? void 0 : info.guest)) {
             setResult({
                 ok: false,
-                message: (info === null || info === void 0 ? void 0 : info.error) || 'Guest not found'
+                message: (info === null || info === void 0 ? void 0 : info.error) || "Tamu tidak ditemukan"
             });
             return;
         }
         const g = info.guest;
-        if (g.invitation.selfieVerification) {
-            // Fall back to manual confirmation flow (need selfie)
+        if ((_g_invitation = g.invitation) === null || _g_invitation === void 0 ? void 0 : _g_invitation.selfieVerification) {
+            setCount(g.guestType === "GROUP" ? Math.min(g.quota || 2, 2) : 1);
             setPending(g);
-            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].info('Selfie required — confirm manually below');
+            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].info("Selfie diperlukan — konfirmasi di bawah");
             return;
         }
-        if (g.guestType === 'INDIVIDUAL' && g.checkedInAt) {
+        if (g.guestType === "INDIVIDUAL" && g.checkedInAt) {
             setResult({
                 ok: false,
-                message: 'Already checked in.',
+                message: "Sudah check-in sebelumnya.",
                 guest: g
             });
             return;
         }
-        // Use guest.quota as count (default 1). For GROUP: use quota as count.
-        const count = Math.max(1, Math.min(g.quota || 1, 50));
-        persistHint();
-        const res = await fetch('/api/guests/lookup/checkin', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                token: g.token,
-                deviceId: effDevice || null,
-                operatorName: effOperator.trim(),
-                count
-            })
+        const c = Math.max(1, Math.min(g.quota || 1, 50));
+        const { res, data } = await postCheckin({
+            token: g.token,
+            count: c
         });
-        const data = await res.json();
         if (!res.ok) {
             setResult({
                 ok: false,
-                message: data.error,
+                message: data.error || "Check-in gagal",
                 guest: data.guest
             });
             return;
@@ -385,105 +390,53 @@ function CheckInClient(param) {
         setResult({
             ok: true,
             guest: data.guest,
-            count
+            count: c
         });
-        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].success("✓ ".concat(data.guest.name, " (+").concat(count, ")"));
-        onCheckedIn === null || onCheckedIn === void 0 ? void 0 : onCheckedIn(data.guest, count, data.checkInId);
+        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].success("✓ ".concat(data.guest.name, " (+").concat(c, ")"));
+        (_ctx_current_onCheckedIn = (_ctx_current = ctx.current).onCheckedIn) === null || _ctx_current_onCheckedIn === void 0 ? void 0 : _ctx_current_onCheckedIn.call(_ctx_current, data.guest, c, data.checkInId);
     };
-    // ---- Manual lookup + confirm flow ----
-    const lookup = async (t)=>{
-        setResult(null);
-        setPending(null);
-        setSelfieDataUrl(null);
-        setGroupCount(1);
-        setIndividualCount(1);
-        const info = await fetch("/api/guests/lookup/checkin?token=".concat(encodeURIComponent(t))).then((r)=>r.json()).catch(()=>null);
-        if (!(info === null || info === void 0 ? void 0 : info.guest)) return setResult({
-            ok: false,
-            message: (info === null || info === void 0 ? void 0 : info.error) || 'Guest not found'
-        });
-        if (info.guest.guestType === 'INDIVIDUAL' && info.guest.checkedInAt) {
-            return setResult({
-                ok: false,
-                message: 'This individual guest has already checked in.',
-                guest: info.guest
-            });
-        }
-        setIndividualCount(Math.min(1, info.guest.quota || 1));
-        setGroupCount(Math.min(info.guest.quota || 2, 2));
-        setPending(info.guest);
-    };
-    const confirm = async ()=>{
+    // ---- Konfirmasi (khusus tamu yang butuh selfie) ----
+    const confirmCheckin = async ()=>{
+        var _ctx_current_onCheckedIn, _ctx_current;
         if (!pending) return;
-        if (!effOperator.trim()) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error('Please enter operator name');
-        if (pending.invitation.selfieVerification && !selfieDataUrl) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error('Selfie is required for this event');
-        persistHint();
-        const rawCount = pending.guestType === 'GROUP' ? groupCount : individualCount;
-        const count = Math.max(1, Math.min(rawCount, pending.quota || 1, 50));
-        const body = {
+        if (!selfieDataUrl) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error("Selfie wajib untuk acara ini");
+        const c = Math.max(1, Math.min(count, pending.quota || 1, 50));
+        const { res, data } = await postCheckin({
             token: pending.token,
-            deviceId: effDevice || null,
-            operatorName: effOperator.trim(),
-            count,
-            selfieDataUrl: pending.invitation.selfieVerification ? selfieDataUrl : null
-        };
-        const res = await fetch("/api/guests/lookup/checkin", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(body)
+            count: c,
+            selfieDataUrl
         });
-        const data = await res.json();
         if (!res.ok) return setResult({
             ok: false,
-            message: data.error,
+            message: data.error || "Check-in gagal",
             guest: data.guest
         });
         setResult({
             ok: true,
             guest: data.guest,
-            count
+            count: c
         });
         setPending(null);
         setSelfieDataUrl(null);
-        setToken('');
-        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].success("✓ ".concat(data.guest.name, " checked in"));
-        onCheckedIn === null || onCheckedIn === void 0 ? void 0 : onCheckedIn(data.guest, count, data.checkInId);
+        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].success("✓ ".concat(data.guest.name, " sudah check-in"));
+        (_ctx_current_onCheckedIn = (_ctx_current = ctx.current).onCheckedIn) === null || _ctx_current_onCheckedIn === void 0 ? void 0 : _ctx_current_onCheckedIn.call(_ctx_current, data.guest, c, data.checkInId);
     };
-    const submitManual = (e)=>{
-        e.preventDefault();
-        if (!token) return;
-        lookup(token);
-    };
-    // ---- Continuous Scanner ----
     const startScanner = async ()=>{
-        if (!effOperator.trim()) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error('Please enter operator name first');
+        if (!operator.trim()) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error("Isi operator dulu");
         setScanning(true);
         try {
             const { Html5Qrcode } = await __turbopack_context__.A("[project]/node_modules/html5-qrcode/esm/index.js [app-client] (ecmascript, async loader)");
-            html5QrRef.current = new Html5Qrcode('qr-reader');
+            html5QrRef.current = new Html5Qrcode("qr-reader");
             await html5QrRef.current.start({
-                facingMode: 'environment'
+                facingMode: "environment"
             }, {
                 fps: 10,
                 qrbox: 250
             }, async (text)=>{
-                if (scanLockRef.current) return;
+                if (scanLockRef.current || pendingRef.current) return;
                 scanLockRef.current = true;
                 try {
-                    // Robust token extraction: try full URL, then fall back to regex, then raw text
-                    let tok = String(text || '').trim();
-                    const m = tok.match(/[?&]guest=([\w-]+)/);
-                    if (m) tok = m[1];
-                    else {
-                        try {
-                            const u = new URL(text);
-                            const t = u.searchParams.get('guest');
-                            if (t) tok = t;
-                        } catch (e) {}
-                    }
-                    await autoCheckin(tok);
+                    await autoCheckin(extractToken(text));
                 } finally{
                     setTimeout(()=>{
                         scanLockRef.current = false;
@@ -492,7 +445,7 @@ function CheckInClient(param) {
                 }
             });
         } catch (e) {
-            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error('Camera access denied or unavailable');
+            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error("Akses kamera ditolak atau tidak tersedia");
             setScanning(false);
         }
     };
@@ -509,344 +462,75 @@ function CheckInClient(param) {
         scanLockRef.current = false;
         setScanning(false);
     };
+    const stopSelfieStream = ()=>{
+        var _streamRef_current;
+        (_streamRef_current = streamRef.current) === null || _streamRef_current === void 0 ? void 0 : _streamRef_current.getTracks().forEach((t)=>t.stop());
+        streamRef.current = null;
+        setSelfieCamOn(false);
+    };
     const startSelfieCamera = async ()=>{
         try {
             const stream = await navigator.mediaDevices.getUserMedia({
                 video: {
-                    facingMode: 'user'
+                    facingMode: "user"
                 }
             });
             streamRef.current = stream;
-            if (videoRef.current) {
-                videoRef.current.srcObject = stream;
-                await videoRef.current.play();
-            }
+            setSelfieCamOn(true);
+            setTimeout(async ()=>{
+                if (videoRef.current) {
+                    videoRef.current.srcObject = stream;
+                    try {
+                        await videoRef.current.play();
+                    } catch (e) {}
+                }
+            }, 0);
         } catch (e) {
-            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error('Cannot access selfie camera');
+            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error("Tidak bisa mengakses kamera selfie");
         }
     };
     const captureSelfie = ()=>{
         if (!videoRef.current) return;
-        const canvas = document.createElement('canvas');
+        const canvas = document.createElement("canvas");
         canvas.width = videoRef.current.videoWidth;
         canvas.height = videoRef.current.videoHeight;
-        canvas.getContext('2d').drawImage(videoRef.current, 0, 0);
-        setSelfieDataUrl(canvas.toDataURL('image/jpeg', 0.7));
-        if (streamRef.current) {
-            streamRef.current.getTracks().forEach((t)=>t.stop());
-            streamRef.current = null;
-        }
+        canvas.getContext("2d").drawImage(videoRef.current, 0, 0);
+        setSelfieDataUrl(canvas.toDataURL("image/jpeg", 0.7));
+        stopSelfieStream();
     };
-    const addDevice = async ()=>{
-        if (!newDeviceName.trim()) return;
-        const res = await fetch('/api/devices', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                name: newDeviceName.trim()
-            })
-        });
-        const data = await res.json();
-        if (!res.ok) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error(data.error);
-        setDevices((d)=>[
-                data.item,
-                ...d
-            ]);
-        setSelectedDevice(data.item.id);
-        setNewDeviceName('');
-        setShowAddDevice(false);
-        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].success('Device added');
+    const cancelPending = ()=>{
+        setPending(null);
+        setSelfieDataUrl(null);
+        stopSelfieStream();
     };
-    const delDevice = async (id)=>{
-        if (!confirm('Delete this device?')) return;
-        await fetch("/api/devices/".concat(id), {
-            method: 'DELETE'
-        });
-        setDevices((d)=>d.filter((x)=>x.id !== id));
-        if (selectedDevice === id) setSelectedDevice('');
-    };
-    // Cleanup on unmount / route change
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "CheckInClient.useEffect": ()=>{
-            const handleUnload = {
-                "CheckInClient.useEffect.handleUnload": ()=>{
+            const cleanup = {
+                "CheckInClient.useEffect.cleanup": ()=>{
                     stopScanner();
-                    if (streamRef.current) streamRef.current.getTracks().forEach({
-                        "CheckInClient.useEffect.handleUnload": (t)=>t.stop()
-                    }["CheckInClient.useEffect.handleUnload"]);
+                    stopSelfieStream();
                 }
-            }["CheckInClient.useEffect.handleUnload"];
-            window.addEventListener('beforeunload', handleUnload);
+            }["CheckInClient.useEffect.cleanup"];
+            window.addEventListener("beforeunload", cleanup);
             return ({
                 "CheckInClient.useEffect": ()=>{
-                    handleUnload();
-                    window.removeEventListener('beforeunload', handleUnload);
+                    cleanup();
+                    window.removeEventListener("beforeunload", cleanup);
                 }
             })["CheckInClient.useEffect"];
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         }
     }["CheckInClient.useEffect"], []);
-    const selfieRequired = pending === null || pending === void 0 ? void 0 : (_pending_invitation = pending.invitation) === null || _pending_invitation === void 0 ? void 0 : _pending_invitation.selfieVerification;
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "grid gap-6 lg:grid-cols-3",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "lg:col-span-2 space-y-6",
                 children: [
-                    !hideSetup && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "rounded-2xl bg-white border p-6",
-                        children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "text-xs uppercase tracking-widest text-muted-foreground mb-3",
-                                children: "Operator & Device"
-                            }, void 0, false, {
-                                fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                lineNumber: 182,
-                                columnNumber: 11
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "grid gap-3 sm:grid-cols-2",
-                                children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
-                                                children: "Operator Name*"
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                                lineNumber: 184,
-                                                columnNumber: 18
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
-                                                value: operatorName,
-                                                onChange: (e)=>setOperatorName(e.target.value),
-                                                placeholder: "e.g. Sarah"
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                                lineNumber: 184,
-                                                columnNumber: 47
-                                            }, this)
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                        lineNumber: 184,
-                                        columnNumber: 13
-                                    }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
-                                                children: "Device"
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                                lineNumber: 185,
-                                                columnNumber: 18
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                className: "flex gap-2",
-                                                children: [
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
-                                                        value: selectedDevice,
-                                                        onChange: (e)=>setSelectedDevice(e.target.value),
-                                                        className: "flex-1 h-10 px-3 rounded-md border text-sm",
-                                                        children: [
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
-                                                                value: "",
-                                                                children: "— Select Device —"
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                                                lineNumber: 188,
-                                                                columnNumber: 19
-                                                            }, this),
-                                                            devices.map((d)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
-                                                                    value: d.id,
-                                                                    children: d.name
-                                                                }, d.id, false, {
-                                                                    fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                                                    lineNumber: 189,
-                                                                    columnNumber: 37
-                                                                }, this))
-                                                        ]
-                                                    }, void 0, true, {
-                                                        fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                                        lineNumber: 187,
-                                                        columnNumber: 17
-                                                    }, this),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
-                                                        size: "sm",
-                                                        variant: "outline",
-                                                        onClick: ()=>setShowAddDevice((v)=>!v),
-                                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$plus$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Plus$3e$__["Plus"], {
-                                                            className: "h-4 w-4"
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                                            lineNumber: 191,
-                                                            columnNumber: 95
-                                                        }, this)
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                                        lineNumber: 191,
-                                                        columnNumber: 17
-                                                    }, this)
-                                                ]
-                                            }, void 0, true, {
-                                                fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                                lineNumber: 186,
-                                                columnNumber: 15
-                                            }, this)
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                        lineNumber: 185,
-                                        columnNumber: 13
-                                    }, this)
-                                ]
-                            }, void 0, true, {
-                                fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                lineNumber: 183,
-                                columnNumber: 11
-                            }, this),
-                            showAddDevice && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "mt-3 flex gap-2",
-                                children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
-                                        value: newDeviceName,
-                                        onChange: (e)=>setNewDeviceName(e.target.value),
-                                        placeholder: "Device name (e.g. iPad #1)",
-                                        onKeyDown: (e)=>e.key === 'Enter' && addDevice()
-                                    }, void 0, false, {
-                                        fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                        lineNumber: 197,
-                                        columnNumber: 15
-                                    }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
-                                        size: "sm",
-                                        onClick: addDevice,
-                                        className: "bg-primary",
-                                        children: "Add"
-                                    }, void 0, false, {
-                                        fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                        lineNumber: 198,
-                                        columnNumber: 15
-                                    }, this)
-                                ]
-                            }, void 0, true, {
-                                fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                lineNumber: 196,
-                                columnNumber: 13
-                            }, this)
-                        ]
-                    }, void 0, true, {
-                        fileName: "[project]/components/dashboard/check-in-client.jsx",
-                        lineNumber: 181,
-                        columnNumber: 9
-                    }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "rounded-2xl bg-white border p-6",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "flex gap-2 mb-4",
-                                children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
-                                        variant: mode === 'manual' ? 'default' : 'outline',
-                                        onClick: ()=>{
-                                            setMode('manual');
-                                            stopScanner();
-                                        },
-                                        className: mode === 'manual' ? 'bg-primary' : '',
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$qr$2d$code$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__QrCode$3e$__["QrCode"], {
-                                                className: "h-4 w-4 mr-1"
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                                lineNumber: 206,
-                                                columnNumber: 177
-                                            }, this),
-                                            "Manual"
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                        lineNumber: 206,
-                                        columnNumber: 13
-                                    }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
-                                        variant: mode === 'camera' ? 'default' : 'outline',
-                                        onClick: ()=>setMode('camera'),
-                                        className: mode === 'camera' ? 'bg-primary' : '',
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$camera$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Camera$3e$__["Camera"], {
-                                                className: "h-4 w-4 mr-1"
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                                lineNumber: 207,
-                                                columnNumber: 157
-                                            }, this),
-                                            "Camera Scan"
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                        lineNumber: 207,
-                                        columnNumber: 13
-                                    }, this)
-                                ]
-                            }, void 0, true, {
-                                fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                lineNumber: 205,
-                                columnNumber: 11
-                            }, this),
-                            mode === 'manual' && !pending && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
-                                onSubmit: submitManual,
-                                className: "space-y-3",
-                                children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
-                                                children: "Guest Token"
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                                lineNumber: 212,
-                                                columnNumber: 20
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
-                                                value: token,
-                                                onChange: (e)=>setToken(e.target.value),
-                                                placeholder: "e.g. abc123xyz",
-                                                className: "font-mono"
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                                lineNumber: 212,
-                                                columnNumber: 46
-                                            }, this)
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                        lineNumber: 212,
-                                        columnNumber: 15
-                                    }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
-                                        type: "submit",
-                                        className: "bg-primary",
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$scan$2d$line$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__ScanLine$3e$__["ScanLine"], {
-                                                className: "h-4 w-4 mr-1"
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                                lineNumber: 213,
-                                                columnNumber: 60
-                                            }, this),
-                                            "Lookup Guest"
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                        lineNumber: 213,
-                                        columnNumber: 15
-                                    }, this)
-                                ]
-                            }, void 0, true, {
-                                fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                lineNumber: 211,
-                                columnNumber: 13
-                            }, this),
-                            mode === 'camera' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "space-y-3",
                                 children: !scanning ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "text-center py-6",
@@ -855,31 +539,31 @@ function CheckInClient(param) {
                                             className: "h-10 w-10 mx-auto text-muted-foreground mb-2"
                                         }, void 0, false, {
                                             fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                            lineNumber: 221,
-                                            columnNumber: 19
+                                            lineNumber: 241,
+                                            columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                             className: "text-xs text-muted-foreground mb-3",
-                                            children: "Camera stays on until you press Stop. Scans continue after each check-in."
+                                            children: "Kamera tetap menyala sampai kamu menekan Stop. Scan berlanjut setelah tiap check-in."
                                         }, void 0, false, {
                                             fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                            lineNumber: 222,
-                                            columnNumber: 19
+                                            lineNumber: 242,
+                                            columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
                                             onClick: startScanner,
                                             className: "bg-primary",
-                                            children: "Open Camera"
+                                            children: "Buka Kamera"
                                         }, void 0, false, {
                                             fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                            lineNumber: 223,
-                                            columnNumber: 19
+                                            lineNumber: 246,
+                                            columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                    lineNumber: 220,
-                                    columnNumber: 17
+                                    lineNumber: 240,
+                                    columnNumber: 15
                                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -887,8 +571,8 @@ function CheckInClient(param) {
                                             className: "w-full max-w-md mx-auto rounded-lg overflow-hidden"
                                         }, void 0, false, {
                                             fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                            lineNumber: 227,
-                                            columnNumber: 19
+                                            lineNumber: 252,
+                                            columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
                                             variant: "outline",
@@ -899,34 +583,34 @@ function CheckInClient(param) {
                                                     className: "h-4 w-4 mr-1"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                                    lineNumber: 228,
-                                                    columnNumber: 84
+                                                    lineNumber: 261,
+                                                    columnNumber: 19
                                                 }, this),
-                                                "Stop Camera"
+                                                "Matikan Kamera"
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                            lineNumber: 228,
-                                            columnNumber: 19
+                                            lineNumber: 256,
+                                            columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                             className: "text-xs text-muted-foreground mt-2",
-                                            children: "Scans automatically resume 1.7s after each result. Duplicate scans are locked."
+                                            children: "Scan otomatis lanjut 1,7 detik setelah tiap hasil. Scan ganda dikunci."
                                         }, void 0, false, {
                                             fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                            lineNumber: 229,
-                                            columnNumber: 19
+                                            lineNumber: 264,
+                                            columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                    lineNumber: 226,
-                                    columnNumber: 17
+                                    lineNumber: 251,
+                                    columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                lineNumber: 218,
-                                columnNumber: 13
+                                lineNumber: 238,
+                                columnNumber: 11
                             }, this),
                             pending && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "space-y-4 mt-4",
@@ -937,136 +621,99 @@ function CheckInClient(param) {
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                 className: "flex items-center gap-2",
                                                 children: [
-                                                    pending.guestType === 'GROUP' ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$users$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Users$3e$__["Users"], {
+                                                    pending.guestType === "GROUP" ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$users$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Users$3e$__["Users"], {
                                                         className: "h-5 w-5 text-primary"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                                        lineNumber: 239,
-                                                        columnNumber: 52
+                                                        lineNumber: 277,
+                                                        columnNumber: 21
                                                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$user$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__User$3e$__["User"], {
                                                         className: "h-5 w-5 text-primary"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                                        lineNumber: 239,
-                                                        columnNumber: 100
+                                                        lineNumber: 279,
+                                                        columnNumber: 21
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                         className: "font-serif text-xl font-bold",
                                                         children: pending.name
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                                        lineNumber: 240,
+                                                        lineNumber: 281,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                        className: "text-xs px-2 py-0.5 rounded-full ".concat(pending.guestType === 'GROUP' ? 'bg-primary text-white' : 'bg-muted text-foreground'),
-                                                        children: pending.guestType
+                                                        className: "text-xs px-2 py-0.5 rounded-full bg-primary text-white",
+                                                        children: pending.guestType === "GROUP" ? "Grup" : "Individu"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                                        lineNumber: 241,
+                                                        lineNumber: 282,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                                lineNumber: 238,
+                                                lineNumber: 275,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                 className: "text-sm text-muted-foreground mt-1",
                                                 children: [
-                                                    pending.category || 'No category',
-                                                    " • Quota: ",
+                                                    (pending.category && typeof pending.category === "object" ? pending.category.name : pending.category) || "Tanpa kategori",
+                                                    " ",
+                                                    "• Kuota: ",
                                                     pending.quota
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                                lineNumber: 243,
+                                                lineNumber: 286,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                        lineNumber: 237,
+                                        lineNumber: 274,
                                         columnNumber: 15
                                     }, this),
-                                    pending.guestType === 'INDIVIDUAL' ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    (pending.quota || 1) > 1 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
-                                                children: "Number of Attendees"
+                                                children: "Jumlah hadir"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                                lineNumber: 248,
-                                                columnNumber: 19
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
-                                                type: "number",
-                                                min: 1,
-                                                max: pending.quota || 1,
-                                                value: individualCount,
-                                                onChange: (e)=>setIndividualCount(parseInt(e.target.value, 10) || 1),
-                                                disabled: (pending.quota || 1) <= 1
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                                lineNumber: 249,
-                                                columnNumber: 19
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                className: "text-xs text-muted-foreground mt-1",
-                                                children: [
-                                                    "1..",
-                                                    pending.quota || 1,
-                                                    " (bounded by guest quota)"
-                                                ]
-                                            }, void 0, true, {
-                                                fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                                lineNumber: 250,
-                                                columnNumber: 19
-                                            }, this)
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                        lineNumber: 247,
-                                        columnNumber: 17
-                                    }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
-                                                children: "Group Attendees for this check-in"
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                                lineNumber: 254,
+                                                lineNumber: 296,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
                                                 type: "number",
                                                 min: 1,
                                                 max: pending.quota || 50,
-                                                value: groupCount,
-                                                onChange: (e)=>setGroupCount(parseInt(e.target.value, 10) || 1)
+                                                value: count,
+                                                onChange: (e)=>setCount(parseInt(e.target.value, 10) || 1)
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                                lineNumber: 255,
+                                                lineNumber: 297,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                        lineNumber: 253,
+                                        lineNumber: 295,
                                         columnNumber: 17
                                     }, this),
-                                    selfieRequired && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
-                                                children: "Selfie Verification (required)"
+                                                children: "Verifikasi Selfie (wajib)"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                                lineNumber: 261,
-                                                columnNumber: 19
+                                                lineNumber: 310,
+                                                columnNumber: 17
                                             }, this),
                                             !selfieDataUrl ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                 className: "space-y-2",
                                                 children: [
-                                                    !streamRef.current && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
+                                                    !selfieCamOn && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
                                                         size: "sm",
                                                         variant: "outline",
                                                         onClick: startSelfieCamera,
@@ -1075,42 +722,46 @@ function CheckInClient(param) {
                                                                 className: "h-4 w-4 mr-1"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                                                lineNumber: 264,
-                                                                columnNumber: 110
+                                                                lineNumber: 319,
+                                                                columnNumber: 25
                                                             }, this),
-                                                            "Start Camera"
+                                                            "Nyalakan Kamera"
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                                        lineNumber: 264,
-                                                        columnNumber: 46
-                                                    }, this),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("video", {
-                                                        ref: videoRef,
-                                                        className: "w-full max-w-xs rounded-lg",
-                                                        autoPlay: true,
-                                                        muted: true,
-                                                        playsInline: true
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                                        lineNumber: 265,
+                                                        lineNumber: 314,
                                                         columnNumber: 23
                                                     }, this),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
-                                                        size: "sm",
-                                                        onClick: captureSelfie,
-                                                        className: "bg-primary",
-                                                        children: "Capture Selfie"
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                                        lineNumber: 266,
-                                                        columnNumber: 23
-                                                    }, this)
+                                                    selfieCamOn && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
+                                                        children: [
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("video", {
+                                                                ref: videoRef,
+                                                                className: "w-full max-w-xs rounded-lg",
+                                                                autoPlay: true,
+                                                                muted: true,
+                                                                playsInline: true
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/components/dashboard/check-in-client.jsx",
+                                                                lineNumber: 325,
+                                                                columnNumber: 25
+                                                            }, this),
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
+                                                                size: "sm",
+                                                                onClick: captureSelfie,
+                                                                className: "bg-primary",
+                                                                children: "Ambil Selfie"
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/components/dashboard/check-in-client.jsx",
+                                                                lineNumber: 332,
+                                                                columnNumber: 25
+                                                            }, this)
+                                                        ]
+                                                    }, void 0, true)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                                lineNumber: 263,
-                                                columnNumber: 21
+                                                lineNumber: 312,
+                                                columnNumber: 19
                                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                 className: "space-y-2",
                                                 children: [
@@ -1120,8 +771,8 @@ function CheckInClient(param) {
                                                         className: "max-w-xs rounded-lg border"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                                        lineNumber: 270,
-                                                        columnNumber: 23
+                                                        lineNumber: 344,
+                                                        columnNumber: 21
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
                                                         size: "sm",
@@ -1135,82 +786,78 @@ function CheckInClient(param) {
                                                                 className: "h-3.5 w-3.5 mr-1"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                                                lineNumber: 271,
-                                                                columnNumber: 124
+                                                                lineNumber: 357,
+                                                                columnNumber: 23
                                                             }, this),
-                                                            "Retake"
+                                                            "Ulangi"
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                                        lineNumber: 271,
-                                                        columnNumber: 23
+                                                        lineNumber: 349,
+                                                        columnNumber: 21
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                                lineNumber: 269,
-                                                columnNumber: 21
+                                                lineNumber: 343,
+                                                columnNumber: 19
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                        lineNumber: 260,
-                                        columnNumber: 17
+                                        lineNumber: 309,
+                                        columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         className: "flex gap-2",
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
                                                 variant: "outline",
-                                                onClick: ()=>{
-                                                    setPending(null);
-                                                    setSelfieDataUrl(null);
-                                                    setToken('');
-                                                },
-                                                children: "Cancel"
+                                                onClick: cancelPending,
+                                                children: "Batal"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                                lineNumber: 278,
+                                                lineNumber: 365,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
-                                                onClick: confirm,
+                                                onClick: confirmCheckin,
                                                 className: "bg-emerald-600",
                                                 children: [
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$circle$2d$check$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__CheckCircle2$3e$__["CheckCircle2"], {
                                                         className: "h-4 w-4 mr-1"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                                        lineNumber: 279,
-                                                        columnNumber: 70
+                                                        lineNumber: 369,
+                                                        columnNumber: 19
                                                     }, this),
-                                                    "Confirm Check-in"
+                                                    "Konfirmasi Check-in"
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                                lineNumber: 279,
+                                                lineNumber: 368,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                        lineNumber: 277,
+                                        lineNumber: 364,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                lineNumber: 236,
+                                lineNumber: 273,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/dashboard/check-in-client.jsx",
-                        lineNumber: 204,
+                        lineNumber: 237,
                         columnNumber: 9
                     }, this),
                     result && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "rounded-2xl border-2 p-6 ".concat(result.ok ? 'bg-emerald-50 border-emerald-300' : 'bg-red-50 border-red-300'),
+                        className: "rounded-2xl border-2 p-6 ".concat(result.ok ? "bg-emerald-50 border-emerald-300" : "bg-red-50 border-red-300"),
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "flex items-start gap-3",
                             children: [
@@ -1218,23 +865,23 @@ function CheckInClient(param) {
                                     className: "h-8 w-8 text-emerald-600 flex-shrink-0"
                                 }, void 0, false, {
                                     fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                    lineNumber: 288,
-                                    columnNumber: 28
+                                    lineNumber: 383,
+                                    columnNumber: 17
                                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$circle$2d$alert$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__AlertCircle$3e$__["AlertCircle"], {
                                     className: "h-8 w-8 text-red-600 flex-shrink-0"
                                 }, void 0, false, {
                                     fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                    lineNumber: 288,
-                                    columnNumber: 98
+                                    lineNumber: 385,
+                                    columnNumber: 17
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                             className: "font-serif text-xl font-bold",
-                                            children: result.ok ? "Checked In".concat(result.count > 1 ? " (× ".concat(result.count, ")") : '', "!") : result.message
+                                            children: result.ok ? "Sudah Check-in".concat(result.count > 1 ? " (× ".concat(result.count, ")") : "", "!") : result.message
                                         }, void 0, false, {
                                             fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                            lineNumber: 290,
+                                            lineNumber: 388,
                                             columnNumber: 17
                                         }, this),
                                         result.guest && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1242,30 +889,30 @@ function CheckInClient(param) {
                                             children: result.guest.name
                                         }, void 0, false, {
                                             fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                            lineNumber: 291,
-                                            columnNumber: 34
+                                            lineNumber: 394,
+                                            columnNumber: 19
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                    lineNumber: 289,
+                                    lineNumber: 387,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/dashboard/check-in-client.jsx",
-                            lineNumber: 287,
+                            lineNumber: 381,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/components/dashboard/check-in-client.jsx",
-                        lineNumber: 286,
+                        lineNumber: 378,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/dashboard/check-in-client.jsx",
-                lineNumber: 179,
+                lineNumber: 236,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1273,10 +920,10 @@ function CheckInClient(param) {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: "text-xs uppercase tracking-widest text-muted-foreground",
-                        children: "Statistics"
+                        children: "Statistik"
                     }, void 0, false, {
                         fileName: "[project]/components/dashboard/check-in-client.jsx",
-                        lineNumber: 299,
+                        lineNumber: 405,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1292,32 +939,32 @@ function CheckInClient(param) {
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                lineNumber: 300,
-                                columnNumber: 74
+                                lineNumber: 410,
+                                columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/dashboard/check-in-client.jsx",
-                        lineNumber: 300,
+                        lineNumber: 408,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: "text-sm text-muted-foreground mt-1",
-                        children: "Unique guests checked in"
+                        children: "Tamu unik yang sudah check-in"
                     }, void 0, false, {
                         fileName: "[project]/components/dashboard/check-in-client.jsx",
-                        lineNumber: 301,
+                        lineNumber: 412,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: "text-xs text-muted-foreground mt-1",
                         children: [
-                            "Total check-in events: ",
+                            "Total kejadian check-in: ",
                             totalCheckIns
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/dashboard/check-in-client.jsx",
-                        lineNumber: 302,
+                        lineNumber: 415,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1336,8 +983,8 @@ function CheckInClient(param) {
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                                lineNumber: 306,
-                                                columnNumber: 53
+                                                lineNumber: 422,
+                                                columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 className: "font-medium",
@@ -1348,13 +995,13 @@ function CheckInClient(param) {
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                                lineNumber: 306,
-                                                columnNumber: 95
+                                                lineNumber: 425,
+                                                columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                        lineNumber: 306,
+                                        lineNumber: 421,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1362,51 +1009,51 @@ function CheckInClient(param) {
                                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             className: "h-full bg-emerald-500",
                                             style: {
-                                                width: i.totalGuests ? "".concat(i.checkedIn / i.totalGuests * 100, "%") : '0%'
+                                                width: i.totalGuests ? "".concat(i.checkedIn / i.totalGuests * 100, "%") : "0%"
                                             }
                                         }, void 0, false, {
                                             fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                            lineNumber: 307,
-                                            columnNumber: 81
+                                            lineNumber: 430,
+                                            columnNumber: 17
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                        lineNumber: 307,
+                                        lineNumber: 429,
                                         columnNumber: 15
                                     }, this),
                                     i.selfieVerification && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                         className: "text-[10px] uppercase tracking-widest text-primary/70 mt-0.5",
-                                        children: "◉ Selfie verification enabled"
+                                        children: "◉ Verifikasi selfie aktif"
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                        lineNumber: 308,
-                                        columnNumber: 40
+                                        lineNumber: 440,
+                                        columnNumber: 17
                                     }, this)
                                 ]
                             }, i.id, true, {
                                 fileName: "[project]/components/dashboard/check-in-client.jsx",
-                                lineNumber: 305,
+                                lineNumber: 420,
                                 columnNumber: 13
                             }, this))
                     }, void 0, false, {
                         fileName: "[project]/components/dashboard/check-in-client.jsx",
-                        lineNumber: 303,
+                        lineNumber: 418,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/dashboard/check-in-client.jsx",
-                lineNumber: 298,
+                lineNumber: 404,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/dashboard/check-in-client.jsx",
-        lineNumber: 178,
+        lineNumber: 235,
         columnNumber: 5
     }, this);
 }
-_s(CheckInClient, "yUDU7HUOIHTyjZ5sKdOyuQleujI=");
+_s(CheckInClient, "quLdYSQ0Gwa54I8VpNuGC2+XLAM=");
 _c = CheckInClient;
 var _c;
 __turbopack_context__.k.register(_c, "CheckInClient");
@@ -1429,12 +1076,17 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$re
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$user$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__User$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/user.js [app-client] (ecmascript) <export default as User>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$users$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Users$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/users.js [app-client] (ecmascript) <export default as Users>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$file$2d$down$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__FileDown$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/file-down.js [app-client] (ecmascript) <export default as FileDown>");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$pencil$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Pencil$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/pencil.js [app-client] (ecmascript) <export default as Pencil>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$user$2d$check$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__UserCheck$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/user-check.js [app-client] (ecmascript) <export default as UserCheck>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$trash$2d$2$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Trash2$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/trash-2.js [app-client] (ecmascript) <export default as Trash2>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/ui/label.jsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/ui/dialog.jsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/sonner/dist/index.mjs [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$xlsx$2f$xlsx$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/xlsx/xlsx.mjs [app-client] (ecmascript)");
+(()=>{
+    const e = new Error("Cannot find module '@/components/dashboard/attendance-extras'");
+    e.code = 'MODULE_NOT_FOUND';
+    throw e;
+})();
 ;
 var _s = __turbopack_context__.k.signature();
 "use client";
@@ -1446,8 +1098,14 @@ var _s = __turbopack_context__.k.signature();
 ;
 ;
 ;
+;
+// ISO -> nilai untuk <input type="datetime-local"> dalam waktu lokal (bukan UTC)
+const toLocalInput = (iso)=>{
+    const d = new Date(iso);
+    return new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 16);
+};
 function AttendanceClient(param) {
-    let { invitations, devices, categories = [], operator = "" } = param;
+    let { invitations, devices, categories = [], operator = "", tableName = "", deviceId: operatorDeviceId = "" } = param;
     _s();
     const [items, setItems] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([]);
     const [totals, setTotals] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({
@@ -1460,26 +1118,24 @@ function AttendanceClient(param) {
     const [deviceId, setDeviceId] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
     const [categoryId, setCategoryId] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
     const [q, setQ] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
-    const [debouncedQ, setDebouncedQ] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(""); // <-- State baru untuk auto-search
+    const [debouncedQ, setDebouncedQ] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
     const [statusFilter, setStatusFilter] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("all");
     const [preview, setPreview] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
-    const [editing, setEditing] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null); // { checkInId, attendees, operatorName, checkedInAt }
+    const [editing, setEditing] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     const [savingEdit, setSavingEdit] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
-    const [adding, setAdding] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null); // { guestToken, count, operatorName, deviceId }
-    // Pagination states
+    const extrasRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
+    // Pagination
     const [page, setPage] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(1);
     const [limit, setLimit] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(10);
     const [totalPages, setTotalPages] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(1);
     const [totalItems, setTotalItems] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(0);
-    // ==========================================
-    // FITUR: Auto-fetch Search dengan Debounce (500ms)
-    // ==========================================
+    // Pencarian otomatis dengan debounce (500ms)
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "AttendanceClient.useEffect": ()=>{
             const timer = setTimeout({
                 "AttendanceClient.useEffect.timer": ()=>{
                     setDebouncedQ(q);
-                    setPage(1); // Reset ke halaman 1 tiap kali pencarian berubah
+                    setPage(1);
                 }
             }["AttendanceClient.useEffect.timer"], 500);
             return ({
@@ -1495,9 +1151,8 @@ function AttendanceClient(param) {
         if (invitationId) params.set("invitationId", invitationId);
         if (deviceId) params.set("deviceId", deviceId);
         if (categoryId) params.set("categoryId", categoryId);
-        if (debouncedQ) params.set("q", debouncedQ); // <-- Gunakan debouncedQ
+        if (debouncedQ) params.set("q", debouncedQ);
         if (statusFilter !== "all") params.set("status", statusFilter);
-        // Append pagination params
         params.set("page", page);
         params.set("limit", limit);
         try {
@@ -1514,28 +1169,88 @@ function AttendanceClient(param) {
             setTotalItems(data.total || data.totalItems || ((_data_items = data.items) === null || _data_items === void 0 ? void 0 : _data_items.length) || 0);
         } catch (error) {
             console.error("Gagal memuat data kehadiran:", error);
+            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error("Gagal memuat data kehadiran");
         } finally{
             setLoading(false);
+        }
+    };
+    // Dipakai untuk SEMUA tamu (sudah maupun belum hadir)
+    const openAttendance = async (x)=>{
+        const isIn = x.status === "CHECKED_IN";
+        setEditing({
+            checkInId: isIn ? x.id.replace(/^ci-/, "") : null,
+            guestToken: x.guestToken,
+            guestName: x.guestName,
+            guestId: x.guestId || null,
+            invitationId: x.invitationId || null,
+            attendees: isIn ? x.attendees || 1 : 1,
+            operatorName: x.operatorName || operator || "",
+            tableName: x.tableName || tableName || "",
+            checkedInAt: isIn && x.checkedInAt ? toLocalInput(x.checkedInAt) : ""
+        });
+        // Ambil id tamu & id undangan (dibutuhkan untuk suvenir/hadiah) bila belum ada di data tabel
+        if (!x.guestId || !x.invitationId) {
+            try {
+                const r = await fetch("/api/guests/lookup/checkin?token=".concat(encodeURIComponent(x.guestToken)));
+                const d = await r.json();
+                if (d === null || d === void 0 ? void 0 : d.guest) {
+                    setEditing((s)=>{
+                        var _d_guest_invitation;
+                        return s && s.guestToken === x.guestToken ? {
+                            ...s,
+                            guestId: d.guest.id,
+                            invitationId: ((_d_guest_invitation = d.guest.invitation) === null || _d_guest_invitation === void 0 ? void 0 : _d_guest_invitation.id) || s.invitationId
+                        } : s;
+                    });
+                }
+            } catch (e) {}
         }
     };
     const saveEdit = async ()=>{
         if (!editing) return;
         setSavingEdit(true);
         try {
-            const res = await fetch("/api/attendance/".concat(editing.checkInId), {
-                method: "PATCH",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    count: editing.attendees,
-                    operatorName: editing.operatorName,
-                    createdAt: editing.checkedInAt ? new Date(editing.checkedInAt).toISOString() : undefined
-                })
-            });
+            var _data_guest, _extrasRef_current;
+            let res;
+            if (editing.checkInId) {
+                // sudah hadir → koreksi data
+                res = await fetch("/api/attendance/".concat(editing.checkInId), {
+                    method: "PATCH",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        count: editing.attendees,
+                        operatorName: editing.operatorName,
+                        tableName: editing.tableName || null,
+                        createdAt: editing.checkedInAt ? new Date(editing.checkedInAt).toISOString() : undefined
+                    })
+                });
+            } else {
+                // belum hadir → tandai hadir
+                res = await fetch("/api/guests/lookup/checkin", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        token: editing.guestToken,
+                        count: editing.attendees || 1,
+                        operatorName: editing.operatorName || operator || null,
+                        tableName: editing.tableName || null,
+                        deviceId: operatorDeviceId || null
+                    })
+                });
+            }
             const data = await res.json();
-            if (!res.ok) throw new Error(data.error || "Save failed");
-            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].success("Attendance updated");
+            if (!res.ok) throw new Error(data.error || "Gagal menyimpan");
+            // Simpan suvenir / hadiah yang diisi (jika ada)
+            await ((_extrasRef_current = extrasRef.current) === null || _extrasRef_current === void 0 ? void 0 : _extrasRef_current.saveAll({
+                guestId: editing.guestId || ((_data_guest = data.guest) === null || _data_guest === void 0 ? void 0 : _data_guest.id) || null,
+                guestName: editing.guestName,
+                checkInId: editing.checkInId || data.checkInId || null
+            }));
+            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].success("Kehadiran disimpan");
             setEditing(null);
             load();
         } catch (e) {
@@ -1545,49 +1260,22 @@ function AttendanceClient(param) {
         }
     };
     const deleteCheckIn = async (checkInId)=>{
-        if (!confirm("Delete this check-in record?")) return;
+        if (!confirm("Hapus catatan check-in ini?")) return;
         const res = await fetch("/api/attendance/".concat(checkInId), {
             method: "DELETE"
         });
         if (!res.ok) {
             const d = await res.json().catch(()=>({}));
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error(d.error || "Delete failed");
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error(d.error || "Gagal menghapus");
         }
-        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].success("Check-in deleted");
+        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].success("Check-in dihapus");
         load();
     };
-    const addCheckIn = async ()=>{
-        if (!(adding === null || adding === void 0 ? void 0 : adding.guestToken)) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error("Select a guest");
-        setSavingEdit(true);
-        try {
-            const res = await fetch("/api/guests/lookup/checkin", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    token: adding.guestToken,
-                    count: adding.count || 1,
-                    operatorName: adding.operatorName || operator || null,
-                    deviceId: adding.deviceId || null
-                })
-            });
-            const d = await res.json();
-            if (!res.ok) throw new Error(d.error || "Failed to add attendance");
-            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].success("Attendance added");
-            setAdding(null);
-            load();
-        } catch (e) {
-            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error(e.message);
-        } finally{
-            setSavingEdit(false);
-        }
-    };
-    const notCheckedInOptions = items.filter((x)=>x.status === "NOT_CHECKED_IN");
-    // Panggil load setiap kali filter atau pagination berubah
+    // Muat ulang setiap kali filter atau pagination berubah
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "AttendanceClient.useEffect": ()=>{
             load();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         }
     }["AttendanceClient.useEffect"], [
         invitationId,
@@ -1597,14 +1285,7 @@ function AttendanceClient(param) {
         page,
         limit,
         debouncedQ
-    ]); // <-- debouncedQ masuk ke dependencies
-    const handleSearch = ()=>{
-        if (page !== 1) {
-            setPage(1);
-        } else {
-            load();
-        }
-    };
+    ]);
     const exportXlsx = async ()=>{
         if (totalItems === 0) {
             alert("Tidak ada data kehadiran untuk diekspor!");
@@ -1633,9 +1314,10 @@ function AttendanceClient(param) {
                     "Tipe Tamu": x.guestType === "GROUP" ? "Grup" : "Individu",
                     Kategori: x.category || "-",
                     "Jumlah Hadir": x.status === "CHECKED_IN" ? Number(x.attendees || 0) : 0,
-                    "Status Kehadiran": x.status === "CHECKED_IN" ? "Checked-in" : "Not Checked-in",
+                    "Status Kehadiran": x.status === "CHECKED_IN" ? "Sudah Check-in" : "Belum Check-in",
                     "Waktu Check-in": x.checkedInAt ? new Date(x.checkedInAt).toLocaleString("id-ID") : "-",
                     Operator: x.operatorName || "-",
+                    Meja: x.tableName || "-",
                     "Perangkat / Device": x.deviceName || "-"
                 }));
             excelData.push({});
@@ -1649,31 +1331,32 @@ function AttendanceClient(param) {
                 "Status Kehadiran": "",
                 "Waktu Check-in": "",
                 Operator: "",
+                Meja: "",
                 "Perangkat / Device": ""
             });
             excelData.push({
                 "No.": "",
                 "Nama Tamu": "- Total Data Ditampilkan",
                 "Tipe Tamu": exportItems.length,
-                Kategori: "Records"
+                Kategori: "Data"
             });
             excelData.push({
                 "No.": "",
-                "Nama Tamu": "- Total Attendees (Orang Hadir)",
+                "Nama Tamu": "- Total Kehadiran (Orang Hadir)",
                 "Tipe Tamu": totals.totalAttendees,
                 Kategori: "Orang"
             });
             excelData.push({
                 "No.": "",
-                "Nama Tamu": "- Total Checked-in",
+                "Nama Tamu": "- Total Sudah Check-in",
                 "Tipe Tamu": totals.totalCheckedIn,
-                Kategori: "Event"
+                Kategori: "Kejadian"
             });
             excelData.push({
                 "No.": "",
-                "Nama Tamu": "- Total Not Checked-in",
+                "Nama Tamu": "- Total Belum Check-in",
                 "Tipe Tamu": totals.totalNotCheckedIn,
-                Kategori: "Event"
+                Kategori: "Kejadian"
             });
             const worksheet = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$xlsx$2f$xlsx$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["utils"].json_to_sheet(excelData);
             worksheet["!cols"] = [
@@ -1702,6 +1385,9 @@ function AttendanceClient(param) {
                     wch: 20
                 },
                 {
+                    wch: 14
+                },
+                {
                     wch: 22
                 }
             ];
@@ -1710,8 +1396,8 @@ function AttendanceClient(param) {
             const dateStr = new Date().toISOString().split("T")[0];
             __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$xlsx$2f$xlsx$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["writeFile"](workbook, "Laporan_Kehadiran_".concat(dateStr, ".xlsx"));
         } catch (error) {
-            console.error("Gagal mengexport file:", error);
-            alert("Terjadi kesalahan saat mengexport data.");
+            console.error("Gagal mengekspor file:", error);
+            alert("Terjadi kesalahan saat mengekspor data.");
         } finally{
             setLoading(false);
         }
@@ -1730,10 +1416,10 @@ function AttendanceClient(param) {
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                 className: "text-xs uppercase tracking-widest text-muted-foreground font-semibold",
-                                children: "Total Attendees"
+                                children: "Total Kehadiran (Orang)"
                             }, void 0, false, {
                                 fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                lineNumber: 302,
+                                lineNumber: 345,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1741,13 +1427,13 @@ function AttendanceClient(param) {
                                 children: totals.totalAttendees
                             }, void 0, false, {
                                 fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                lineNumber: 305,
+                                lineNumber: 348,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/dashboard/attendance-client.jsx",
-                        lineNumber: 301,
+                        lineNumber: 344,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1755,10 +1441,10 @@ function AttendanceClient(param) {
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                 className: "text-xs uppercase tracking-widest text-muted-foreground font-semibold",
-                                children: "Checked-in Events"
+                                children: "Sudah Check-in"
                             }, void 0, false, {
                                 fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                lineNumber: 310,
+                                lineNumber: 353,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1766,13 +1452,13 @@ function AttendanceClient(param) {
                                 children: totals.totalCheckedIn
                             }, void 0, false, {
                                 fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                lineNumber: 313,
+                                lineNumber: 356,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/dashboard/attendance-client.jsx",
-                        lineNumber: 309,
+                        lineNumber: 352,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1780,10 +1466,10 @@ function AttendanceClient(param) {
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                 className: "text-xs uppercase tracking-widest text-muted-foreground font-semibold",
-                                children: "Not Checked-in"
+                                children: "Belum Check-in"
                             }, void 0, false, {
                                 fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                lineNumber: 318,
+                                lineNumber: 361,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1791,45 +1477,13 @@ function AttendanceClient(param) {
                                 children: totals.totalNotCheckedIn
                             }, void 0, false, {
                                 fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                lineNumber: 321,
+                                lineNumber: 364,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/dashboard/attendance-client.jsx",
-                        lineNumber: 317,
-                        columnNumber: 9
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "rounded-2xl bg-white border p-4 flex items-center gap-2 shadow-sm",
-                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
-                            onClick: ()=>setAdding({
-                                    guestToken: "",
-                                    count: 1,
-                                    operatorName: operator || "",
-                                    deviceId: ""
-                                }),
-                            variant: "outline",
-                            className: "flex-1 h-11 text-sm font-medium",
-                            "data-testid": "add-attendance-btn",
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$user$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__User$3e$__["User"], {
-                                    className: "h-4 w-4 mr-2"
-                                }, void 0, false, {
-                                    fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                    lineNumber: 332,
-                                    columnNumber: 13
-                                }, this),
-                                "Add Attendance"
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/components/dashboard/attendance-client.jsx",
-                            lineNumber: 326,
-                            columnNumber: 11
-                        }, this)
-                    }, void 0, false, {
-                        fileName: "[project]/components/dashboard/attendance-client.jsx",
-                        lineNumber: 325,
+                        lineNumber: 360,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1843,27 +1497,27 @@ function AttendanceClient(param) {
                                     className: "h-4 w-4 mr-2"
                                 }, void 0, false, {
                                     fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                    lineNumber: 342,
+                                    lineNumber: 374,
                                     columnNumber: 13
                                 }, this),
-                                "Export to Excel (",
+                                "Ekspor ke Excel (",
                                 totalItems,
                                 ")"
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/dashboard/attendance-client.jsx",
-                            lineNumber: 337,
+                            lineNumber: 369,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/components/dashboard/attendance-client.jsx",
-                        lineNumber: 336,
+                        lineNumber: 368,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/dashboard/attendance-client.jsx",
-                lineNumber: 300,
+                lineNumber: 343,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1876,24 +1530,23 @@ function AttendanceClient(param) {
                                 className: "absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground"
                             }, void 0, false, {
                                 fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                lineNumber: 351,
+                                lineNumber: 383,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
                                 value: q,
                                 onChange: (e)=>setQ(e.target.value),
-                                // onKeyDown dihapus karena fitur search sudah otomatis fetch via debounce
-                                placeholder: "Search guest name...",
+                                placeholder: "Cari nama tamu...",
                                 className: "pl-10 h-10 text-sm rounded-xl"
                             }, void 0, false, {
                                 fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                lineNumber: 352,
+                                lineNumber: 384,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/dashboard/attendance-client.jsx",
-                        lineNumber: 350,
+                        lineNumber: 382,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -1906,32 +1559,32 @@ function AttendanceClient(param) {
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                 value: "all",
-                                children: "All Status"
+                                children: "Semua Status"
                             }, void 0, false, {
                                 fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                lineNumber: 368,
+                                lineNumber: 399,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                 value: "CHECKED_IN",
-                                children: "Checked-in"
+                                children: "Sudah Check-in"
                             }, void 0, false, {
                                 fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                lineNumber: 369,
+                                lineNumber: 400,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                 value: "NOT_CHECKED_IN",
-                                children: "Not Checked-in"
+                                children: "Belum Check-in"
                             }, void 0, false, {
                                 fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                lineNumber: 370,
+                                lineNumber: 401,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/dashboard/attendance-client.jsx",
-                        lineNumber: 360,
+                        lineNumber: 391,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -1944,10 +1597,10 @@ function AttendanceClient(param) {
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                 value: "",
-                                children: "All Categories"
+                                children: "Semua Kategori"
                             }, void 0, false, {
                                 fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                lineNumber: 380,
+                                lineNumber: 411,
                                 columnNumber: 11
                             }, this),
                             categories.map((c)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1955,13 +1608,13 @@ function AttendanceClient(param) {
                                     children: c.name
                                 }, c.id, false, {
                                     fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                    lineNumber: 382,
+                                    lineNumber: 413,
                                     columnNumber: 13
                                 }, this))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/dashboard/attendance-client.jsx",
-                        lineNumber: 372,
+                        lineNumber: 403,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -1974,10 +1627,10 @@ function AttendanceClient(param) {
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                 value: "",
-                                children: "All Invitations"
+                                children: "Semua Undangan"
                             }, void 0, false, {
                                 fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                lineNumber: 395,
+                                lineNumber: 426,
                                 columnNumber: 11
                             }, this),
                             invitations.map((i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1989,13 +1642,13 @@ function AttendanceClient(param) {
                                     ]
                                 }, i.id, true, {
                                     fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                    lineNumber: 397,
+                                    lineNumber: 428,
                                     columnNumber: 13
                                 }, this))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/dashboard/attendance-client.jsx",
-                        lineNumber: 387,
+                        lineNumber: 418,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -2008,10 +1661,10 @@ function AttendanceClient(param) {
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                 value: "",
-                                children: "All Devices"
+                                children: "Semua Device"
                             }, void 0, false, {
                                 fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                lineNumber: 410,
+                                lineNumber: 441,
                                 columnNumber: 11
                             }, this),
                             devices.map((d)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -2019,19 +1672,19 @@ function AttendanceClient(param) {
                                     children: d.name
                                 }, d.id, false, {
                                     fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                    lineNumber: 412,
+                                    lineNumber: 443,
                                     columnNumber: 13
                                 }, this))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/dashboard/attendance-client.jsx",
-                        lineNumber: 402,
+                        lineNumber: 433,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/dashboard/attendance-client.jsx",
-                lineNumber: 349,
+                lineNumber: 381,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2048,26 +1701,26 @@ function AttendanceClient(param) {
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                                 className: "px-5 py-4 font-semibold",
-                                                children: "Guest"
+                                                children: "Tamu"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                                lineNumber: 439,
+                                                lineNumber: 456,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                                 className: "px-5 py-4 font-semibold",
-                                                children: "Category"
+                                                children: "Kategori"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                                lineNumber: 440,
+                                                lineNumber: 457,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                                 className: "px-5 py-4 font-semibold",
-                                                children: "Attendees"
+                                                children: "Jumlah Hadir"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                                lineNumber: 441,
+                                                lineNumber: 458,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -2075,15 +1728,15 @@ function AttendanceClient(param) {
                                                 children: "Status"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                                lineNumber: 442,
+                                                lineNumber: 459,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                                 className: "px-5 py-4 font-semibold",
-                                                children: "Check-in Time"
+                                                children: "Waktu Check-in"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                                lineNumber: 443,
+                                                lineNumber: 460,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -2091,73 +1744,81 @@ function AttendanceClient(param) {
                                                 children: "Operator"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                                lineNumber: 444,
+                                                lineNumber: 461,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                                 className: "px-5 py-4 font-semibold",
-                                                children: "iPad Code"
+                                                children: "Meja"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                                lineNumber: 445,
+                                                lineNumber: 462,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                                 className: "px-5 py-4 font-semibold",
-                                                children: "Selfie Photo"
+                                                children: "Device"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                                lineNumber: 446,
+                                                lineNumber: 463,
+                                                columnNumber: 17
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                                className: "px-5 py-4 font-semibold",
+                                                children: "Foto Selfie"
+                                            }, void 0, false, {
+                                                fileName: "[project]/components/dashboard/attendance-client.jsx",
+                                                lineNumber: 464,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                                 className: "px-5 py-4 font-semibold text-right",
-                                                children: "Actions"
+                                                children: "Aksi"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                                lineNumber: 447,
+                                                lineNumber: 465,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                        lineNumber: 438,
+                                        lineNumber: 455,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                    lineNumber: 437,
+                                    lineNumber: 454,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
                                     className: "divide-y divide-border/60",
                                     children: loading && items.length === 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
                                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
-                                            colSpan: 9,
+                                            colSpan: 10,
                                             className: "px-5 py-16 text-center text-muted-foreground animate-pulse text-sm",
-                                            children: "Loading data..."
+                                            children: "Memuat data..."
                                         }, void 0, false, {
                                             fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                            lineNumber: 453,
+                                            lineNumber: 471,
                                             columnNumber: 19
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                        lineNumber: 452,
+                                        lineNumber: 470,
                                         columnNumber: 17
                                     }, this) : items.length === 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
                                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
-                                            colSpan: 9,
+                                            colSpan: 10,
                                             className: "px-5 py-16 text-center text-muted-foreground text-sm",
-                                            children: "No records found"
+                                            children: "Data tidak ditemukan"
                                         }, void 0, false, {
                                             fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                            lineNumber: 462,
+                                            lineNumber: 480,
                                             columnNumber: 19
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                        lineNumber: 461,
+                                        lineNumber: 479,
                                         columnNumber: 17
                                     }, this) : items.map((x)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
                                             className: "hover:bg-muted/30 transition-colors ".concat(x.status === "NOT_CHECKED_IN" ? "bg-amber-50/30" : ""),
@@ -2171,13 +1832,13 @@ function AttendanceClient(param) {
                                                                 className: "h-4 w-4 text-primary shrink-0"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                                                lineNumber: 480,
+                                                                lineNumber: 498,
                                                                 columnNumber: 27
                                                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$user$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__User$3e$__["User"], {
                                                                 className: "h-4 w-4 text-muted-foreground shrink-0"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                                                lineNumber: 482,
+                                                                lineNumber: 500,
                                                                 columnNumber: 27
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2185,52 +1846,14 @@ function AttendanceClient(param) {
                                                                 children: x.guestName
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                                                lineNumber: 484,
+                                                                lineNumber: 502,
                                                                 columnNumber: 25
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                                        lineNumber: 478,
+                                                        lineNumber: 496,
                                                         columnNumber: 23
-                                                    }, this)
-                                                }, void 0, false, {
-                                                    fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                                    lineNumber: 477,
-                                                    columnNumber: 21
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
-                                                    className: "px-5 py-4 text-muted-foreground",
-                                                    children: x.category || "-"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                                    lineNumber: 489,
-                                                    columnNumber: 21
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
-                                                    className: "px-5 py-4 font-medium text-foreground",
-                                                    children: x.status === "CHECKED_IN" ? x.attendees : "-"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                                    lineNumber: 492,
-                                                    columnNumber: 21
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
-                                                    className: "px-5 py-4",
-                                                    children: x.status === "CHECKED_IN" ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                        className: "text-xs px-3 py-1 rounded-full font-medium bg-emerald-50 text-emerald-700 border border-emerald-200/50",
-                                                        children: "Checked-in"
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                                        lineNumber: 497,
-                                                        columnNumber: 25
-                                                    }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                        className: "text-xs px-3 py-1 rounded-full font-medium bg-amber-50 text-amber-700 border border-amber-200/50",
-                                                        children: "Not Checked In"
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                                        lineNumber: 501,
-                                                        columnNumber: 25
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/attendance-client.jsx",
@@ -2238,11 +1861,49 @@ function AttendanceClient(param) {
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
-                                                    className: "px-5 py-4 text-xs text-muted-foreground",
-                                                    children: x.checkedInAt ? new Date(x.checkedInAt).toLocaleString() : "-"
+                                                    className: "px-5 py-4 text-muted-foreground",
+                                                    children: x.category || "-"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                                    lineNumber: 506,
+                                                    lineNumber: 507,
+                                                    columnNumber: 21
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                    className: "px-5 py-4 font-medium text-foreground",
+                                                    children: x.status === "CHECKED_IN" ? x.attendees : "-"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/components/dashboard/attendance-client.jsx",
+                                                    lineNumber: 510,
+                                                    columnNumber: 21
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                    className: "px-5 py-4",
+                                                    children: x.status === "CHECKED_IN" ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                        className: "text-xs px-3 py-1 rounded-full font-medium bg-emerald-50 text-emerald-700 border border-emerald-200/50",
+                                                        children: "Sudah Check-in"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/components/dashboard/attendance-client.jsx",
+                                                        lineNumber: 515,
+                                                        columnNumber: 25
+                                                    }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                        className: "text-xs px-3 py-1 rounded-full font-medium bg-amber-50 text-amber-700 border border-amber-200/50",
+                                                        children: "Belum Check-in"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/components/dashboard/attendance-client.jsx",
+                                                        lineNumber: 519,
+                                                        columnNumber: 25
+                                                    }, this)
+                                                }, void 0, false, {
+                                                    fileName: "[project]/components/dashboard/attendance-client.jsx",
+                                                    lineNumber: 513,
+                                                    columnNumber: 21
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                    className: "px-5 py-4 text-xs text-muted-foreground",
+                                                    children: x.checkedInAt ? new Date(x.checkedInAt).toLocaleString("id-ID") : "-"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/components/dashboard/attendance-client.jsx",
+                                                    lineNumber: 524,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -2250,7 +1911,15 @@ function AttendanceClient(param) {
                                                     children: x.operatorName || "-"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                                    lineNumber: 511,
+                                                    lineNumber: 529,
+                                                    columnNumber: 21
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                    className: "px-5 py-4 text-muted-foreground",
+                                                    children: x.tableName || "-"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/components/dashboard/attendance-client.jsx",
+                                                    lineNumber: 532,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -2258,7 +1927,7 @@ function AttendanceClient(param) {
                                                     children: x.deviceName || "-"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                                    lineNumber: 514,
+                                                    lineNumber: 535,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -2272,109 +1941,100 @@ function AttendanceClient(param) {
                                                             className: "w-full h-full object-cover"
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                                            lineNumber: 523,
+                                                            lineNumber: 544,
                                                             columnNumber: 27
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                                        lineNumber: 519,
+                                                        lineNumber: 540,
                                                         columnNumber: 25
                                                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                         className: "text-muted-foreground",
                                                         children: "-"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                                        lineNumber: 530,
+                                                        lineNumber: 551,
                                                         columnNumber: 25
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                                    lineNumber: 517,
+                                                    lineNumber: 538,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
                                                     className: "px-5 py-4 text-right",
-                                                    children: x.status === "CHECKED_IN" ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                         className: "flex justify-end gap-1",
                                                         children: [
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
-                                                                variant: "ghost",
+                                                                variant: x.status === "CHECKED_IN" ? "outline" : "default",
                                                                 size: "sm",
-                                                                title: "Edit attendance",
-                                                                onClick: ()=>setEditing({
-                                                                        checkInId: x.id.replace(/^ci-/, ""),
-                                                                        guestName: x.guestName,
-                                                                        attendees: x.attendees || 1,
-                                                                        operatorName: x.operatorName || operator || "",
-                                                                        checkedInAt: x.checkedInAt ? new Date(x.checkedInAt).toISOString().slice(0, 16) : ""
-                                                                    }),
-                                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$pencil$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Pencil$3e$__["Pencil"], {
-                                                                    className: "h-3.5 w-3.5"
-                                                                }, void 0, false, {
-                                                                    fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                                                    lineNumber: 552,
-                                                                    columnNumber: 29
-                                                                }, this)
-                                                            }, void 0, false, {
+                                                                title: "Edit kehadiran",
+                                                                onClick: ()=>openAttendance(x),
+                                                                "data-testid": "attendance-hadir-".concat(x.id),
+                                                                children: [
+                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$user$2d$check$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__UserCheck$3e$__["UserCheck"], {
+                                                                        className: "h-3.5 w-3.5 mr-1"
+                                                                    }, void 0, false, {
+                                                                        fileName: "[project]/components/dashboard/attendance-client.jsx",
+                                                                        lineNumber: 565,
+                                                                        columnNumber: 27
+                                                                    }, this),
+                                                                    "Hadir"
+                                                                ]
+                                                            }, void 0, true, {
                                                                 fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                                                lineNumber: 536,
-                                                                columnNumber: 27
+                                                                lineNumber: 556,
+                                                                columnNumber: 25
                                                             }, this),
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
+                                                            x.status === "CHECKED_IN" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
                                                                 variant: "ghost",
                                                                 size: "sm",
-                                                                title: "Delete check-in",
+                                                                title: "Hapus check-in",
                                                                 onClick: ()=>deleteCheckIn(x.id.replace(/^ci-/, "")),
                                                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$trash$2d$2$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Trash2$3e$__["Trash2"], {
                                                                     className: "h-3.5 w-3.5 text-red-600"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                                                    lineNumber: 560,
+                                                                    lineNumber: 577,
                                                                     columnNumber: 29
                                                                 }, this)
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                                                lineNumber: 554,
+                                                                lineNumber: 569,
                                                                 columnNumber: 27
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                                        lineNumber: 535,
-                                                        columnNumber: 25
-                                                    }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                        className: "text-muted-foreground",
-                                                        children: "-"
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                                        lineNumber: 564,
-                                                        columnNumber: 25
+                                                        lineNumber: 555,
+                                                        columnNumber: 23
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                                    lineNumber: 533,
+                                                    lineNumber: 554,
                                                     columnNumber: 21
                                                 }, this)
                                             ]
                                         }, x.id, true, {
                                             fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                            lineNumber: 471,
+                                            lineNumber: 489,
                                             columnNumber: 19
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                    lineNumber: 450,
+                                    lineNumber: 468,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/dashboard/attendance-client.jsx",
-                            lineNumber: 436,
+                            lineNumber: 453,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/components/dashboard/attendance-client.jsx",
-                        lineNumber: 435,
+                        lineNumber: 452,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2389,10 +2049,10 @@ function AttendanceClient(param) {
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                                 htmlFor: "limit",
                                                 className: "font-medium text-foreground",
-                                                children: "Rows per page:"
+                                                children: "Baris per halaman:"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                                lineNumber: 579,
+                                                lineNumber: 593,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -2409,7 +2069,7 @@ function AttendanceClient(param) {
                                                         children: "10"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                                        lineNumber: 591,
+                                                        lineNumber: 605,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -2417,7 +2077,7 @@ function AttendanceClient(param) {
                                                         children: "20"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                                        lineNumber: 592,
+                                                        lineNumber: 606,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -2425,7 +2085,7 @@ function AttendanceClient(param) {
                                                         children: "50"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                                        lineNumber: 593,
+                                                        lineNumber: 607,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -2433,75 +2093,75 @@ function AttendanceClient(param) {
                                                         children: "100"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                                        lineNumber: 594,
+                                                        lineNumber: 608,
                                                         columnNumber: 17
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                                lineNumber: 582,
+                                                lineNumber: 596,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                        lineNumber: 578,
+                                        lineNumber: 592,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                         className: "hidden sm:inline-block w-px h-4 bg-border"
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                        lineNumber: 598,
+                                        lineNumber: 612,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                         className: "text-sm",
                                         children: [
-                                            "Showing",
+                                            "Menampilkan",
                                             " ",
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 className: "font-semibold text-foreground",
                                                 children: startEntry
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                                lineNumber: 602,
+                                                lineNumber: 616,
                                                 columnNumber: 15
                                             }, this),
                                             " ",
-                                            "to",
+                                            "sampai",
                                             " ",
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 className: "font-semibold text-foreground",
                                                 children: endEntry
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                                lineNumber: 606,
+                                                lineNumber: 620,
                                                 columnNumber: 15
                                             }, this),
                                             " ",
-                                            "of",
+                                            "dari",
                                             " ",
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 className: "font-semibold text-foreground",
                                                 children: totalItems
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                                lineNumber: 608,
+                                                lineNumber: 622,
                                                 columnNumber: 15
                                             }, this),
                                             " ",
-                                            "entries"
+                                            "data"
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                        lineNumber: 600,
+                                        lineNumber: 614,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                lineNumber: 577,
+                                lineNumber: 591,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2512,10 +2172,10 @@ function AttendanceClient(param) {
                                         onClick: ()=>setPage((p)=>Math.max(1, p - 1)),
                                         disabled: page === 1 || loading,
                                         className: "rounded-lg px-3 text-sm text-muted-foreground bg-white border-gray-200 hover:bg-gray-50 h-8 font-medium cursor-pointer",
-                                        children: "Previous"
+                                        children: "Sebelumnya"
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                        lineNumber: 617,
+                                        lineNumber: 630,
                                         columnNumber: 13
                                     }, this),
                                     (()=>{
@@ -2530,7 +2190,7 @@ function AttendanceClient(param) {
                                                     children: i
                                                 }, "page-".concat(i), false, {
                                                     fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                                    lineNumber: 638,
+                                                    lineNumber: 650,
                                                     columnNumber: 21
                                                 }, this));
                                             } else if (i === page - 2 || i === page + 2) {
@@ -2539,7 +2199,7 @@ function AttendanceClient(param) {
                                                     children: "..."
                                                 }, "ellipsis-".concat(i), false, {
                                                     fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                                    lineNumber: 653,
+                                                    lineNumber: 665,
                                                     columnNumber: 21
                                                 }, this));
                                             }
@@ -2551,28 +2211,28 @@ function AttendanceClient(param) {
                                         onClick: ()=>setPage((p)=>Math.min(totalPages, p + 1)),
                                         disabled: page >= totalPages || loading,
                                         className: "rounded-lg px-3 text-sm text-muted-foreground bg-white border-gray-200 hover:bg-gray-50 h-8 font-medium cursor-pointer",
-                                        children: "Next"
+                                        children: "Berikutnya"
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                        lineNumber: 665,
+                                        lineNumber: 677,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                lineNumber: 616,
+                                lineNumber: 629,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/dashboard/attendance-client.jsx",
-                        lineNumber: 576,
+                        lineNumber: 590,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/dashboard/attendance-client.jsx",
-                lineNumber: 434,
+                lineNumber: 451,
                 columnNumber: 7
             }, this),
             preview && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2580,43 +2240,44 @@ function AttendanceClient(param) {
                 className: "fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-8 cursor-pointer backdrop-blur-sm",
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
                     src: preview,
-                    alt: "Selfie Preview",
+                    alt: "Pratinjau Selfie",
                     className: "max-w-2xl max-h-[85vh] rounded-2xl shadow-2xl"
                 }, void 0, false, {
                     fileName: "[project]/components/dashboard/attendance-client.jsx",
-                    lineNumber: 683,
+                    lineNumber: 695,
                     columnNumber: 11
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/dashboard/attendance-client.jsx",
-                lineNumber: 679,
+                lineNumber: 691,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Dialog"], {
                 open: !!editing,
                 onOpenChange: (o)=>!o && setEditing(null),
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogContent"], {
+                    className: "max-h-[90vh] overflow-y-auto",
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogHeader"], {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogTitle"], {
-                                    children: "Edit Attendance"
+                                    children: "Edit Kehadiran"
                                 }, void 0, false, {
                                     fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                    lineNumber: 695,
+                                    lineNumber: 707,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogDescription"], {
                                     children: editing === null || editing === void 0 ? void 0 : editing.guestName
                                 }, void 0, false, {
                                     fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                    lineNumber: 696,
+                                    lineNumber: 708,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/dashboard/attendance-client.jsx",
-                            lineNumber: 694,
+                            lineNumber: 706,
                             columnNumber: 11
                         }, this),
                         editing && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2625,10 +2286,10 @@ function AttendanceClient(param) {
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
-                                            children: "Attendees (count)"
+                                            children: "Jumlah hadir"
                                         }, void 0, false, {
                                             fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                            lineNumber: 701,
+                                            lineNumber: 713,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -2642,49 +2303,85 @@ function AttendanceClient(param) {
                                                     }))
                                         }, void 0, false, {
                                             fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                            lineNumber: 702,
+                                            lineNumber: 714,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                    lineNumber: 700,
+                                    lineNumber: 712,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "grid grid-cols-2 gap-3",
                                     children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
-                                            children: "Operator"
-                                        }, void 0, false, {
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
+                                                    children: "Operator"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/components/dashboard/attendance-client.jsx",
+                                                    lineNumber: 729,
+                                                    columnNumber: 19
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
+                                                    value: editing.operatorName,
+                                                    onChange: (e)=>setEditing((s)=>({
+                                                                ...s,
+                                                                operatorName: e.target.value
+                                                            }))
+                                                }, void 0, false, {
+                                                    fileName: "[project]/components/dashboard/attendance-client.jsx",
+                                                    lineNumber: 730,
+                                                    columnNumber: 19
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
                                             fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                            lineNumber: 711,
+                                            lineNumber: 728,
                                             columnNumber: 17
                                         }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
-                                            value: editing.operatorName,
-                                            onChange: (e)=>setEditing((s)=>({
-                                                        ...s,
-                                                        operatorName: e.target.value
-                                                    }))
-                                        }, void 0, false, {
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
+                                                    children: "Meja"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/components/dashboard/attendance-client.jsx",
+                                                    lineNumber: 741,
+                                                    columnNumber: 19
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
+                                                    value: editing.tableName,
+                                                    placeholder: "mis. Meja 1",
+                                                    onChange: (e)=>setEditing((s)=>({
+                                                                ...s,
+                                                                tableName: e.target.value
+                                                            }))
+                                                }, void 0, false, {
+                                                    fileName: "[project]/components/dashboard/attendance-client.jsx",
+                                                    lineNumber: 742,
+                                                    columnNumber: 19
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
                                             fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                            lineNumber: 712,
+                                            lineNumber: 740,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                    lineNumber: 710,
+                                    lineNumber: 727,
                                     columnNumber: 15
                                 }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                editing.checkInId && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
-                                            children: "Check-in Time"
+                                            children: "Waktu Check-in"
                                         }, void 0, false, {
                                             fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                            lineNumber: 718,
-                                            columnNumber: 17
+                                            lineNumber: 753,
+                                            columnNumber: 19
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
                                             type: "datetime-local",
@@ -2695,19 +2392,31 @@ function AttendanceClient(param) {
                                                     }))
                                         }, void 0, false, {
                                             fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                            lineNumber: 719,
-                                            columnNumber: 17
+                                            lineNumber: 754,
+                                            columnNumber: 19
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                    lineNumber: 717,
-                                    columnNumber: 15
+                                    lineNumber: 752,
+                                    columnNumber: 17
+                                }, this),
+                                editing.invitationId && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(AttendanceExtras, {
+                                    ref: extrasRef,
+                                    invitationId: editing.invitationId,
+                                    guestId: editing.guestId,
+                                    guestName: editing.guestName,
+                                    checkInId: editing.checkInId,
+                                    operatorName: editing.operatorName
+                                }, editing.guestToken, false, {
+                                    fileName: "[project]/components/dashboard/attendance-client.jsx",
+                                    lineNumber: 765,
+                                    columnNumber: 17
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/dashboard/attendance-client.jsx",
-                            lineNumber: 699,
+                            lineNumber: 711,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogFooter"], {
@@ -2715,282 +2424,47 @@ function AttendanceClient(param) {
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
                                     variant: "outline",
                                     onClick: ()=>setEditing(null),
-                                    children: "Cancel"
+                                    children: "Batal"
                                 }, void 0, false, {
                                     fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                    lineNumber: 728,
+                                    lineNumber: 778,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
                                     onClick: saveEdit,
                                     disabled: savingEdit,
                                     className: "bg-primary",
-                                    children: savingEdit ? "Saving…" : "Save"
+                                    children: savingEdit ? "Menyimpan…" : "Simpan"
                                 }, void 0, false, {
                                     fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                    lineNumber: 729,
+                                    lineNumber: 781,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/dashboard/attendance-client.jsx",
-                            lineNumber: 727,
+                            lineNumber: 777,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/dashboard/attendance-client.jsx",
-                    lineNumber: 693,
+                    lineNumber: 705,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/dashboard/attendance-client.jsx",
-                lineNumber: 692,
-                columnNumber: 7
-            }, this),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Dialog"], {
-                open: !!adding,
-                onOpenChange: (o)=>!o && setAdding(null),
-                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogContent"], {
-                    "data-testid": "add-attendance-dialog",
-                    children: [
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogHeader"], {
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogTitle"], {
-                                    children: "Add Attendance"
-                                }, void 0, false, {
-                                    fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                    lineNumber: 739,
-                                    columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogDescription"], {
-                                    children: "Manually check in a guest who hasn't been checked in yet."
-                                }, void 0, false, {
-                                    fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                    lineNumber: 740,
-                                    columnNumber: 13
-                                }, this)
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/components/dashboard/attendance-client.jsx",
-                            lineNumber: 738,
-                            columnNumber: 11
-                        }, this),
-                        adding && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "space-y-3",
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
-                                            children: "Guest (not checked in)"
-                                        }, void 0, false, {
-                                            fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                            lineNumber: 745,
-                                            columnNumber: 17
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
-                                            value: adding.guestToken,
-                                            onChange: (e)=>setAdding((s)=>({
-                                                        ...s,
-                                                        guestToken: e.target.value
-                                                    })),
-                                            className: "w-full h-10 px-3 rounded-md border text-sm bg-white",
-                                            "data-testid": "add-attendance-guest",
-                                            children: [
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
-                                                    value: "",
-                                                    children: "Select a guest…"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                                    lineNumber: 752,
-                                                    columnNumber: 19
-                                                }, this),
-                                                notCheckedInOptions.map((x)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
-                                                        value: x.guestToken,
-                                                        children: [
-                                                            x.guestName,
-                                                            x.category ? " — ".concat(x.category) : ""
-                                                        ]
-                                                    }, x.id, true, {
-                                                        fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                                        lineNumber: 754,
-                                                        columnNumber: 21
-                                                    }, this))
-                                            ]
-                                        }, void 0, true, {
-                                            fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                            lineNumber: 746,
-                                            columnNumber: 17
-                                        }, this),
-                                        notCheckedInOptions.length === 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                            className: "text-xs text-muted-foreground mt-1",
-                                            children: "All visible guests are already checked in. Adjust filters to see more."
-                                        }, void 0, false, {
-                                            fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                            lineNumber: 757,
-                                            columnNumber: 54
-                                        }, this)
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                    lineNumber: 744,
-                                    columnNumber: 15
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
-                                            children: "Attendees (count)"
-                                        }, void 0, false, {
-                                            fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                            lineNumber: 760,
-                                            columnNumber: 17
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
-                                            type: "number",
-                                            min: 1,
-                                            max: 50,
-                                            value: adding.count,
-                                            onChange: (e)=>setAdding((s)=>({
-                                                        ...s,
-                                                        count: parseInt(e.target.value, 10) || 1
-                                                    })),
-                                            "data-testid": "add-attendance-count"
-                                        }, void 0, false, {
-                                            fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                            lineNumber: 761,
-                                            columnNumber: 17
-                                        }, this)
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                    lineNumber: 759,
-                                    columnNumber: 15
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
-                                            children: "Operator"
-                                        }, void 0, false, {
-                                            fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                            lineNumber: 764,
-                                            columnNumber: 17
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
-                                            value: adding.operatorName,
-                                            onChange: (e)=>setAdding((s)=>({
-                                                        ...s,
-                                                        operatorName: e.target.value
-                                                    })),
-                                            placeholder: "Operator name"
-                                        }, void 0, false, {
-                                            fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                            lineNumber: 765,
-                                            columnNumber: 17
-                                        }, this)
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                    lineNumber: 763,
-                                    columnNumber: 15
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
-                                            children: "Device"
-                                        }, void 0, false, {
-                                            fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                            lineNumber: 768,
-                                            columnNumber: 17
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
-                                            value: adding.deviceId,
-                                            onChange: (e)=>setAdding((s)=>({
-                                                        ...s,
-                                                        deviceId: e.target.value
-                                                    })),
-                                            className: "w-full h-10 px-3 rounded-md border text-sm bg-white",
-                                            children: [
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
-                                                    value: "",
-                                                    children: "No device"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                                    lineNumber: 770,
-                                                    columnNumber: 19
-                                                }, this),
-                                                devices.map((d)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
-                                                        value: d.id,
-                                                        children: d.name
-                                                    }, d.id, false, {
-                                                        fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                                        lineNumber: 771,
-                                                        columnNumber: 40
-                                                    }, this))
-                                            ]
-                                        }, void 0, true, {
-                                            fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                            lineNumber: 769,
-                                            columnNumber: 17
-                                        }, this)
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                    lineNumber: 767,
-                                    columnNumber: 15
-                                }, this)
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/components/dashboard/attendance-client.jsx",
-                            lineNumber: 743,
-                            columnNumber: 13
-                        }, this),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogFooter"], {
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
-                                    variant: "outline",
-                                    onClick: ()=>setAdding(null),
-                                    children: "Cancel"
-                                }, void 0, false, {
-                                    fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                    lineNumber: 777,
-                                    columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
-                                    onClick: addCheckIn,
-                                    disabled: savingEdit || !(adding === null || adding === void 0 ? void 0 : adding.guestToken),
-                                    className: "bg-primary",
-                                    "data-testid": "add-attendance-submit",
-                                    children: savingEdit ? "Adding…" : "Add Attendance"
-                                }, void 0, false, {
-                                    fileName: "[project]/components/dashboard/attendance-client.jsx",
-                                    lineNumber: 778,
-                                    columnNumber: 13
-                                }, this)
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/components/dashboard/attendance-client.jsx",
-                            lineNumber: 776,
-                            columnNumber: 11
-                        }, this)
-                    ]
-                }, void 0, true, {
-                    fileName: "[project]/components/dashboard/attendance-client.jsx",
-                    lineNumber: 737,
-                    columnNumber: 9
-                }, this)
-            }, void 0, false, {
-                fileName: "[project]/components/dashboard/attendance-client.jsx",
-                lineNumber: 736,
+                lineNumber: 704,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/dashboard/attendance-client.jsx",
-        lineNumber: 299,
+        lineNumber: 342,
         columnNumber: 5
     }, this);
 }
-_s(AttendanceClient, "VvdCmxoroYnvbKVkybHP0fRp+Wo=");
+_s(AttendanceClient, "16IDMSfQ1K+6geuzNhnzf7PGZ7M=");
 _c = AttendanceClient;
 var _c;
 __turbopack_context__.k.register(_c, "AttendanceClient");
@@ -3007,143 +2481,178 @@ __turbopack_context__.s([
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/ui/input.jsx [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/ui/label.jsx [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/ui/button.jsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/sonner/dist/index.mjs [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$cpu$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Cpu$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/cpu.js [app-client] (ecmascript) <export default as Cpu>");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$scan$2d$line$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__ScanLine$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/scan-line.js [app-client] (ecmascript) <export default as ScanLine>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$circle$2d$check$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__CheckCircle2$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/circle-check.js [app-client] (ecmascript) <export default as CheckCircle2>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$circle$2d$alert$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__AlertCircle$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/circle-alert.js [app-client] (ecmascript) <export default as AlertCircle>");
 ;
 var _s = __turbopack_context__.k.signature();
-'use client';
+"use client";
 ;
 ;
 ;
-;
-;
-;
+const MIN_TOKEN_LEN = 4; // kode lebih pendek dari ini dianggap bukan hasil scan
+const MAX_KEY_GAP_MS = 100; // alat scan mengetik jauh lebih cepat daripada manusia
+const extractToken = (text)=>{
+    let tok = String(text || "").trim();
+    const m = tok.match(/[?&]guest=([\w-]+)/);
+    if (m) return m[1];
+    try {
+        const t = new URL(tok).searchParams.get("guest");
+        if (t) return t;
+    } catch (e) {}
+    return tok;
+};
 function DeviceScanClient(param) {
-    let { invitations = [], devices: initialDevices = [], operator, deviceId, hideSetup = false, onCheckedIn } = param;
-    var _initialDevices_;
+    let { operator = "", deviceId = "", tableName = "", paused = false, onCheckedIn } = param;
     _s();
-    const [devices, setDevices] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(initialDevices);
-    const [selectedDevice, setSelectedDevice] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(((_initialDevices_ = initialDevices[0]) === null || _initialDevices_ === void 0 ? void 0 : _initialDevices_.id) || '');
-    const [operatorName, setOperatorName] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('');
-    const effOperator = operator !== undefined ? operator || '' : operatorName;
-    const effDevice = deviceId !== undefined ? deviceId || '' : selectedDevice;
-    const [token, setToken] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('');
     const [results, setResults] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([]);
     const [busy, setBusy] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
-    const inputRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
+    const bufferRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])("");
+    const lastKeyRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(0);
+    const busyRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(false);
+    const lastScanRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])({
+        token: "",
+        at: 0
+    });
+    const ctx = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])({});
+    ctx.current = {
+        operator,
+        deviceId,
+        tableName,
+        paused,
+        onCheckedIn
+    };
+    const pushResult = (r)=>setResults((list)=>[
+                {
+                    ...r,
+                    at: Date.now() + Math.random()
+                },
+                ...list
+            ].slice(0, 25));
+    const processScan = async (raw)=>{
+        const token = extractToken(raw);
+        if (!token || busyRef.current) return;
+        // cegah scan ganda dari token yang sama (2 detik)
+        const now = Date.now();
+        if (lastScanRef.current.token === token && now - lastScanRef.current.at < 2000) return;
+        lastScanRef.current = {
+            token,
+            at: now
+        };
+        const { operator, deviceId, tableName, onCheckedIn } = ctx.current;
+        if (!operator.trim()) {
+            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error("Isi operator dulu");
+            return;
+        }
+        busyRef.current = true;
+        setBusy(true);
+        try {
+            var _g_invitation, _data_guest, _data_guest1;
+            const info = await fetch("/api/guests/lookup/checkin?token=".concat(encodeURIComponent(token))).then((r)=>r.json()).catch(()=>null);
+            const g = info === null || info === void 0 ? void 0 : info.guest;
+            if (!g) {
+                const msg = (info === null || info === void 0 ? void 0 : info.error) || "Tamu tidak ditemukan";
+                pushResult({
+                    ok: false,
+                    message: msg,
+                    token
+                });
+                __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error(msg);
+                return;
+            }
+            if ((_g_invitation = g.invitation) === null || _g_invitation === void 0 ? void 0 : _g_invitation.selfieVerification) {
+                const msg = "Undangan ini butuh selfie — gunakan tab Scan Kamera";
+                pushResult({
+                    ok: false,
+                    message: msg,
+                    token
+                });
+                __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error(msg);
+                return;
+            }
+            if (g.guestType === "INDIVIDUAL" && g.checkedInAt) {
+                const msg = "".concat(g.name, " sudah check-in");
+                pushResult({
+                    ok: false,
+                    message: msg,
+                    token
+                });
+                __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error(msg);
+                return;
+            }
+            const count = Math.max(1, Math.min(g.quota || 1, 50));
+            const res = await fetch("/api/guests/lookup/checkin", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    token: g.token,
+                    deviceId: deviceId || null,
+                    operatorName: operator.trim(),
+                    tableName: tableName || null,
+                    count
+                })
+            });
+            const data = await res.json().catch(()=>({}));
+            if (!res.ok || (data === null || data === void 0 ? void 0 : data.error)) {
+                const msg = (data === null || data === void 0 ? void 0 : data.error) || "Check-in gagal";
+                pushResult({
+                    ok: false,
+                    message: msg,
+                    token
+                });
+                __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error(msg);
+                return;
+            }
+            pushResult({
+                ok: true,
+                name: ((_data_guest = data.guest) === null || _data_guest === void 0 ? void 0 : _data_guest.name) || token,
+                count: data.count || count,
+                token
+            });
+            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].success("✓ ".concat(((_data_guest1 = data.guest) === null || _data_guest1 === void 0 ? void 0 : _data_guest1.name) || "Sudah check-in"));
+            if (data.guest) onCheckedIn === null || onCheckedIn === void 0 ? void 0 : onCheckedIn(data.guest, data.count || count, data.checkInId); // → popup Sudah Check-in
+        } finally{
+            busyRef.current = false;
+            setBusy(false);
+        }
+    };
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "DeviceScanClient.useEffect": ()=>{
-            var _inputRef_current;
-            try {
-                setOperatorName(localStorage.getItem('checkin.operator') || '');
-                const d = localStorage.getItem('checkin.device');
-                if (d && initialDevices.find({
-                    "DeviceScanClient.useEffect": (x)=>x.id === d
-                }["DeviceScanClient.useEffect"])) setSelectedDevice(d);
-            } catch (e) {}
-            // Refresh device list from the existing endpoint.
-            fetch('/api/devices').then({
-                "DeviceScanClient.useEffect": (r)=>r.ok ? r.json() : null
-            }["DeviceScanClient.useEffect"]).then({
-                "DeviceScanClient.useEffect": (data)=>{
-                    if (data === null || data === void 0 ? void 0 : data.items) {
-                        setDevices(data.items);
-                        setSelectedDevice({
-                            "DeviceScanClient.useEffect": (cur)=>{
-                                var _data_items_;
-                                return cur || ((_data_items_ = data.items[0]) === null || _data_items_ === void 0 ? void 0 : _data_items_.id) || '';
-                            }
-                        }["DeviceScanClient.useEffect"]);
+            const onKeyDown = {
+                "DeviceScanClient.useEffect.onKeyDown": (e)=>{
+                    if (ctx.current.paused) {
+                        bufferRef.current = "";
+                        return;
                     }
+                    const t = e.target;
+                    const tag = t === null || t === void 0 ? void 0 : t.tagName;
+                    if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || (t === null || t === void 0 ? void 0 : t.isContentEditable)) return;
+                    if (e.ctrlKey || e.metaKey || e.altKey) return;
+                    const now = Date.now();
+                    if (now - lastKeyRef.current > MAX_KEY_GAP_MS) bufferRef.current = "";
+                    lastKeyRef.current = now;
+                    if (e.key === "Enter") {
+                        const code = bufferRef.current;
+                        bufferRef.current = "";
+                        if (code.length >= MIN_TOKEN_LEN) {
+                            e.preventDefault();
+                            processScan(code);
+                        }
+                        return;
+                    }
+                    if (e.key.length === 1) bufferRef.current += e.key;
                 }
-            }["DeviceScanClient.useEffect"]).catch({
-                "DeviceScanClient.useEffect": ()=>{}
-            }["DeviceScanClient.useEffect"]);
-            (_inputRef_current = inputRef.current) === null || _inputRef_current === void 0 ? void 0 : _inputRef_current.focus();
+            }["DeviceScanClient.useEffect.onKeyDown"];
+            window.addEventListener("keydown", onKeyDown);
+            return ({
+                "DeviceScanClient.useEffect": ()=>window.removeEventListener("keydown", onKeyDown)
+            })["DeviceScanClient.useEffect"];
         // eslint-disable-next-line react-hooks/exhaustive-deps
         }
     }["DeviceScanClient.useEffect"], []);
-    const persistHint = ()=>{
-        try {
-            localStorage.setItem('checkin.operator', effOperator);
-            localStorage.setItem('checkin.device', effDevice);
-        } catch (e) {}
-    };
-    // Single seam mapping to the existing check-in endpoint (same one camera mode uses).
-    const deviceCheckIn = async (payload)=>{
-        const res = await fetch('/api/guests/lookup/checkin', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(payload)
-        });
-        const data = await res.json().catch(()=>({}));
-        return {
-            ok: res.ok,
-            data
-        };
-    };
-    const submitToken = async (raw)=>{
-        const t = String(raw || '').trim();
-        if (!t) return;
-        if (!effOperator.trim()) {
-            var _inputRef_current;
-            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error('Enter operator name first');
-            (_inputRef_current = inputRef.current) === null || _inputRef_current === void 0 ? void 0 : _inputRef_current.focus();
-            return;
-        }
-        setBusy(true);
-        persistHint();
-        try {
-            const { ok, data } = await deviceCheckIn({
-                token: t,
-                deviceId: effDevice || null,
-                operatorName: effOperator.trim(),
-                count: 1
-            });
-            if (!ok || (data === null || data === void 0 ? void 0 : data.error)) {
-                setResults((r)=>[
-                        {
-                            ok: false,
-                            message: (data === null || data === void 0 ? void 0 : data.error) || 'Check-in failed',
-                            token: t,
-                            at: Date.now()
-                        },
-                        ...r
-                    ].slice(0, 25));
-                __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error((data === null || data === void 0 ? void 0 : data.error) || 'Check-in failed');
-            } else {
-                var _data_guest;
-                setResults((r)=>{
-                    var _data_guest;
-                    return [
-                        {
-                            ok: true,
-                            name: (data === null || data === void 0 ? void 0 : (_data_guest = data.guest) === null || _data_guest === void 0 ? void 0 : _data_guest.name) || t,
-                            count: (data === null || data === void 0 ? void 0 : data.count) || 1,
-                            token: t,
-                            at: Date.now()
-                        },
-                        ...r
-                    ].slice(0, 25);
-                });
-                __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].success("✓ ".concat((data === null || data === void 0 ? void 0 : (_data_guest = data.guest) === null || _data_guest === void 0 ? void 0 : _data_guest.name) || 'Checked in'));
-                if (data === null || data === void 0 ? void 0 : data.guest) onCheckedIn === null || onCheckedIn === void 0 ? void 0 : onCheckedIn(data.guest, (data === null || data === void 0 ? void 0 : data.count) || 1, data === null || data === void 0 ? void 0 : data.checkInId);
-            }
-        } finally{
-            var _inputRef_current1;
-            setToken('');
-            setBusy(false);
-            (_inputRef_current1 = inputRef.current) === null || _inputRef_current1 === void 0 ? void 0 : _inputRef_current1.focus();
-        }
-    };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "grid gap-6 lg:grid-cols-2",
         children: [
@@ -3157,166 +2666,52 @@ function DeviceScanClient(param) {
                                 className: "h-5 w-5 text-primary"
                             }, void 0, false, {
                                 fileName: "[project]/components/dashboard/device-scan-client.jsx",
-                                lineNumber: 96,
+                                lineNumber: 167,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
                                 className: "font-serif text-xl font-semibold",
-                                children: "Device Scanner"
+                                children: "Scanner Device"
                             }, void 0, false, {
                                 fileName: "[project]/components/dashboard/device-scan-client.jsx",
-                                lineNumber: 97,
+                                lineNumber: 168,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/dashboard/device-scan-client.jsx",
-                        lineNumber: 95,
-                        columnNumber: 9
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                        className: "text-sm text-muted-foreground",
-                        children: "Select the check-in device and operator, then scan a guest QR with your hardware scanner (or type/paste the token and press Enter). This uses the same check-in service as camera mode."
-                    }, void 0, false, {
-                        fileName: "[project]/components/dashboard/device-scan-client.jsx",
-                        lineNumber: 99,
+                        lineNumber: 166,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "space-y-1.5",
+                        className: "rounded-xl border-2 border-dashed p-8 text-center ".concat(paused ? "border-amber-300 bg-amber-50" : "border-emerald-300 bg-emerald-50"),
                         children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
-                                children: "Operator Name"
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                className: "font-medium",
+                                children: busy ? "Memproses…" : paused ? "Scan ditunda (tutup popup terlebih dulu)" : "Siap memindai — arahkan alat scan ke QR tamu"
                             }, void 0, false, {
                                 fileName: "[project]/components/dashboard/device-scan-client.jsx",
-                                lineNumber: 105,
+                                lineNumber: 173,
                                 columnNumber: 11
                             }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
-                                value: effOperator,
-                                onChange: (e)=>setOperatorName(e.target.value),
-                                disabled: hideSetup,
-                                placeholder: "e.g. Front Desk 1"
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                className: "text-xs text-muted-foreground mt-1",
+                                children: "Tidak perlu klik apa pun. Setelah QR terbaca, popup check-in akan muncul otomatis."
                             }, void 0, false, {
                                 fileName: "[project]/components/dashboard/device-scan-client.jsx",
-                                lineNumber: 106,
+                                lineNumber: 180,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/dashboard/device-scan-client.jsx",
-                        lineNumber: 104,
-                        columnNumber: 9
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "space-y-1.5",
-                        children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
-                                children: "Device"
-                            }, void 0, false, {
-                                fileName: "[project]/components/dashboard/device-scan-client.jsx",
-                                lineNumber: 110,
-                                columnNumber: 11
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
-                                className: "w-full h-10 rounded-md border border-input bg-background px-3 text-sm disabled:opacity-60",
-                                value: effDevice,
-                                disabled: hideSetup,
-                                onChange: (e)=>setSelectedDevice(e.target.value),
-                                children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
-                                        value: "",
-                                        children: "No device"
-                                    }, void 0, false, {
-                                        fileName: "[project]/components/dashboard/device-scan-client.jsx",
-                                        lineNumber: 117,
-                                        columnNumber: 13
-                                    }, this),
-                                    devices.map((d)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
-                                            value: d.id,
-                                            children: d.name
-                                        }, d.id, false, {
-                                            fileName: "[project]/components/dashboard/device-scan-client.jsx",
-                                            lineNumber: 119,
-                                            columnNumber: 15
-                                        }, this))
-                                ]
-                            }, void 0, true, {
-                                fileName: "[project]/components/dashboard/device-scan-client.jsx",
-                                lineNumber: 111,
-                                columnNumber: 11
-                            }, this)
-                        ]
-                    }, void 0, true, {
-                        fileName: "[project]/components/dashboard/device-scan-client.jsx",
-                        lineNumber: 109,
-                        columnNumber: 9
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "space-y-1.5",
-                        children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
-                                children: "Scan / Token"
-                            }, void 0, false, {
-                                fileName: "[project]/components/dashboard/device-scan-client.jsx",
-                                lineNumber: 125,
-                                columnNumber: 11
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "flex gap-2",
-                                children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
-                                        ref: inputRef,
-                                        value: token,
-                                        onChange: (e)=>setToken(e.target.value),
-                                        onKeyDown: (e)=>{
-                                            if (e.key === 'Enter') {
-                                                e.preventDefault();
-                                                submitToken(token);
-                                            }
-                                        },
-                                        placeholder: "Scan QR or paste guest token, then Enter",
-                                        disabled: busy
-                                    }, void 0, false, {
-                                        fileName: "[project]/components/dashboard/device-scan-client.jsx",
-                                        lineNumber: 127,
-                                        columnNumber: 13
-                                    }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
-                                        onClick: ()=>submitToken(token),
-                                        disabled: busy,
-                                        className: "bg-primary shrink-0",
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$scan$2d$line$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__ScanLine$3e$__["ScanLine"], {
-                                                className: "h-4 w-4 mr-1"
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/dashboard/device-scan-client.jsx",
-                                                lineNumber: 136,
-                                                columnNumber: 15
-                                            }, this),
-                                            "Check in"
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "[project]/components/dashboard/device-scan-client.jsx",
-                                        lineNumber: 135,
-                                        columnNumber: 13
-                                    }, this)
-                                ]
-                            }, void 0, true, {
-                                fileName: "[project]/components/dashboard/device-scan-client.jsx",
-                                lineNumber: 126,
-                                columnNumber: 11
-                            }, this)
-                        ]
-                    }, void 0, true, {
-                        fileName: "[project]/components/dashboard/device-scan-client.jsx",
-                        lineNumber: 124,
+                        lineNumber: 170,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/dashboard/device-scan-client.jsx",
-                lineNumber: 94,
+                lineNumber: 165,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3324,43 +2719,43 @@ function DeviceScanClient(param) {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
                         className: "font-serif text-lg font-semibold mb-3",
-                        children: "Recent Scans"
+                        children: "Scan Terakhir"
                     }, void 0, false, {
                         fileName: "[project]/components/dashboard/device-scan-client.jsx",
-                        lineNumber: 143,
+                        lineNumber: 188,
                         columnNumber: 9
                     }, this),
                     results.length === 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: "text-sm text-muted-foreground",
-                        children: "No scans yet."
+                        children: "Belum ada scan."
                     }, void 0, false, {
                         fileName: "[project]/components/dashboard/device-scan-client.jsx",
-                        lineNumber: 145,
+                        lineNumber: 190,
                         columnNumber: 11
                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
                         className: "space-y-2 max-h-[420px] overflow-auto",
-                        children: results.map((r, i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
-                                className: "flex items-center gap-2 text-sm rounded-md px-3 py-2 ".concat(r.ok ? 'bg-emerald-50 text-emerald-800' : 'bg-red-50 text-red-700'),
+                        children: results.map((r)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
+                                className: "flex items-center gap-2 text-sm rounded-md px-3 py-2 ".concat(r.ok ? "bg-emerald-50 text-emerald-800" : "bg-red-50 text-red-700"),
                                 children: [
                                     r.ok ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$circle$2d$check$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__CheckCircle2$3e$__["CheckCircle2"], {
                                         className: "h-4 w-4"
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/device-scan-client.jsx",
-                                        lineNumber: 150,
-                                        columnNumber: 25
+                                        lineNumber: 199,
+                                        columnNumber: 19
                                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$circle$2d$alert$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__AlertCircle$3e$__["AlertCircle"], {
                                         className: "h-4 w-4"
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/device-scan-client.jsx",
-                                        lineNumber: 150,
-                                        columnNumber: 64
+                                        lineNumber: 201,
+                                        columnNumber: 19
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                         className: "font-medium",
                                         children: r.ok ? r.name : r.message
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/device-scan-client.jsx",
-                                        lineNumber: 151,
+                                        lineNumber: 203,
                                         columnNumber: 17
                                     }, this),
                                     r.ok && r.count > 1 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -3372,42 +2767,42 @@ function DeviceScanClient(param) {
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/dashboard/device-scan-client.jsx",
-                                        lineNumber: 152,
-                                        columnNumber: 40
+                                        lineNumber: 205,
+                                        columnNumber: 19
                                     }, this) : null,
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                         className: "ml-auto text-xs opacity-60 font-mono",
                                         children: r.token.slice(0, 10)
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/device-scan-client.jsx",
-                                        lineNumber: 153,
+                                        lineNumber: 207,
                                         columnNumber: 17
                                     }, this)
                                 ]
-                            }, i, true, {
+                            }, r.at, true, {
                                 fileName: "[project]/components/dashboard/device-scan-client.jsx",
-                                lineNumber: 149,
+                                lineNumber: 194,
                                 columnNumber: 15
                             }, this))
                     }, void 0, false, {
                         fileName: "[project]/components/dashboard/device-scan-client.jsx",
-                        lineNumber: 147,
+                        lineNumber: 192,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/dashboard/device-scan-client.jsx",
-                lineNumber: 142,
+                lineNumber: 187,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/dashboard/device-scan-client.jsx",
-        lineNumber: 93,
+        lineNumber: 164,
         columnNumber: 5
     }, this);
 }
-_s(DeviceScanClient, "NzfJzoO1mjH6EM/YitIhs5Mylvk=");
+_s(DeviceScanClient, "FaTXt4Tb0q/gM7Qy+E6K1uG3Yh0=");
 _c = DeviceScanClient;
 var _c;
 __turbopack_context__.k.register(_c, "DeviceScanClient");
@@ -3440,9 +2835,14 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$dashboard$2f$check$2d$in$2d$client$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/dashboard/check-in-client.jsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$dashboard$2f$attendance$2d$client$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/dashboard/attendance-client.jsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$dashboard$2f$device$2d$scan$2d$client$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/dashboard/device-scan-client.jsx [app-client] (ecmascript)");
+(()=>{
+    const e = new Error("Cannot find module '@/components/dashboard/attendance-extras'");
+    e.code = 'MODULE_NOT_FOUND';
+    throw e;
+})();
 ;
 var _s = __turbopack_context__.k.signature();
-'use client';
+"use client";
 ;
 ;
 ;
@@ -3454,182 +2854,102 @@ var _s = __turbopack_context__.k.signature();
 ;
 ;
 ;
-// Unified workspace: tabs are React state, NOT routes. A single Operator + Device setup dialog
-// runs once per browser SESSION (persisted in sessionStorage); the chosen operator/device are
-// shared across Camera / Device / Manual and survive dashboard navigation + remounts.
+;
+// Workspace terpadu: tab adalah state React, BUKAN route. Dialog Operator + Device + Meja
+// muncul sekali per SESI browser (disimpan di sessionStorage) dan dipakai bersama
+// oleh Scan Kamera / Scan Device / Kehadiran Manual.
 const TABS = [
     {
-        key: 'camera',
-        label: 'Scan Camera',
+        key: "camera",
+        label: "Scan Kamera",
         icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$camera$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Camera$3e$__["Camera"]
     },
     {
-        key: 'device',
-        label: 'Scan Device',
+        key: "device",
+        label: "Scan Device",
         icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$scan$2d$line$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__ScanLine$3e$__["ScanLine"]
     },
     {
-        key: 'manual',
-        label: 'Edit Manual Attendance',
+        key: "manual",
+        label: "Edit Kehadiran Manual",
         icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$clipboard$2d$list$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__ClipboardList$3e$__["ClipboardList"]
     }
 ];
-// Stable session keys (survive navigation; cleared when the browser session ends).
-const SS_OPERATOR = 'checkin.operator';
-const SS_DEVICE = 'checkin.device';
+const SS_OPERATOR = "checkin.operator";
+const SS_DEVICE = "checkin.device";
+const SS_TABLE = "checkin.table";
+const GENDERS = [
+    {
+        value: "",
+        label: "Tidak diisi"
+    },
+    {
+        value: "MALE",
+        label: "Laki-laki"
+    },
+    {
+        value: "FEMALE",
+        label: "Perempuan"
+    },
+    {
+        value: "OTHER",
+        label: "Lainnya"
+    }
+];
 function CheckinAttendanceClient(param) {
-    let { initialMode = 'camera', checkinInvitations = [], checkinDevices = [], attendanceInvitations = [], attendanceDevices = [], categories = [] } = param;
-    var _attendanceInvitations_, _devs_find;
+    let { initialMode = "camera", checkinInvitations = [], checkinDevices = [], attendanceInvitations = [], attendanceDevices = [], categories = [], guestSides = [] } = param;
+    var _attendanceInvitations_, _devs_find, _checkedIn_guest_invitation, _checkedIn_guest;
     _s();
     const [mode, setMode] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(TABS.some({
         "CheckinAttendanceClient.useState": (t)=>t.key === initialMode
-    }["CheckinAttendanceClient.useState"]) ? initialMode : 'camera');
-    const [operator, setOperator] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('');
-    const [deviceId, setDeviceId] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('');
-    // Start closed + unconfigured; a client-only effect decides whether to open (avoids SSR flash).
+    }["CheckinAttendanceClient.useState"]) ? initialMode : "camera");
+    const [operator, setOperator] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
+    const [deviceId, setDeviceId] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
+    const [tableName, setTableName] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
     const [setupOpen, setSetupOpen] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const [configured, setConfigured] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
-    const [hydrated, setHydrated] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const [devs, setDevs] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(checkinDevices);
-    const [newDevName, setNewDevName] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('');
+    const [newDevName, setNewDevName] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
     const [addingDev, setAddingDev] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
-    // Draft values inside the setup dialog
-    const [draftOp, setDraftOp] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('');
-    const [draftDev, setDraftDev] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('');
-    // ---- Add Guest (new guests only) state ----
+    const [draftOp, setDraftOp] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
+    const [draftDev, setDraftDev] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
+    const [draftTable, setDraftTable] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
+    // ---- Tambah Tamu (khusus tamu baru) ----
     const [addGuestOpen, setAddGuestOpen] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
-    const [agInvitationId, setAgInvitationId] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(((_attendanceInvitations_ = attendanceInvitations[0]) === null || _attendanceInvitations_ === void 0 ? void 0 : _attendanceInvitations_.id) || '');
-    const [agName, setAgName] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('');
-    const [agPhone, setAgPhone] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('');
-    const [agType, setAgType] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('INDIVIDUAL');
+    const [agInvitationId, setAgInvitationId] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(((_attendanceInvitations_ = attendanceInvitations[0]) === null || _attendanceInvitations_ === void 0 ? void 0 : _attendanceInvitations_.id) || "");
+    const [agName, setAgName] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
+    const [agPhone, setAgPhone] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
+    const [agType, setAgType] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("INDIVIDUAL");
     const [agQuota, setAgQuota] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(1);
-    const [agCategoryId, setAgCategoryId] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('');
+    const [agCategoryId, setAgCategoryId] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
+    const [agGender, setAgGender] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
+    const [agSideId, setAgSideId] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
     const [agBusy, setAgBusy] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
-    // ---- Post-check-in popup ----
+    const agExtrasRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
+    // ---- Popup setelah check-in ----
     const [checkedIn, setCheckedIn] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null); // { guest, count, checkInId }
-    const [svList, setSvList] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([]);
-    const [svSelect, setSvSelect] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('');
-    const [svQty, setSvQty] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(1);
-    const [savingSv, setSavingSv] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
-    const [giftMode, setGiftMode] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('none'); // none | money | goods
-    const [giftAmount, setGiftAmount] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('');
-    const [giftItem, setGiftItem] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('');
-    const [giftNote, setGiftNote] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('');
-    const [savingGift, setSavingGift] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
-    const openPostCheckin = async (guest, count, checkInId)=>{
-        var _guest_invitation;
-        setCheckedIn({
+    // Scanner device ditunda selama ada dialog terbuka
+    const dialogOpen = setupOpen || addGuestOpen || !!checkedIn;
+    const openPostCheckin = (guest, count, checkInId)=>setCheckedIn({
             guest,
             count,
             checkInId
         });
-        setSvSelect('');
-        setSvQty(1);
-        setGiftMode('none');
-        setGiftAmount('');
-        setGiftItem('');
-        setGiftNote('');
-        const invId = guest === null || guest === void 0 ? void 0 : (_guest_invitation = guest.invitation) === null || _guest_invitation === void 0 ? void 0 : _guest_invitation.id;
-        if (invId) {
-            try {
-                const r = await fetch("/api/invitations/".concat(invId, "/souvenirs"));
-                const d = await r.json();
-                setSvList((d.items || []).filter((x)=>x.active));
-            } catch (e) {
-                setSvList([]);
-            }
-        } else setSvList([]);
-    };
-    const saveSouvenir = async ()=>{
-        var _checkedIn_guest_invitation, _checkedIn_guest;
-        if (!checkedIn) return;
-        const invId = (_checkedIn_guest = checkedIn.guest) === null || _checkedIn_guest === void 0 ? void 0 : (_checkedIn_guest_invitation = _checkedIn_guest.invitation) === null || _checkedIn_guest_invitation === void 0 ? void 0 : _checkedIn_guest_invitation.id;
-        if (!invId || !svSelect) {
-            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error('Pick a souvenir');
-            return;
-        }
-        setSavingSv(true);
-        try {
-            const r = await fetch("/api/invitations/".concat(invId, "/souvenir-distributions"), {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    souvenirId: svSelect,
-                    guestId: checkedIn.guest.id,
-                    quantity: parseInt(svQty, 10) || 0,
-                    operatorName: operator,
-                    checkInId: checkedIn.checkInId || null
-                })
-            });
-            const d = await r.json();
-            if (!r.ok) throw new Error(d.error || 'Failed');
-            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].success("Souvenir saved. Remaining: ".concat(d.remaining));
-            setSvList((list)=>list.map((x)=>x.id === svSelect ? {
-                        ...x,
-                        remaining: d.remaining,
-                        distributed: d.distributed
-                    } : x));
-        } catch (e) {
-            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error(e.message);
-        } finally{
-            setSavingSv(false);
-        }
-    };
-    const saveGift = async ()=>{
-        var _checkedIn_guest_invitation, _checkedIn_guest;
-        if (!checkedIn || giftMode === 'none') {
-            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error('Select Angpau or Gift first');
-            return;
-        }
-        const invId = (_checkedIn_guest = checkedIn.guest) === null || _checkedIn_guest === void 0 ? void 0 : (_checkedIn_guest_invitation = _checkedIn_guest.invitation) === null || _checkedIn_guest_invitation === void 0 ? void 0 : _checkedIn_guest_invitation.id;
-        setSavingGift(true);
-        try {
-            const body = {
-                giverName: checkedIn.guest.name,
-                guestId: checkedIn.guest.id,
-                notes: giftNote || null,
-                checkInId: checkedIn.checkInId || null
-            };
-            if (giftMode === 'money') {
-                body.kind = 'MONEY';
-                body.amount = giftAmount || null;
-            } else {
-                body.kind = 'GOODS';
-                body.itemName = giftItem || null;
-            }
-            const r = await fetch("/api/invitations/".concat(invId, "/gift-entries"), {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(body)
-            });
-            const d = await r.json();
-            if (!r.ok) throw new Error(d.error || 'Failed');
-            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].success(d.deduped ? 'Gift record updated' : 'Gift recorded');
-        } catch (e) {
-            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error(e.message);
-        } finally{
-            setSavingGift(false);
-        }
-    };
     const addDevice = async ()=>{
         if (!newDevName.trim()) return;
         setAddingDev(true);
         try {
-            const res = await fetch('/api/devices', {
-                method: 'POST',
+            const res = await fetch("/api/devices", {
+                method: "POST",
                 headers: {
-                    'Content-Type': 'application/json'
+                    "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
                     name: newDevName.trim()
                 })
             });
             const data = await res.json();
-            if (!res.ok) throw new Error(data.error || 'Failed');
+            if (!res.ok) throw new Error(data.error || "Gagal");
             const dev = {
                 id: data.item.id,
                 name: data.item.name
@@ -3639,146 +2959,165 @@ function CheckinAttendanceClient(param) {
                     dev
                 ]);
             setDraftDev(dev.id);
-            setNewDevName('');
-        } catch (e) {} finally{
+            setNewDevName("");
+        } catch (e) {
+            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error(e.message || "Gagal menambah device");
+        } finally{
             setAddingDev(false);
         }
     };
-    // On mount (client-only): restore operator/device from sessionStorage. If a valid operator
-    // session exists, DO NOT show the popup again. Only open it when no valid session exists.
+    // Saat mount (hanya di client): pulihkan operator/device/meja dari sessionStorage.
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "CheckinAttendanceClient.useEffect": ()=>{
             try {
-                const op = (sessionStorage.getItem(SS_OPERATOR) || '').trim();
-                const dev = sessionStorage.getItem(SS_DEVICE) || '';
+                const op = (sessionStorage.getItem(SS_OPERATOR) || "").trim();
+                const dev = sessionStorage.getItem(SS_DEVICE) || "";
+                const tbl = sessionStorage.getItem(SS_TABLE) || "";
                 if (op) {
                     setOperator(op);
                     const validDev = dev && devs.find({
                         "CheckinAttendanceClient.useEffect": (d)=>d.id === dev
-                    }["CheckinAttendanceClient.useEffect"]) ? dev : '';
+                    }["CheckinAttendanceClient.useEffect"]) ? dev : "";
                     setDeviceId(validDev);
+                    setTableName(tbl);
                     setConfigured(true);
                     setSetupOpen(false);
                     setDraftOp(op);
                     setDraftDev(validDev);
+                    setDraftTable(tbl);
                 } else {
-                    setDraftOp('');
-                    setDraftDev('');
+                    setDraftOp("");
+                    setDraftDev("");
+                    setDraftTable("");
                     setSetupOpen(true);
                 }
             } catch (e) {
                 setSetupOpen(true);
             }
-            setHydrated(true);
         // eslint-disable-next-line react-hooks/exhaustive-deps
         }
     }["CheckinAttendanceClient.useEffect"], []);
     const confirmSetup = ()=>{
         if (!draftOp.trim()) return;
         const op = draftOp.trim();
-        const dev = draftDev || '';
+        const dev = draftDev || "";
+        const tbl = draftTable.trim();
         setOperator(op);
         setDeviceId(dev);
+        setTableName(tbl);
         setConfigured(true);
         setSetupOpen(false);
         try {
             sessionStorage.setItem(SS_OPERATOR, op);
             sessionStorage.setItem(SS_DEVICE, dev);
-            // Keep localStorage in sync for any legacy standalone reads.
-            localStorage.setItem(SS_OPERATOR, op);
-            localStorage.setItem(SS_DEVICE, dev);
+            sessionStorage.setItem(SS_TABLE, tbl);
         } catch (e) {}
     };
     const openChange = ()=>{
         setDraftOp(operator);
         setDraftDev(deviceId);
+        setDraftTable(tableName);
         setSetupOpen(true);
     };
-    const deviceName = ((_devs_find = devs.find((d)=>d.id === deviceId)) === null || _devs_find === void 0 ? void 0 : _devs_find.name) || 'No device';
-    // ---- Add Guest: create a REAL guest via the existing Guest API, then continue to check-in ----
+    const deviceName = ((_devs_find = devs.find((d)=>d.id === deviceId)) === null || _devs_find === void 0 ? void 0 : _devs_find.name) || "Tanpa device";
     const resetAddGuest = ()=>{
         var _attendanceInvitations_;
-        setAgName('');
-        setAgPhone('');
-        setAgType('INDIVIDUAL');
+        setAgName("");
+        setAgPhone("");
+        setAgType("INDIVIDUAL");
         setAgQuota(1);
-        setAgCategoryId('');
-        setAgInvitationId(((_attendanceInvitations_ = attendanceInvitations[0]) === null || _attendanceInvitations_ === void 0 ? void 0 : _attendanceInvitations_.id) || '');
+        setAgCategoryId("");
+        setAgGender("");
+        setAgSideId("");
+        setAgInvitationId(((_attendanceInvitations_ = attendanceInvitations[0]) === null || _attendanceInvitations_ === void 0 ? void 0 : _attendanceInvitations_.id) || "");
     };
+    // Kategori: global (invitationId null) + milik undangan yang dipilih. Sisi: milik undangan yang dipilih.
+    const agCategories = categories.filter((c)=>!c.invitationId || c.invitationId === agInvitationId);
+    const agSides = guestSides.filter((s)=>s.invitationId === agInvitationId);
     const submitAddGuest = async ()=>{
         if (!configured) {
-            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error('Set operator & device first');
+            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error("Atur operator & device dulu");
             setSetupOpen(true);
             return;
         }
         if (!agInvitationId) {
-            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error('Select an invitation');
+            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error("Pilih undangan");
             return;
         }
         if (!agName.trim()) {
-            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error('Guest name is required');
+            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error("Nama tamu wajib diisi");
             return;
         }
         setAgBusy(true);
         try {
-            // 1) Prevent duplicates: an existing guest with the same name (+phone) must NOT be re-created.
+            var _agExtrasRef_current;
+            // 1) Cegah duplikat: tamu dengan nama (+telepon) yang sama tidak boleh dibuat ulang.
             const listRes = await fetch("/api/invitations/".concat(agInvitationId, "/guests"));
             if (listRes.ok) {
                 const { items = [] } = await listRes.json();
                 const nameL = agName.trim().toLowerCase();
                 const phoneL = agPhone.trim();
-                const dupe = items.find((g)=>(g.name || '').trim().toLowerCase() === nameL && (!phoneL || (g.phone || '').trim() === phoneL));
+                const dupe = items.find((g)=>(g.name || "").trim().toLowerCase() === nameL && (!phoneL || (g.phone || "").trim() === phoneL));
                 if (dupe) {
-                    __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error('"'.concat(dupe.name, '" already exists. Use Scan/Search to check them in.'));
+                    __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error('"'.concat(dupe.name, '" sudah ada. Gunakan Scan/Edit Kehadiran Manual untuk check-in.'));
                     setAgBusy(false);
                     return;
                 }
             }
-            // 2) Create the real guest (reuses existing guest fields + validation + ownership check).
-            const quota = agType === 'GROUP' ? Math.max(1, parseInt(agQuota, 10) || 2) : Math.max(1, parseInt(agQuota, 10) || 1);
+            // 2) Buat tamu asli.
+            const quota = Math.max(1, parseInt(agQuota, 10) || (agType === "GROUP" ? 2 : 1));
             const createRes = await fetch("/api/invitations/".concat(agInvitationId, "/guests"), {
-                method: 'POST',
+                method: "POST",
                 headers: {
-                    'Content-Type': 'application/json'
+                    "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
                     name: agName.trim(),
                     phone: agPhone.trim() || null,
                     guestType: agType,
                     quota,
-                    categoryId: agCategoryId || null
+                    categoryId: agCategoryId || null,
+                    gender: agGender || null,
+                    sideId: agSideId || null
                 })
             });
             const createData = await createRes.json();
-            if (!createRes.ok || !createData.item) throw new Error(createData.error || 'Failed to create guest');
+            if (!createRes.ok || !createData.item) throw new Error(createData.error || "Gagal membuat tamu");
             const token = createData.item.token;
-            // 3) Immediately continue into the SAME check-in flow (no navigation).
-            const count = agType === 'GROUP' ? quota : 1;
-            const ciRes = await fetch('/api/guests/lookup/checkin', {
-                method: 'POST',
+            // 3) Langsung check-in.
+            const count = agType === "GROUP" ? quota : 1;
+            const ciRes = await fetch("/api/guests/lookup/checkin", {
+                method: "POST",
                 headers: {
-                    'Content-Type': 'application/json'
+                    "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
                     token,
                     deviceId: deviceId || null,
                     operatorName: operator,
+                    tableName: tableName || null,
                     count
                 })
             });
             const ciData = await ciRes.json();
-            if (!ciRes.ok || !ciData.guest) throw new Error(ciData.error || 'Guest created but check-in failed');
-            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].success("✓ ".concat(ciData.guest.name, " added & checked in"));
+            if (!ciRes.ok || !ciData.guest) throw new Error(ciData.error || "Tamu dibuat tetapi check-in gagal");
+            // 4) Simpan suvenir / hadiah yang diisi di form (jika ada).
+            await ((_agExtrasRef_current = agExtrasRef.current) === null || _agExtrasRef_current === void 0 ? void 0 : _agExtrasRef_current.saveAll({
+                guestId: ciData.guest.id,
+                guestName: ciData.guest.name,
+                checkInId: ciData.checkInId
+            }));
+            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].success("✓ ".concat(ciData.guest.name, " ditambahkan & sudah check-in"));
             setAddGuestOpen(false);
             resetAddGuest();
-            openPostCheckin(ciData.guest, ciData.count || count, ciData.checkInId);
         } catch (e) {
-            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error(e.message || 'Something went wrong');
+            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error(e.message || "Terjadi kesalahan");
         } finally{
             setAgBusy(false);
         }
     };
-    const catOf = (g)=>((g === null || g === void 0 ? void 0 : g.category) && typeof g.category === 'object' ? g.category.name : g === null || g === void 0 ? void 0 : g.category) || null;
+    const catOf = (g)=>((g === null || g === void 0 ? void 0 : g.category) && typeof g.category === "object" ? g.category.name : g === null || g === void 0 ? void 0 : g.category) || null;
+    const typeLabel = (t)=>t === "GROUP" ? "Grup" : "Individu";
     var _checkedIn_guest_quota;
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "space-y-6",
@@ -3800,27 +3139,27 @@ function CheckinAttendanceClient(param) {
                                             className: "h-5 w-5"
                                         }, void 0, false, {
                                             fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                            lineNumber: 229,
-                                            columnNumber: 62
+                                            lineNumber: 303,
+                                            columnNumber: 15
                                         }, this),
-                                        "Operator & Device"
+                                        "Operator, Device & Meja"
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                    lineNumber: 229,
+                                    lineNumber: 302,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogDescription"], {
-                                    children: "Set who is checking in guests and which device. This is shared across Camera, Device, and Manual — and remembered for the rest of your session."
+                                    children: "Atur siapa yang melakukan check-in, device yang dipakai, dan meja. Pengaturan ini dipakai di Scan Kamera, Scan Device, dan Kehadiran Manual, serta diingat selama sesi browser."
                                 }, void 0, false, {
                                     fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                    lineNumber: 230,
+                                    lineNumber: 306,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                            lineNumber: 228,
+                            lineNumber: 301,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3829,27 +3168,27 @@ function CheckinAttendanceClient(param) {
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
-                                            children: "Operator Name *"
+                                            children: "Nama Operator *"
                                         }, void 0, false, {
                                             fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                            lineNumber: 234,
+                                            lineNumber: 314,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
                                             value: draftOp,
                                             onChange: (e)=>setDraftOp(e.target.value),
-                                            placeholder: "e.g. Sarah",
-                                            onKeyDown: (e)=>e.key === 'Enter' && confirmSetup(),
+                                            placeholder: "mis. Sarah",
+                                            onKeyDown: (e)=>e.key === "Enter" && confirmSetup(),
                                             "data-testid": "setup-operator-input"
                                         }, void 0, false, {
                                             fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                            lineNumber: 235,
+                                            lineNumber: 315,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                    lineNumber: 233,
+                                    lineNumber: 313,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3858,7 +3197,7 @@ function CheckinAttendanceClient(param) {
                                             children: "Device"
                                         }, void 0, false, {
                                             fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                            lineNumber: 238,
+                                            lineNumber: 324,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -3869,10 +3208,10 @@ function CheckinAttendanceClient(param) {
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                     value: "",
-                                                    children: "No device"
+                                                    children: "Tanpa device"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                                    lineNumber: 240,
+                                                    lineNumber: 331,
                                                     columnNumber: 17
                                                 }, this),
                                                 devs.map((d)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -3880,13 +3219,13 @@ function CheckinAttendanceClient(param) {
                                                         children: d.name
                                                     }, d.id, false, {
                                                         fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                                        lineNumber: 241,
-                                                        columnNumber: 35
+                                                        lineNumber: 333,
+                                                        columnNumber: 19
                                                     }, this))
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                            lineNumber: 239,
+                                            lineNumber: 325,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3895,13 +3234,13 @@ function CheckinAttendanceClient(param) {
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
                                                     value: newDevName,
                                                     onChange: (e)=>setNewDevName(e.target.value),
-                                                    placeholder: "＋ Add new device name",
+                                                    placeholder: "＋ Tambah nama device baru",
                                                     className: "h-9 text-sm",
                                                     "data-testid": "setup-new-device-input",
-                                                    onKeyDown: (e)=>e.key === 'Enter' && (e.preventDefault(), addDevice())
+                                                    onKeyDown: (e)=>e.key === "Enter" && (e.preventDefault(), addDevice())
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                                    lineNumber: 244,
+                                                    lineNumber: 339,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -3911,28 +3250,54 @@ function CheckinAttendanceClient(param) {
                                                     onClick: addDevice,
                                                     disabled: addingDev || !newDevName.trim(),
                                                     "data-testid": "setup-add-device-btn",
-                                                    children: "Add"
+                                                    children: "Tambah"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                                    lineNumber: 245,
+                                                    lineNumber: 349,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                            lineNumber: 243,
+                                            lineNumber: 338,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                    lineNumber: 237,
+                                    lineNumber: 323,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
+                                            children: "Meja"
+                                        }, void 0, false, {
+                                            fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
+                                            lineNumber: 362,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
+                                            value: draftTable,
+                                            onChange: (e)=>setDraftTable(e.target.value),
+                                            placeholder: "mis. Meja 1 / Registrasi A",
+                                            onKeyDown: (e)=>e.key === "Enter" && confirmSetup(),
+                                            "data-testid": "setup-table-input"
+                                        }, void 0, false, {
+                                            fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
+                                            lineNumber: 363,
+                                            columnNumber: 15
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
+                                    lineNumber: 361,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                            lineNumber: 232,
+                            lineNumber: 312,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogFooter"], {
@@ -3941,55 +3306,55 @@ function CheckinAttendanceClient(param) {
                                 disabled: !draftOp.trim(),
                                 className: "bg-primary",
                                 "data-testid": "setup-continue-btn",
-                                children: "Continue"
+                                children: "Lanjutkan"
                             }, void 0, false, {
                                 fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                lineNumber: 250,
+                                lineNumber: 373,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                            lineNumber: 249,
+                            lineNumber: 372,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                    lineNumber: 227,
+                    lineNumber: 298,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                lineNumber: 226,
+                lineNumber: 292,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "flex flex-wrap items-center justify-between gap-3 rounded-xl border border-primary/15 bg-white px-4 py-3",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "flex items-center gap-2 text-sm",
+                        className: "flex flex-wrap items-center gap-2 text-sm",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$user$2d$cog$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__UserCog$3e$__["UserCog"], {
                                 className: "h-4 w-4 text-primary"
                             }, void 0, false, {
                                 fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                lineNumber: 258,
+                                lineNumber: 388,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                 children: [
                                     "Operator: ",
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
-                                        children: operator || '—'
+                                        children: operator || "—"
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                        lineNumber: 259,
-                                        columnNumber: 27
+                                        lineNumber: 390,
+                                        columnNumber: 23
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                lineNumber: 259,
+                                lineNumber: 389,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -3997,7 +3362,7 @@ function CheckinAttendanceClient(param) {
                                 children: "•"
                             }, void 0, false, {
                                 fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                lineNumber: 260,
+                                lineNumber: 392,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -4007,19 +3372,43 @@ function CheckinAttendanceClient(param) {
                                         children: deviceName
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                        lineNumber: 261,
-                                        columnNumber: 25
+                                        lineNumber: 394,
+                                        columnNumber: 21
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                lineNumber: 261,
+                                lineNumber: 393,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                className: "text-muted-foreground",
+                                children: "•"
+                            }, void 0, false, {
+                                fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
+                                lineNumber: 396,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                children: [
+                                    "Meja: ",
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
+                                        children: tableName || "—"
+                                    }, void 0, false, {
+                                        fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
+                                        lineNumber: 398,
+                                        columnNumber: 19
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
+                                lineNumber: 397,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                        lineNumber: 257,
+                        lineNumber: 387,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4038,14 +3427,14 @@ function CheckinAttendanceClient(param) {
                                         className: "h-4 w-4 mr-1"
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                        lineNumber: 265,
+                                        lineNumber: 411,
                                         columnNumber: 13
                                     }, this),
-                                    "Add Guest"
+                                    "Tambah Tamu"
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                lineNumber: 264,
+                                lineNumber: 402,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -4058,32 +3447,33 @@ function CheckinAttendanceClient(param) {
                                         className: "h-4 w-4 mr-1"
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                        lineNumber: 268,
+                                        lineNumber: 420,
                                         columnNumber: 13
                                     }, this),
-                                    "Change Operator/Device"
+                                    "Ubah Operator/Device/Meja"
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                lineNumber: 267,
+                                lineNumber: 414,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                        lineNumber: 263,
+                        lineNumber: 401,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                lineNumber: 256,
+                lineNumber: 386,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Dialog"], {
                 open: addGuestOpen,
                 onOpenChange: setAddGuestOpen,
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogContent"], {
+                    className: "max-h-[90vh] overflow-y-auto",
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogHeader"], {
                             children: [
@@ -4094,27 +3484,27 @@ function CheckinAttendanceClient(param) {
                                             className: "h-5 w-5"
                                         }, void 0, false, {
                                             fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                            lineNumber: 277,
-                                            columnNumber: 62
+                                            lineNumber: 431,
+                                            columnNumber: 15
                                         }, this),
-                                        "Add Guest"
+                                        "Tambah Tamu"
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                    lineNumber: 277,
+                                    lineNumber: 430,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogDescription"], {
-                                    children: "Only for a guest who is NOT already in the list. This creates a real guest and immediately checks them in."
+                                    children: "Hanya untuk tamu yang BELUM ada di daftar. Tamu akan dibuat lalu langsung di-check-in."
                                 }, void 0, false, {
                                     fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                    lineNumber: 278,
+                                    lineNumber: 434,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                            lineNumber: 276,
+                            lineNumber: 429,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4123,72 +3513,76 @@ function CheckinAttendanceClient(param) {
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
-                                            children: "Invitation *"
+                                            children: "Undangan *"
                                         }, void 0, false, {
                                             fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                            lineNumber: 282,
+                                            lineNumber: 441,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
                                             value: agInvitationId,
-                                            onChange: (e)=>setAgInvitationId(e.target.value),
+                                            onChange: (e)=>{
+                                                setAgInvitationId(e.target.value);
+                                                setAgCategoryId("");
+                                                setAgSideId("");
+                                            },
                                             className: "w-full h-10 px-3 rounded-md border text-sm bg-white",
                                             "data-testid": "ag-invitation-select",
                                             children: [
                                                 attendanceInvitations.length === 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                     value: "",
-                                                    children: "No invitations"
+                                                    children: "Belum ada undangan"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                                    lineNumber: 284,
-                                                    columnNumber: 56
+                                                    lineNumber: 453,
+                                                    columnNumber: 19
                                                 }, this),
                                                 attendanceInvitations.map((i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                         value: i.id,
                                                         children: [
                                                             i.brideName,
                                                             i.groomName
-                                                        ].filter(Boolean).join(' & ') || 'Untitled'
+                                                        ].filter(Boolean).join(" & ") || "Tanpa judul"
                                                     }, i.id, false, {
                                                         fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                                        lineNumber: 285,
-                                                        columnNumber: 52
+                                                        lineNumber: 456,
+                                                        columnNumber: 19
                                                     }, this))
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                            lineNumber: 283,
+                                            lineNumber: 442,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                    lineNumber: 281,
+                                    lineNumber: 440,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
-                                            children: "Guest Name *"
+                                            children: "Nama Tamu *"
                                         }, void 0, false, {
                                             fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                            lineNumber: 289,
+                                            lineNumber: 464,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
                                             value: agName,
                                             onChange: (e)=>setAgName(e.target.value),
-                                            placeholder: "e.g. Ahmad Fauzan",
+                                            placeholder: "mis. Ahmad Fauzan",
                                             "data-testid": "ag-name-input"
                                         }, void 0, false, {
                                             fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                            lineNumber: 290,
+                                            lineNumber: 465,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                    lineNumber: 288,
+                                    lineNumber: 463,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4197,78 +3591,78 @@ function CheckinAttendanceClient(param) {
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
-                                                    children: "Phone"
+                                                    children: "Telepon"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                                    lineNumber: 294,
+                                                    lineNumber: 474,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
                                                     value: agPhone,
                                                     onChange: (e)=>setAgPhone(e.target.value),
-                                                    placeholder: "Optional",
+                                                    placeholder: "Opsional",
                                                     "data-testid": "ag-phone-input"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                                    lineNumber: 295,
+                                                    lineNumber: 475,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                            lineNumber: 293,
+                                            lineNumber: 473,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
-                                                    children: "Type"
+                                                    children: "Tipe"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                                    lineNumber: 298,
+                                                    lineNumber: 483,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
                                                     value: agType,
                                                     onChange: (e)=>{
                                                         setAgType(e.target.value);
-                                                        setAgQuota(e.target.value === 'GROUP' ? 2 : 1);
+                                                        setAgQuota(e.target.value === "GROUP" ? 2 : 1);
                                                     },
                                                     className: "w-full h-10 px-3 rounded-md border text-sm bg-white",
                                                     "data-testid": "ag-type-select",
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                             value: "INDIVIDUAL",
-                                                            children: "Individual"
+                                                            children: "Individu"
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                                            lineNumber: 300,
+                                                            lineNumber: 493,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                             value: "GROUP",
-                                                            children: "Group"
+                                                            children: "Grup"
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                                            lineNumber: 301,
+                                                            lineNumber: 494,
                                                             columnNumber: 19
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                                    lineNumber: 299,
+                                                    lineNumber: 484,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                            lineNumber: 297,
+                                            lineNumber: 482,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                    lineNumber: 292,
+                                    lineNumber: 472,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4277,10 +3671,10 @@ function CheckinAttendanceClient(param) {
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
-                                                    children: "Quota"
+                                                    children: "Kuota"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                                    lineNumber: 307,
+                                                    lineNumber: 500,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -4292,22 +3686,22 @@ function CheckinAttendanceClient(param) {
                                                     "data-testid": "ag-quota-input"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                                    lineNumber: 308,
+                                                    lineNumber: 501,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                            lineNumber: 306,
+                                            lineNumber: 499,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
-                                                    children: "Category"
+                                                    children: "Kategori"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                                    lineNumber: 311,
+                                                    lineNumber: 513,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -4318,42 +3712,137 @@ function CheckinAttendanceClient(param) {
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                             value: "",
-                                                            children: "No category"
+                                                            children: "Tanpa kategori"
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                                            lineNumber: 313,
+                                                            lineNumber: 520,
                                                             columnNumber: 19
                                                         }, this),
-                                                        categories.map((c)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                                        agCategories.map((c)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                                 value: c.id,
                                                                 children: c.name
                                                             }, c.id, false, {
                                                                 fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                                                lineNumber: 314,
-                                                                columnNumber: 43
+                                                                lineNumber: 522,
+                                                                columnNumber: 21
                                                             }, this))
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                                    lineNumber: 312,
+                                                    lineNumber: 514,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                            lineNumber: 310,
+                                            lineNumber: 512,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                    lineNumber: 305,
+                                    lineNumber: 498,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "grid grid-cols-2 gap-3",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
+                                                    children: "Jenis Kelamin"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
+                                                    lineNumber: 531,
+                                                    columnNumber: 17
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
+                                                    value: agGender,
+                                                    onChange: (e)=>setAgGender(e.target.value),
+                                                    className: "w-full h-10 px-3 rounded-md border text-sm bg-white",
+                                                    "data-testid": "ag-gender-select",
+                                                    children: GENDERS.map((g)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                                            value: g.value,
+                                                            children: g.label
+                                                        }, g.value, false, {
+                                                            fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
+                                                            lineNumber: 539,
+                                                            columnNumber: 21
+                                                        }, this))
+                                                }, void 0, false, {
+                                                    fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
+                                                    lineNumber: 532,
+                                                    columnNumber: 17
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
+                                            lineNumber: 530,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
+                                                    children: "Sisi Tamu"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
+                                                    lineNumber: 546,
+                                                    columnNumber: 17
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
+                                                    value: agSideId,
+                                                    onChange: (e)=>setAgSideId(e.target.value),
+                                                    className: "w-full h-10 px-3 rounded-md border text-sm bg-white",
+                                                    "data-testid": "ag-side-select",
+                                                    children: [
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                                            value: "",
+                                                            children: "Tidak diisi"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
+                                                            lineNumber: 553,
+                                                            columnNumber: 19
+                                                        }, this),
+                                                        agSides.map((s)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                                                value: s.id,
+                                                                children: s.name
+                                                            }, s.id, false, {
+                                                                fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
+                                                                lineNumber: 555,
+                                                                columnNumber: 21
+                                                            }, this))
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
+                                                    lineNumber: 547,
+                                                    columnNumber: 17
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
+                                            lineNumber: 545,
+                                            columnNumber: 15
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
+                                    lineNumber: 529,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(AttendanceExtras, {
+                                    ref: agExtrasRef,
+                                    invitationId: agInvitationId,
+                                    guestName: agName.trim(),
+                                    operatorName: operator
+                                }, void 0, false, {
+                                    fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
+                                    lineNumber: 564,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                            lineNumber: 280,
+                            lineNumber: 439,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogFooter"], {
@@ -4362,10 +3851,10 @@ function CheckinAttendanceClient(param) {
                                     variant: "outline",
                                     onClick: ()=>setAddGuestOpen(false),
                                     disabled: agBusy,
-                                    children: "Cancel"
+                                    children: "Batal"
                                 }, void 0, false, {
                                     fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                    lineNumber: 320,
+                                    lineNumber: 572,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -4373,27 +3862,27 @@ function CheckinAttendanceClient(param) {
                                     disabled: agBusy || !agName.trim() || !agInvitationId,
                                     className: "bg-primary",
                                     "data-testid": "ag-save-btn",
-                                    children: agBusy ? 'Saving…' : 'Save & Check-in'
+                                    children: agBusy ? "Menyimpan…" : "Simpan & Check-in"
                                 }, void 0, false, {
                                     fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                    lineNumber: 321,
+                                    lineNumber: 579,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                            lineNumber: 319,
+                            lineNumber: 571,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                    lineNumber: 275,
+                    lineNumber: 428,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                lineNumber: 274,
+                lineNumber: 427,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Dialog"], {
@@ -4402,6 +3891,7 @@ function CheckinAttendanceClient(param) {
                     if (!o) setCheckedIn(null);
                 },
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogContent"], {
+                    className: "max-h-[90vh] overflow-y-auto",
                     "data-testid": "post-checkin-dialog",
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogHeader"], {
@@ -4413,27 +3903,27 @@ function CheckinAttendanceClient(param) {
                                             className: "h-5 w-5"
                                         }, void 0, false, {
                                             fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                            lineNumber: 332,
-                                            columnNumber: 79
+                                            lineNumber: 604,
+                                            columnNumber: 15
                                         }, this),
-                                        "Checked In"
+                                        "Sudah Check-in"
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                    lineNumber: 332,
+                                    lineNumber: 603,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogDescription"], {
-                                    children: "Guest attendance recorded."
+                                    children: "Kehadiran tamu telah tercatat."
                                 }, void 0, false, {
                                     fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                    lineNumber: 333,
+                                    lineNumber: 607,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                            lineNumber: 331,
+                            lineNumber: 602,
                             columnNumber: 11
                         }, this),
                         (checkedIn === null || checkedIn === void 0 ? void 0 : checkedIn.guest) && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4451,39 +3941,40 @@ function CheckinAttendanceClient(param) {
                                                     children: checkedIn.guest.name
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                                    lineNumber: 339,
+                                                    lineNumber: 615,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                     className: "text-xs px-2 py-0.5 rounded-full bg-primary text-white",
-                                                    children: checkedIn.guest.guestType
+                                                    children: typeLabel(checkedIn.guest.guestType)
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                                    lineNumber: 340,
+                                                    lineNumber: 621,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                            lineNumber: 338,
+                                            lineNumber: 614,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                             className: "text-sm text-muted-foreground mt-1",
                                             children: [
-                                                catOf(checkedIn.guest) || 'No category',
-                                                " • Quota: ",
+                                                catOf(checkedIn.guest) || "Tanpa kategori",
+                                                " • Kuota:",
+                                                " ",
                                                 (_checkedIn_guest_quota = checkedIn.guest.quota) !== null && _checkedIn_guest_quota !== void 0 ? _checkedIn_guest_quota : 1
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                            lineNumber: 342,
+                                            lineNumber: 625,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                    lineNumber: 337,
+                                    lineNumber: 613,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4494,10 +3985,10 @@ function CheckinAttendanceClient(param) {
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                     className: "text-xs uppercase tracking-widest text-muted-foreground",
-                                                    children: "Attendance"
+                                                    children: "Kehadiran"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                                    lineNumber: 346,
+                                                    lineNumber: 632,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -4505,18 +3996,28 @@ function CheckinAttendanceClient(param) {
                                                     "data-testid": "post-checkin-count",
                                                     children: [
                                                         checkedIn.count,
-                                                        " ",
-                                                        checkedIn.count > 1 ? 'people' : 'person'
+                                                        " orang"
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                                    lineNumber: 347,
+                                                    lineNumber: 635,
+                                                    columnNumber: 19
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                    className: "text-xs text-muted-foreground",
+                                                    children: [
+                                                        "Meja: ",
+                                                        tableName || "—"
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
+                                                    lineNumber: 641,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                            lineNumber: 345,
+                                            lineNumber: 631,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4527,270 +4028,56 @@ function CheckinAttendanceClient(param) {
                                                     children: "Status"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                                    lineNumber: 350,
+                                                    lineNumber: 646,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                     className: "text-lg font-semibold text-emerald-700",
-                                                    children: "Checked In"
+                                                    children: "Sudah Check-in"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                                    lineNumber: 351,
+                                                    lineNumber: 649,
                                                     columnNumber: 19
                                                 }, this),
-                                                typeof checkedIn.guest.checkedInCount === 'number' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                typeof checkedIn.guest.checkedInCount === "number" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                     className: "text-xs text-muted-foreground",
                                                     children: [
-                                                        "Total attended: ",
+                                                        "Total hadir: ",
                                                         checkedIn.guest.checkedInCount
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                                    lineNumber: 353,
+                                                    lineNumber: 653,
                                                     columnNumber: 21
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                            lineNumber: 349,
+                                            lineNumber: 645,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                    lineNumber: 344,
+                                    lineNumber: 630,
                                     columnNumber: 15
                                 }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "rounded-lg border p-3 space-y-2",
-                                    "data-testid": "post-souvenir-section",
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                            className: "text-xs uppercase tracking-widest text-muted-foreground",
-                                            children: "Souvenir"
-                                        }, void 0, false, {
-                                            fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                            lineNumber: 359,
-                                            columnNumber: 17
-                                        }, this),
-                                        svList.length === 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                            className: "text-xs text-muted-foreground",
-                                            children: "No souvenirs configured."
-                                        }, void 0, false, {
-                                            fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                            lineNumber: 361,
-                                            columnNumber: 19
-                                        }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "flex flex-wrap items-end gap-2",
-                                            children: [
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
-                                                    value: svSelect,
-                                                    onChange: (e)=>setSvSelect(e.target.value),
-                                                    className: "h-9 px-2 rounded-md border text-sm bg-white",
-                                                    "data-testid": "post-souvenir-select",
-                                                    children: [
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
-                                                            value: "",
-                                                            children: "Select…"
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                                            lineNumber: 365,
-                                                            columnNumber: 23
-                                                        }, this),
-                                                        svList.map((x)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
-                                                                value: x.id,
-                                                                children: [
-                                                                    x.name,
-                                                                    " (Avail: ",
-                                                                    x.remaining,
-                                                                    ")"
-                                                                ]
-                                                            }, x.id, true, {
-                                                                fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                                                lineNumber: 366,
-                                                                columnNumber: 42
-                                                            }, this))
-                                                    ]
-                                                }, void 0, true, {
-                                                    fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                                    lineNumber: 364,
-                                                    columnNumber: 21
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
-                                                    type: "number",
-                                                    min: 0,
-                                                    value: svQty,
-                                                    onChange: (e)=>setSvQty(parseInt(e.target.value, 10) || 0),
-                                                    className: "h-9 w-20",
-                                                    "data-testid": "post-souvenir-qty"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                                    lineNumber: 368,
-                                                    columnNumber: 21
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
-                                                    size: "sm",
-                                                    onClick: saveSouvenir,
-                                                    disabled: savingSv || !svSelect,
-                                                    className: "bg-primary",
-                                                    "data-testid": "post-souvenir-save",
-                                                    children: "Save"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                                    lineNumber: 369,
-                                                    columnNumber: 21
-                                                }, this)
-                                            ]
-                                        }, void 0, true, {
-                                            fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                            lineNumber: 363,
-                                            columnNumber: 19
-                                        }, this)
-                                    ]
-                                }, void 0, true, {
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(AttendanceExtras, {
+                                    invitationId: (_checkedIn_guest = checkedIn.guest) === null || _checkedIn_guest === void 0 ? void 0 : (_checkedIn_guest_invitation = _checkedIn_guest.invitation) === null || _checkedIn_guest_invitation === void 0 ? void 0 : _checkedIn_guest_invitation.id,
+                                    guestId: checkedIn.guest.id,
+                                    guestName: checkedIn.guest.name,
+                                    checkInId: checkedIn.checkInId || null,
+                                    operatorName: operator,
+                                    showSaveButtons: true
+                                }, checkedIn.checkInId || checkedIn.guest.id, false, {
                                     fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                    lineNumber: 358,
-                                    columnNumber: 15
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "rounded-lg border p-3 space-y-2",
-                                    "data-testid": "post-gift-section",
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                            className: "text-xs uppercase tracking-widest text-muted-foreground",
-                                            children: "Gift / Angpau"
-                                        }, void 0, false, {
-                                            fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                            lineNumber: 376,
-                                            columnNumber: 17
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "flex gap-3 text-sm",
-                                            children: [
-                                                'none',
-                                                'money',
-                                                'goods'
-                                            ].map((m)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                                    className: "flex items-center gap-1",
-                                                    children: [
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                                            type: "radio",
-                                                            name: "giftMode",
-                                                            checked: giftMode === m,
-                                                            onChange: ()=>setGiftMode(m),
-                                                            "data-testid": "post-gift-mode-".concat(m)
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                                            lineNumber: 380,
-                                                            columnNumber: 23
-                                                        }, this),
-                                                        m === 'none' ? 'No Gift' : m === 'money' ? 'Gave Angpau' : 'Gave Gift'
-                                                    ]
-                                                }, m, true, {
-                                                    fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                                    lineNumber: 379,
-                                                    columnNumber: 21
-                                                }, this))
-                                        }, void 0, false, {
-                                            fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                            lineNumber: 377,
-                                            columnNumber: 17
-                                        }, this),
-                                        giftMode === 'money' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "flex flex-wrap gap-2",
-                                            children: [
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
-                                                    type: "number",
-                                                    placeholder: "Amount",
-                                                    value: giftAmount,
-                                                    onChange: (e)=>setGiftAmount(e.target.value),
-                                                    className: "h-9 w-32",
-                                                    "data-testid": "post-gift-amount"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                                    lineNumber: 387,
-                                                    columnNumber: 21
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
-                                                    placeholder: "Note (optional)",
-                                                    value: giftNote,
-                                                    onChange: (e)=>setGiftNote(e.target.value),
-                                                    className: "h-9 flex-1 min-w-[140px]"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                                    lineNumber: 388,
-                                                    columnNumber: 21
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
-                                                    size: "sm",
-                                                    onClick: saveGift,
-                                                    disabled: savingGift,
-                                                    className: "bg-primary",
-                                                    "data-testid": "post-gift-save",
-                                                    children: "Save Gift"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                                    lineNumber: 389,
-                                                    columnNumber: 21
-                                                }, this)
-                                            ]
-                                        }, void 0, true, {
-                                            fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                            lineNumber: 386,
-                                            columnNumber: 19
-                                        }, this),
-                                        giftMode === 'goods' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "flex flex-wrap gap-2",
-                                            children: [
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
-                                                    placeholder: "Gift item",
-                                                    value: giftItem,
-                                                    onChange: (e)=>setGiftItem(e.target.value),
-                                                    className: "h-9 w-40",
-                                                    "data-testid": "post-gift-item"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                                    lineNumber: 394,
-                                                    columnNumber: 21
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
-                                                    placeholder: "Note (optional)",
-                                                    value: giftNote,
-                                                    onChange: (e)=>setGiftNote(e.target.value),
-                                                    className: "h-9 flex-1 min-w-[140px]"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                                    lineNumber: 395,
-                                                    columnNumber: 21
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
-                                                    size: "sm",
-                                                    onClick: saveGift,
-                                                    disabled: savingGift,
-                                                    className: "bg-primary",
-                                                    "data-testid": "post-gift-save",
-                                                    children: "Save Gift"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                                    lineNumber: 396,
-                                                    columnNumber: 21
-                                                }, this)
-                                            ]
-                                        }, void 0, true, {
-                                            fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                            lineNumber: 393,
-                                            columnNumber: 19
-                                        }, this)
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                    lineNumber: 375,
+                                    lineNumber: 660,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                            lineNumber: 336,
+                            lineNumber: 612,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogFooter"], {
@@ -4798,26 +4085,26 @@ function CheckinAttendanceClient(param) {
                                 onClick: ()=>setCheckedIn(null),
                                 className: "bg-primary",
                                 "data-testid": "post-checkin-done-btn",
-                                children: "Done"
+                                children: "Selesai"
                             }, void 0, false, {
                                 fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                lineNumber: 403,
+                                lineNumber: 672,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                            lineNumber: 402,
+                            lineNumber: 671,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                    lineNumber: 330,
+                    lineNumber: 598,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                lineNumber: 329,
+                lineNumber: 592,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4826,78 +4113,78 @@ function CheckinAttendanceClient(param) {
                         type: "button",
                         "data-testid": "mode-".concat(t.key),
                         onClick: ()=>setMode(t.key),
-                        className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$utils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["cn"])('flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition', mode === t.key ? 'bg-primary text-primary-foreground shadow' : 'text-foreground/70 hover:bg-muted'),
+                        className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$utils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["cn"])("flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition", mode === t.key ? "bg-primary text-primary-foreground shadow" : "text-foreground/70 hover:bg-muted"),
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(t.icon, {
                                 className: "h-4 w-4"
                             }, void 0, false, {
                                 fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                                lineNumber: 421,
+                                lineNumber: 698,
                                 columnNumber: 13
                             }, this),
                             t.label
                         ]
                     }, t.key, true, {
                         fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                        lineNumber: 411,
+                        lineNumber: 686,
                         columnNumber: 11
                     }, this))
             }, void 0, false, {
                 fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                lineNumber: 409,
+                lineNumber: 684,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 "data-testid": "mode-content-".concat(mode),
                 children: [
-                    mode === 'camera' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$dashboard$2f$check$2d$in$2d$client$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                    mode === "camera" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$dashboard$2f$check$2d$in$2d$client$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                         invitations: checkinInvitations,
-                        devices: devs,
                         operator: operator,
                         deviceId: deviceId,
-                        hideSetup: true,
+                        tableName: tableName,
                         onCheckedIn: (g, c, cid)=>openPostCheckin(g, c, cid)
                     }, void 0, false, {
                         fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                        lineNumber: 429,
+                        lineNumber: 706,
                         columnNumber: 11
                     }, this),
-                    mode === 'device' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$dashboard$2f$device$2d$scan$2d$client$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                        invitations: checkinInvitations,
-                        devices: devs,
+                    mode === "device" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$dashboard$2f$device$2d$scan$2d$client$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                         operator: operator,
                         deviceId: deviceId,
-                        hideSetup: true,
+                        tableName: tableName,
+                        paused: dialogOpen,
                         onCheckedIn: (g, c, cid)=>openPostCheckin(g, c, cid)
                     }, void 0, false, {
                         fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                        lineNumber: 432,
+                        lineNumber: 715,
                         columnNumber: 11
                     }, this),
-                    mode === 'manual' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$dashboard$2f$attendance$2d$client$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                    mode === "manual" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$dashboard$2f$attendance$2d$client$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                         invitations: attendanceInvitations,
                         devices: attendanceDevices,
                         categories: categories,
-                        operator: operator
+                        operator: operator,
+                        tableName: tableName,
+                        deviceId: deviceId
                     }, void 0, false, {
                         fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                        lineNumber: 435,
+                        lineNumber: 724,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-                lineNumber: 427,
+                lineNumber: 704,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/dashboard/checkin-attendance-client.jsx",
-        lineNumber: 224,
+        lineNumber: 290,
         columnNumber: 5
     }, this);
 }
-_s(CheckinAttendanceClient, "bYXaOVLM4msEne0QSIEL+sGSzdg=");
+_s(CheckinAttendanceClient, "RM0n774+dmnZi6Nyu/EFuxPpfgA=");
 _c = CheckinAttendanceClient;
 var _c;
 __turbopack_context__.k.register(_c, "CheckinAttendanceClient");

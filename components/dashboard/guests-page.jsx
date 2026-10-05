@@ -15,6 +15,7 @@ import {
   Pencil,
   MessageSquare,
   CheckSquare,
+  Loader2,
 } from "lucide-react";
 import { toast } from "sonner";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
@@ -49,18 +50,12 @@ const WhatsAppIcon = ({ className = "h-4 w-4" }) => (
   </svg>
 );
 
-const SIDE_LABEL = {
-  GROOM: "Groom",
-  BRIDE: "Bride",
-  BOTH: "Both",
-  PARENTS: "Parents",
+const TYPE_LABEL = {
+  INDIVIDUAL: "Individu",
+  GROUP: "Grup",
 };
 
-export default function GuestsPageClient({
-  invitations,
-  categories,
-  messageTemplate,
-}) {
+export default function GuestsPageClient({ invitations, messageTemplate }) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -104,19 +99,29 @@ export default function GuestsPageClient({
   const [isAddOpen, setIsAddOpen] = useState(false);
   const [isDeletingBulk, setIsDeletingBulk] = useState(false);
 
-  // Req 4 — bulk WhatsApp with template selection + "Fix Message" toggle.
-  const [waOpen, setWaOpen] = useState(false);
-  const [waTemplates, setWaTemplates] = useState([]);
-  const [waTemplateId, setWaTemplateId] = useState("");
-  const [waFix, setWaFix] = useState(false);
+  // --- POPUP PILIH TEMPLATE PESAN (untuk Salin Pesan & Kirim WhatsApp) ---
+  const [tplOpen, setTplOpen] = useState(false);
+  const [tplAction, setTplAction] = useState("copy"); // "copy" | "wa"
+  const [tplGuest, setTplGuest] = useState(null);
+  const [tplList, setTplList] = useState([]);
+  const [tplId, setTplId] = useState("");
+  const [tplLoading, setTplLoading] = useState(false);
 
   const selected = invitations.find((i) => i.id === selectedId);
+  // Kategori milik undangan yang sedang dipilih
+  const categories = selected?.categories || [];
   const baseUrl = typeof window !== "undefined" ? window.location.origin : "";
 
   // Req 5 — load DB-driven Guest Sides for the selected invitation.
   useEffect(() => {
-    if (!selectedId) { setSides([]); return; }
-    fetch(`/api/invitations/${selectedId}/sides`).then((r) => r.json()).then((d) => setSides(d.items || [])).catch(() => setSides([]));
+    if (!selectedId) {
+      setSides([]);
+      return;
+    }
+    fetch(`/api/invitations/${selectedId}/sides`)
+      .then((r) => r.json())
+      .then((d) => setSides(d.items || []))
+      .catch(() => setSides([]));
   }, [selectedId]);
 
   // Reset pilihan & kembali ke halaman 1 jika filter/undangan berubah
@@ -136,6 +141,14 @@ export default function GuestsPageClient({
     router.replace(`${pathname}?${params.toString()}`, { scroll: false });
   }, [selectedId, q, filterType, filterCategory, filterSide, pathname, router]);
 
+  // Ganti undangan: reset filter & form yang bergantung pada kategori/pihak
+  const handleInvitationChange = (id) => {
+    setSelectedId(id);
+    setFilterCategory("ALL");
+    setFilterSide("ALL");
+    setForm((f) => ({ ...f, categoryId: "", sideId: "" }));
+  };
+
   const filtered = (selected?.guests || []).filter((g) => {
     if (q && !g.name.toLowerCase().includes(q.toLowerCase())) return false;
     if (filterType !== "ALL" && g.guestType !== filterType) return false;
@@ -146,12 +159,15 @@ export default function GuestsPageClient({
   });
 
   // --- LOGIKA PENGIRISAN DATA UNTUK PAGINATION ---
-  const totalPages = Math.ceil(filtered.length / itemsPerPage) || 1;
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const paginatedGuests = filtered.slice(startIndex, startIndex + itemsPerPage);
+  // "ALL" = satu halaman berisi semua data (pakai angka terbatas, bukan Infinity, agar tidak jadi NaN)
+  const pageSize =
+    itemsPerPage === "ALL" ? Math.max(filtered.length, 1) : itemsPerPage;
+  const totalPages = Math.ceil(filtered.length / pageSize) || 1;
+  const startIndex = (currentPage - 1) * pageSize;
+  const paginatedGuests = filtered.slice(startIndex, startIndex + pageSize);
 
   const handleRowsPerPageChange = (e) => {
-    setItemsPerPage(Number(e.target.value));
+    setItemsPerPage(e.target.value === "ALL" ? "ALL" : Number(e.target.value));
     setCurrentPage(1); // Reset ke halaman 1 setiap kali jumlah baris diubah
   };
 
@@ -172,11 +188,7 @@ export default function GuestsPageClient({
   };
 
   const handleBulkDelete = async () => {
-    if (
-      !confirm(
-        `Are you sure you want to delete ${selectedGuestIds.length} guests?`,
-      )
-    )
+    if (!confirm(`Yakin ingin menghapus ${selectedGuestIds.length} tamu?`))
       return;
     setIsDeletingBulk(true);
 
@@ -188,11 +200,11 @@ export default function GuestsPageClient({
           }),
         ),
       );
-      toast.success(`${selectedGuestIds.length} guests deleted`);
+      toast.success(`${selectedGuestIds.length} tamu berhasil dihapus`);
       setSelectedGuestIds([]);
       router.refresh();
     } catch (error) {
-      toast.error("Failed to delete some guests");
+      toast.error("Gagal menghapus sebagian tamu");
     } finally {
       setIsDeletingBulk(false);
     }
@@ -217,8 +229,8 @@ export default function GuestsPageClient({
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     });
-    if (!res.ok) return toast.error("Failed");
-    toast.success("Guest added successfully");
+    if (!res.ok) return toast.error("Gagal menambahkan tamu");
+    toast.success("Tamu berhasil ditambahkan");
     setForm({
       name: "",
       phone: "",
@@ -234,7 +246,7 @@ export default function GuestsPageClient({
   };
 
   const remove = async (gid) => {
-    if (!confirm("Delete this guest?")) return;
+    if (!confirm("Hapus tamu ini?")) return;
     await fetch(`/api/invitations/${selected.id}/guests/${gid}`, {
       method: "DELETE",
     });
@@ -242,62 +254,63 @@ export default function GuestsPageClient({
   };
 
   const copyLink = (g) => {
-    navigator.clipboard.writeText(
-      buildInvitationUrl(baseUrl, selected, g.token),
-    );
-    toast.success("Guest link copied");
+    navigator.clipboard.writeText(buildInvitationUrl(baseUrl, selected, g));
+    toast.success("Tautan tamu disalin");
   };
-  const buildMessage = (g) => {
+
+  // Render pesan untuk satu tamu memakai isi template tertentu (default: template bawaan user).
+  const buildMessage = (g, body = messageTemplate) => {
     const ctx = buildContext({
       invitation: selected,
       guest: g,
       origin: baseUrl,
     });
-    return renderTemplate(messageTemplate, ctx);
-  };
-  const copyMessage = (g) => {
-    navigator.clipboard.writeText(buildMessage(g));
-    toast.success("Invitation message copied");
-  };
-  const sendWhatsApp = (g) => {
-    const msg = encodeURIComponent(buildMessage(g));
-    const phone = String(g.phone || "").replace(/\D/g, "");
-    window.open(
-      phone
-        ? `https://wa.me/${phone}?text=${msg}`
-        : `https://wa.me/?text=${msg}`,
-      "_blank",
-    );
+    return renderTemplate(body, ctx);
   };
 
-  const openWaDialog = async () => {
+  // Buka popup pilih template, lalu muat daftar template dari API.
+  const openTemplatePicker = async (g, action) => {
+    setTplGuest(g);
+    setTplAction(action);
+    setTplOpen(true);
+    setTplLoading(true);
     try {
       const r = await fetch("/api/message-templates");
       const d = await r.json();
-      const list = (d.items || d.templates || []).filter((t) => t.active !== false);
-      setWaTemplates(list);
-      setWaTemplateId(list[0]?.id || "");
-    } catch { setWaTemplates([]); }
-    setWaOpen(true);
+      const list = (d.items || d.templates || []).filter(
+        (t) => t.active !== false,
+      );
+      setTplList(list);
+      setTplId(list[0]?.id || "");
+    } catch {
+      setTplList([]);
+      setTplId("");
+      toast.error("Gagal memuat template pesan");
+    } finally {
+      setTplLoading(false);
+    }
   };
 
-  const sendBulkWhatsApp = () => {
-    const chosen = waTemplates.find((t) => t.id === waTemplateId);
-    const body = chosen?.body || messageTemplate;
-    const guests = (selected?.guests || []).filter((g) => selectedGuestIds.includes(g.id));
-    if (!guests.length) return;
-    // Fix ON: render once (first guest context) and send the exact same text to everyone.
-    // Fix OFF: personalize per guest.
-    const fixedText = waFix
-      ? renderTemplate(body, buildContext({ invitation: selected, guest: guests[0], origin: baseUrl }))
-      : null;
-    guests.forEach((g) => {
-      const text = waFix ? fixedText : renderTemplate(body, buildContext({ invitation: selected, guest: g, origin: baseUrl }));
-      const phone = String(g.phone || "").replace(/\D/g, "");
-      window.open(phone ? `https://wa.me/${phone}?text=${encodeURIComponent(text)}` : `https://wa.me/?text=${encodeURIComponent(text)}`, "_blank");
-    });
-    toast.success(`Opened WhatsApp for ${guests.length} guest(s)`);
-    setWaOpen(false);
+  const tplBody = tplList.find((t) => t.id === tplId)?.body || messageTemplate;
+  const tplPreview = tplGuest ? buildMessage(tplGuest, tplBody) : "";
+
+  const confirmTemplate = () => {
+    if (!tplGuest) return;
+    const text = buildMessage(tplGuest, tplBody);
+    if (tplAction === "copy") {
+      navigator.clipboard.writeText(text);
+      toast.success("Pesan undangan disalin");
+    } else {
+      const phone = String(tplGuest.phone || "").replace(/\D/g, "");
+      const msg = encodeURIComponent(text);
+      window.open(
+        phone
+          ? `https://wa.me/${phone}?text=${msg}`
+          : `https://wa.me/?text=${msg}`,
+        "_blank",
+      );
+    }
+    setTplOpen(false);
   };
 
   const saveEdit = async (e) => {
@@ -322,9 +335,9 @@ export default function GuestsPageClient({
     );
     if (!res.ok) {
       const err = await res.json().catch(() => ({}));
-      return toast.error(err.error || "Failed");
+      return toast.error(err.error || "Gagal menyimpan perubahan");
     }
-    toast.success("Guest updated");
+    toast.success("Data tamu diperbarui");
     setEditing(null);
     router.refresh();
   };
@@ -343,7 +356,7 @@ export default function GuestsPageClient({
     const data = await res.json();
     setImporting(false);
     e.target.value = "";
-    if (!res.ok) return toast.error(data.error || "Could not read file");
+    if (!res.ok) return toast.error(data.error || "Tidak dapat membaca file");
     setImportData(data);
     setImportOpen(true);
   };
@@ -352,7 +365,7 @@ export default function GuestsPageClient({
     return (
       <div className="rounded-2xl bg-white border p-12 text-center">
         <p className="text-muted-foreground">
-          Create an invitation first to manage guests.
+          Buat undangan terlebih dahulu untuk mengelola tamu.
         </p>
       </div>
     );
@@ -362,19 +375,19 @@ export default function GuestsPageClient({
       {/* Header Action Bar */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 rounded-2xl bg-white border p-4">
         <div className="flex flex-col sm:flex-row sm:items-center gap-3">
-          <p className="text-sm font-semibold">Guest Management</p>
+          <p className="text-sm font-semibold">Manajemen Tamu</p>
           <div className="flex items-center gap-2">
             <span className="text-sm text-muted-foreground hidden sm:inline-block">
-              for
+              untuk
             </span>
             <select
               value={selectedId}
-              onChange={(e) => setSelectedId(e.target.value)}
+              onChange={(e) => handleInvitationChange(e.target.value)}
               className="h-9 px-3 py-1 rounded-md border text-sm font-medium bg-muted/30 focus:outline-none focus:ring-2 focus:ring-primary min-w-[200px]"
             >
               {invitations.map((i) => (
                 <option key={i.id} value={i.id}>
-                  {i.brideName} & {i.groomName} ({i.guests.length} guests)
+                  {i.brideName} & {i.groomName} ({i.guests.length} tamu)
                 </option>
               ))}
             </select>
@@ -395,7 +408,7 @@ export default function GuestsPageClient({
             <Button asChild size="sm" variant="outline" disabled={importing}>
               <span>
                 <Upload className="h-3.5 w-3.5 mr-1" />
-                {importing ? "Importing…" : "Import Excel"}
+                {importing ? "Mengimpor…" : "Impor Excel"}
               </span>
             </Button>
             <input type="file" hidden accept=".xlsx,.xls" onChange={doImport} />
@@ -406,7 +419,7 @@ export default function GuestsPageClient({
             className="bg-primary"
           >
             <Plus className="h-4 w-4 mr-1" />
-            Add Guest
+            Tambah Tamu
           </Button>
         </div>
       </div>
@@ -420,7 +433,7 @@ export default function GuestsPageClient({
             <Input
               value={q}
               onChange={(e) => setQ(e.target.value)}
-              placeholder="Search guests…"
+              placeholder="Cari tamu…"
               className="pl-9"
             />
           </div>
@@ -429,16 +442,16 @@ export default function GuestsPageClient({
             onChange={(e) => setFilterType(e.target.value)}
             className="h-9 px-2 rounded-md border text-sm"
           >
-            <option value="ALL">All Types</option>
-            <option value="INDIVIDUAL">Individual</option>
-            <option value="GROUP">Group</option>
+            <option value="ALL">Semua Tipe</option>
+            <option value="INDIVIDUAL">Individu</option>
+            <option value="GROUP">Grup</option>
           </select>
           <select
             value={filterCategory}
             onChange={(e) => setFilterCategory(e.target.value)}
             className="h-9 px-2 rounded-md border text-sm"
           >
-            <option value="ALL">All Categories</option>
+            <option value="ALL">Semua Kategori</option>
             {categories.map((c) => (
               <option key={c.id} value={c.id}>
                 {c.name}
@@ -451,13 +464,15 @@ export default function GuestsPageClient({
             className="h-9 px-2 rounded-md border text-sm"
             data-testid="filter-side"
           >
-            <option value="ALL">All Sides</option>
+            <option value="ALL">Semua Pihak</option>
             {sides.map((sd) => (
-              <option key={sd.id} value={sd.id}>{sd.name}</option>
+              <option key={sd.id} value={sd.id}>
+                {sd.name}
+              </option>
             ))}
           </select>
           <p className="text-sm text-muted-foreground ml-auto">
-            {filtered.length} of {selected?.guests.length || 0}
+            {filtered.length} dari {selected?.guests.length || 0}
           </p>
         </div>
 
@@ -466,7 +481,7 @@ export default function GuestsPageClient({
           <div className="p-3 bg-primary/5 border-b flex items-center gap-4 animate-in fade-in zoom-in-95 duration-200">
             <div className="flex items-center gap-2 text-sm font-medium text-primary">
               <CheckSquare className="h-4 w-4" />
-              {selectedGuestIds.length} Guests Selected
+              {selectedGuestIds.length} Tamu Dipilih
             </div>
             <div className="flex gap-2">
               <Button
@@ -475,15 +490,7 @@ export default function GuestsPageClient({
                 className="bg-white"
                 onClick={handleBulkDownloadQR}
               >
-                <Download className="h-3.5 w-3.5 mr-2" /> Download QR (PDF)
-              </Button>
-              <Button
-                size="sm"
-                className="bg-emerald-600 hover:bg-emerald-700 text-white"
-                onClick={openWaDialog}
-                data-testid="bulk-whatsapp-btn"
-              >
-                <WhatsAppIcon className="h-3.5 w-3.5 mr-2" /> Send WhatsApp
+                <Download className="h-3.5 w-3.5 mr-2" /> Unduh QR (PDF)
               </Button>
               <Button
                 size="sm"
@@ -492,7 +499,7 @@ export default function GuestsPageClient({
                 disabled={isDeletingBulk}
               >
                 <Trash2 className="h-3.5 w-3.5 mr-2" />{" "}
-                {isDeletingBulk ? "Deleting..." : "Delete Selected"}
+                {isDeletingBulk ? "Menghapus..." : "Hapus yang Dipilih"}
               </Button>
             </div>
             <Button
@@ -501,46 +508,10 @@ export default function GuestsPageClient({
               className="ml-auto"
               onClick={() => setSelectedGuestIds([])}
             >
-              Clear Selection
+              Batalkan Pilihan
             </Button>
           </div>
         )}
-
-        <Dialog open={waOpen} onOpenChange={setWaOpen}>
-          <DialogContent data-testid="bulk-whatsapp-dialog">
-            <DialogHeader>
-              <DialogTitle>Send WhatsApp to {selectedGuestIds.length} guest(s)</DialogTitle>
-              <DialogDescription>Choose a message template and how it should be personalized.</DialogDescription>
-            </DialogHeader>
-            <div className="space-y-3">
-              <div>
-                <Label>Template</Label>
-                <select
-                  value={waTemplateId}
-                  onChange={(e) => setWaTemplateId(e.target.value)}
-                  className="w-full h-10 px-3 rounded-md border text-sm bg-white"
-                  data-testid="wa-template-select"
-                >
-                  {waTemplates.length === 0 && <option value="">Default template</option>}
-                  {waTemplates.map((t) => (
-                    <option key={t.id} value={t.id}>{t.name}</option>
-                  ))}
-                </select>
-              </div>
-              <label className="flex items-start gap-2 text-sm cursor-pointer">
-                <input type="checkbox" checked={waFix} onChange={(e) => setWaFix(e.target.checked)} className="mt-1" data-testid="wa-fix-checkbox" />
-                <span>
-                  <span className="font-medium">Fix Message</span>
-                  <span className="block text-xs text-muted-foreground">All selected guests get this exact message (no per-guest personalization).</span>
-                </span>
-              </label>
-            </div>
-            <DialogFooter>
-              <Button variant="outline" onClick={() => setWaOpen(false)}>Cancel</Button>
-              <Button className="bg-emerald-600 hover:bg-emerald-700 text-white" onClick={sendBulkWhatsApp} data-testid="wa-send-confirm">Open WhatsApp</Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
 
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
@@ -557,12 +528,12 @@ export default function GuestsPageClient({
                     onChange={handleSelectAll}
                   />
                 </th>
-                <th className="px-4 py-2">Name</th>
-                <th className="px-4 py-2">Type</th>
-                <th className="px-4 py-2">Category</th>
-                <th className="px-4 py-2">Side</th>
-                <th className="px-4 py-2 text-center">Share</th>
-                <th className="px-4 py-2 text-right">Actions</th>
+                <th className="px-4 py-2">Nama</th>
+                <th className="px-4 py-2">Tipe</th>
+                <th className="px-4 py-2">Kategori</th>
+                <th className="px-4 py-2">Pihak</th>
+                <th className="px-4 py-2 text-center">Bagikan</th>
+                <th className="px-4 py-2 text-right">Aksi</th>
               </tr>
             </thead>
             <tbody>
@@ -591,6 +562,14 @@ export default function GuestsPageClient({
                         <p className="text-xs text-muted-foreground">
                           {g.phone || "—"}
                         </p>
+                        {g.trackingCode && (
+                          <p
+                            className="text-[10px] font-mono text-primary/70 mt-0.5"
+                            data-testid={`guest-code-${g.id}`}
+                          >
+                            {g.trackingCode}
+                          </p>
+                        )}
                       </div>
                     </div>
                   </td>
@@ -598,12 +577,14 @@ export default function GuestsPageClient({
                     <span
                       className={`text-xs px-2 py-0.5 rounded-full ${g.guestType === "GROUP" ? "bg-primary/10 text-primary" : "bg-muted text-muted-foreground"}`}
                     >
-                      {g.guestType}
+                      {TYPE_LABEL[g.guestType] || g.guestType}
                     </span>
                   </td>
                   <td className="px-4 py-3">{g.category || "—"}</td>
                   <td className="px-4 py-3">
-                    {g.sideName || (g.guestSide ? SIDE_LABEL[g.guestSide] : "—")}
+                    {g.sideName ||
+                      sides.find((sd) => sd.id === g.sideId)?.name ||
+                      "—"}
                   </td>
                   <td className="px-4 py-3">
                     <div className="flex justify-center gap-1">
@@ -611,23 +592,25 @@ export default function GuestsPageClient({
                         size="sm"
                         variant="ghost"
                         onClick={() => copyLink(g)}
-                        title="Copy Link"
+                        title="Salin Tautan"
                       >
                         <Copy className="h-4 w-4" />
                       </Button>
                       <Button
                         size="sm"
                         variant="ghost"
-                        onClick={() => copyMessage(g)}
-                        title="Copy Message"
+                        onClick={() => openTemplatePicker(g, "copy")}
+                        title="Salin Pesan"
+                        data-testid={`copy-message-${g.id}`}
                       >
                         <MessageSquare className="h-4 w-4" />
                       </Button>
                       <Button
                         size="sm"
                         variant="ghost"
-                        onClick={() => sendWhatsApp(g)}
-                        title="Send WhatsApp"
+                        onClick={() => openTemplatePicker(g, "wa")}
+                        title="Kirim WhatsApp"
+                        data-testid={`send-whatsapp-${g.id}`}
                       >
                         <WhatsAppIcon className="h-4 w-4 text-emerald-600" />
                       </Button>
@@ -644,7 +627,7 @@ export default function GuestsPageClient({
                         <Pencil className="h-4 w-4" />
                       </Button>
                       <a href={`/api/guests/${g.id}/qr`} target="_blank">
-                        <Button size="sm" variant="ghost" title="View QR">
+                        <Button size="sm" variant="ghost" title="Lihat QR">
                           <QrIcon className="h-4 w-4" />
                         </Button>
                       </a>
@@ -652,7 +635,7 @@ export default function GuestsPageClient({
                         size="sm"
                         variant="ghost"
                         onClick={() => remove(g.id)}
-                        title="Delete"
+                        title="Hapus"
                       >
                         <Trash2 className="h-4 w-4 text-red-600" />
                       </Button>
@@ -666,7 +649,7 @@ export default function GuestsPageClient({
                     colSpan={7}
                     className="px-4 py-8 text-center text-muted-foreground"
                   >
-                    No guests found
+                    Tamu tidak ditemukan
                   </td>
                 </tr>
               )}
@@ -674,13 +657,13 @@ export default function GuestsPageClient({
           </table>
         </div>
 
-        {/* --- KONTROL PAGINATION DIPERBARUI SESUAI GAMBAR --- */}
+        {/* --- KONTROL PAGINATION --- */}
         {filtered.length > 0 && (
           <div className="p-4 border-t flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
-            {/* Bagian Kiri: Rows per page & Showing X to Y */}
+            {/* Bagian Kiri: Baris per halaman & Menampilkan X sampai Y */}
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-2">
-                <span className="text-foreground">Rows per page:</span>
+                <span className="text-foreground">Baris per halaman:</span>
                 <select
                   value={itemsPerPage}
                   onChange={handleRowsPerPageChange}
@@ -690,27 +673,28 @@ export default function GuestsPageClient({
                   <option value={20}>20</option>
                   <option value={50}>50</option>
                   <option value={100}>100</option>
+                  <option value="ALL">Semua</option>
                 </select>
               </div>
               <span className="text-border">|</span>
               <span>
-                Showing{" "}
+                Menampilkan{" "}
                 <span className="font-semibold text-foreground">
                   {startIndex + 1}
                 </span>{" "}
-                to{" "}
+                sampai{" "}
                 <span className="font-semibold text-foreground">
-                  {Math.min(startIndex + itemsPerPage, filtered.length)}
+                  {Math.min(startIndex + pageSize, filtered.length)}
                 </span>{" "}
-                of{" "}
+                dari{" "}
                 <span className="font-semibold text-foreground">
                   {filtered.length}
                 </span>{" "}
-                entries
+                data
               </span>
             </div>
 
-            {/* Bagian Kanan: Previous [1] [2] Next */}
+            {/* Bagian Kanan: Sebelumnya [1] [2] Berikutnya */}
             <div className="flex items-center gap-1">
               <Button
                 variant="outline"
@@ -719,7 +703,7 @@ export default function GuestsPageClient({
                 onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
                 disabled={currentPage === 1}
               >
-                Previous
+                Sebelumnya
               </Button>
 
               {Array.from({ length: totalPages }, (_, i) => i + 1).map(
@@ -745,37 +729,112 @@ export default function GuestsPageClient({
                 }
                 disabled={currentPage === totalPages}
               >
-                Next
+                Berikutnya
               </Button>
             </div>
           </div>
         )}
       </div>
 
-      {/* MODAL ADD GUEST */}
+      {/* POPUP PILIH TEMPLATE PESAN */}
+      <Dialog open={tplOpen} onOpenChange={setTplOpen}>
+        <DialogContent
+          className="max-w-lg"
+          data-testid="template-picker-dialog"
+        >
+          <DialogHeader>
+            <DialogTitle>
+              {tplAction === "wa" ? "Kirim WhatsApp" : "Salin Pesan"}
+              {tplGuest ? ` — ${tplGuest.name}` : ""}
+            </DialogTitle>
+            <DialogDescription>
+              Pilih template pesan yang ingin digunakan.
+            </DialogDescription>
+          </DialogHeader>
+
+          {tplLoading ? (
+            <div className="flex items-center gap-2 text-sm text-muted-foreground py-6 justify-center">
+              <Loader2 className="h-4 w-4 animate-spin" />
+              Memuat template…
+            </div>
+          ) : (
+            <div className="space-y-3">
+              <div>
+                <Label>Template Pesan</Label>
+                <select
+                  value={tplId}
+                  onChange={(e) => setTplId(e.target.value)}
+                  className="w-full h-10 px-3 rounded-md border text-sm bg-white"
+                  data-testid="template-picker-select"
+                >
+                  {tplList.length === 0 && (
+                    <option value="">Template default</option>
+                  )}
+                  {tplList.map((t) => (
+                    <option key={t.id} value={t.id}>
+                      {t.name}
+                    </option>
+                  ))}
+                </select>
+                {tplList.length === 0 && (
+                  <p className="text-[10px] text-muted-foreground mt-1">
+                    Belum ada template pesan. Memakai template default.
+                  </p>
+                )}
+              </div>
+              <div>
+                <Label className="text-xs">Pratinjau</Label>
+                <div className="mt-1 max-h-48 overflow-auto whitespace-pre-wrap rounded-md border bg-muted/30 p-3 text-xs">
+                  {tplPreview || "—"}
+                </div>
+              </div>
+            </div>
+          )}
+
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setTplOpen(false)}>
+              Batal
+            </Button>
+            <Button
+              className={
+                tplAction === "wa"
+                  ? "bg-emerald-600 hover:bg-emerald-700 text-white"
+                  : "bg-primary"
+              }
+              onClick={confirmTemplate}
+              disabled={tplLoading}
+              data-testid="template-picker-confirm"
+            >
+              {tplAction === "wa" ? "Buka WhatsApp" : "Salin Pesan"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* MODAL TAMBAH TAMU */}
       <Dialog open={isAddOpen} onOpenChange={setIsAddOpen}>
         <DialogContent className="max-w-lg">
           <DialogHeader>
-            <DialogTitle>Add New Guest</DialogTitle>
+            <DialogTitle>Tambah Tamu Baru</DialogTitle>
             <DialogDescription>
-              Fill in the guest details to invite them.
+              Isi detail tamu untuk mengundang mereka.
             </DialogDescription>
           </DialogHeader>
           <form onSubmit={add} className="space-y-3">
             <div className="grid grid-cols-2 gap-2">
               <div>
-                <Label>Name*</Label>
+                <Label>Nama*</Label>
                 <Input
-                  placeholder="E.g. John Doe"
+                  placeholder="mis. Budi Santoso"
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
                   required
                 />
               </div>
               <div>
-                <Label>Phone</Label>
+                <Label>Telepon</Label>
                 <Input
-                  placeholder="E.g. 0812..."
+                  placeholder="mis. 0812..."
                   value={form.phone}
                   onChange={(e) => setForm({ ...form, phone: e.target.value })}
                 />
@@ -783,7 +842,7 @@ export default function GuestsPageClient({
             </div>
             <div className="grid grid-cols-2 gap-2">
               <div>
-                <Label>Guest Type</Label>
+                <Label>Tipe Tamu</Label>
                 <select
                   value={form.guestType}
                   onChange={(e) =>
@@ -798,12 +857,12 @@ export default function GuestsPageClient({
                   }
                   className="w-full h-10 px-3 rounded-md border text-sm"
                 >
-                  <option value="INDIVIDUAL">Individual</option>
-                  <option value="GROUP">Group</option>
+                  <option value="INDIVIDUAL">Individu</option>
+                  <option value="GROUP">Grup</option>
                 </select>
               </div>
               <div>
-                <Label>Quota</Label>
+                <Label>Kuota</Label>
                 <Input
                   type="number"
                   min={1}
@@ -820,7 +879,7 @@ export default function GuestsPageClient({
             </div>
             <div className="grid grid-cols-2 gap-2">
               <div>
-                <Label>Category</Label>
+                <Label>Kategori</Label>
                 <select
                   value={form.categoryId}
                   onChange={(e) =>
@@ -828,43 +887,52 @@ export default function GuestsPageClient({
                   }
                   className="w-full h-10 px-3 rounded-md border text-sm"
                 >
-                  <option value="">— None —</option>
+                  <option value="">— Tidak ada —</option>
                   {categories.map((c) => (
                     <option key={c.id} value={c.id}>
                       {c.name}
                     </option>
                   ))}
                 </select>
+                {categories.length === 0 && (
+                  <p className="text-[10px] text-muted-foreground mt-1">
+                    Tambahkan Kategori di editor undangan → Kategori Tamu.
+                  </p>
+                )}
               </div>
               <div>
-                <Label>Guest Side</Label>
+                <Label>Pihak Tamu</Label>
                 <select
                   value={form.sideId}
-                  onChange={(e) =>
-                    setForm({ ...form, sideId: e.target.value })
-                  }
+                  onChange={(e) => setForm({ ...form, sideId: e.target.value })}
                   className="w-full h-10 px-3 rounded-md border text-sm"
                   data-testid="add-guest-side"
                 >
-                  <option value="">— None —</option>
+                  <option value="">— Tidak ada —</option>
                   {sides.map((sd) => (
-                    <option key={sd.id} value={sd.id}>{sd.name}</option>
+                    <option key={sd.id} value={sd.id}>
+                      {sd.name}
+                    </option>
                   ))}
                 </select>
-                {sides.length === 0 && <p className="text-[10px] text-muted-foreground mt-1">Add sides in the invitation editor → Guest Sides.</p>}
+                {sides.length === 0 && (
+                  <p className="text-[10px] text-muted-foreground mt-1">
+                    Tambahkan Pihak di editor undangan → Pihak Tamu.
+                  </p>
+                )}
               </div>
             </div>
             <div>
-              <Label>Gender</Label>
+              <Label>Jenis Kelamin</Label>
               <select
                 value={form.gender}
                 onChange={(e) => setForm({ ...form, gender: e.target.value })}
                 className="w-full h-10 px-3 rounded-md border text-sm"
               >
-                <option value="">— None —</option>
-                <option value="MALE">Male</option>
-                <option value="FEMALE">Female</option>
-                <option value="OTHER">Other</option>
+                <option value="">— Tidak ada —</option>
+                <option value="MALE">Laki-laki</option>
+                <option value="FEMALE">Perempuan</option>
+                <option value="OTHER">Lainnya</option>
               </select>
             </div>
             <DialogFooter className="mt-4">
@@ -873,51 +941,51 @@ export default function GuestsPageClient({
                 variant="outline"
                 onClick={() => setIsAddOpen(false)}
               >
-                Cancel
+                Batal
               </Button>
               <Button type="submit" className="bg-primary">
-                Add Guest
+                Tambah Tamu
               </Button>
             </DialogFooter>
           </form>
         </DialogContent>
       </Dialog>
 
-      {/* MODAL EDIT GUEST */}
+      {/* MODAL EDIT TAMU */}
       <Dialog open={!!editing} onOpenChange={(o) => !o && setEditing(null)}>
         <DialogContent className="max-w-lg">
           <DialogHeader>
-            <DialogTitle>Edit Guest</DialogTitle>
+            <DialogTitle>Edit Tamu</DialogTitle>
             <DialogDescription>
-              Update guest details. Token & QR remain the same.
+              Perbarui detail tamu. Token & QR tetap sama.
             </DialogDescription>
           </DialogHeader>
           {editing && (
             <form onSubmit={saveEdit} className="space-y-3">
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <Label>Name</Label>
+                  <Label>Nama</Label>
                   <Input name="name" defaultValue={editing.name} required />
                 </div>
                 <div>
-                  <Label>Phone</Label>
+                  <Label>Telepon</Label>
                   <Input name="phone" defaultValue={editing.phone || ""} />
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <Label>Guest Type</Label>
+                  <Label>Tipe Tamu</Label>
                   <select
                     name="guestType"
                     defaultValue={editing.guestType}
                     className="w-full h-10 px-3 rounded-md border text-sm"
                   >
-                    <option value="INDIVIDUAL">Individual</option>
-                    <option value="GROUP">Group</option>
+                    <option value="INDIVIDUAL">Individu</option>
+                    <option value="GROUP">Grup</option>
                   </select>
                 </div>
                 <div>
-                  <Label>Quota</Label>
+                  <Label>Kuota</Label>
                   <Input
                     name="quota"
                     type="number"
@@ -929,13 +997,13 @@ export default function GuestsPageClient({
               </div>
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <Label>Category</Label>
+                  <Label>Kategori</Label>
                   <select
                     name="categoryId"
                     defaultValue={editing.categoryId || ""}
                     className="w-full h-10 px-3 rounded-md border text-sm"
                   >
-                    <option value="">— None —</option>
+                    <option value="">— Tidak ada —</option>
                     {categories.map((c) => (
                       <option key={c.id} value={c.id}>
                         {c.name}
@@ -944,36 +1012,38 @@ export default function GuestsPageClient({
                   </select>
                 </div>
                 <div>
-                  <Label>Guest Side</Label>
+                  <Label>Pihak Tamu</Label>
                   <select
                     name="sideId"
                     defaultValue={editing.sideId || ""}
                     className="w-full h-10 px-3 rounded-md border text-sm"
                     data-testid="edit-guest-side"
                   >
-                    <option value="">— None —</option>
+                    <option value="">— Tidak ada —</option>
                     {sides.map((sd) => (
-                      <option key={sd.id} value={sd.id}>{sd.name}</option>
+                      <option key={sd.id} value={sd.id}>
+                        {sd.name}
+                      </option>
                     ))}
                   </select>
                 </div>
               </div>
               <div>
-                <Label>Gender</Label>
+                <Label>Jenis Kelamin</Label>
                 <select
                   name="gender"
                   defaultValue={editing.gender || ""}
                   className="w-full h-10 px-3 rounded-md border text-sm"
                 >
-                  <option value="">— None —</option>
-                  <option value="MALE">Male</option>
-                  <option value="FEMALE">Female</option>
-                  <option value="OTHER">Other</option>
+                  <option value="">— Tidak ada —</option>
+                  <option value="MALE">Laki-laki</option>
+                  <option value="FEMALE">Perempuan</option>
+                  <option value="OTHER">Lainnya</option>
                 </select>
               </div>
               <div className="rounded-md bg-muted/40 border p-2 text-xs text-muted-foreground">
-                Invitation Token:{" "}
-                <code className="font-mono">{editing.token}</code> (read-only)
+                Token Undangan:{" "}
+                <code className="font-mono">{editing.token}</code> (hanya baca)
               </div>
               <DialogFooter className="mt-4">
                 <Button
@@ -981,10 +1051,10 @@ export default function GuestsPageClient({
                   variant="outline"
                   onClick={() => setEditing(null)}
                 >
-                  Cancel
+                  Batal
                 </Button>
                 <Button type="submit" className="bg-primary">
-                  Save Changes
+                  Simpan Perubahan
                 </Button>
               </DialogFooter>
             </form>

@@ -146,7 +146,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$dashboard$2f$i
 ;
 ;
 ;
-const dynamic = 'force-dynamic';
+const dynamic = "force-dynamic";
 async function InvitationsListPage() {
     const session = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$auth$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["auth"])();
     const invitations = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$prisma$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"].invitation.findMany({
@@ -154,7 +154,7 @@ async function InvitationsListPage() {
             userId: session.user.id
         },
         orderBy: {
-            updatedAt: 'desc'
+            updatedAt: "desc"
         },
         include: {
             template: {
@@ -176,7 +176,7 @@ async function InvitationsListPage() {
             brideName: i.brideName,
             groomName: i.groomName,
             status: i.status,
-            templateName: i.template?.name || '—',
+            templateName: i.template?.name || "—",
             weddingDate: i.weddingDate?.toISOString() || null,
             guestCount: i._count.guests,
             rsvpCount: i._count.rsvps,
@@ -192,24 +192,24 @@ async function InvitationsListPage() {
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
                                 className: "font-serif text-3xl font-bold",
-                                children: "My Invitations"
+                                children: "Undangan Saya"
                             }, void 0, false, {
                                 fileName: "[project]/app/dashboard/invitations/page.js",
-                                lineNumber: 31,
+                                lineNumber: 36,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                 className: "text-muted-foreground mt-1",
-                                children: "Create, edit and publish your wedding invitations"
+                                children: "Buat, edit, dan publikasikan undangan pernikahan Anda"
                             }, void 0, false, {
                                 fileName: "[project]/app/dashboard/invitations/page.js",
-                                lineNumber: 32,
+                                lineNumber: 37,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/dashboard/invitations/page.js",
-                        lineNumber: 30,
+                        lineNumber: 35,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
@@ -221,25 +221,25 @@ async function InvitationsListPage() {
                                     className: "h-4 w-4 mr-2"
                                 }, void 0, false, {
                                     fileName: "[project]/app/dashboard/invitations/page.js",
-                                    lineNumber: 34,
-                                    columnNumber: 80
+                                    lineNumber: 43,
+                                    columnNumber: 13
                                 }, this),
-                                "New Invitation"
+                                "Undangan Baru"
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/dashboard/invitations/page.js",
-                            lineNumber: 34,
-                            columnNumber: 49
+                            lineNumber: 42,
+                            columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/dashboard/invitations/page.js",
-                        lineNumber: 34,
+                        lineNumber: 41,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/dashboard/invitations/page.js",
-                lineNumber: 29,
+                lineNumber: 34,
                 columnNumber: 7
             }, this),
             items.length === 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -247,39 +247,39 @@ async function InvitationsListPage() {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: "font-serif text-xl mb-2",
-                        children: "No invitations yet"
+                        children: "Belum ada undangan"
                     }, void 0, false, {
                         fileName: "[project]/app/dashboard/invitations/page.js",
-                        lineNumber: 39,
+                        lineNumber: 51,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: "text-muted-foreground mb-4",
-                        children: "Create your first beautiful invitation to get started."
+                        children: "Buat undangan cantik pertama Anda untuk memulai."
                     }, void 0, false, {
                         fileName: "[project]/app/dashboard/invitations/page.js",
-                        lineNumber: 40,
+                        lineNumber: 52,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
                         href: "/dashboard/invitations/new",
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Button"], {
                             className: "bg-primary",
-                            children: "Create Now"
+                            children: "Buat Sekarang"
                         }, void 0, false, {
                             fileName: "[project]/app/dashboard/invitations/page.js",
-                            lineNumber: 41,
-                            columnNumber: 51
+                            lineNumber: 56,
+                            columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/dashboard/invitations/page.js",
-                        lineNumber: 41,
+                        lineNumber: 55,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/dashboard/invitations/page.js",
-                lineNumber: 38,
+                lineNumber: 50,
                 columnNumber: 9
             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "grid gap-4 sm:grid-cols-2 lg:grid-cols-3",
@@ -295,37 +295,38 @@ async function InvitationsListPage() {
                                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                 className: "font-script text-2xl text-primary",
                                                 children: [
-                                                    i.brideName || 'Bride',
-                                                    " & ",
-                                                    i.groomName || 'Groom'
+                                                    i.brideName || "Mempelai Wanita",
+                                                    " &",
+                                                    " ",
+                                                    i.groomName || "Mempelai Pria"
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/app/dashboard/invitations/page.js",
-                                                lineNumber: 50,
+                                                lineNumber: 69,
                                                 columnNumber: 21
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/app/dashboard/invitations/page.js",
-                                            lineNumber: 49,
+                                            lineNumber: 68,
                                             columnNumber: 19
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/app/dashboard/invitations/page.js",
-                                        lineNumber: 48,
+                                        lineNumber: 67,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                        className: `absolute top-2 right-2 text-[10px] uppercase tracking-widest px-2 py-1 rounded-full ${i.status === 'PUBLISHED' ? 'bg-emerald-500 text-white' : 'bg-amber-500 text-white'}`,
-                                        children: i.status
+                                        className: `absolute top-2 right-2 text-[10px] uppercase tracking-widest px-2 py-1 rounded-full ${i.status === "PUBLISHED" ? "bg-emerald-500 text-white" : "bg-amber-500 text-white"}`,
+                                        children: i.status === "PUBLISHED" ? "Dipublikasikan" : i.status === "DRAFT" ? "Draf" : i.status
                                     }, void 0, false, {
                                         fileName: "[project]/app/dashboard/invitations/page.js",
-                                        lineNumber: 53,
+                                        lineNumber: 75,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/dashboard/invitations/page.js",
-                                lineNumber: 47,
+                                lineNumber: 66,
                                 columnNumber: 15
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -339,20 +340,20 @@ async function InvitationsListPage() {
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/dashboard/invitations/page.js",
-                                        lineNumber: 56,
+                                        lineNumber: 86,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         className: "text-xs text-muted-foreground mt-1",
-                                        children: i.weddingDate ? new Date(i.weddingDate).toLocaleDateString('en-US', {
-                                            weekday: 'short',
-                                            day: 'numeric',
-                                            month: 'short',
-                                            year: 'numeric'
-                                        }) : 'No date set'
+                                        children: i.weddingDate ? new Date(i.weddingDate).toLocaleDateString("id-ID", {
+                                            weekday: "short",
+                                            day: "numeric",
+                                            month: "short",
+                                            year: "numeric"
+                                        }) : "Tanggal belum diatur"
                                     }, void 0, false, {
                                         fileName: "[project]/app/dashboard/invitations/page.js",
-                                        lineNumber: 57,
+                                        lineNumber: 89,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -365,7 +366,7 @@ async function InvitationsListPage() {
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/app/dashboard/invitations/page.js",
-                                                lineNumber: 59,
+                                                lineNumber: 100,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -375,13 +376,13 @@ async function InvitationsListPage() {
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/app/dashboard/invitations/page.js",
-                                                lineNumber: 60,
+                                                lineNumber: 101,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/dashboard/invitations/page.js",
-                                        lineNumber: 58,
+                                        lineNumber: 99,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -397,19 +398,19 @@ async function InvitationsListPage() {
                                                             className: "h-3.5 w-3.5 mr-1"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/dashboard/invitations/page.js",
-                                                            lineNumber: 63,
-                                                            columnNumber: 106
+                                                            lineNumber: 106,
+                                                            columnNumber: 23
                                                         }, this),
                                                         "Edit"
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/app/dashboard/invitations/page.js",
-                                                    lineNumber: 63,
-                                                    columnNumber: 70
+                                                    lineNumber: 105,
+                                                    columnNumber: 21
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/app/dashboard/invitations/page.js",
-                                                lineNumber: 63,
+                                                lineNumber: 104,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -423,53 +424,53 @@ async function InvitationsListPage() {
                                                         className: "h-3.5 w-3.5"
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/dashboard/invitations/page.js",
-                                                        lineNumber: 64,
-                                                        columnNumber: 126
+                                                        lineNumber: 116,
+                                                        columnNumber: 23
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/dashboard/invitations/page.js",
-                                                    lineNumber: 64,
-                                                    columnNumber: 90
+                                                    lineNumber: 115,
+                                                    columnNumber: 21
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/app/dashboard/invitations/page.js",
-                                                lineNumber: 64,
+                                                lineNumber: 110,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$dashboard$2f$invitation$2d$row$2d$actions$2e$jsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
                                                 invitation: i
                                             }, void 0, false, {
                                                 fileName: "[project]/app/dashboard/invitations/page.js",
-                                                lineNumber: 65,
+                                                lineNumber: 119,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/dashboard/invitations/page.js",
-                                        lineNumber: 62,
+                                        lineNumber: 103,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/dashboard/invitations/page.js",
-                                lineNumber: 55,
+                                lineNumber: 85,
                                 columnNumber: 15
                             }, this)
                         ]
                     }, i.id, true, {
                         fileName: "[project]/app/dashboard/invitations/page.js",
-                        lineNumber: 46,
+                        lineNumber: 62,
                         columnNumber: 13
                     }, this))
             }, void 0, false, {
                 fileName: "[project]/app/dashboard/invitations/page.js",
-                lineNumber: 44,
+                lineNumber: 60,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/app/dashboard/invitations/page.js",
-        lineNumber: 28,
+        lineNumber: 33,
         columnNumber: 5
     }, this);
 }

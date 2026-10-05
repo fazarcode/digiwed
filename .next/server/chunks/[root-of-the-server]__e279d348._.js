@@ -222,7 +222,9 @@ __turbopack_context__.s([
     "GET",
     ()=>GET,
     "POST",
-    ()=>POST
+    ()=>POST,
+    "PUT",
+    ()=>PUT
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/server.js [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$dist$2f$esm$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/node_modules/zod/dist/esm/index.js [app-route] (ecmascript) <locals>");
@@ -246,40 +248,34 @@ async function ownerCheck(userId, invitationId) {
 }
 const schema = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$dist$2f$esm$2f$v3$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["z"].object({
     name: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$dist$2f$esm$2f$v3$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["z"].string().min(1).max(80),
-    order: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$dist$2f$esm$2f$v3$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["z"].number().int().optional(),
-    enabled: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$dist$2f$esm$2f$v3$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["z"].boolean().optional(),
-    priority: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$dist$2f$esm$2f$v3$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["z"].number().int().optional()
+    enabled: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$dist$2f$esm$2f$v3$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["z"].boolean().optional()
+});
+const reorderSchema = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$dist$2f$esm$2f$v3$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["z"].object({
+    ids: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$dist$2f$esm$2f$v3$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["z"].array(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$dist$2f$esm$2f$v3$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["z"].string()).min(1)
 });
 async function GET(request, { params }) {
     const s = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$auth$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["auth"])();
     if (!s) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-        error: 'Unauthorized'
+        error: "Unauthorized"
     }, {
         status: 401
     });
     const p = await params;
     if (!await ownerCheck(s.user.id, p.id)) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-        error: 'Not found'
+        error: "Not found"
     }, {
         status: 404
     });
     const items = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$prisma$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].guestCategory.findMany({
         where: {
-            OR: [
-                {
-                    invitationId: null
-                },
-                {
-                    invitationId: p.id
-                }
-            ]
+            invitationId: p.id
         },
         orderBy: [
             {
-                order: 'asc'
+                order: "asc"
             },
             {
-                name: 'asc'
+                createdAt: "asc"
             }
         ],
         include: {
@@ -296,8 +292,6 @@ async function GET(request, { params }) {
                 name: c.name,
                 order: c.order,
                 enabled: c.enabled,
-                priority: c.priority,
-                global: c.invitationId === null,
                 guestCount: c._count.guests
             }))
     });
@@ -305,20 +299,20 @@ async function GET(request, { params }) {
 async function POST(request, { params }) {
     const s = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$auth$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["auth"])();
     if (!s) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-        error: 'Unauthorized'
+        error: "Unauthorized"
     }, {
         status: 401
     });
     const p = await params;
     if (!await ownerCheck(s.user.id, p.id)) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-        error: 'Not found'
+        error: "Not found"
     }, {
         status: 404
     });
     const body = await request.json().catch(()=>({}));
     const parsed = schema.safeParse(body);
     if (!parsed.success) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-        error: 'Invalid data'
+        error: "Invalid data"
     }, {
         status: 400
     });
@@ -331,30 +325,83 @@ async function POST(request, { params }) {
                 order: true
             }
         });
+        const next = (max._max.order || 0) + 1;
         const item = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$prisma$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].guestCategory.create({
             data: {
                 invitationId: p.id,
                 name: parsed.data.name,
-                order: parsed.data.order ?? (max._max.order || 0) + 10,
-                enabled: parsed.data.enabled ?? true,
-                priority: parsed.data.priority ?? 100
+                order: next,
+                priority: next,
+                enabled: parsed.data.enabled ?? true
             }
         });
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             item
         });
     } catch (e) {
-        if (e.code === 'P2002') return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            error: 'A category with this name already exists for this invitation.'
-        }, {
-            status: 400
-        });
+        if (e.code === "P2002") {
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                error: "A category with this name already exists for this invitation."
+            }, {
+                status: 400
+            });
+        }
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            error: 'Server error'
+            error: "Server error"
         }, {
             status: 500
         });
     }
+}
+async function PUT(request, { params }) {
+    const s = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$auth$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["auth"])();
+    if (!s) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+        error: "Unauthorized"
+    }, {
+        status: 401
+    });
+    const p = await params;
+    if (!await ownerCheck(s.user.id, p.id)) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+        error: "Not found"
+    }, {
+        status: 404
+    });
+    const body = await request.json().catch(()=>({}));
+    const parsed = reorderSchema.safeParse(body);
+    if (!parsed.success) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+        error: "Invalid data"
+    }, {
+        status: 400
+    });
+    const { ids } = parsed.data;
+    const existing = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$prisma$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].guestCategory.findMany({
+        where: {
+            invitationId: p.id
+        },
+        select: {
+            id: true
+        }
+    });
+    const valid = new Set(existing.map((c)=>c.id));
+    if (new Set(ids).size !== ids.length || ids.length !== valid.size || !ids.every((id)=>valid.has(id))) {
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+            error: "Invalid order"
+        }, {
+            status: 400
+        });
+    }
+    await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$prisma$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].$transaction(ids.map((id, i)=>__TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$prisma$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].guestCategory.update({
+            where: {
+                id
+            },
+            data: {
+                order: i + 1,
+                priority: i + 1
+            }
+        })));
+    return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+        ok: true
+    });
 }
 }),
 ];

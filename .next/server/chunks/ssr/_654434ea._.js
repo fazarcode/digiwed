@@ -222,6 +222,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$re
 ;
 ;
 // Feature I — preview BEFORE insert: parsed rows + row selection + column mapping + chunked import.
+// Side is now sent as `sideName` (resolved server-side to a GuestSideOption), not the legacy `guestSide` enum.
 const TARGETS = [
     {
         key: "name",
@@ -263,7 +264,7 @@ const TARGETS = [
         ]
     },
     {
-        key: "guestSide",
+        key: "sideName",
         label: "Side",
         guesses: [
             "side",
@@ -389,12 +390,13 @@ function ImportPreviewDialog({ open, onOpenChange, invitationId, data, onDone })
                             children: "Import Preview"
                         }, void 0, false, {
                             fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                            lineNumber: 99,
+                            lineNumber: 146,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["DialogDescription"], {
                             children: [
-                                "Nothing is saved until you press Import. ",
+                                "Nothing is saved until you press Import.",
+                                " ",
                                 data?.totalRows || rows.length,
                                 " row(s) parsed",
                                 rows.length < (data?.totalRows || 0) ? ` (showing first ${rows.length})` : "",
@@ -402,13 +404,13 @@ function ImportPreviewDialog({ open, onOpenChange, invitationId, data, onDone })
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                            lineNumber: 100,
+                            lineNumber: 147,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                    lineNumber: 98,
+                    lineNumber: 145,
                     columnNumber: 9
                 }, this),
                 result ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -418,7 +420,7 @@ function ImportPreviewDialog({ open, onOpenChange, invitationId, data, onDone })
                             className: "h-10 w-10 text-emerald-600 mx-auto"
                         }, void 0, false, {
                             fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                            lineNumber: 107,
+                            lineNumber: 159,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -426,7 +428,7 @@ function ImportPreviewDialog({ open, onOpenChange, invitationId, data, onDone })
                             children: "Import Complete"
                         }, void 0, false, {
                             fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                            lineNumber: 108,
+                            lineNumber: 160,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -437,29 +439,30 @@ function ImportPreviewDialog({ open, onOpenChange, invitationId, data, onDone })
                                     children: result.imported
                                 }, void 0, false, {
                                     fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                                    lineNumber: 109,
-                                    columnNumber: 46
+                                    lineNumber: 162,
+                                    columnNumber: 25
                                 }, this),
-                                " · Skipped (duplicates): ",
+                                " · Skipped (duplicates):",
+                                " ",
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("b", {
                                     children: result.skipped
                                 }, void 0, false, {
                                     fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                                    lineNumber: 109,
-                                    columnNumber: 95
+                                    lineNumber: 163,
+                                    columnNumber: 15
                                 }, this),
                                 " · Failed: ",
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("b", {
                                     children: result.failed
                                 }, void 0, false, {
                                     fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                                    lineNumber: 109,
-                                    columnNumber: 129
+                                    lineNumber: 163,
+                                    columnNumber: 49
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                            lineNumber: 109,
+                            lineNumber: 161,
                             columnNumber: 13
                         }, this),
                         result.errors.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -473,18 +476,18 @@ function ImportPreviewDialog({ open, onOpenChange, invitationId, data, onDone })
                                     ]
                                 }, i, true, {
                                     fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                                    lineNumber: 112,
-                                    columnNumber: 46
+                                    lineNumber: 168,
+                                    columnNumber: 19
                                 }, this))
                         }, void 0, false, {
                             fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                            lineNumber: 111,
+                            lineNumber: 166,
                             columnNumber: 15
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                    lineNumber: 106,
+                    lineNumber: 158,
                     columnNumber: 11
                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: "flex-1 overflow-auto space-y-4",
@@ -496,7 +499,7 @@ function ImportPreviewDialog({ open, onOpenChange, invitationId, data, onDone })
                                     children: "Map Columns"
                                 }, void 0, false, {
                                     fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                                    lineNumber: 120,
+                                    lineNumber: 179,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -509,7 +512,7 @@ function ImportPreviewDialog({ open, onOpenChange, invitationId, data, onDone })
                                                         children: t.label
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                                                        lineNumber: 124,
+                                                        lineNumber: 185,
                                                         columnNumber: 21
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -525,7 +528,7 @@ function ImportPreviewDialog({ open, onOpenChange, invitationId, data, onDone })
                                                                 children: "— none —"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                                                                lineNumber: 130,
+                                                                lineNumber: 193,
                                                                 columnNumber: 23
                                                             }, this),
                                                             columns.map((c)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -533,19 +536,19 @@ function ImportPreviewDialog({ open, onOpenChange, invitationId, data, onDone })
                                                                     children: c
                                                                 }, c, false, {
                                                                     fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                                                                    lineNumber: 131,
-                                                                    columnNumber: 43
+                                                                    lineNumber: 195,
+                                                                    columnNumber: 25
                                                                 }, this))
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                                                        lineNumber: 125,
+                                                        lineNumber: 186,
                                                         columnNumber: 21
                                                     }, this)
                                                 ]
                                             }, t.key, true, {
                                                 fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                                                lineNumber: 123,
+                                                lineNumber: 184,
                                                 columnNumber: 19
                                             }, this)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -555,7 +558,7 @@ function ImportPreviewDialog({ open, onOpenChange, invitationId, data, onDone })
                                                     children: "Default Category"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                                                    lineNumber: 136,
+                                                    lineNumber: 203,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -568,7 +571,7 @@ function ImportPreviewDialog({ open, onOpenChange, invitationId, data, onDone })
                                                             children: "— none —"
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                                                            lineNumber: 138,
+                                                            lineNumber: 209,
                                                             columnNumber: 21
                                                         }, this),
                                                         categories.map((c)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -579,31 +582,31 @@ function ImportPreviewDialog({ open, onOpenChange, invitationId, data, onDone })
                                                                 ]
                                                             }, c.id, true, {
                                                                 fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                                                                lineNumber: 139,
-                                                                columnNumber: 44
+                                                                lineNumber: 211,
+                                                                columnNumber: 23
                                                             }, this))
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                                                    lineNumber: 137,
+                                                    lineNumber: 204,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                                            lineNumber: 135,
+                                            lineNumber: 202,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                                    lineNumber: 121,
+                                    lineNumber: 182,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                            lineNumber: 119,
+                            lineNumber: 178,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -623,12 +626,12 @@ function ImportPreviewDialog({ open, onOpenChange, invitationId, data, onDone })
                                                         onChange: toggleAll
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                                                        lineNumber: 150,
-                                                        columnNumber: 52
+                                                        lineNumber: 227,
+                                                        columnNumber: 23
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                                                    lineNumber: 150,
+                                                    lineNumber: 226,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -636,7 +639,7 @@ function ImportPreviewDialog({ open, onOpenChange, invitationId, data, onDone })
                                                     children: "Name"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                                                    lineNumber: 151,
+                                                    lineNumber: 233,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -644,7 +647,7 @@ function ImportPreviewDialog({ open, onOpenChange, invitationId, data, onDone })
                                                     children: "Phone"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                                                    lineNumber: 152,
+                                                    lineNumber: 234,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -652,18 +655,26 @@ function ImportPreviewDialog({ open, onOpenChange, invitationId, data, onDone })
                                                     children: "Category"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                                                    lineNumber: 153,
+                                                    lineNumber: 235,
+                                                    columnNumber: 21
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                                    className: "px-3 py-2 text-left",
+                                                    children: "Side"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
+                                                    lineNumber: 236,
                                                     columnNumber: 21
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                                            lineNumber: 149,
+                                            lineNumber: 225,
                                             columnNumber: 19
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                                        lineNumber: 148,
+                                        lineNumber: 224,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
@@ -679,12 +690,12 @@ function ImportPreviewDialog({ open, onOpenChange, invitationId, data, onDone })
                                                             onChange: ()=>toggleRow(i)
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                                                            lineNumber: 159,
-                                                            columnNumber: 51
+                                                            lineNumber: 243,
+                                                            columnNumber: 25
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                                                        lineNumber: 159,
+                                                        lineNumber: 242,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -694,12 +705,12 @@ function ImportPreviewDialog({ open, onOpenChange, invitationId, data, onDone })
                                                             children: "map name"
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                                                            lineNumber: 160,
-                                                            columnNumber: 85
+                                                            lineNumber: 253,
+                                                            columnNumber: 27
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                                                        lineNumber: 160,
+                                                        lineNumber: 249,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -707,7 +718,7 @@ function ImportPreviewDialog({ open, onOpenChange, invitationId, data, onDone })
                                                         children: mapping.phone ? r[mapping.phone] : "-"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                                                        lineNumber: 161,
+                                                        lineNumber: 256,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -715,29 +726,37 @@ function ImportPreviewDialog({ open, onOpenChange, invitationId, data, onDone })
                                                         children: mapping.categoryName ? r[mapping.categoryName] : "-"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                                                        lineNumber: 162,
+                                                        lineNumber: 259,
+                                                        columnNumber: 23
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                        className: "px-3 py-1.5",
+                                                        children: mapping.sideName ? r[mapping.sideName] : "-"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
+                                                        lineNumber: 262,
                                                         columnNumber: 23
                                                     }, this)
                                                 ]
                                             }, i, true, {
                                                 fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                                                lineNumber: 158,
+                                                lineNumber: 241,
                                                 columnNumber: 21
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                                        lineNumber: 156,
+                                        lineNumber: 239,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                                lineNumber: 147,
+                                lineNumber: 223,
                                 columnNumber: 15
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                            lineNumber: 146,
+                            lineNumber: 222,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -750,13 +769,13 @@ function ImportPreviewDialog({ open, onOpenChange, invitationId, data, onDone })
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                            lineNumber: 168,
+                            lineNumber: 270,
                             columnNumber: 13
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                    lineNumber: 117,
+                    lineNumber: 176,
                     columnNumber: 11
                 }, this),
                 importing && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -771,12 +790,12 @@ function ImportPreviewDialog({ open, onOpenChange, invitationId, data, onDone })
                                 }
                             }, void 0, false, {
                                 fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                                lineNumber: 174,
-                                columnNumber: 72
+                                lineNumber: 279,
+                                columnNumber: 15
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                            lineNumber: 174,
+                            lineNumber: 278,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -788,13 +807,13 @@ function ImportPreviewDialog({ open, onOpenChange, invitationId, data, onDone })
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                            lineNumber: 175,
+                            lineNumber: 284,
                             columnNumber: 13
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                    lineNumber: 173,
+                    lineNumber: 277,
                     columnNumber: 11
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["DialogFooter"], {
@@ -804,7 +823,7 @@ function ImportPreviewDialog({ open, onOpenChange, invitationId, data, onDone })
                         children: "Done"
                     }, void 0, false, {
                         fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                        lineNumber: 181,
+                        lineNumber: 292,
                         columnNumber: 13
                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
                         children: [
@@ -815,7 +834,7 @@ function ImportPreviewDialog({ open, onOpenChange, invitationId, data, onDone })
                                 children: "Cancel"
                             }, void 0, false, {
                                 fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                                lineNumber: 184,
+                                lineNumber: 297,
                                 columnNumber: 15
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
@@ -828,33 +847,33 @@ function ImportPreviewDialog({ open, onOpenChange, invitationId, data, onDone })
                                             className: "h-4 w-4 mr-1 animate-spin"
                                         }, void 0, false, {
                                             fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                                            lineNumber: 186,
-                                            columnNumber: 32
+                                            lineNumber: 311,
+                                            columnNumber: 21
                                         }, this),
                                         "Importing…"
                                     ]
                                 }, void 0, true) : `Import ${selected.size} Guest(s)`
                             }, void 0, false, {
                                 fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                                lineNumber: 185,
+                                lineNumber: 304,
                                 columnNumber: 15
                             }, this)
                         ]
                     }, void 0, true)
                 }, void 0, false, {
                     fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-                    lineNumber: 179,
+                    lineNumber: 290,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-            lineNumber: 97,
+            lineNumber: 144,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/components/dashboard/import-preview-dialog.jsx",
-        lineNumber: 96,
+        lineNumber: 143,
         columnNumber: 5
     }, this);
 }
@@ -892,21 +911,24 @@ Please view your personalized invitation here:
 {invitation_url}
 
 We look forward to celebrating with you!`;
-function buildInvitationUrl(baseOrigin, invitation, guestToken) {
-    const suffix = guestToken ? `?guest=${guestToken}` : "";
+function buildInvitationUrl(baseOrigin, invitation, guest) {
+    // Accept either a guest object (preferred) or a raw token string (legacy callers).
+    const nameSlug = guest && typeof guest === "object" ? guest.nameSlug : null;
+    const token = guest && typeof guest === "object" ? guest.token : guest;
+    const query = nameSlug ? `?to=${encodeURIComponent(nameSlug)}` : token ? `?guest=${token}` : "";
     if (invitation?.customDomain) {
-        return `https://${invitation.customDomain}/${suffix}`;
+        return `https://${invitation.customDomain}/${query}`;
     }
     if (invitation?.subdomain && baseOrigin) {
         try {
             const u = new URL(baseOrigin);
             const rootHost = u.hostname.split(".").slice(-2).join(".");
             // Best-effort subdomain URL; falls back gracefully if hostname isn't a real domain.
-            return `${u.protocol}//${invitation.subdomain}.${rootHost}/${suffix}`;
+            return `${u.protocol}//${invitation.subdomain}.${rootHost}/${query}`;
         } catch  {}
     }
     const base = (baseOrigin || "").replace(/\/$/, "");
-    return `${base}/invite/${invitation.slug}${suffix}`;
+    return `${base}/invite/${invitation.slug}${query}`;
 }
 function fmtDate(d) {
     if (!d) return "";
@@ -952,7 +974,7 @@ function buildContext({ invitation, guest, origin }) {
         event_date: ev.date ? fmtDate(ev.date) : "",
         event_time: ev.time || "",
         event_location: ev.venue || ev.address || "",
-        invitation_url: buildInvitationUrl(origin, invitation, guest?.token),
+        invitation_url: buildInvitationUrl(origin, invitation, guest),
         guest_category: guest?.category || guest?.categoryText || "",
         guest_quota: guest?.quota ?? 1
     };
@@ -991,6 +1013,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$re
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$pencil$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Pencil$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/pencil.js [app-ssr] (ecmascript) <export default as Pencil>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$message$2d$square$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__MessageSquare$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/message-square.js [app-ssr] (ecmascript) <export default as MessageSquare>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$square$2d$check$2d$big$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__CheckSquare$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/square-check-big.js [app-ssr] (ecmascript) <export default as CheckSquare>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$loader$2d$circle$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Loader2$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/loader-circle.js [app-ssr] (ecmascript) <export default as Loader2>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/sonner/dist/index.mjs [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/navigation.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/ui/dialog.jsx [app-ssr] (ecmascript)");
@@ -1022,21 +1045,19 @@ const WhatsAppIcon = ({ className = "h-4 w-4" })=>/*#__PURE__*/ (0, __TURBOPACK_
             d: "M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"
         }, void 0, false, {
             fileName: "[project]/components/dashboard/guests-page.jsx",
-            lineNumber: 48,
+            lineNumber: 49,
             columnNumber: 5
         }, ("TURBOPACK compile-time value", void 0))
     }, void 0, false, {
         fileName: "[project]/components/dashboard/guests-page.jsx",
-        lineNumber: 39,
+        lineNumber: 40,
         columnNumber: 3
     }, ("TURBOPACK compile-time value", void 0));
-const SIDE_LABEL = {
-    GROOM: "Groom",
-    BRIDE: "Bride",
-    BOTH: "Both",
-    PARENTS: "Parents"
+const TYPE_LABEL = {
+    INDIVIDUAL: "Individu",
+    GROUP: "Grup"
 };
-function GuestsPageClient({ invitations, categories, messageTemplate }) {
+function GuestsPageClient({ invitations, messageTemplate }) {
     const router = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRouter"])();
     const pathname = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["usePathname"])();
     const searchParams = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useSearchParams"])();
@@ -1066,12 +1087,16 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
     const [editing, setEditing] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
     const [isAddOpen, setIsAddOpen] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     const [isDeletingBulk, setIsDeletingBulk] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
-    // Req 4 — bulk WhatsApp with template selection + "Fix Message" toggle.
-    const [waOpen, setWaOpen] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
-    const [waTemplates, setWaTemplates] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])([]);
-    const [waTemplateId, setWaTemplateId] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("");
-    const [waFix, setWaFix] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
+    // --- POPUP PILIH TEMPLATE PESAN (untuk Salin Pesan & Kirim WhatsApp) ---
+    const [tplOpen, setTplOpen] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [tplAction, setTplAction] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("copy"); // "copy" | "wa"
+    const [tplGuest, setTplGuest] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
+    const [tplList, setTplList] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])([]);
+    const [tplId, setTplId] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("");
+    const [tplLoading, setTplLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     const selected = invitations.find((i)=>i.id === selectedId);
+    // Kategori milik undangan yang sedang dipilih
+    const categories = selected?.categories || [];
     const baseUrl = ("TURBOPACK compile-time falsy", 0) ? "TURBOPACK unreachable" : "";
     // Req 5 — load DB-driven Guest Sides for the selected invitation.
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
@@ -1113,6 +1138,17 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
         pathname,
         router
     ]);
+    // Ganti undangan: reset filter & form yang bergantung pada kategori/pihak
+    const handleInvitationChange = (id)=>{
+        setSelectedId(id);
+        setFilterCategory("ALL");
+        setFilterSide("ALL");
+        setForm((f)=>({
+                ...f,
+                categoryId: "",
+                sideId: ""
+            }));
+    };
     const filtered = (selected?.guests || []).filter((g)=>{
         if (q && !g.name.toLowerCase().includes(q.toLowerCase())) return false;
         if (filterType !== "ALL" && g.guestType !== filterType) return false;
@@ -1121,11 +1157,13 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
         return true;
     });
     // --- LOGIKA PENGIRISAN DATA UNTUK PAGINATION ---
-    const totalPages = Math.ceil(filtered.length / itemsPerPage) || 1;
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const paginatedGuests = filtered.slice(startIndex, startIndex + itemsPerPage);
+    // "ALL" = satu halaman berisi semua data (pakai angka terbatas, bukan Infinity, agar tidak jadi NaN)
+    const pageSize = itemsPerPage === "ALL" ? Math.max(filtered.length, 1) : itemsPerPage;
+    const totalPages = Math.ceil(filtered.length / pageSize) || 1;
+    const startIndex = (currentPage - 1) * pageSize;
+    const paginatedGuests = filtered.slice(startIndex, startIndex + pageSize);
     const handleRowsPerPageChange = (e)=>{
-        setItemsPerPage(Number(e.target.value));
+        setItemsPerPage(e.target.value === "ALL" ? "ALL" : Number(e.target.value));
         setCurrentPage(1); // Reset ke halaman 1 setiap kali jumlah baris diubah
     };
     const handleSelectAll = (e)=>{
@@ -1146,17 +1184,17 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
         }
     };
     const handleBulkDelete = async ()=>{
-        if (!confirm(`Are you sure you want to delete ${selectedGuestIds.length} guests?`)) return;
+        if (!confirm(`Yakin ingin menghapus ${selectedGuestIds.length} tamu?`)) return;
         setIsDeletingBulk(true);
         try {
             await Promise.all(selectedGuestIds.map((gid)=>fetch(`/api/invitations/${selected.id}/guests/${gid}`, {
                     method: "DELETE"
                 })));
-            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["toast"].success(`${selectedGuestIds.length} guests deleted`);
+            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["toast"].success(`${selectedGuestIds.length} tamu berhasil dihapus`);
             setSelectedGuestIds([]);
             router.refresh();
         } catch (error) {
-            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["toast"].error("Failed to delete some guests");
+            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["toast"].error("Gagal menghapus sebagian tamu");
         } finally{
             setIsDeletingBulk(false);
         }
@@ -1181,8 +1219,8 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
             },
             body: JSON.stringify(payload)
         });
-        if (!res.ok) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["toast"].error("Failed");
-        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["toast"].success("Guest added successfully");
+        if (!res.ok) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["toast"].error("Gagal menambahkan tamu");
+        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["toast"].success("Tamu berhasil ditambahkan");
         setForm({
             name: "",
             phone: "",
@@ -1197,68 +1235,59 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
         router.refresh();
     };
     const remove = async (gid)=>{
-        if (!confirm("Delete this guest?")) return;
+        if (!confirm("Hapus tamu ini?")) return;
         await fetch(`/api/invitations/${selected.id}/guests/${gid}`, {
             method: "DELETE"
         });
         router.refresh();
     };
     const copyLink = (g)=>{
-        navigator.clipboard.writeText((0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$whatsapp$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["buildInvitationUrl"])(baseUrl, selected, g.token));
-        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["toast"].success("Guest link copied");
+        navigator.clipboard.writeText((0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$whatsapp$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["buildInvitationUrl"])(baseUrl, selected, g));
+        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["toast"].success("Tautan tamu disalin");
     };
-    const buildMessage = (g)=>{
+    // Render pesan untuk satu tamu memakai isi template tertentu (default: template bawaan user).
+    const buildMessage = (g, body = messageTemplate)=>{
         const ctx = (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$whatsapp$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["buildContext"])({
             invitation: selected,
             guest: g,
             origin: baseUrl
         });
-        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$whatsapp$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["renderTemplate"])(messageTemplate, ctx);
+        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$whatsapp$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["renderTemplate"])(body, ctx);
     };
-    const copyMessage = (g)=>{
-        navigator.clipboard.writeText(buildMessage(g));
-        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["toast"].success("Invitation message copied");
-    };
-    const sendWhatsApp = (g)=>{
-        const msg = encodeURIComponent(buildMessage(g));
-        const phone = String(g.phone || "").replace(/\D/g, "");
-        window.open(phone ? `https://wa.me/${phone}?text=${msg}` : `https://wa.me/?text=${msg}`, "_blank");
-    };
-    const openWaDialog = async ()=>{
+    // Buka popup pilih template, lalu muat daftar template dari API.
+    const openTemplatePicker = async (g, action)=>{
+        setTplGuest(g);
+        setTplAction(action);
+        setTplOpen(true);
+        setTplLoading(true);
         try {
             const r = await fetch("/api/message-templates");
             const d = await r.json();
             const list = (d.items || d.templates || []).filter((t)=>t.active !== false);
-            setWaTemplates(list);
-            setWaTemplateId(list[0]?.id || "");
+            setTplList(list);
+            setTplId(list[0]?.id || "");
         } catch  {
-            setWaTemplates([]);
+            setTplList([]);
+            setTplId("");
+            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["toast"].error("Gagal memuat template pesan");
+        } finally{
+            setTplLoading(false);
         }
-        setWaOpen(true);
     };
-    const sendBulkWhatsApp = ()=>{
-        const chosen = waTemplates.find((t)=>t.id === waTemplateId);
-        const body = chosen?.body || messageTemplate;
-        const guests = (selected?.guests || []).filter((g)=>selectedGuestIds.includes(g.id));
-        if (!guests.length) return;
-        // Fix ON: render once (first guest context) and send the exact same text to everyone.
-        // Fix OFF: personalize per guest.
-        const fixedText = waFix ? (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$whatsapp$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["renderTemplate"])(body, (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$whatsapp$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["buildContext"])({
-            invitation: selected,
-            guest: guests[0],
-            origin: baseUrl
-        })) : null;
-        guests.forEach((g)=>{
-            const text = waFix ? fixedText : (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$whatsapp$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["renderTemplate"])(body, (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$whatsapp$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["buildContext"])({
-                invitation: selected,
-                guest: g,
-                origin: baseUrl
-            }));
-            const phone = String(g.phone || "").replace(/\D/g, "");
-            window.open(phone ? `https://wa.me/${phone}?text=${encodeURIComponent(text)}` : `https://wa.me/?text=${encodeURIComponent(text)}`, "_blank");
-        });
-        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["toast"].success(`Opened WhatsApp for ${guests.length} guest(s)`);
-        setWaOpen(false);
+    const tplBody = tplList.find((t)=>t.id === tplId)?.body || messageTemplate;
+    const tplPreview = tplGuest ? buildMessage(tplGuest, tplBody) : "";
+    const confirmTemplate = ()=>{
+        if (!tplGuest) return;
+        const text = buildMessage(tplGuest, tplBody);
+        if (tplAction === "copy") {
+            navigator.clipboard.writeText(text);
+            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["toast"].success("Pesan undangan disalin");
+        } else {
+            const phone = String(tplGuest.phone || "").replace(/\D/g, "");
+            const msg = encodeURIComponent(text);
+            window.open(phone ? `https://wa.me/${phone}?text=${msg}` : `https://wa.me/?text=${msg}`, "_blank");
+        }
+        setTplOpen(false);
     };
     const saveEdit = async (e)=>{
         e.preventDefault();
@@ -1281,9 +1310,9 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
         });
         if (!res.ok) {
             const err = await res.json().catch(()=>({}));
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["toast"].error(err.error || "Failed");
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["toast"].error(err.error || "Gagal menyimpan perubahan");
         }
-        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["toast"].success("Guest updated");
+        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["toast"].success("Data tamu diperbarui");
         setEditing(null);
         router.refresh();
     };
@@ -1301,7 +1330,7 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
         const data = await res.json();
         setImporting(false);
         e.target.value = "";
-        if (!res.ok) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["toast"].error(data.error || "Could not read file");
+        if (!res.ok) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["toast"].error(data.error || "Tidak dapat membaca file");
         setImportData(data);
         setImportOpen(true);
     };
@@ -1309,15 +1338,15 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
         className: "rounded-2xl bg-white border p-12 text-center",
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
             className: "text-muted-foreground",
-            children: "Create an invitation first to manage guests."
+            children: "Buat undangan terlebih dahulu untuk mengelola tamu."
         }, void 0, false, {
             fileName: "[project]/components/dashboard/guests-page.jsx",
-            lineNumber: 354,
+            lineNumber: 367,
             columnNumber: 9
         }, this)
     }, void 0, false, {
         fileName: "[project]/components/dashboard/guests-page.jsx",
-        lineNumber: 353,
+        lineNumber: 366,
         columnNumber: 7
     }, this);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1331,10 +1360,10 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                 className: "text-sm font-semibold",
-                                children: "Guest Management"
+                                children: "Manajemen Tamu"
                             }, void 0, false, {
                                 fileName: "[project]/components/dashboard/guests-page.jsx",
-                                lineNumber: 365,
+                                lineNumber: 378,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1342,15 +1371,15 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                         className: "text-sm text-muted-foreground hidden sm:inline-block",
-                                        children: "for"
+                                        children: "untuk"
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/guests-page.jsx",
-                                        lineNumber: 367,
+                                        lineNumber: 380,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
                                         value: selectedId,
-                                        onChange: (e)=>setSelectedId(e.target.value),
+                                        onChange: (e)=>handleInvitationChange(e.target.value),
                                         className: "h-9 px-3 py-1 rounded-md border text-sm font-medium bg-muted/30 focus:outline-none focus:ring-2 focus:ring-primary min-w-[200px]",
                                         children: invitations.map((i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                 value: i.id,
@@ -1360,28 +1389,28 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                                     i.groomName,
                                                     " (",
                                                     i.guests.length,
-                                                    " guests)"
+                                                    " tamu)"
                                                 ]
                                             }, i.id, true, {
                                                 fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                lineNumber: 376,
+                                                lineNumber: 389,
                                                 columnNumber: 17
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/guests-page.jsx",
-                                        lineNumber: 370,
+                                        lineNumber: 383,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/dashboard/guests-page.jsx",
-                                lineNumber: 366,
+                                lineNumber: 379,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/dashboard/guests-page.jsx",
-                        lineNumber: 364,
+                        lineNumber: 377,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1398,19 +1427,19 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                             className: "h-3.5 w-3.5 mr-1"
                                         }, void 0, false, {
                                             fileName: "[project]/components/dashboard/guests-page.jsx",
-                                            lineNumber: 390,
+                                            lineNumber: 403,
                                             columnNumber: 15
                                         }, this),
                                         "Template"
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                    lineNumber: 389,
+                                    lineNumber: 402,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/dashboard/guests-page.jsx",
-                                lineNumber: 385,
+                                lineNumber: 398,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -1426,19 +1455,19 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                                     className: "h-3.5 w-3.5 mr-1"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                    lineNumber: 397,
+                                                    lineNumber: 410,
                                                     columnNumber: 17
                                                 }, this),
-                                                importing ? "Importing…" : "Import Excel"
+                                                importing ? "Mengimpor…" : "Impor Excel"
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/dashboard/guests-page.jsx",
-                                            lineNumber: 396,
+                                            lineNumber: 409,
                                             columnNumber: 15
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/guests-page.jsx",
-                                        lineNumber: 395,
+                                        lineNumber: 408,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1448,13 +1477,13 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                         onChange: doImport
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/guests-page.jsx",
-                                        lineNumber: 401,
+                                        lineNumber: 414,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/dashboard/guests-page.jsx",
-                                lineNumber: 394,
+                                lineNumber: 407,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
@@ -1466,26 +1495,26 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                         className: "h-4 w-4 mr-1"
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/guests-page.jsx",
-                                        lineNumber: 408,
+                                        lineNumber: 421,
                                         columnNumber: 13
                                     }, this),
-                                    "Add Guest"
+                                    "Tambah Tamu"
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/dashboard/guests-page.jsx",
-                                lineNumber: 403,
+                                lineNumber: 416,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/dashboard/guests-page.jsx",
-                        lineNumber: 384,
+                        lineNumber: 397,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/dashboard/guests-page.jsx",
-                lineNumber: 363,
+                lineNumber: 376,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1501,23 +1530,23 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                         className: "absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground"
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/guests-page.jsx",
-                                        lineNumber: 419,
+                                        lineNumber: 432,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Input"], {
                                         value: q,
                                         onChange: (e)=>setQ(e.target.value),
-                                        placeholder: "Search guests…",
+                                        placeholder: "Cari tamu…",
                                         className: "pl-9"
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/guests-page.jsx",
-                                        lineNumber: 420,
+                                        lineNumber: 433,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/dashboard/guests-page.jsx",
-                                lineNumber: 418,
+                                lineNumber: 431,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -1527,32 +1556,32 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                         value: "ALL",
-                                        children: "All Types"
+                                        children: "Semua Tipe"
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/guests-page.jsx",
-                                        lineNumber: 432,
+                                        lineNumber: 445,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                         value: "INDIVIDUAL",
-                                        children: "Individual"
+                                        children: "Individu"
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/guests-page.jsx",
-                                        lineNumber: 433,
+                                        lineNumber: 446,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                         value: "GROUP",
-                                        children: "Group"
+                                        children: "Grup"
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/guests-page.jsx",
-                                        lineNumber: 434,
+                                        lineNumber: 447,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/dashboard/guests-page.jsx",
-                                lineNumber: 427,
+                                lineNumber: 440,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -1562,10 +1591,10 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                         value: "ALL",
-                                        children: "All Categories"
+                                        children: "Semua Kategori"
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/guests-page.jsx",
-                                        lineNumber: 441,
+                                        lineNumber: 454,
                                         columnNumber: 13
                                     }, this),
                                     categories.map((c)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1573,13 +1602,13 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                             children: c.name
                                         }, c.id, false, {
                                             fileName: "[project]/components/dashboard/guests-page.jsx",
-                                            lineNumber: 443,
+                                            lineNumber: 456,
                                             columnNumber: 15
                                         }, this))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/dashboard/guests-page.jsx",
-                                lineNumber: 436,
+                                lineNumber: 449,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -1590,10 +1619,10 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                         value: "ALL",
-                                        children: "All Sides"
+                                        children: "Semua Pihak"
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/guests-page.jsx",
-                                        lineNumber: 454,
+                                        lineNumber: 467,
                                         columnNumber: 13
                                     }, this),
                                     sides.map((sd)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1601,31 +1630,31 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                             children: sd.name
                                         }, sd.id, false, {
                                             fileName: "[project]/components/dashboard/guests-page.jsx",
-                                            lineNumber: 456,
+                                            lineNumber: 469,
                                             columnNumber: 15
                                         }, this))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/dashboard/guests-page.jsx",
-                                lineNumber: 448,
+                                lineNumber: 461,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                 className: "text-sm text-muted-foreground ml-auto",
                                 children: [
                                     filtered.length,
-                                    " of ",
+                                    " dari ",
                                     selected?.guests.length || 0
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/dashboard/guests-page.jsx",
-                                lineNumber: 459,
+                                lineNumber: 474,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/dashboard/guests-page.jsx",
-                        lineNumber: 417,
+                        lineNumber: 430,
                         columnNumber: 9
                     }, this),
                     selectedGuestIds.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1638,15 +1667,15 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                         className: "h-4 w-4"
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/guests-page.jsx",
-                                        lineNumber: 468,
+                                        lineNumber: 483,
                                         columnNumber: 15
                                     }, this),
                                     selectedGuestIds.length,
-                                    " Guests Selected"
+                                    " Tamu Dipilih"
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/dashboard/guests-page.jsx",
-                                lineNumber: 467,
+                                lineNumber: 482,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1662,34 +1691,14 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                                 className: "h-3.5 w-3.5 mr-2"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                lineNumber: 478,
+                                                lineNumber: 493,
                                                 columnNumber: 17
                                             }, this),
-                                            " Download QR (PDF)"
+                                            " Unduh QR (PDF)"
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/dashboard/guests-page.jsx",
-                                        lineNumber: 472,
-                                        columnNumber: 15
-                                    }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
-                                        size: "sm",
-                                        className: "bg-emerald-600 hover:bg-emerald-700 text-white",
-                                        onClick: openWaDialog,
-                                        "data-testid": "bulk-whatsapp-btn",
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(WhatsAppIcon, {
-                                                className: "h-3.5 w-3.5 mr-2"
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                lineNumber: 486,
-                                                columnNumber: 17
-                                            }, this),
-                                            " Send WhatsApp"
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "[project]/components/dashboard/guests-page.jsx",
-                                        lineNumber: 480,
+                                        lineNumber: 487,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
@@ -1702,21 +1711,21 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                                 className: "h-3.5 w-3.5 mr-2"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                lineNumber: 494,
+                                                lineNumber: 501,
                                                 columnNumber: 17
                                             }, this),
                                             " ",
-                                            isDeletingBulk ? "Deleting..." : "Delete Selected"
+                                            isDeletingBulk ? "Menghapus..." : "Hapus yang Dipilih"
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/dashboard/guests-page.jsx",
-                                        lineNumber: 488,
+                                        lineNumber: 495,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/dashboard/guests-page.jsx",
-                                lineNumber: 471,
+                                lineNumber: 486,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
@@ -1724,183 +1733,17 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                 variant: "ghost",
                                 className: "ml-auto",
                                 onClick: ()=>setSelectedGuestIds([]),
-                                children: "Clear Selection"
+                                children: "Batalkan Pilihan"
                             }, void 0, false, {
                                 fileName: "[project]/components/dashboard/guests-page.jsx",
-                                lineNumber: 498,
+                                lineNumber: 505,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/dashboard/guests-page.jsx",
-                        lineNumber: 466,
+                        lineNumber: 481,
                         columnNumber: 11
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Dialog"], {
-                        open: waOpen,
-                        onOpenChange: setWaOpen,
-                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["DialogContent"], {
-                            "data-testid": "bulk-whatsapp-dialog",
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["DialogHeader"], {
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["DialogTitle"], {
-                                            children: [
-                                                "Send WhatsApp to ",
-                                                selectedGuestIds.length,
-                                                " guest(s)"
-                                            ]
-                                        }, void 0, true, {
-                                            fileName: "[project]/components/dashboard/guests-page.jsx",
-                                            lineNumber: 512,
-                                            columnNumber: 15
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["DialogDescription"], {
-                                            children: "Choose a message template and how it should be personalized."
-                                        }, void 0, false, {
-                                            fileName: "[project]/components/dashboard/guests-page.jsx",
-                                            lineNumber: 513,
-                                            columnNumber: 15
-                                        }, this)
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/components/dashboard/guests-page.jsx",
-                                    lineNumber: 511,
-                                    columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "space-y-3",
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            children: [
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Label"], {
-                                                    children: "Template"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                    lineNumber: 517,
-                                                    columnNumber: 17
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
-                                                    value: waTemplateId,
-                                                    onChange: (e)=>setWaTemplateId(e.target.value),
-                                                    className: "w-full h-10 px-3 rounded-md border text-sm bg-white",
-                                                    "data-testid": "wa-template-select",
-                                                    children: [
-                                                        waTemplates.length === 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
-                                                            value: "",
-                                                            children: "Default template"
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                            lineNumber: 524,
-                                                            columnNumber: 48
-                                                        }, this),
-                                                        waTemplates.map((t)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
-                                                                value: t.id,
-                                                                children: t.name
-                                                            }, t.id, false, {
-                                                                fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                                lineNumber: 526,
-                                                                columnNumber: 21
-                                                            }, this))
-                                                    ]
-                                                }, void 0, true, {
-                                                    fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                    lineNumber: 518,
-                                                    columnNumber: 17
-                                                }, this)
-                                            ]
-                                        }, void 0, true, {
-                                            fileName: "[project]/components/dashboard/guests-page.jsx",
-                                            lineNumber: 516,
-                                            columnNumber: 15
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                            className: "flex items-start gap-2 text-sm cursor-pointer",
-                                            children: [
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                                    type: "checkbox",
-                                                    checked: waFix,
-                                                    onChange: (e)=>setWaFix(e.target.checked),
-                                                    className: "mt-1",
-                                                    "data-testid": "wa-fix-checkbox"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                    lineNumber: 531,
-                                                    columnNumber: 17
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                    children: [
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                            className: "font-medium",
-                                                            children: "Fix Message"
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                            lineNumber: 533,
-                                                            columnNumber: 19
-                                                        }, this),
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                            className: "block text-xs text-muted-foreground",
-                                                            children: "All selected guests get this exact message (no per-guest personalization)."
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                            lineNumber: 534,
-                                                            columnNumber: 19
-                                                        }, this)
-                                                    ]
-                                                }, void 0, true, {
-                                                    fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                    lineNumber: 532,
-                                                    columnNumber: 17
-                                                }, this)
-                                            ]
-                                        }, void 0, true, {
-                                            fileName: "[project]/components/dashboard/guests-page.jsx",
-                                            lineNumber: 530,
-                                            columnNumber: 15
-                                        }, this)
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/components/dashboard/guests-page.jsx",
-                                    lineNumber: 515,
-                                    columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["DialogFooter"], {
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
-                                            variant: "outline",
-                                            onClick: ()=>setWaOpen(false),
-                                            children: "Cancel"
-                                        }, void 0, false, {
-                                            fileName: "[project]/components/dashboard/guests-page.jsx",
-                                            lineNumber: 539,
-                                            columnNumber: 15
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
-                                            className: "bg-emerald-600 hover:bg-emerald-700 text-white",
-                                            onClick: sendBulkWhatsApp,
-                                            "data-testid": "wa-send-confirm",
-                                            children: "Open WhatsApp"
-                                        }, void 0, false, {
-                                            fileName: "[project]/components/dashboard/guests-page.jsx",
-                                            lineNumber: 540,
-                                            columnNumber: 15
-                                        }, this)
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/components/dashboard/guests-page.jsx",
-                                    lineNumber: 538,
-                                    columnNumber: 13
-                                }, this)
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/components/dashboard/guests-page.jsx",
-                            lineNumber: 510,
-                            columnNumber: 11
-                        }, this)
-                    }, void 0, false, {
-                        fileName: "[project]/components/dashboard/guests-page.jsx",
-                        lineNumber: 509,
-                        columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "overflow-x-auto",
@@ -1920,71 +1763,71 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                                     onChange: handleSelectAll
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                    lineNumber: 550,
+                                                    lineNumber: 521,
                                                     columnNumber: 19
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                lineNumber: 549,
+                                                lineNumber: 520,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                                 className: "px-4 py-2",
-                                                children: "Name"
+                                                children: "Nama"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                lineNumber: 560,
+                                                lineNumber: 531,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                                 className: "px-4 py-2",
-                                                children: "Type"
+                                                children: "Tipe"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                lineNumber: 561,
+                                                lineNumber: 532,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                                 className: "px-4 py-2",
-                                                children: "Category"
+                                                children: "Kategori"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                lineNumber: 562,
+                                                lineNumber: 533,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                                 className: "px-4 py-2",
-                                                children: "Side"
+                                                children: "Pihak"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                lineNumber: 563,
+                                                lineNumber: 534,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                                 className: "px-4 py-2 text-center",
-                                                children: "Share"
+                                                children: "Bagikan"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                lineNumber: 564,
+                                                lineNumber: 535,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                                 className: "px-4 py-2 text-right",
-                                                children: "Actions"
+                                                children: "Aksi"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                lineNumber: 565,
+                                                lineNumber: 536,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/dashboard/guests-page.jsx",
-                                        lineNumber: 548,
+                                        lineNumber: 519,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                    lineNumber: 547,
+                                    lineNumber: 518,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
@@ -2001,12 +1844,12 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                                             onChange: ()=>handleSelectOne(g.id)
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                            lineNumber: 575,
+                                                            lineNumber: 546,
                                                             columnNumber: 21
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                        lineNumber: 574,
+                                                        lineNumber: 545,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -2018,13 +1861,13 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                                                     className: "h-3.5 w-3.5 text-primary"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                                    lineNumber: 585,
+                                                                    lineNumber: 556,
                                                                     columnNumber: 25
                                                                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$user$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__User$3e$__["User"], {
                                                                     className: "h-3.5 w-3.5 text-muted-foreground"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                                    lineNumber: 587,
+                                                                    lineNumber: 558,
                                                                     columnNumber: 25
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2034,7 +1877,7 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                                                             children: g.name
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                                            lineNumber: 590,
+                                                                            lineNumber: 561,
                                                                             columnNumber: 25
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2042,39 +1885,48 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                                                             children: g.phone || "—"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                                            lineNumber: 591,
+                                                                            lineNumber: 562,
                                                                             columnNumber: 25
+                                                                        }, this),
+                                                                        g.trackingCode && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                                            className: "text-[10px] font-mono text-primary/70 mt-0.5",
+                                                                            "data-testid": `guest-code-${g.id}`,
+                                                                            children: g.trackingCode
+                                                                        }, void 0, false, {
+                                                                            fileName: "[project]/components/dashboard/guests-page.jsx",
+                                                                            lineNumber: 566,
+                                                                            columnNumber: 27
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                                    lineNumber: 589,
+                                                                    lineNumber: 560,
                                                                     columnNumber: 23
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                            lineNumber: 583,
+                                                            lineNumber: 554,
                                                             columnNumber: 21
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                        lineNumber: 582,
+                                                        lineNumber: 553,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
                                                         className: "px-4 py-3",
                                                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                             className: `text-xs px-2 py-0.5 rounded-full ${g.guestType === "GROUP" ? "bg-primary/10 text-primary" : "bg-muted text-muted-foreground"}`,
-                                                            children: g.guestType
+                                                            children: TYPE_LABEL[g.guestType] || g.guestType
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                            lineNumber: 598,
+                                                            lineNumber: 577,
                                                             columnNumber: 21
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                        lineNumber: 597,
+                                                        lineNumber: 576,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -2082,15 +1934,15 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                                         children: g.category || "—"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                        lineNumber: 604,
+                                                        lineNumber: 583,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
                                                         className: "px-4 py-3",
-                                                        children: g.sideName || (g.guestSide ? SIDE_LABEL[g.guestSide] : "—")
+                                                        children: g.sideName || sides.find((sd)=>sd.id === g.sideId)?.name || "—"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                        lineNumber: 605,
+                                                        lineNumber: 584,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -2102,62 +1954,64 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                                                     size: "sm",
                                                                     variant: "ghost",
                                                                     onClick: ()=>copyLink(g),
-                                                                    title: "Copy Link",
+                                                                    title: "Salin Tautan",
                                                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$copy$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Copy$3e$__["Copy"], {
                                                                         className: "h-4 w-4"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                                        lineNumber: 616,
+                                                                        lineNumber: 597,
                                                                         columnNumber: 25
                                                                     }, this)
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                                    lineNumber: 610,
+                                                                    lineNumber: 591,
                                                                     columnNumber: 23
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
                                                                     size: "sm",
                                                                     variant: "ghost",
-                                                                    onClick: ()=>copyMessage(g),
-                                                                    title: "Copy Message",
+                                                                    onClick: ()=>openTemplatePicker(g, "copy"),
+                                                                    title: "Salin Pesan",
+                                                                    "data-testid": `copy-message-${g.id}`,
                                                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$message$2d$square$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__MessageSquare$3e$__["MessageSquare"], {
                                                                         className: "h-4 w-4"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                                        lineNumber: 624,
+                                                                        lineNumber: 606,
                                                                         columnNumber: 25
                                                                     }, this)
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                                    lineNumber: 618,
+                                                                    lineNumber: 599,
                                                                     columnNumber: 23
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
                                                                     size: "sm",
                                                                     variant: "ghost",
-                                                                    onClick: ()=>sendWhatsApp(g),
-                                                                    title: "Send WhatsApp",
+                                                                    onClick: ()=>openTemplatePicker(g, "wa"),
+                                                                    title: "Kirim WhatsApp",
+                                                                    "data-testid": `send-whatsapp-${g.id}`,
                                                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(WhatsAppIcon, {
                                                                         className: "h-4 w-4 text-emerald-600"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                                        lineNumber: 632,
+                                                                        lineNumber: 615,
                                                                         columnNumber: 25
                                                                     }, this)
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                                    lineNumber: 626,
+                                                                    lineNumber: 608,
                                                                     columnNumber: 23
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                            lineNumber: 609,
+                                                            lineNumber: 590,
                                                             columnNumber: 21
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                        lineNumber: 608,
+                                                        lineNumber: 589,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -2174,12 +2028,12 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                                                         className: "h-4 w-4"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                                        lineNumber: 644,
+                                                                        lineNumber: 627,
                                                                         columnNumber: 25
                                                                     }, this)
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                                    lineNumber: 638,
+                                                                    lineNumber: 621,
                                                                     columnNumber: 23
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -2188,88 +2042,88 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
                                                                         size: "sm",
                                                                         variant: "ghost",
-                                                                        title: "View QR",
+                                                                        title: "Lihat QR",
                                                                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$qr$2d$code$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__QrCode$3e$__["QrCode"], {
                                                                             className: "h-4 w-4"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                                            lineNumber: 648,
+                                                                            lineNumber: 631,
                                                                             columnNumber: 27
                                                                         }, this)
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                                        lineNumber: 647,
+                                                                        lineNumber: 630,
                                                                         columnNumber: 25
                                                                     }, this)
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                                    lineNumber: 646,
+                                                                    lineNumber: 629,
                                                                     columnNumber: 23
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
                                                                     size: "sm",
                                                                     variant: "ghost",
                                                                     onClick: ()=>remove(g.id),
-                                                                    title: "Delete",
+                                                                    title: "Hapus",
                                                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$trash$2d$2$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Trash2$3e$__["Trash2"], {
                                                                         className: "h-4 w-4 text-red-600"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                                        lineNumber: 657,
+                                                                        lineNumber: 640,
                                                                         columnNumber: 25
                                                                     }, this)
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                                    lineNumber: 651,
+                                                                    lineNumber: 634,
                                                                     columnNumber: 23
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                            lineNumber: 637,
+                                                            lineNumber: 620,
                                                             columnNumber: 21
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                        lineNumber: 636,
+                                                        lineNumber: 619,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, g.id, true, {
                                                 fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                lineNumber: 570,
+                                                lineNumber: 541,
                                                 columnNumber: 17
                                             }, this)),
                                         paginatedGuests.length === 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
                                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
                                                 colSpan: 7,
                                                 className: "px-4 py-8 text-center text-muted-foreground",
-                                                children: "No guests found"
+                                                children: "Tamu tidak ditemukan"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                lineNumber: 665,
+                                                lineNumber: 648,
                                                 columnNumber: 19
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/components/dashboard/guests-page.jsx",
-                                            lineNumber: 664,
+                                            lineNumber: 647,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                    lineNumber: 568,
+                                    lineNumber: 539,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/dashboard/guests-page.jsx",
-                            lineNumber: 546,
+                            lineNumber: 517,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/components/dashboard/guests-page.jsx",
-                        lineNumber: 545,
+                        lineNumber: 516,
                         columnNumber: 9
                     }, this),
                     filtered.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2283,10 +2137,10 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 className: "text-foreground",
-                                                children: "Rows per page:"
+                                                children: "Baris per halaman:"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                lineNumber: 683,
+                                                lineNumber: 666,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -2299,7 +2153,7 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                                         children: "10"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                        lineNumber: 689,
+                                                        lineNumber: 672,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -2307,7 +2161,7 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                                         children: "20"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                        lineNumber: 690,
+                                                        lineNumber: 673,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -2315,7 +2169,7 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                                         children: "50"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                        lineNumber: 691,
+                                                        lineNumber: 674,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -2323,19 +2177,27 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                                         children: "100"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                        lineNumber: 692,
+                                                        lineNumber: 675,
+                                                        columnNumber: 19
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                                        value: "ALL",
+                                                        children: "Semua"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/components/dashboard/guests-page.jsx",
+                                                        lineNumber: 676,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                lineNumber: 684,
+                                                lineNumber: 667,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/dashboard/guests-page.jsx",
-                                        lineNumber: 682,
+                                        lineNumber: 665,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2343,55 +2205,55 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                         children: "|"
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/guests-page.jsx",
-                                        lineNumber: 695,
+                                        lineNumber: 679,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                         children: [
-                                            "Showing",
+                                            "Menampilkan",
                                             " ",
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 className: "font-semibold text-foreground",
                                                 children: startIndex + 1
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                lineNumber: 698,
+                                                lineNumber: 682,
                                                 columnNumber: 17
                                             }, this),
                                             " ",
-                                            "to",
+                                            "sampai",
                                             " ",
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 className: "font-semibold text-foreground",
-                                                children: Math.min(startIndex + itemsPerPage, filtered.length)
+                                                children: Math.min(startIndex + pageSize, filtered.length)
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                lineNumber: 702,
+                                                lineNumber: 686,
                                                 columnNumber: 17
                                             }, this),
                                             " ",
-                                            "of",
+                                            "dari",
                                             " ",
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 className: "font-semibold text-foreground",
                                                 children: filtered.length
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                lineNumber: 706,
+                                                lineNumber: 690,
                                                 columnNumber: 17
                                             }, this),
                                             " ",
-                                            "entries"
+                                            "data"
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/dashboard/guests-page.jsx",
-                                        lineNumber: 696,
+                                        lineNumber: 680,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/dashboard/guests-page.jsx",
-                                lineNumber: 681,
+                                lineNumber: 664,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2403,10 +2265,10 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                         className: "h-8 px-3 text-muted-foreground",
                                         onClick: ()=>setCurrentPage((prev)=>Math.max(prev - 1, 1)),
                                         disabled: currentPage === 1,
-                                        children: "Previous"
+                                        children: "Sebelumnya"
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/guests-page.jsx",
-                                        lineNumber: 715,
+                                        lineNumber: 699,
                                         columnNumber: 15
                                     }, this),
                                     Array.from({
@@ -2419,7 +2281,7 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                             children: pageNum
                                         }, pageNum, false, {
                                             fileName: "[project]/components/dashboard/guests-page.jsx",
-                                            lineNumber: 727,
+                                            lineNumber: 711,
                                             columnNumber: 19
                                         }, this)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
@@ -2428,28 +2290,199 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                         className: "h-8 px-3 text-muted-foreground",
                                         onClick: ()=>setCurrentPage((prev)=>Math.min(prev + 1, totalPages)),
                                         disabled: currentPage === totalPages,
-                                        children: "Next"
+                                        children: "Berikutnya"
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/guests-page.jsx",
-                                        lineNumber: 739,
+                                        lineNumber: 723,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/dashboard/guests-page.jsx",
-                                lineNumber: 714,
+                                lineNumber: 698,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/dashboard/guests-page.jsx",
-                        lineNumber: 679,
+                        lineNumber: 662,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/dashboard/guests-page.jsx",
-                lineNumber: 415,
+                lineNumber: 428,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Dialog"], {
+                open: tplOpen,
+                onOpenChange: setTplOpen,
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["DialogContent"], {
+                    className: "max-w-lg",
+                    "data-testid": "template-picker-dialog",
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["DialogHeader"], {
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["DialogTitle"], {
+                                    children: [
+                                        tplAction === "wa" ? "Kirim WhatsApp" : "Salin Pesan",
+                                        tplGuest ? ` — ${tplGuest.name}` : ""
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/components/dashboard/guests-page.jsx",
+                                    lineNumber: 746,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["DialogDescription"], {
+                                    children: "Pilih template pesan yang ingin digunakan."
+                                }, void 0, false, {
+                                    fileName: "[project]/components/dashboard/guests-page.jsx",
+                                    lineNumber: 750,
+                                    columnNumber: 13
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/components/dashboard/guests-page.jsx",
+                            lineNumber: 745,
+                            columnNumber: 11
+                        }, this),
+                        tplLoading ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "flex items-center gap-2 text-sm text-muted-foreground py-6 justify-center",
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$loader$2d$circle$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Loader2$3e$__["Loader2"], {
+                                    className: "h-4 w-4 animate-spin"
+                                }, void 0, false, {
+                                    fileName: "[project]/components/dashboard/guests-page.jsx",
+                                    lineNumber: 757,
+                                    columnNumber: 15
+                                }, this),
+                                "Memuat template…"
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/components/dashboard/guests-page.jsx",
+                            lineNumber: 756,
+                            columnNumber: 13
+                        }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "space-y-3",
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Label"], {
+                                            children: "Template Pesan"
+                                        }, void 0, false, {
+                                            fileName: "[project]/components/dashboard/guests-page.jsx",
+                                            lineNumber: 763,
+                                            columnNumber: 17
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
+                                            value: tplId,
+                                            onChange: (e)=>setTplId(e.target.value),
+                                            className: "w-full h-10 px-3 rounded-md border text-sm bg-white",
+                                            "data-testid": "template-picker-select",
+                                            children: [
+                                                tplList.length === 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                                    value: "",
+                                                    children: "Template default"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/components/dashboard/guests-page.jsx",
+                                                    lineNumber: 771,
+                                                    columnNumber: 21
+                                                }, this),
+                                                tplList.map((t)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                                        value: t.id,
+                                                        children: t.name
+                                                    }, t.id, false, {
+                                                        fileName: "[project]/components/dashboard/guests-page.jsx",
+                                                        lineNumber: 774,
+                                                        columnNumber: 21
+                                                    }, this))
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/components/dashboard/guests-page.jsx",
+                                            lineNumber: 764,
+                                            columnNumber: 17
+                                        }, this),
+                                        tplList.length === 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                            className: "text-[10px] text-muted-foreground mt-1",
+                                            children: "Belum ada template pesan. Memakai template default."
+                                        }, void 0, false, {
+                                            fileName: "[project]/components/dashboard/guests-page.jsx",
+                                            lineNumber: 780,
+                                            columnNumber: 19
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/components/dashboard/guests-page.jsx",
+                                    lineNumber: 762,
+                                    columnNumber: 15
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Label"], {
+                                            className: "text-xs",
+                                            children: "Pratinjau"
+                                        }, void 0, false, {
+                                            fileName: "[project]/components/dashboard/guests-page.jsx",
+                                            lineNumber: 786,
+                                            columnNumber: 17
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            className: "mt-1 max-h-48 overflow-auto whitespace-pre-wrap rounded-md border bg-muted/30 p-3 text-xs",
+                                            children: tplPreview || "—"
+                                        }, void 0, false, {
+                                            fileName: "[project]/components/dashboard/guests-page.jsx",
+                                            lineNumber: 787,
+                                            columnNumber: 17
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/components/dashboard/guests-page.jsx",
+                                    lineNumber: 785,
+                                    columnNumber: 15
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/components/dashboard/guests-page.jsx",
+                            lineNumber: 761,
+                            columnNumber: 13
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["DialogFooter"], {
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
+                                    variant: "outline",
+                                    onClick: ()=>setTplOpen(false),
+                                    children: "Batal"
+                                }, void 0, false, {
+                                    fileName: "[project]/components/dashboard/guests-page.jsx",
+                                    lineNumber: 795,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
+                                    className: tplAction === "wa" ? "bg-emerald-600 hover:bg-emerald-700 text-white" : "bg-primary",
+                                    onClick: confirmTemplate,
+                                    disabled: tplLoading,
+                                    "data-testid": "template-picker-confirm",
+                                    children: tplAction === "wa" ? "Buka WhatsApp" : "Salin Pesan"
+                                }, void 0, false, {
+                                    fileName: "[project]/components/dashboard/guests-page.jsx",
+                                    lineNumber: 798,
+                                    columnNumber: 13
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/components/dashboard/guests-page.jsx",
+                            lineNumber: 794,
+                            columnNumber: 11
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/components/dashboard/guests-page.jsx",
+                    lineNumber: 741,
+                    columnNumber: 9
+                }, this)
+            }, void 0, false, {
+                fileName: "[project]/components/dashboard/guests-page.jsx",
+                lineNumber: 740,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Dialog"], {
@@ -2461,23 +2494,23 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["DialogHeader"], {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["DialogTitle"], {
-                                    children: "Add New Guest"
+                                    children: "Tambah Tamu Baru"
                                 }, void 0, false, {
                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                    lineNumber: 759,
+                                    lineNumber: 818,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["DialogDescription"], {
-                                    children: "Fill in the guest details to invite them."
+                                    children: "Isi detail tamu untuk mengundang mereka."
                                 }, void 0, false, {
                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                    lineNumber: 760,
+                                    lineNumber: 819,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/dashboard/guests-page.jsx",
-                            lineNumber: 758,
+                            lineNumber: 817,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -2490,14 +2523,14 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Label"], {
-                                                    children: "Name*"
+                                                    children: "Nama*"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                    lineNumber: 767,
+                                                    lineNumber: 826,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Input"], {
-                                                    placeholder: "E.g. John Doe",
+                                                    placeholder: "mis. Budi Santoso",
                                                     value: form.name,
                                                     onChange: (e)=>setForm({
                                                             ...form,
@@ -2506,26 +2539,26 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                                     required: true
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                    lineNumber: 768,
+                                                    lineNumber: 827,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/dashboard/guests-page.jsx",
-                                            lineNumber: 766,
+                                            lineNumber: 825,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Label"], {
-                                                    children: "Phone"
+                                                    children: "Telepon"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                    lineNumber: 776,
+                                                    lineNumber: 835,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Input"], {
-                                                    placeholder: "E.g. 0812...",
+                                                    placeholder: "mis. 0812...",
                                                     value: form.phone,
                                                     onChange: (e)=>setForm({
                                                             ...form,
@@ -2533,19 +2566,19 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                                         })
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                    lineNumber: 777,
+                                                    lineNumber: 836,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/dashboard/guests-page.jsx",
-                                            lineNumber: 775,
+                                            lineNumber: 834,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                    lineNumber: 765,
+                                    lineNumber: 824,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2554,10 +2587,10 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Label"], {
-                                                    children: "Guest Type"
+                                                    children: "Tipe Tamu"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                    lineNumber: 786,
+                                                    lineNumber: 845,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -2571,39 +2604,39 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                             value: "INDIVIDUAL",
-                                                            children: "Individual"
+                                                            children: "Individu"
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                            lineNumber: 801,
+                                                            lineNumber: 860,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                             value: "GROUP",
-                                                            children: "Group"
+                                                            children: "Grup"
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                            lineNumber: 802,
+                                                            lineNumber: 861,
                                                             columnNumber: 19
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                    lineNumber: 787,
+                                                    lineNumber: 846,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/dashboard/guests-page.jsx",
-                                            lineNumber: 785,
+                                            lineNumber: 844,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Label"], {
-                                                    children: "Quota"
+                                                    children: "Kuota"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                    lineNumber: 806,
+                                                    lineNumber: 865,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Input"], {
@@ -2617,19 +2650,19 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                                         })
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                    lineNumber: 807,
+                                                    lineNumber: 866,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/dashboard/guests-page.jsx",
-                                            lineNumber: 805,
+                                            lineNumber: 864,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                    lineNumber: 784,
+                                    lineNumber: 843,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2638,10 +2671,10 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Label"], {
-                                                    children: "Category"
+                                                    children: "Kategori"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                    lineNumber: 823,
+                                                    lineNumber: 882,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -2654,10 +2687,10 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                             value: "",
-                                                            children: "— None —"
+                                                            children: "— Tidak ada —"
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                            lineNumber: 831,
+                                                            lineNumber: 890,
                                                             columnNumber: 19
                                                         }, this),
                                                         categories.map((c)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -2665,28 +2698,36 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                                                 children: c.name
                                                             }, c.id, false, {
                                                                 fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                                lineNumber: 833,
+                                                                lineNumber: 892,
                                                                 columnNumber: 21
                                                             }, this))
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                    lineNumber: 824,
+                                                    lineNumber: 883,
                                                     columnNumber: 17
+                                                }, this),
+                                                categories.length === 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                    className: "text-[10px] text-muted-foreground mt-1",
+                                                    children: "Tambahkan Kategori di editor undangan → Kategori Tamu."
+                                                }, void 0, false, {
+                                                    fileName: "[project]/components/dashboard/guests-page.jsx",
+                                                    lineNumber: 898,
+                                                    columnNumber: 19
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/dashboard/guests-page.jsx",
-                                            lineNumber: 822,
+                                            lineNumber: 881,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Label"], {
-                                                    children: "Guest Side"
+                                                    children: "Pihak Tamu"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                    lineNumber: 840,
+                                                    lineNumber: 904,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -2700,10 +2741,10 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                             value: "",
-                                                            children: "— None —"
+                                                            children: "— Tidak ada —"
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                            lineNumber: 849,
+                                                            lineNumber: 911,
                                                             columnNumber: 19
                                                         }, this),
                                                         sides.map((sd)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -2711,42 +2752,42 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                                                 children: sd.name
                                                             }, sd.id, false, {
                                                                 fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                                lineNumber: 851,
+                                                                lineNumber: 913,
                                                                 columnNumber: 21
                                                             }, this))
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                    lineNumber: 841,
+                                                    lineNumber: 905,
                                                     columnNumber: 17
                                                 }, this),
                                                 sides.length === 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                     className: "text-[10px] text-muted-foreground mt-1",
-                                                    children: "Add sides in the invitation editor → Guest Sides."
+                                                    children: "Tambahkan Pihak di editor undangan → Pihak Tamu."
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                    lineNumber: 854,
-                                                    columnNumber: 40
+                                                    lineNumber: 919,
+                                                    columnNumber: 19
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/dashboard/guests-page.jsx",
-                                            lineNumber: 839,
+                                            lineNumber: 903,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                    lineNumber: 821,
+                                    lineNumber: 880,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Label"], {
-                                            children: "Gender"
+                                            children: "Jenis Kelamin"
                                         }, void 0, false, {
                                             fileName: "[project]/components/dashboard/guests-page.jsx",
-                                            lineNumber: 858,
+                                            lineNumber: 926,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -2759,46 +2800,46 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                     value: "",
-                                                    children: "— None —"
+                                                    children: "— Tidak ada —"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                    lineNumber: 864,
+                                                    lineNumber: 932,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                     value: "MALE",
-                                                    children: "Male"
+                                                    children: "Laki-laki"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                    lineNumber: 865,
+                                                    lineNumber: 933,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                     value: "FEMALE",
-                                                    children: "Female"
+                                                    children: "Perempuan"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                    lineNumber: 866,
+                                                    lineNumber: 934,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                     value: "OTHER",
-                                                    children: "Other"
+                                                    children: "Lainnya"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                    lineNumber: 867,
+                                                    lineNumber: 935,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/dashboard/guests-page.jsx",
-                                            lineNumber: 859,
+                                            lineNumber: 927,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                    lineNumber: 857,
+                                    lineNumber: 925,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["DialogFooter"], {
@@ -2808,42 +2849,42 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                             type: "button",
                                             variant: "outline",
                                             onClick: ()=>setIsAddOpen(false),
-                                            children: "Cancel"
+                                            children: "Batal"
                                         }, void 0, false, {
                                             fileName: "[project]/components/dashboard/guests-page.jsx",
-                                            lineNumber: 871,
+                                            lineNumber: 939,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
                                             type: "submit",
                                             className: "bg-primary",
-                                            children: "Add Guest"
+                                            children: "Tambah Tamu"
                                         }, void 0, false, {
                                             fileName: "[project]/components/dashboard/guests-page.jsx",
-                                            lineNumber: 878,
+                                            lineNumber: 946,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                    lineNumber: 870,
+                                    lineNumber: 938,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/dashboard/guests-page.jsx",
-                            lineNumber: 764,
+                            lineNumber: 823,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                    lineNumber: 757,
+                    lineNumber: 816,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/dashboard/guests-page.jsx",
-                lineNumber: 756,
+                lineNumber: 815,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Dialog"], {
@@ -2855,23 +2896,23 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["DialogHeader"], {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["DialogTitle"], {
-                                    children: "Edit Guest"
+                                    children: "Edit Tamu"
                                 }, void 0, false, {
                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                    lineNumber: 890,
+                                    lineNumber: 958,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["DialogDescription"], {
-                                    children: "Update guest details. Token & QR remain the same."
+                                    children: "Perbarui detail tamu. Token & QR tetap sama."
                                 }, void 0, false, {
                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                    lineNumber: 891,
+                                    lineNumber: 959,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/dashboard/guests-page.jsx",
-                            lineNumber: 889,
+                            lineNumber: 957,
                             columnNumber: 11
                         }, this),
                         editing && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -2884,10 +2925,10 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Label"], {
-                                                    children: "Name"
+                                                    children: "Nama"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                    lineNumber: 899,
+                                                    lineNumber: 967,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Input"], {
@@ -2896,22 +2937,22 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                                     required: true
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                    lineNumber: 900,
+                                                    lineNumber: 968,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/dashboard/guests-page.jsx",
-                                            lineNumber: 898,
+                                            lineNumber: 966,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Label"], {
-                                                    children: "Phone"
+                                                    children: "Telepon"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                    lineNumber: 903,
+                                                    lineNumber: 971,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Input"], {
@@ -2919,19 +2960,19 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                                     defaultValue: editing.phone || ""
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                    lineNumber: 904,
+                                                    lineNumber: 972,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/dashboard/guests-page.jsx",
-                                            lineNumber: 902,
+                                            lineNumber: 970,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                    lineNumber: 897,
+                                    lineNumber: 965,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2940,10 +2981,10 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Label"], {
-                                                    children: "Guest Type"
+                                                    children: "Tipe Tamu"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                    lineNumber: 909,
+                                                    lineNumber: 977,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -2953,39 +2994,39 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                             value: "INDIVIDUAL",
-                                                            children: "Individual"
+                                                            children: "Individu"
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                            lineNumber: 915,
+                                                            lineNumber: 983,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                             value: "GROUP",
-                                                            children: "Group"
+                                                            children: "Grup"
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                            lineNumber: 916,
+                                                            lineNumber: 984,
                                                             columnNumber: 21
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                    lineNumber: 910,
+                                                    lineNumber: 978,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/dashboard/guests-page.jsx",
-                                            lineNumber: 908,
+                                            lineNumber: 976,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Label"], {
-                                                    children: "Quota"
+                                                    children: "Kuota"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                    lineNumber: 920,
+                                                    lineNumber: 988,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Input"], {
@@ -2996,19 +3037,19 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                                     defaultValue: editing.quota || 1
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                    lineNumber: 921,
+                                                    lineNumber: 989,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/dashboard/guests-page.jsx",
-                                            lineNumber: 919,
+                                            lineNumber: 987,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                    lineNumber: 907,
+                                    lineNumber: 975,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3017,10 +3058,10 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Label"], {
-                                                    children: "Category"
+                                                    children: "Kategori"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                    lineNumber: 932,
+                                                    lineNumber: 1000,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -3030,10 +3071,10 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                             value: "",
-                                                            children: "— None —"
+                                                            children: "— Tidak ada —"
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                            lineNumber: 938,
+                                                            lineNumber: 1006,
                                                             columnNumber: 21
                                                         }, this),
                                                         categories.map((c)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -3041,28 +3082,28 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                                                 children: c.name
                                                             }, c.id, false, {
                                                                 fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                                lineNumber: 940,
+                                                                lineNumber: 1008,
                                                                 columnNumber: 23
                                                             }, this))
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                    lineNumber: 933,
+                                                    lineNumber: 1001,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/dashboard/guests-page.jsx",
-                                            lineNumber: 931,
+                                            lineNumber: 999,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Label"], {
-                                                    children: "Guest Side"
+                                                    children: "Pihak Tamu"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                    lineNumber: 947,
+                                                    lineNumber: 1015,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -3073,10 +3114,10 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                             value: "",
-                                                            children: "— None —"
+                                                            children: "— Tidak ada —"
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                            lineNumber: 954,
+                                                            lineNumber: 1022,
                                                             columnNumber: 21
                                                         }, this),
                                                         sides.map((sd)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -3084,34 +3125,34 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                                                 children: sd.name
                                                             }, sd.id, false, {
                                                                 fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                                lineNumber: 956,
+                                                                lineNumber: 1024,
                                                                 columnNumber: 23
                                                             }, this))
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                    lineNumber: 948,
+                                                    lineNumber: 1016,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/dashboard/guests-page.jsx",
-                                            lineNumber: 946,
+                                            lineNumber: 1014,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                    lineNumber: 930,
+                                    lineNumber: 998,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Label"], {
-                                            children: "Gender"
+                                            children: "Jenis Kelamin"
                                         }, void 0, false, {
                                             fileName: "[project]/components/dashboard/guests-page.jsx",
-                                            lineNumber: 962,
+                                            lineNumber: 1032,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -3121,66 +3162,66 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                     value: "",
-                                                    children: "— None —"
+                                                    children: "— Tidak ada —"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                    lineNumber: 968,
+                                                    lineNumber: 1038,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                     value: "MALE",
-                                                    children: "Male"
+                                                    children: "Laki-laki"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                    lineNumber: 969,
+                                                    lineNumber: 1039,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                     value: "FEMALE",
-                                                    children: "Female"
+                                                    children: "Perempuan"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                    lineNumber: 970,
+                                                    lineNumber: 1040,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                     value: "OTHER",
-                                                    children: "Other"
+                                                    children: "Lainnya"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                                    lineNumber: 971,
+                                                    lineNumber: 1041,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/dashboard/guests-page.jsx",
-                                            lineNumber: 963,
+                                            lineNumber: 1033,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                    lineNumber: 961,
+                                    lineNumber: 1031,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "rounded-md bg-muted/40 border p-2 text-xs text-muted-foreground",
                                     children: [
-                                        "Invitation Token:",
+                                        "Token Undangan:",
                                         " ",
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("code", {
                                             className: "font-mono",
                                             children: editing.token
                                         }, void 0, false, {
                                             fileName: "[project]/components/dashboard/guests-page.jsx",
-                                            lineNumber: 976,
+                                            lineNumber: 1046,
                                             columnNumber: 17
                                         }, this),
-                                        " (read-only)"
+                                        " (hanya baca)"
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                    lineNumber: 974,
+                                    lineNumber: 1044,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["DialogFooter"], {
@@ -3190,42 +3231,42 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                                             type: "button",
                                             variant: "outline",
                                             onClick: ()=>setEditing(null),
-                                            children: "Cancel"
+                                            children: "Batal"
                                         }, void 0, false, {
                                             fileName: "[project]/components/dashboard/guests-page.jsx",
-                                            lineNumber: 979,
+                                            lineNumber: 1049,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
                                             type: "submit",
                                             className: "bg-primary",
-                                            children: "Save Changes"
+                                            children: "Simpan Perubahan"
                                         }, void 0, false, {
                                             fileName: "[project]/components/dashboard/guests-page.jsx",
-                                            lineNumber: 986,
+                                            lineNumber: 1056,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                                    lineNumber: 978,
+                                    lineNumber: 1048,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/dashboard/guests-page.jsx",
-                            lineNumber: 896,
+                            lineNumber: 964,
                             columnNumber: 13
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/dashboard/guests-page.jsx",
-                    lineNumber: 888,
+                    lineNumber: 956,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/dashboard/guests-page.jsx",
-                lineNumber: 887,
+                lineNumber: 955,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$dashboard$2f$import$2d$preview$2d$dialog$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -3236,13 +3277,13 @@ function GuestsPageClient({ invitations, categories, messageTemplate }) {
                 onDone: ()=>router.refresh()
             }, void 0, false, {
                 fileName: "[project]/components/dashboard/guests-page.jsx",
-                lineNumber: 995,
+                lineNumber: 1065,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/dashboard/guests-page.jsx",
-        lineNumber: 361,
+        lineNumber: 374,
         columnNumber: 5
     }, this);
 }

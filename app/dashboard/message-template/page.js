@@ -1,17 +1,57 @@
 import prisma from "@/lib/prisma";
 import { auth } from "@/auth";
-import MessageTemplateClient from "@/components/dashboard/message-template-client";
 import MessageTemplatesManager from "@/components/dashboard/message-templates-manager";
-import { DEFAULT_WHATSAPP_TEMPLATE } from "@/lib/whatsapp";
 
 export const dynamic = "force-dynamic";
 
+// Ambil nilai pertama yang terisi dari beberapa kemungkinan nama kunci
+const pick = (obj, keys) => {
+  if (!obj || typeof obj !== "object") return null;
+  for (const k of keys) {
+    const v = obj[k];
+    if (v !== undefined && v !== null && String(v).trim() !== "") return v;
+  }
+  return null;
+};
+
+const toISO = (v) => {
+  if (!v) return null;
+  const d = new Date(v);
+  return Number.isNaN(d.getTime()) ? null : d.toISOString();
+};
+
+// events bisa berupa array, atau string JSON
+const parseEvents = (raw) => {
+  if (Array.isArray(raw)) return raw;
+  if (typeof raw === "string") {
+    try {
+      const p = JSON.parse(raw);
+      return Array.isArray(p) ? p : [];
+    } catch {
+      return [];
+    }
+  }
+  return [];
+};
+
+const DATE_KEYS = ["date", "eventDate", "tanggal", "startDate", "day"];
+const TIME_KEYS = ["time", "startTime", "eventTime", "waktu", "start", "jam"];
+const END_TIME_KEYS = ["endTime", "end", "selesai"];
+const VENUE_KEYS = [
+  "venue",
+  "location",
+  "locationName",
+  "place",
+  "placeName",
+  "lokasi",
+  "tempat",
+  "name",
+];
+const ADDRESS_KEYS = ["address", "alamat", "fullAddress", "locationAddress"];
+const MAP_KEYS = ["mapUrl", "mapsUrl", "mapLink", "maps", "googleMaps"];
+
 export default async function MessageTemplatePage() {
   const s = await auth();
-  const user = await prisma.user.findUnique({
-    where: { id: s.user.id },
-    select: { whatsappTemplate: true },
-  });
 
   const invitations = await prisma.invitation.findMany({
     where: { userId: s.user.id },
@@ -23,10 +63,7 @@ export default async function MessageTemplatePage() {
       groomName: true,
       customDomain: true,
       subdomain: true,
-
-      // ✅ PERBAIKAN: Cukup panggil true karena events bertipe Json (Scalar)
       events: true,
-
       guests: {
         take: 1,
         orderBy: { createdAt: "desc" },
@@ -36,9 +73,26 @@ export default async function MessageTemplatePage() {
   });
 
   const data = invitations.map((i) => {
-    // Pastikan events dibaca sebagai array dari Json
-    const eventsArray = Array.isArray(i.events) ? i.events : [];
-    const mainEvent = eventsArray.length > 0 ? eventsArray[0] : null;
+    const eventsArray = parseEvents(i.events);
+
+    // Prioritaskan acara pertama yang punya tanggal
+    const mainEvent =
+      eventsArray.find((e) => pick(e, DATE_KEYS)) || eventsArray[0] || null;
+
+    const startTime = pick(mainEvent, TIME_KEYS);
+    const endTime = pick(mainEvent, END_TIME_KEYS);
+    const weddingTime = startTime
+      ? endTime && endTime !== startTime
+        ? `${startTime} - ${endTime}`
+        : String(startTime)
+      : null;
+
+    const venue = pick(mainEvent, VENUE_KEYS);
+    const address = pick(mainEvent, ADDRESS_KEYS);
+    const mapUrl = pick(mainEvent, MAP_KEYS);
+    const weddingDate = toISO(pick(mainEvent, DATE_KEYS));
+
+    const guest = i.guests[0];
 
     return {
       id: i.id,
@@ -48,21 +102,30 @@ export default async function MessageTemplatePage() {
       customDomain: i.customDomain,
       subdomain: i.subdomain,
 
-      // Ambil properti dari object JSON event tersebut
-      weddingDate: mainEvent?.date
-        ? new Date(mainEvent.date).toISOString()
-        : null,
-      weddingTime: mainEvent?.time || null,
-      venue: mainEvent?.venue || null,
-      address: mainEvent?.address || null,
+      // Nama utama yang dibaca buildContext
+      weddingDate,
+      weddingTime,
+      venue,
+      address,
+      mapUrl,
 
-      sampleGuest: i.guests[0]
+      // Alias supaya cocok dengan berbagai nama yang mungkin dipakai buildContext
+      eventDate: weddingDate,
+      eventTime: weddingTime,
+      eventLocation: venue || address || null,
+      location: venue || address || null,
+
+      // Data mentah semua acara (jika buildContext ingin memakainya)
+      events: eventsArray,
+
+      sampleGuest: guest
         ? {
-            name: i.guests[0].name,
-            token: i.guests[0].token,
-            quota: i.guests[0].quota,
-            category:
-              i.guests[0].category?.name || i.guests[0].categoryText || "",
+            name: guest.name,
+            token: guest.token,
+            nameSlug: guest.nameSlug || null,
+            trackingCode: guest.trackingCode || null,
+            quota: guest.quota,
+            category: guest.category?.name || guest.categoryText || "",
           }
         : null,
     };
@@ -71,23 +134,10 @@ export default async function MessageTemplatePage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="font-serif text-3xl font-bold">
-          WhatsApp Message Template
-        </h1>
-        <p className="text-muted-foreground mt-1">
-          Customize the message sent to your guests. Use placeholders to
-          auto-fill each guest's details.
-        </p>
+        <h1 className="font-serif text-3xl font-bold">Template Pesan</h1>
       </div>
-      <MessageTemplateClient
-        initialTemplate={user?.whatsappTemplate || DEFAULT_WHATSAPP_TEMPLATE}
-        defaultTemplate={DEFAULT_WHATSAPP_TEMPLATE}
-        isCustom={!!user?.whatsappTemplate}
-        invitations={data}
-      />
-      <div className="pt-6 mt-6 border-t border-primary/10">
-        <MessageTemplatesManager />
-      </div>
+
+      <MessageTemplatesManager invitations={data} />
     </div>
   );
 }

@@ -9,6 +9,7 @@ export default async function PublicInvitationPage({ params, searchParams }) {
   const sp = await searchParams;
   const slug = p.slug;
   const guestToken = sp?.guest;
+  const guestNameSlug = sp?.to;
 
   const invitation = await prisma.invitation.findUnique({
     where: { slug },
@@ -45,10 +46,12 @@ export default async function PublicInvitationPage({ params, searchParams }) {
 
   let guest = null;
   let guestHasRsvp = false;
-  if (guestToken) {
-    guest = await prisma.guest.findFirst({ where: { token: guestToken, invitationId: invitation.id } });
+  if (guestNameSlug || guestToken) {
+    guest = guestNameSlug
+      ? await prisma.guest.findFirst({ where: { nameSlug: guestNameSlug, invitationId: invitation.id } })
+      : await prisma.guest.findFirst({ where: { token: guestToken, invitationId: invitation.id } });
     if (guest) {
-      const existing = await prisma.rsvp.findFirst({ where: { guestId: guest.id, invitationId: invitation.id }, select: { id: true } });
+      const existing = await prisma.rsvp.findFirst({ where: { guestId: guest.id, invitationId: invitation.id, isMessageOnly: false }, select: { id: true } });
       guestHasRsvp = !!existing;
     }
   }

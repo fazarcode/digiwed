@@ -4,5 +4,9 @@
       "width": 400,
       "height": 375
     }
+  },
+  "devToolsPosition": "bottom-right",
+  "devToolsPanelPosition": {
+    "__nextjs-dev-tools-shared-panel-location": "bottom-right"
   }
 }

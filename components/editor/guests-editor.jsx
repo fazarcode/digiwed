@@ -42,7 +42,7 @@ export default function GuestsEditor({ invitationId, slug }) {
     await fetch(`/api/invitations/${invitationId}/guests/${id}`, { method: 'DELETE' });
     load();
   };
-  const copyLink = (g) => { navigator.clipboard.writeText(`${baseUrl}/invite/${slug}?guest=${g.token}`); toast.success('Guest link copied'); };
+  const copyLink = (g) => { const q = g.nameSlug ? `?to=${encodeURIComponent(g.nameSlug)}` : `?guest=${g.token}`; navigator.clipboard.writeText(`${baseUrl}/invite/${slug}${q}`); toast.success('Guest link copied'); };
 
   const doImport = async (e) => {
     const f = e.target.files?.[0]; if (!f) return;

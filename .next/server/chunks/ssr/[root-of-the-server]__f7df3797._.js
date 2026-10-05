@@ -63,7 +63,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$dashboard$2f$d
 ;
 ;
 ;
-const dynamic = 'force-dynamic';
+const dynamic = "force-dynamic";
 async function DomainPage() {
     const s = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$auth$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["auth"])();
     const invitations = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$prisma$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"].invitation.findMany({
@@ -71,7 +71,7 @@ async function DomainPage() {
             userId: s.user.id
         },
         orderBy: {
-            updatedAt: 'desc'
+            updatedAt: "desc"
         },
         select: {
             id: true,
@@ -90,37 +90,37 @@ async function DomainPage() {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
                         className: "font-serif text-3xl font-bold",
-                        children: "Domain Settings"
+                        children: "Pengaturan Domain"
                     }, void 0, false, {
                         fileName: "[project]/app/dashboard/domain/page.js",
-                        lineNumber: 17,
+                        lineNumber: 25,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: "text-muted-foreground mt-1",
-                        children: "Configure how guests reach your invitation — via slug, subdomain, or your own custom domain."
+                        children: "Atur bagaimana tamu membuka undangan Anda — lewat slug, subdomain, atau domain kustom Anda sendiri."
                     }, void 0, false, {
                         fileName: "[project]/app/dashboard/domain/page.js",
-                        lineNumber: 18,
+                        lineNumber: 26,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/dashboard/domain/page.js",
-                lineNumber: 16,
+                lineNumber: 24,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$dashboard$2f$domain$2d$settings$2d$client$2e$jsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
                 invitations: invitations
             }, void 0, false, {
                 fileName: "[project]/app/dashboard/domain/page.js",
-                lineNumber: 20,
+                lineNumber: 31,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/app/dashboard/domain/page.js",
-        lineNumber: 15,
+        lineNumber: 23,
         columnNumber: 5
     }, this);
 }

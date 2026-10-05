@@ -154,14 +154,14 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$auth$2e$js__$5b$middleware$2
 // We look up the invitation in a DB call only for non-preview hosts (i.e. hosts we don't already recognise) by
 // forwarding to /_h/[host]/[slug-resolver]. To keep middleware Edge-safe (no Prisma), the resolver is at an API route.
 const PREVIEW_HOST_SUFFIXES = [
-    'emergentagent.com',
-    'emergentcf.cloud',
-    'localhost'
+    "emergentagent.com",
+    "emergentcf.cloud"
 ];
 function isPreviewHost(host) {
     if (!host) return true;
-    const h = host.toLowerCase().split(':')[0];
-    return PREVIEW_HOST_SUFFIXES.some((sfx)=>h === sfx || h.endsWith('.' + sfx) || h === 'localhost' || h === '127.0.0.1');
+    const h = host.toLowerCase().split(":")[0];
+    if (h === "localhost" || h === "127.0.0.1") return true; // hanya host polos, subdomain.localhost tetap diproses
+    return PREVIEW_HOST_SUFFIXES.some((sfx)=>h === sfx || h.endsWith("." + sfx));
 }
 const __TURBOPACK__default__export__ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$auth$2e$js__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["auth"])(async (req)=>{
     const { nextUrl } = req;
@@ -169,14 +169,14 @@ const __TURBOPACK__default__export__ = (0, __TURBOPACK__imported__module__$5b$pr
     const isLoggedIn = !!session;
     const role = session?.user?.role;
     const path = nextUrl.pathname;
-    const host = req.headers.get('host') || '';
+    const host = req.headers.get("host") || "";
     // 1) Host-based routing for custom domain / subdomain (only when NOT a preview host and NOT already on /invite/, /api/, static, etc.)
-    if (!isPreviewHost(host) && path === '/') {
+    if (!isPreviewHost(host) && path === "/") {
         // Forward to internal resolver which queries DB and rewrites
         const resolveUrl = new URL(`/api/host-resolve?host=${encodeURIComponent(host)}`, nextUrl);
         const res = await fetch(resolveUrl.toString(), {
             headers: {
-                cookie: req.headers.get('cookie') || ''
+                cookie: req.headers.get("cookie") || ""
             }
         }).catch(()=>null);
         if (res && res.ok) {
@@ -188,25 +188,25 @@ const __TURBOPACK__default__export__ = (0, __TURBOPACK__imported__module__$5b$pr
         }
     }
     // 2) Redirect logged-in users away from auth pages to their dashboard
-    if (isLoggedIn && (path === '/login' || path === '/register' || path === '/forgot-password')) {
-        const target = role === 'ADMIN' ? '/admin' : '/dashboard';
+    if (isLoggedIn && (path === "/login" || path === "/register" || path === "/forgot-password")) {
+        const target = role === "ADMIN" ? "/admin" : "/dashboard";
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$server$2f$web$2f$exports$2f$index$2e$js__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["NextResponse"].redirect(new URL(target, nextUrl));
     }
     // 3) Protect /admin routes (Admin only)
-    if (path.startsWith('/admin')) {
-        if (!isLoggedIn) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$server$2f$web$2f$exports$2f$index$2e$js__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["NextResponse"].redirect(new URL('/login', nextUrl));
-        if (role !== 'ADMIN') return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$server$2f$web$2f$exports$2f$index$2e$js__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["NextResponse"].redirect(new URL('/dashboard', nextUrl));
+    if (path.startsWith("/admin")) {
+        if (!isLoggedIn) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$server$2f$web$2f$exports$2f$index$2e$js__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["NextResponse"].redirect(new URL("/login", nextUrl));
+        if (role !== "ADMIN") return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$server$2f$web$2f$exports$2f$index$2e$js__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["NextResponse"].redirect(new URL("/dashboard", nextUrl));
     }
     // 4) Protect /dashboard routes (User only)
-    if (path.startsWith('/dashboard')) {
-        if (!isLoggedIn) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$server$2f$web$2f$exports$2f$index$2e$js__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["NextResponse"].redirect(new URL('/login', nextUrl));
-        if (role === 'ADMIN') return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$server$2f$web$2f$exports$2f$index$2e$js__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["NextResponse"].redirect(new URL('/admin', nextUrl));
+    if (path.startsWith("/dashboard")) {
+        if (!isLoggedIn) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$server$2f$web$2f$exports$2f$index$2e$js__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["NextResponse"].redirect(new URL("/login", nextUrl));
+        if (role === "ADMIN") return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$server$2f$web$2f$exports$2f$index$2e$js__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["NextResponse"].redirect(new URL("/admin", nextUrl));
     }
     return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$server$2f$web$2f$exports$2f$index$2e$js__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["NextResponse"].next();
 });
 const config = {
     matcher: [
-        '/((?!api/auth|api/host-resolve|_next/static|_next/image|favicon.ico|storage-file|.*\\.(?:png|jpg|jpeg|gif|svg|ico|css|js|woff|woff2|mp3|mp4|webp)$).*)'
+        "/((?!api/auth|api/host-resolve|_next/static|_next/image|favicon.ico|storage-file|.*\\.(?:png|jpg|jpeg|gif|svg|ico|css|js|woff|woff2|mp3|mp4|webp)$).*)"
     ]
 };
 }),

@@ -297,7 +297,7 @@ __turbopack_context__.s([
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$heart$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Heart$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/heart.js [app-client] (ecmascript) <export default as Heart>");
-'use client';
+"use client";
 ;
 ;
 function MomentsHero(param) {
@@ -305,9 +305,9 @@ function MomentsHero(param) {
     const eventName = [
         invitation.brideName,
         invitation.groomName
-    ].filter(Boolean).join(' & ') || 'our wedding';
-    const title = invitation.momentsTitle || 'Event Moments';
-    const message = invitation.momentsMessage || 'Share the memories you captured today. Every photo will be treasured by the couple.';
+    ].filter(Boolean).join(" & ") || "pernikahan kami";
+    const title = invitation.momentsTitle || "Momen Acara";
+    const message = invitation.momentsMessage || "Bagikan kenangan yang Anda abadikan hari ini. Setiap foto akan sangat berharga bagi kedua mempelai.";
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         children: [
             invitation.coverImage && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -318,7 +318,7 @@ function MomentsHero(param) {
                 "data-testid": "moments-cover"
             }, void 0, false, {
                 fileName: "[project]/components/moments/moments-hero.jsx",
-                lineNumber: 13,
+                lineNumber: 18,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -332,14 +332,14 @@ function MomentsHero(param) {
                                 fill: "currentColor"
                             }, void 0, false, {
                                 fileName: "[project]/components/moments/moments-hero.jsx",
-                                lineNumber: 17,
+                                lineNumber: 26,
                                 columnNumber: 11
                             }, this),
                             title
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/moments/moments-hero.jsx",
-                        lineNumber: 16,
+                        lineNumber: 25,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
@@ -348,7 +348,7 @@ function MomentsHero(param) {
                         children: eventName
                     }, void 0, false, {
                         fileName: "[project]/components/moments/moments-hero.jsx",
-                        lineNumber: 19,
+                        lineNumber: 29,
                         columnNumber: 9
                     }, this),
                     invitation.venue && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -356,8 +356,8 @@ function MomentsHero(param) {
                         children: invitation.venue
                     }, void 0, false, {
                         fileName: "[project]/components/moments/moments-hero.jsx",
-                        lineNumber: 20,
-                        columnNumber: 30
+                        lineNumber: 36,
+                        columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: "text-sm text-muted-foreground pt-2 max-w-xl mx-auto",
@@ -365,19 +365,19 @@ function MomentsHero(param) {
                         children: message
                     }, void 0, false, {
                         fileName: "[project]/components/moments/moments-hero.jsx",
-                        lineNumber: 21,
+                        lineNumber: 38,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/moments/moments-hero.jsx",
-                lineNumber: 15,
+                lineNumber: 24,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/moments/moments-hero.jsx",
-        lineNumber: 11,
+        lineNumber: 16,
         columnNumber: 5
     }, this);
 }
@@ -421,7 +421,8 @@ function MomentsCustomizer(param) {
         momentsMessage: inv.momentsMessage || ""
     });
     const timer = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
-    const persist = (patch)=>{
+    // Selalu kirim seluruh form agar perubahan dalam jeda debounce tidak hilang
+    const persist = (next)=>{
         if (timer.current) clearTimeout(timer.current);
         timer.current = setTimeout(async ()=>{
             try {
@@ -430,20 +431,21 @@ function MomentsCustomizer(param) {
                     headers: {
                         "Content-Type": "application/json"
                     },
-                    body: JSON.stringify(patch)
+                    body: JSON.stringify(next)
                 });
                 if (!r.ok) throw new Error();
             } catch (e) {
-                __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error("Save failed");
+                __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error("Gagal menyimpan");
             }
         }, 500);
     };
     const update = (patch)=>{
-        setForm((f)=>({
-                ...f,
-                ...patch
-            }));
-        persist(patch);
+        const next = {
+            ...form,
+            ...patch
+        };
+        setForm(next);
+        persist(next);
     };
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "MomentsCustomizer.useEffect": ()=>({
@@ -466,33 +468,33 @@ function MomentsCustomizer(param) {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                         className: "font-serif text-xl font-semibold",
-                        children: "Photo Moments Page"
+                        children: "Halaman Photo Moments"
                     }, void 0, false, {
                         fileName: "[project]/components/editor/moments-customizer.jsx",
-                        lineNumber: 42,
+                        lineNumber: 55,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: "text-xs text-muted-foreground mt-0.5",
-                        children: "Customize the guest-facing photo capture landing. Changes preview instantly below."
+                        children: "Sesuaikan halaman pengambilan foto untuk tamu. Perubahan langsung terlihat di pratinjau di bawah."
                     }, void 0, false, {
                         fileName: "[project]/components/editor/moments-customizer.jsx",
-                        lineNumber: 43,
+                        lineNumber: 58,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/editor/moments-customizer.jsx",
-                lineNumber: 41,
+                lineNumber: 54,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
-                        children: "Heading"
+                        children: "Judul"
                     }, void 0, false, {
                         fileName: "[project]/components/editor/moments-customizer.jsx",
-                        lineNumber: 46,
+                        lineNumber: 64,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -500,26 +502,26 @@ function MomentsCustomizer(param) {
                         onChange: (e)=>update({
                                 momentsTitle: e.target.value
                             }),
-                        placeholder: "Event Moments",
+                        placeholder: "Momen Acara",
                         "data-testid": "moments-title-input"
                     }, void 0, false, {
                         fileName: "[project]/components/editor/moments-customizer.jsx",
-                        lineNumber: 47,
+                        lineNumber: 65,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/editor/moments-customizer.jsx",
-                lineNumber: 45,
+                lineNumber: 63,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
-                        children: "Welcome Message"
+                        children: "Pesan Sambutan"
                     }, void 0, false, {
                         fileName: "[project]/components/editor/moments-customizer.jsx",
-                        lineNumber: 50,
+                        lineNumber: 73,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$textarea$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Textarea"], {
@@ -528,37 +530,37 @@ function MomentsCustomizer(param) {
                         onChange: (e)=>update({
                                 momentsMessage: e.target.value
                             }),
-                        placeholder: "Share the memories you captured today…",
+                        placeholder: "Bagikan kenangan yang Anda abadikan hari ini…",
                         "data-testid": "moments-message-input"
                     }, void 0, false, {
                         fileName: "[project]/components/editor/moments-customizer.jsx",
-                        lineNumber: 51,
+                        lineNumber: 74,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/editor/moments-customizer.jsx",
-                lineNumber: 49,
+                lineNumber: 72,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
                 href: "/moments/".concat(inv.slug),
                 target: "_blank",
-                rel: "noopener",
+                rel: "noopener noreferrer",
                 className: "text-xs text-primary inline-flex items-center gap-1",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$external$2d$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__ExternalLink$3e$__["ExternalLink"], {
                         className: "h-3 w-3"
                     }, void 0, false, {
                         fileName: "[project]/components/editor/moments-customizer.jsx",
-                        lineNumber: 53,
-                        columnNumber: 135
+                        lineNumber: 88,
+                        columnNumber: 9
                     }, this),
-                    "Open public page"
+                    "Buka halaman publik"
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/editor/moments-customizer.jsx",
-                lineNumber: 53,
+                lineNumber: 82,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -566,10 +568,10 @@ function MomentsCustomizer(param) {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: "text-xs uppercase tracking-widest text-muted-foreground mb-2",
-                        children: "Live Preview"
+                        children: "Pratinjau Langsung"
                     }, void 0, false, {
                         fileName: "[project]/components/editor/moments-customizer.jsx",
-                        lineNumber: 56,
+                        lineNumber: 93,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -579,24 +581,24 @@ function MomentsCustomizer(param) {
                             invitation: previewInv
                         }, void 0, false, {
                             fileName: "[project]/components/editor/moments-customizer.jsx",
-                            lineNumber: 58,
+                            lineNumber: 100,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/components/editor/moments-customizer.jsx",
-                        lineNumber: 57,
+                        lineNumber: 96,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/editor/moments-customizer.jsx",
-                lineNumber: 55,
+                lineNumber: 92,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/editor/moments-customizer.jsx",
-        lineNumber: 40,
+        lineNumber: 53,
         columnNumber: 5
     }, this);
 }
@@ -638,55 +640,77 @@ var _s = __turbopack_context__.k.signature();
 ;
 ;
 ;
+// Format tanggal tetap (zona waktu tetap) agar tidak terjadi hydration mismatch
+const dateFormatter = new Intl.DateTimeFormat("id-ID", {
+    dateStyle: "medium",
+    timeStyle: "short",
+    timeZone: "Asia/Jakarta"
+});
+const formatDate = (value)=>{
+    const d = new Date(value);
+    return Number.isNaN(d.getTime()) ? "-" : dateFormatter.format(d);
+};
 function MomentsClient(param) {
     let { invitations } = param;
     var _invitations_, _selected_moments, _selected_moments1, _selected_moments2;
     _s();
     const router = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRouter"])();
     const [selectedId, setSelectedId] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(((_invitations_ = invitations[0]) === null || _invitations_ === void 0 ? void 0 : _invitations_.id) || "");
+    // Fallback ke undangan pertama jika undangan terpilih sudah tidak ada
     const selected = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
         "MomentsClient.useMemo[selected]": ()=>invitations.find({
                 "MomentsClient.useMemo[selected]": (i)=>i.id === selectedId
-            }["MomentsClient.useMemo[selected]"])
+            }["MomentsClient.useMemo[selected]"]) || invitations[0] || null
     }["MomentsClient.useMemo[selected]"], [
         invitations,
         selectedId
     ]);
     const [showQr, setShowQr] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const [zoom, setZoom] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
-    const origin = ("TURBOPACK compile-time truthy", 1) ? window.location.origin : "TURBOPACK unreachable";
-    const publicUrl = selected ? "".concat(origin, "/moments/").concat(selected.slug) : "";
+    // FIX HYDRATION:
+    // Jangan menggunakan window.location.origin saat render.
+    // URL relatif akan sama antara server dan client.
+    const publicUrl = selected ? "/moments/".concat(selected.slug) : "";
     const del = async (mid)=>{
-        if (!confirm("Delete this photo? This cannot be undone.")) return;
-        const res = await fetch("/api/invitations/".concat(selected.id, "/moments/").concat(mid), {
-            method: "DELETE"
-        });
-        if (!res.ok) return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error("Failed to delete");
-        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].success("Photo removed");
-        router.refresh();
+        if (!selected) return;
+        if (!confirm("Hapus foto ini? Tindakan ini tidak dapat dibatalkan.")) return;
+        try {
+            const res = await fetch("/api/invitations/".concat(selected.id, "/moments/").concat(mid), {
+                method: "DELETE"
+            });
+            if (!res.ok) throw new Error();
+            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].success("Foto berhasil dihapus");
+            router.refresh();
+        } catch (e) {
+            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error("Gagal menghapus foto");
+        }
     };
     const downloadAll = ()=>{
         if (!selected) return;
         window.open("/api/invitations/".concat(selected.id, "/moments/download-all"), "_blank");
     };
-    const copyLink = ()=>{
-        navigator.clipboard.writeText(publicUrl);
-        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].success("Upload link copied");
+    const copyLink = async ()=>{
+        try {
+            await navigator.clipboard.writeText(publicUrl);
+            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].success("Tautan unggah berhasil disalin");
+        } catch (e) {
+            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error("Gagal menyalin tautan. Salin secara manual.");
+        }
     };
     if (invitations.length === 0) {
         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "rounded-2xl bg-white border p-12 text-center",
             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                 className: "text-muted-foreground",
-                children: "Create an invitation first, then guests can upload moments."
+                children: "Buat undangan terlebih dahulu, setelah itu tamu dapat mengunggah momen."
             }, void 0, false, {
                 fileName: "[project]/components/dashboard/moments-client.jsx",
-                lineNumber: 61,
+                lineNumber: 98,
                 columnNumber: 9
             }, this)
         }, void 0, false, {
             fileName: "[project]/components/dashboard/moments-client.jsx",
-            lineNumber: 60,
+            lineNumber: 97,
             columnNumber: 7
         }, this);
     }
@@ -698,50 +722,53 @@ function MomentsClient(param) {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: "text-xs uppercase tracking-widest text-muted-foreground px-2 pb-2",
-                        children: "Your Invitations"
+                        children: "Undangan Anda"
                     }, void 0, false, {
                         fileName: "[project]/components/dashboard/moments-client.jsx",
-                        lineNumber: 71,
+                        lineNumber: 110,
                         columnNumber: 9
                     }, this),
-                    invitations.map((i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                    invitations.map((i)=>{
+                        var _i_moments;
+                        return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                            type: "button",
                             "data-testid": "moments-inv-".concat(i.id),
                             onClick: ()=>setSelectedId(i.id),
-                            className: "w-full text-left px-3 py-2 rounded-md text-sm transition ".concat(selectedId === i.id ? "bg-primary text-primary-foreground" : "hover:bg-muted"),
+                            className: "w-full text-left px-3 py-2 rounded-md text-sm transition ".concat((selected === null || selected === void 0 ? void 0 : selected.id) === i.id ? "bg-primary text-primary-foreground" : "hover:bg-muted"),
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                     className: "font-medium",
                                     children: [
                                         i.brideName,
-                                        " & ",
                                         i.groomName
-                                    ]
-                                }, void 0, true, {
+                                    ].filter(Boolean).join(" & ") || "Tanpa nama"
+                                }, void 0, false, {
                                     fileName: "[project]/components/dashboard/moments-client.jsx",
-                                    lineNumber: 81,
+                                    lineNumber: 126,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                     className: "text-xs opacity-70",
                                     children: [
-                                        i.moments.length,
-                                        " photos"
+                                        ((_i_moments = i.moments) === null || _i_moments === void 0 ? void 0 : _i_moments.length) || 0,
+                                        " foto"
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/dashboard/moments-client.jsx",
-                                    lineNumber: 84,
+                                    lineNumber: 131,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, i.id, true, {
                             fileName: "[project]/components/dashboard/moments-client.jsx",
-                            lineNumber: 75,
+                            lineNumber: 115,
                             columnNumber: 11
-                        }, this))
+                        }, this);
+                    })
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/dashboard/moments-client.jsx",
-                lineNumber: 70,
+                lineNumber: 109,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -752,27 +779,28 @@ function MomentsClient(param) {
                         "data-testid": "moments-customize-card",
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$editor$2f$moments$2d$customizer$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                             inv: selected
-                        }, void 0, false, {
+                        }, selected.id, false, {
                             fileName: "[project]/components/dashboard/moments-client.jsx",
-                            lineNumber: 92,
+                            lineNumber: 145,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/components/dashboard/moments-client.jsx",
-                        lineNumber: 91,
+                        lineNumber: 140,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "rounded-2xl bg-white border p-5 flex flex-wrap items-center justify-between gap-3",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "min-w-0",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                         className: "text-xs uppercase tracking-widest text-muted-foreground",
-                                        children: "Public Upload URL"
+                                        children: "URL Unggah Publik"
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/moments-client.jsx",
-                                        lineNumber: 97,
+                                        lineNumber: 152,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -781,13 +809,13 @@ function MomentsClient(param) {
                                         children: publicUrl
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/moments-client.jsx",
-                                        lineNumber: 100,
+                                        lineNumber: 156,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/dashboard/moments-client.jsx",
-                                lineNumber: 96,
+                                lineNumber: 151,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -802,39 +830,41 @@ function MomentsClient(param) {
                                                 className: "h-4 w-4 mr-1.5"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/moments-client.jsx",
-                                                lineNumber: 113,
+                                                lineNumber: 170,
                                                 columnNumber: 15
                                             }, this),
-                                            "Copy Link"
+                                            "Salin Tautan"
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/dashboard/moments-client.jsx",
-                                        lineNumber: 108,
+                                        lineNumber: 165,
                                         columnNumber: 13
                                     }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
-                                        href: publicUrl,
-                                        target: "_blank",
-                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
-                                            variant: "outline",
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
+                                        variant: "outline",
+                                        asChild: true,
+                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
+                                            href: publicUrl,
+                                            target: "_blank",
+                                            rel: "noopener noreferrer",
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$external$2d$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__ExternalLink$3e$__["ExternalLink"], {
                                                     className: "h-4 w-4 mr-1.5"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/moments-client.jsx",
-                                                    lineNumber: 118,
+                                                    lineNumber: 176,
                                                     columnNumber: 17
                                                 }, this),
-                                                "Preview"
+                                                "Pratinjau"
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/dashboard/moments-client.jsx",
-                                            lineNumber: 117,
+                                            lineNumber: 175,
                                             columnNumber: 15
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/moments-client.jsx",
-                                        lineNumber: 116,
+                                        lineNumber: 174,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -846,14 +876,14 @@ function MomentsClient(param) {
                                                 className: "h-4 w-4 mr-1.5"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/moments-client.jsx",
-                                                lineNumber: 127,
+                                                lineNumber: 186,
                                                 columnNumber: 15
                                             }, this),
-                                            "Show QR"
+                                            "Tampilkan QR"
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/dashboard/moments-client.jsx",
-                                        lineNumber: 122,
+                                        lineNumber: 181,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -866,26 +896,26 @@ function MomentsClient(param) {
                                                 className: "h-4 w-4 mr-1.5"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/moments-client.jsx",
-                                                lineNumber: 136,
+                                                lineNumber: 196,
                                                 columnNumber: 15
                                             }, this),
-                                            "Download All"
+                                            "Unduh Semua"
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/dashboard/moments-client.jsx",
-                                        lineNumber: 130,
+                                        lineNumber: 190,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/dashboard/moments-client.jsx",
-                                lineNumber: 107,
+                                lineNumber: 164,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/dashboard/moments-client.jsx",
-                        lineNumber: 95,
+                        lineNumber: 150,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -895,11 +925,11 @@ function MomentsClient(param) {
                                 className: "text-xs uppercase tracking-widest text-muted-foreground mb-3",
                                 children: [
                                     (selected === null || selected === void 0 ? void 0 : (_selected_moments1 = selected.moments) === null || _selected_moments1 === void 0 ? void 0 : _selected_moments1.length) || 0,
-                                    " photos"
+                                    " foto"
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/dashboard/moments-client.jsx",
-                                lineNumber: 143,
+                                lineNumber: 204,
                                 columnNumber: 11
                             }, this),
                             (selected === null || selected === void 0 ? void 0 : (_selected_moments2 = selected.moments) === null || _selected_moments2 === void 0 ? void 0 : _selected_moments2.length) ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -909,20 +939,22 @@ function MomentsClient(param) {
                                         "data-testid": "moment-".concat(m.id),
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                type: "button",
                                                 onClick: ()=>setZoom(m),
                                                 className: "block w-full aspect-square bg-black/5",
                                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
                                                     src: m.url,
-                                                    alt: m.senderName || "Guest photo",
-                                                    className: "w-full h-full object-cover"
+                                                    alt: m.senderName || "Foto tamu",
+                                                    className: "w-full h-full object-cover",
+                                                    loading: "lazy"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/dashboard/moments-client.jsx",
-                                                    lineNumber: 158,
+                                                    lineNumber: 221,
                                                     columnNumber: 21
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/moments-client.jsx",
-                                                lineNumber: 154,
+                                                lineNumber: 216,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -930,96 +962,99 @@ function MomentsClient(param) {
                                                 children: [
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                         className: "font-medium truncate",
-                                                        children: m.senderName || "Anonymous"
+                                                        children: m.senderName || "Anonim"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/dashboard/moments-client.jsx",
-                                                        lineNumber: 165,
+                                                        lineNumber: 230,
                                                         columnNumber: 21
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                         className: "text-muted-foreground",
-                                                        children: new Date(m.createdAt).toLocaleString()
+                                                        children: formatDate(m.createdAt)
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/dashboard/moments-client.jsx",
-                                                        lineNumber: 168,
+                                                        lineNumber: 234,
                                                         columnNumber: 21
                                                     }, this),
                                                     m.message && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                         className: "italic mt-1 line-clamp-2",
                                                         children: [
-                                                            '"',
+                                                            "“",
                                                             m.message,
-                                                            '"'
+                                                            "”"
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/components/dashboard/moments-client.jsx",
-                                                        lineNumber: 172,
+                                                        lineNumber: 239,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                         className: "flex justify-between pt-2",
                                                         children: [
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
-                                                                href: m.url,
-                                                                download: true,
-                                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
-                                                                    size: "sm",
-                                                                    variant: "ghost",
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
+                                                                size: "sm",
+                                                                variant: "ghost",
+                                                                asChild: true,
+                                                                "aria-label": "Unduh foto",
+                                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
+                                                                    href: m.url,
+                                                                    download: true,
                                                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$download$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Download$3e$__["Download"], {
                                                                         className: "h-3.5 w-3.5"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/components/dashboard/moments-client.jsx",
-                                                                        lineNumber: 177,
+                                                                        lineNumber: 252,
                                                                         columnNumber: 27
                                                                     }, this)
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/components/dashboard/moments-client.jsx",
-                                                                    lineNumber: 176,
+                                                                    lineNumber: 251,
                                                                     columnNumber: 25
                                                                 }, this)
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/dashboard/moments-client.jsx",
-                                                                lineNumber: 175,
+                                                                lineNumber: 245,
                                                                 columnNumber: 23
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
                                                                 size: "sm",
                                                                 variant: "ghost",
                                                                 onClick: ()=>del(m.id),
+                                                                "aria-label": "Hapus foto",
                                                                 "data-testid": "delete-moment-".concat(m.id),
                                                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$trash$2d$2$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Trash2$3e$__["Trash2"], {
                                                                     className: "h-3.5 w-3.5 text-red-600"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/components/dashboard/moments-client.jsx",
-                                                                    lineNumber: 186,
+                                                                    lineNumber: 263,
                                                                     columnNumber: 25
                                                                 }, this)
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/dashboard/moments-client.jsx",
-                                                                lineNumber: 180,
+                                                                lineNumber: 256,
                                                                 columnNumber: 23
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/components/dashboard/moments-client.jsx",
-                                                        lineNumber: 174,
+                                                        lineNumber: 244,
                                                         columnNumber: 21
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/dashboard/moments-client.jsx",
-                                                lineNumber: 164,
+                                                lineNumber: 229,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, m.id, true, {
                                         fileName: "[project]/components/dashboard/moments-client.jsx",
-                                        lineNumber: 149,
+                                        lineNumber: 211,
                                         columnNumber: 17
                                     }, this))
                             }, void 0, false, {
                                 fileName: "[project]/components/dashboard/moments-client.jsx",
-                                lineNumber: 147,
+                                lineNumber: 209,
                                 columnNumber: 13
                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "text-center py-16 text-muted-foreground",
@@ -1028,32 +1063,32 @@ function MomentsClient(param) {
                                         className: "h-12 w-12 mx-auto mb-3 opacity-30"
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/moments-client.jsx",
-                                        lineNumber: 195,
+                                        lineNumber: 272,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                        children: "No moments yet — share the QR code with your guests at the venue."
+                                        children: "Belum ada momen. Bagikan kode QR kepada tamu di lokasi acara."
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/moments-client.jsx",
-                                        lineNumber: 196,
+                                        lineNumber: 274,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/dashboard/moments-client.jsx",
-                                lineNumber: 194,
+                                lineNumber: 271,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/dashboard/moments-client.jsx",
-                        lineNumber: 142,
+                        lineNumber: 203,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/dashboard/moments-client.jsx",
-                lineNumber: 89,
+                lineNumber: 137,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Dialog"], {
@@ -1065,23 +1100,23 @@ function MomentsClient(param) {
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogHeader"], {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogTitle"], {
-                                    children: "Event Moments QR"
+                                    children: "QR Momen Acara"
                                 }, void 0, false, {
                                     fileName: "[project]/components/dashboard/moments-client.jsx",
-                                    lineNumber: 209,
+                                    lineNumber: 286,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogDescription"], {
-                                    children: "Guests can scan this to upload photos — no login required."
+                                    children: "Tamu dapat memindai kode ini untuk mengunggah foto, tanpa perlu login."
                                 }, void 0, false, {
                                     fileName: "[project]/components/dashboard/moments-client.jsx",
-                                    lineNumber: 210,
+                                    lineNumber: 288,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/dashboard/moments-client.jsx",
-                            lineNumber: 208,
+                            lineNumber: 285,
                             columnNumber: 11
                         }, this),
                         selected && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1089,11 +1124,11 @@ function MomentsClient(param) {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
                                     src: "/api/invitations/".concat(selected.id, "/moments-qr"),
-                                    alt: "Moments QR",
+                                    alt: "QR Momen",
                                     className: "w-full rounded-lg border"
                                 }, void 0, false, {
                                     fileName: "[project]/components/dashboard/moments-client.jsx",
-                                    lineNumber: 216,
+                                    lineNumber: 296,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1101,49 +1136,50 @@ function MomentsClient(param) {
                                     children: publicUrl
                                 }, void 0, false, {
                                     fileName: "[project]/components/dashboard/moments-client.jsx",
-                                    lineNumber: 221,
+                                    lineNumber: 302,
                                     columnNumber: 15
                                 }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
-                                    href: "/api/invitations/".concat(selected.id, "/moments-qr"),
-                                    download: true,
-                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
-                                        className: "w-full bg-primary",
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
+                                    className: "w-full bg-primary",
+                                    asChild: true,
+                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
+                                        href: "/api/invitations/".concat(selected.id, "/moments-qr"),
+                                        download: true,
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$download$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Download$3e$__["Download"], {
                                                 className: "h-4 w-4 mr-1.5"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/dashboard/moments-client.jsx",
-                                                lineNumber: 226,
+                                                lineNumber: 308,
                                                 columnNumber: 19
                                             }, this),
-                                            "Download QR"
+                                            "Unduh QR"
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/dashboard/moments-client.jsx",
-                                        lineNumber: 225,
+                                        lineNumber: 307,
                                         columnNumber: 17
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/components/dashboard/moments-client.jsx",
-                                    lineNumber: 224,
+                                    lineNumber: 306,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/dashboard/moments-client.jsx",
-                            lineNumber: 215,
+                            lineNumber: 295,
                             columnNumber: 13
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/dashboard/moments-client.jsx",
-                    lineNumber: 207,
+                    lineNumber: 284,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/dashboard/moments-client.jsx",
-                lineNumber: 206,
+                lineNumber: 283,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Dialog"], {
@@ -1156,62 +1192,62 @@ function MomentsClient(param) {
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogHeader"], {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogTitle"], {
-                                        children: zoom.senderName || "Anonymous"
+                                        children: zoom.senderName || "Anonim"
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/moments-client.jsx",
-                                        lineNumber: 241,
+                                        lineNumber: 323,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogDescription"], {
-                                        children: new Date(zoom.createdAt).toLocaleString()
+                                        children: formatDate(zoom.createdAt)
                                     }, void 0, false, {
                                         fileName: "[project]/components/dashboard/moments-client.jsx",
-                                        lineNumber: 242,
+                                        lineNumber: 325,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/dashboard/moments-client.jsx",
-                                lineNumber: 240,
+                                lineNumber: 322,
                                 columnNumber: 15
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
                                 src: zoom.url,
-                                alt: "Moment",
+                                alt: zoom.senderName || "Foto tamu",
                                 className: "w-full rounded-lg"
                             }, void 0, false, {
                                 fileName: "[project]/components/dashboard/moments-client.jsx",
-                                lineNumber: 246,
+                                lineNumber: 330,
                                 columnNumber: 15
                             }, this),
                             zoom.message && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                 className: "italic text-sm",
                                 children: [
-                                    '"',
+                                    "“",
                                     zoom.message,
-                                    '"'
+                                    "”"
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/dashboard/moments-client.jsx",
-                                lineNumber: 248,
+                                lineNumber: 337,
                                 columnNumber: 17
                             }, this)
                         ]
                     }, void 0, true)
                 }, void 0, false, {
                     fileName: "[project]/components/dashboard/moments-client.jsx",
-                    lineNumber: 237,
+                    lineNumber: 319,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/dashboard/moments-client.jsx",
-                lineNumber: 236,
+                lineNumber: 318,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/dashboard/moments-client.jsx",
-        lineNumber: 69,
+        lineNumber: 107,
         columnNumber: 5
     }, this);
 }
